@@ -1,0 +1,43 @@
+plugins {
+    id 'war'
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.11'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+
+//    runtimeOnly ('mysql:mysql-connector-java') //mysql8
+//    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.28'
+
+
+//    runtimeOnly 'mysql:mysql-connector-java:5.1.47'
+    implementation 'mysql:mysql-connector-java:8.0.25'
+
+//    runtimeOnly ('mysql:mysql-connector-java') //mysql8
+//    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.25'
+
+//    //DB
+//    runtimeOnly ('mysql:mysql-connector-java') //mysql8
+//    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.32' //원래는 28
+
+}
+
+
+
+
+
+test {
+    useJUnitPlatform()
+}
