@@ -1,8 +1,28 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,eclipse,intellij,linux,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,eclipse,intellij,linux,java
+
+# config folder
+**/secret/
+
+# Gradle files
+.gradle/
+build/
+
+# IntelliJ IDEA files
+.idea/
+
+# Eclipse files
 .classpath
 .project
-**/secret/
+.settings/
+
+# Compiled Java class files
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
 
 ### Eclipse ###
 .metadata
