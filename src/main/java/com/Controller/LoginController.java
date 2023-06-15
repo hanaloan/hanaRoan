@@ -1,6 +1,7 @@
-package com.login;
+package com.Controller;
 
-import com.login.model.User;
+import com.Model.LoginUser;
+import com.Service.LoginService;
 import com.utils.ValidationRegex;
 
 import javax.servlet.ServletException;
@@ -37,12 +38,12 @@ public class LoginController extends HttpServlet {
 
 
         // User 모델 생성
-        User user = new User(username, password);
+        LoginUser loginUser = new LoginUser(username, password);
 
         // 모든 형식적 유효성 검사 통과하면 비즈니스로직 시작
         try {
             // LoginService를 사용하여 의미적 유효성 검사 및 인증 수행
-            boolean authenticated = loginService.authenticateUser(user);
+            boolean authenticated = loginService.authenticateUser(loginUser);
 
             if (authenticated) {
                 // 로그인 성공 시 응답

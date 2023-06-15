@@ -1,7 +1,7 @@
-package com.login;
+package com.Service;
 
-import com.login.model.User;
-import com.utils.ValidationRegex;
+import com.DAO.LoginDao;
+import com.Model.LoginUser;
 
 import java.sql.SQLException;
 
@@ -13,18 +13,18 @@ public class LoginService {
         loginDao = new LoginDao();
     }
 
-    public boolean authenticateUser(User user) throws SQLException {
+    public boolean authenticateUser(LoginUser loginUser) throws SQLException {
 
         // 의미적 유효성 검사
-        if (!isMeaningfulValidationPassed(user)) {
+        if (!isMeaningfulValidationPassed(loginUser)) {
             return false;
         }
 
         // LoginDao의 로그인 메소드 호출
-        return loginDao.login(user);
+        return loginDao.login(loginUser);
     }
 
-    private boolean isMeaningfulValidationPassed(User user) {
+    private boolean isMeaningfulValidationPassed(LoginUser loginUser) {
         // 여기에 의미적 유효성 검사 로직을 구현
 
         return true; // 의미적 유효성 검사 통과

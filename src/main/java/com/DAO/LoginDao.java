@@ -1,7 +1,6 @@
-package com.login;
-import com.login.model.User;
+package com.DAO;
+import com.Model.LoginUser;
 import com.config.secret.Secret;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,7 +14,7 @@ public class LoginDao {
 
 
 
-    public boolean login(User user) throws SQLException {
+    public boolean login(LoginUser loginUser) throws SQLException {
         System.out.println("dao_여기1");
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -23,8 +22,8 @@ public class LoginDao {
         System.out.println("dao_여기2");
         boolean authenticated = false;
         System.out.println("dao_여기3");
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
+        System.out.println(loginUser.getUsername());
+        System.out.println(loginUser.getPassword());
 
 
         try {
@@ -37,8 +36,8 @@ public class LoginDao {
             // SQL 쿼리 작성
             String sql = "SELECT COUNT(*) FROM customers WHERE cus_id = ? AND password = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getPassword());
+            stmt.setString(1, loginUser.getUsername());
+            stmt.setString(2, loginUser.getPassword());
 
             // 쿼리 실행
             rs = stmt.executeQuery();
