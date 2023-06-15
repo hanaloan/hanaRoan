@@ -1,16 +1,14 @@
-package com.login.model;
+package com.Model;
 
-public class User {
+public class LoginUser {
     private String username;
     private String password;
 
     // Getter와 Setter 생략
 
-    public User(String username, String password) {
+    public LoginUser(String username, String password) {
         this.username = username;
         this.password = password;
-
-
     }
 
 
