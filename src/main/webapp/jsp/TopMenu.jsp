@@ -11,7 +11,7 @@
 
 <nav>
     <ul>
-        <li><a href="./EmployeeManagement/EmployeeManagement.do">∙직원 관리</a></li>
+        <li><a href="ManageEmployee/EmployeeManagement/EmployeeManagement.do">∙직원 관리</a></li>
 <%--        <li><a href="voteMember.do">∙대출 상품 관리</a></li>--%>
 
     </ul>

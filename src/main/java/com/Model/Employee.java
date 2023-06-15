@@ -7,6 +7,11 @@ public class Employee {
     private String empLevel;
     private String empName;
 
+    public Employee(String empLevel, String empName) {
+        this.empLevel = empLevel;
+        this.empName = empName;
+    }
+
     public String getEmpLevel() {
         return empLevel;
     }

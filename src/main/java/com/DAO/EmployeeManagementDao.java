@@ -5,11 +5,9 @@ import com.config.secret.Secret;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeManagementDao {
 
@@ -17,49 +15,90 @@ public class EmployeeManagementDao {
     private static final String DB_USER = Secret.DB_USER;
     private static final String DB_PASSWORD = Secret.DB_PASSWORD;
 
+    Connection conn= null; //변수 선언 DB와 연결
+    PreparedStatement ps=null; // SQL문 담당
+//    ResultSet rs=null; //select문에서 검색 결과를 담을 것
 
-
-    static Connection conn= null; //
-    static PreparedStatement ps=null;
-    static ResultSet rs=null;
-
-    public static Connection getConnection() throws Exception{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-        return con;
-    }
-
-
-    public static String selectEmployee(HttpServletRequest request, HttpServletResponse response) {
-        ArrayList<Employee> list = new ArrayList<Employee>();
-
+    public List<Employee> selectEmployees() {
+        List<Employee> employees = new ArrayList<>();
         try{
-            conn=getConnection();
+            Class.forName("com.mysql.cj.jdbc.Driver"); //mysql 드라이버 JVM에 로딩
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             //관리자 조회 화면 쿼리
             //주석1 DB에서 불러와서
-            String sql = "SELECT ";
-            sql+= " authority_idx, ";
-            sql+= " name ";
-            sql+= " FROM employees";
+//            String sql = "SELECT ";
+//            sql+= " authority_idx, ";
+//            sql+= " name ";
+//            sql+= " FROM employees";
+            String sql="SELECT authority_idx, name FROM employees";
             ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery(); //select문에서 검색 결과를 담을 것
 
             while(rs.next()) {
-                Employee emp = new Employee();
-                emp.setEmpLevel(rs.getString(1));
-                emp.setEmpName(rs.getString(2));
 
-                list.add(emp); // 주석2 리스트에 담아주고
+//                emp.setEmpName(rs.getString(4));
+//                emp.setEmpLevel(rs.getString(3));
+
+                String level = rs.getString("authority_idx");
+                String name = rs.getString("name");
+
+                Employee emp = new Employee(level,name );
+                employees.add(emp); // 주석2 리스트에 담아주고
             }
-            request.setAttribute("list",list);  // 주석3 jsp보내기위해 속성으로 저장함. 속성명 "list" 저장할 내용은 list
+//            req.setAttribute("list",alist);  // 주석3 jsp보내기위해 속성으로 저장함. 속성명 "list" 저장할 내용은 list
             conn.close();
             ps.close();
             rs.close();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
+        }catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        return "EmployeeManagement.jsp";
+        return employees;
+
+
+
 
     }
+
+//    public static Connection getConnection() throws Exception{
+//        Class.forName("com.mysql.cj.jdbc.Driver"); //mysql 드라이버 JVM에 로딩
+//        Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+//        return con; //연결하기
+//    }
+
+//    public String selectEmployee(HttpServletRequest request, HttpServletResponse response) {
+//        ArrayList<Employee> alist = new ArrayList<Employee>();
+//
+//        try{
+//            conn=getConnection();
+//            //관리자 조회 화면 쿼리
+//            //주석1 DB에서 불러와서
+//            String sql = "SELECT ";
+//            sql+= " authority_idx, ";
+//            sql+= " name ";
+//            sql+= " FROM employees";
+//            ps = conn.prepareStatement(sql);
+//            rs = ps.executeQuery();
+//
+//            while(rs.next()) {
+//                Employee emp = new Employee();
+//                emp.setEmpName(rs.getString(4));
+//                emp.setEmpLevel(rs.getString(3));
+//
+//                alist.add(emp); // 주석2 리스트에 담아주고
+//            }
+//            request.setAttribute("list",alist);  // 주석3 jsp보내기위해 속성으로 저장함. 속성명 "list" 저장할 내용은 list
+//            conn.close();
+//            ps.close();
+//            rs.close();
+//        } catch (Exception e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        return "EmployeeManagement.jsp";
+//
+//    }
+
+
 }
