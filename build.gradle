@@ -17,7 +17,8 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
-
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
 //    runtimeOnly ('mysql:mysql-connector-java') //mysql8
 //    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.28'
 
