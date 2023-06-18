@@ -19,6 +19,41 @@ public class EmployeeManagementDao {
     PreparedStatement ps=null; // SQL문 담당
 //    ResultSet rs=null; //select문에서 검색 결과를 담을 것
 
+    public Employee currentEmployee(String cur_name) {
+
+        Employee cur_emp = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); //mysql 드라이버 JVM에 로딩
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+
+            String sql = "SELECT name, authority_idx FROM employees WHERE name='" + cur_name+"'";
+            ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(); //select문에서 검색 결과를 담을 것
+
+            while(rs.next()) {
+
+                String level = rs.getString("authority_idx");
+//                String name = rs.getString("name");
+//                System.out.println(name);
+                cur_emp = new Employee(level);
+            }
+//            req.setAttribute("list",alist);  // 주석3 jsp보내기위해 속성으로 저장함. 속성명 "list" 저장할 내용은 list
+            conn.close();
+            ps.close();
+            rs.close();
+            
+            
+            
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return cur_emp;
+    }
+
+
     public List<Employee> selectEmployees() {
         List<Employee> employees = new ArrayList<>();
         try{
