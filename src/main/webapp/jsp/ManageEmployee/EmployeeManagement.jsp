@@ -66,6 +66,10 @@
             }
         %>
     </table>
+    <button id="popupButton" onclick="openPopup()">관리자 직원 추가</button>
+
+    <script src="../../js/ManageEmployee/AddEmployeeScript.js"></script>
+
 </div>
 </body>
 </html>
