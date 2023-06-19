@@ -1,10 +1,7 @@
 package com.Service;
 
 import com.DAO.LoginDao;
-import com.Model.LoginCreditScoreModelReq;
-import com.Model.LoginCreditScoreModelRes;
-import com.Model.LoginUserReq;
-import com.Model.LoginUserRes;
+import com.Model.*;
 
 import java.sql.SQLException;
 
@@ -32,5 +29,9 @@ public class LoginService {
 
     public LoginCreditScoreModelRes getCreditScore(LoginCreditScoreModelReq modelReq) throws SQLException {
         return loginDao.getCreditScore(modelReq);
+    }
+
+    public LoginRecommendationRes getRecoProduct(LoginRecommendationReq recoReq) throws SQLException{
+        return loginDao.getRecoProduct(recoReq);
     }
 }

@@ -1,10 +1,7 @@
 package com.Controller;
 
-import com.Model.LoginCreditScoreModelReq;
-import com.Model.LoginCreditScoreModelRes;
-import com.Model.LoginUserRes;
+import com.Model.*;
 import com.Service.LoginService;
-import com.Model.LoginUserReq;
 import com.utils.ValidationRegex;
 
 import javax.servlet.ServletException;
@@ -49,20 +46,23 @@ public class LoginController extends HttpServlet {
             LoginUserRes loginUserRes = loginService.authenticateUser(user);
 
             if (loginUserRes.isAuthenticated()) {
-                // CreditScoreModel 가져오기
+                // 사용자 정보관련 LoginCreditScoreModelReq 가져오면서 Idx 할당
                 LoginCreditScoreModelReq modelReq = new LoginCreditScoreModelReq(loginUserRes.getCustomer_Idx());
                 LoginCreditScoreModelRes modelRes = loginService.getCreditScore(modelReq);
 
                 int credit = modelRes.getCreditScore();
                 int income = modelRes.getIncome();
 
-                // 요청에 데이터 설정
+                // 사용자 정보관련
                 req.setAttribute("username", loginUserRes.getName());
                 req.setAttribute("income", income);
                 req.setAttribute("credit", credit);
                 req.setAttribute("customer_idx", loginUserRes.getCustomer_Idx());
 
-
+                // 추천상품 관련
+                LoginRecommendationReq recoReq = new LoginRecommendationReq(loginUserRes.getCustomer_Idx(), income, credit);
+                LoginRecommendationRes recoRes = loginService.getRecoProduct(recoReq);
+                req.setAttribute("recoRes", recoRes);
 
                 // 로그인 성공 시 응답
                 resp.setStatus(HttpServletResponse.SC_OK);
