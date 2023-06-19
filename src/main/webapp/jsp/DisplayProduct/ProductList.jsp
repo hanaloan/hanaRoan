@@ -18,7 +18,7 @@
   List<Product> products = productDao.getItems();
   for (Product product : products) {
 %>
-<h2><a href="/ProductDetail?id=<%= product.getId() %>"><%= product.getName() %></a></h2>
+<h2><a href="${pageContext.request.contextPath}/ProductDetail?id=<%= product.getId() %>"><%= product.getName() %></a></h2>
 <p><%= product.getDescription() %></p>
 <% } %>
 </body>
