@@ -1,0 +1,36 @@
+@charset "UTF-8";
+*{
+    margin:0;
+    padding:0;
+}
+
+.table{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.table table,th,td{
+    border:1px solid #454545;
+    border-collapse:collapse;
+    padding:5px;
+}
+table{
+    width: 500px;
+}
+
+.box {
+    /*width: 150px;*/
+    /*height: 150px;*/
+    /*border-radius: 70%;*/
+    /*overflow: hidden;*/
+    height: 4.375rem;
+    display: flex;
+    align-items: center;
+    padding: 0 0.75rem;
+}
+
+.profile {
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+}

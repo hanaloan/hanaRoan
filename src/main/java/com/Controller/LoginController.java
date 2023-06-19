@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -49,6 +50,12 @@ public class LoginController extends HttpServlet {
                 // 로그인 성공 시 응답
                 resp.setStatus(HttpServletResponse.SC_OK);
                 resp.getWriter().println("Login successful");
+
+                HttpSession session = req.getSession();
+                session.setAttribute("loggedInUser", username);
+                String employeeUrl = req.getContextPath() + "/jsp/ManageEmployee/EmployeeManagement.jsp";
+                resp.sendRedirect(employeeUrl);
+
             } else {
                 // 로그인 실패 시 응답
                 resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
