@@ -1,12 +1,14 @@
 package com.DAO;
 
 import com.Model.Employee;
+import com.utils.DatabaseConnector;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeManagementDao {
-
+    Connection conn=null;
     PreparedStatement ps=null; // SQL문 담당
 
     public Employee currentEmployee(String cur_name) {
@@ -14,8 +16,8 @@ public class EmployeeManagementDao {
         Employee cur_emp = null;
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver"); //mysql 드라이버 JVM에 로딩
-            Connection conn = DatabaseUtil.getConnection(); //변수 선언 DB와 연결
+//            Class.forName("com.mysql.cj.jdbc.Driver"); //mysql 드라이버 JVM에 로딩
+            conn = DatabaseConnector.getConnection(); //변수 선언 DB와 연결
 
             String sql = "SELECT name, authority_idx FROM employees WHERE name='" + cur_name+"'";
             ps = conn.prepareStatement(sql);
@@ -40,8 +42,8 @@ public class EmployeeManagementDao {
     public List<Employee> selectEmployees() {
         List<Employee> employees = new ArrayList<>();
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver"); //mysql 드라이버 JVM에 로딩
-            Connection conn = DatabaseUtil.getConnection();
+//            Class.forName("com.mysql.cj.jdbc.Driver"); //mysql 드라이버 JVM에 로딩
+            conn = DatabaseConnector.getConnection();
             String sql="SELECT authority_idx, name FROM employees";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(); //select문에서 검색 결과를 담을 것
@@ -56,7 +58,7 @@ public class EmployeeManagementDao {
             conn.close();
             ps.close();
             rs.close();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
