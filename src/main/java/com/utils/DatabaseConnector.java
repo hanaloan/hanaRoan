@@ -4,6 +4,7 @@ import com.config.secret.Secret;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DatabaseConnector {
@@ -19,5 +20,25 @@ public class DatabaseConnector {
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
         }
         return connection;
+    }
+
+    public static void closeStatement(PreparedStatement statement) {
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void closeConnection(Connection connection) {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
