@@ -29,8 +29,7 @@ public class LoginController extends HttpServlet {
         String password = req.getParameter("password");
         String userType = req.getParameter("userType");
 
-
-
+        System.out.println("asdasd");
 
         LoginUserReq loginUserReq = new LoginUserReq(username, password, userType);
         LoginForAdminReq loginForAdminReq = new LoginForAdminReq(username, password, userType);
@@ -85,7 +84,7 @@ public class LoginController extends HttpServlet {
                     }
 
         } catch (SQLException e) {
-            // 예외 발생 시 응답
+            System.out.println(e.getMessage());
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             resp.getWriter().println("Internal server error");
         }

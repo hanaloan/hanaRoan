@@ -119,7 +119,7 @@ public class LoginDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
-            // 쿼리1) 평균 pv 도출 쿼리
+            // 쿼리1) 평균 pv 도출 쿼리 (pv 테이블에서 전체 pv 대비 해당 idx pv 비율 구하기 위함)
             // SQL 쿼리 작성
             String sql = "SELECT\n" +
                     "  (SELECT ROUND(AVG(page_views)) FROM page_views) AS avg_pv,\n" +
@@ -150,7 +150,7 @@ public class LoginDao {
             }
 
             // customerPv >= avgPv 조건이 만족되면 새로운 쿼리를 실행
-            System.out.println(recoReq.getCredit());
+            System.out.println(recoReq.getCustomer_Idx() + "손님의 신용도 : " + recoReq.getCredit());
             float minRate = 0;
             float maxRate = 100;
             //4가지 경우의 수에 따른 max, min추천 이자율 구하기
@@ -168,6 +168,8 @@ public class LoginDao {
             else if (customerPv < avgPv && recoReq.getIncome() >= 24000000){
                 maxRate = 3.0f;
             }
+
+            System.out.println(recoReq.getCustomer_Idx() + "손님의 이자율은 max :" + maxRate + "  min :" + minRate);
 
             sql = "SELECT\n" +
                     "    r.loan_id, l.loan_image, l.loan_name, l.loan_interest_rate\n" +
@@ -200,7 +202,7 @@ public class LoginDao {
                 );
                 recommendedProducts.add(product);
             }
-
+            System.out.println(recoReq.getCustomer_Idx() + "손님의 상위3개 추천상품의 idx는 :" + recommendedProducts);
 
             // 쿼리3) 최소 신용도를 충족시키는 상품 가져오기
             if (rs != null) {
@@ -211,22 +213,29 @@ public class LoginDao {
             }
 
             // ★ NOT IN안에 그냥 loanIdList를 넣기에는 인젝션주입 공격에 취약하다 고로 아래와 같이 진행
-            String questionmarks = String.join(",", Collections.nCopies(loanIdList.size(), "?"));
-
-            sql = "SELECT loan_image, loan_name, loan_interest_rate " +
-                    "FROM loan_products " +
-                    "WHERE min_credit < ? AND loan_idx NOT IN (" + questionmarks + ");";
+            // 리스트가 비어있으면 구문이 NOT IN ()이니까 에러나므로 두가지 케이스로 진행
+            if (loanIdList.isEmpty()) {
+                sql = "SELECT loan_image, loan_name, loan_interest_rate " +
+                        "FROM loan_products " +
+                        "WHERE min_credit < ?";
+            } else {
+                String questionmarks = String.join(",", Collections.nCopies(loanIdList.size(), "?"));
+                sql = "SELECT loan_image, loan_name, loan_interest_rate " +
+                        "FROM loan_products " +
+                        "WHERE min_credit < ? AND loan_idx NOT IN (" + questionmarks + ")";
+            }
 
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, recoReq.getCredit());
 
             // NOT IN안에 들어갈 ?를 파라메터인덱스 2번부터 넣어주기
-            for (int i = 0; i < loanIdList.size(); i++) {
-                stmt.setInt(i + 2, loanIdList.get(i));
+            if (!loanIdList.isEmpty()) {
+                for (int i = 0; i < loanIdList.size(); i++) {
+                    stmt.setInt(i + 2, loanIdList.get(i));
+                }
             }
 
             rs = stmt.executeQuery();
-
             while (rs.next()) {
                 LoginLoanProduct product = new LoginLoanProduct(
                         rs.getString("loan_image"),
@@ -236,6 +245,7 @@ public class LoginDao {
                 recommendedProducts.add(product);
             }
 
+            System.out.println(recoReq.getCustomer_Idx() + "손님에게 가능한 모든 추천상품의 idx는 :" + recommendedProducts);
             // recommendedProducts에 쌓아뒀던 정보들을 LoginRecommendationRes에 넣기
             recoRes = new LoginRecommendationRes(recommendedProducts);
 
