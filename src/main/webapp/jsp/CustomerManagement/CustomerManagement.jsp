@@ -7,10 +7,15 @@
   <title>Customer Management</title>
 </head>
 <body>
+<script>
+  window.onload = function() {
+    if (!sessionStorage.getItem('loaded')) {
+      sessionStorage.setItem('loaded', 'true');
+      location.href = '/CustomerManagement';
+    }
+  }
+</script>
 <h1>Customer Management</h1>
-<form action="/CustomerManagement" method="get">
-  <input type="submit" value="Load Customer Data">
-</form>
 <table>
   <tr>
     <th>Customer ID</th>
