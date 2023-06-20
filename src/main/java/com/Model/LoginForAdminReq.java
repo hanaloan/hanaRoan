@@ -8,7 +8,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class LoginUserReq {
+public class LoginForAdminReq{
     private String username;
     private String password;
     private String userType;

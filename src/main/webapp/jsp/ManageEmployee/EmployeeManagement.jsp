@@ -25,7 +25,8 @@
 
     <%-- Display logged-in user and perform admin functionality --%>
 <%--    <% if (loggedInUser != null && loggedInUser.equals("admin")) { %>--%>
-    <p>어서오세요!, 현재 관리자는 <%= loggedInUser %>. 입니다~.</p>
+<%--    <p>어서오세요!, 현재 관리자는 <%= loggedInUser %>. 입니다~.</p>--%>
+    <p>어서오세요!, 현재 관리자는 <%= request.getAttribute("username") %>. 입니다~.</p>
     <p>당신의 권한은 <%
         EmployeeManagementDao empDao = new EmployeeManagementDao();
         Employee cur_emp = empDao.currentEmployee(loggedInUser);

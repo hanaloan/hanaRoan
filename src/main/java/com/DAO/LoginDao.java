@@ -256,4 +256,47 @@ public class LoginDao {
         }
         return recoRes;
     }
+
+    public LoginForAdminRes loginAdmin(LoginForAdminReq loginForAdminReq) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        LoginForAdminRes loginForAdminRes = null;
+
+        try {
+            // 데이터베이스 연결
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+
+            System.out.println(loginForAdminReq.getUsername());
+            // SQL 쿼리 작성
+            String sql = "SELECT name FROM employees WHERE name = ? AND password = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, loginForAdminReq.getUsername());
+            stmt.setString(2, loginForAdminReq.getPassword());
+
+            // 쿼리 실행
+            rs = stmt.executeQuery();
+
+            // 결과 처리
+            if (rs.next()) {
+                String name = rs.getString("name");
+                loginForAdminRes = new LoginForAdminRes(name, false);
+            }
+        } catch (ClassNotFoundException e) {
+            System.out.println("데이터베이스 연결 실패: " + e.getMessage());
+        } finally {
+            // 사용한 자원 정리
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return loginForAdminRes;
+    }
 }
