@@ -3,23 +3,23 @@ package com.DAO;
 
 import com.config.secret.Secret;
 import com.Model.*;
-import com.Model.CustomerManageDto;
+import com.Model.CustomerManagement;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerManageDao {
+public class CustomerManagementDao {
     private static final String DB_URL = Secret.DB_URL;
     private static final String DB_USER = Secret.DB_USER;
     private static final String DB_PASSWORD = Secret.DB_PASSWORD;
 
-    public List<CustomerManageDto> getCustomerInfo(CustomerManageReqDto customerManageReqDto) throws SQLException {
+    public List<CustomerManagement> getCustomerInfo(CustomerManagementReq customerManagementReq) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        List<CustomerManageDto> customerManageDtoList = new ArrayList<>();
+        List<CustomerManagement> customerManagementList = new ArrayList<>();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -48,9 +48,9 @@ public class CustomerManageDao {
                 Long overdueInterestRate = rs.getLong("overdue_interest_rate");
 
 
-                CustomerManageDto customerManageDto1 = new CustomerManageDto(cusId, name, contactInfo, customerPassword, startDate, endDate, loanAmount, loanStatus, paymentAmount, paymentStatus, overdueInterestRate);
+                CustomerManagement customerManagement1 = new CustomerManagement(cusId, name, contactInfo, customerPassword, startDate, endDate, loanAmount, loanStatus, paymentAmount, paymentStatus, overdueInterestRate);
 
-                customerManageDtoList.add(customerManageDto1);
+                customerManagementList.add(customerManagement1);
             }
 
 
@@ -68,6 +68,6 @@ public class CustomerManageDao {
                 conn.close();
             }
         }
-        return customerManageDtoList;
+        return customerManagementList;
     }
 }

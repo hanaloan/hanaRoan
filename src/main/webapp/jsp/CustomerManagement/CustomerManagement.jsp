@@ -1,4 +1,4 @@
-<%@ page import="com.Model.CustomerManageDto" %>
+<%@ page import="com.Model.CustomerManagement" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Customer Management</h1>
-<form action="/CustomerManagement" method="post">
+<form action="/CustomerManagement" method="get">
   <input type="submit" value="Load Customer Data">
 </form>
 <table>
@@ -27,11 +27,11 @@
   </tr>
   <%
     request.setCharacterEncoding("UTF-8");
-    List<CustomerManageDto> customers = (List<CustomerManageDto>) request.getAttribute("customerManageResDto");
+    List<CustomerManagement> customers = (List<CustomerManagement>) request.getAttribute("customerManageResDto");
     if (customers != null) {
       for (Object obj : customers) {
-        if (obj instanceof CustomerManageDto) {
-          CustomerManageDto customer = (CustomerManageDto) obj;
+        if (obj instanceof CustomerManagement) {
+          CustomerManagement customer = (CustomerManagement) obj;
   %>
   <tr>
     <td><%= customer.getCusId() %>
@@ -64,8 +64,5 @@
   %>
 
 </table>
-<form action="/createCustomerInfo" method="post">
-  <input type="submit" value="Create Customer Data">
-</form>
 </body>
 </html>

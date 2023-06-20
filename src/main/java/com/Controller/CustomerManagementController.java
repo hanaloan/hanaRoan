@@ -1,7 +1,7 @@
 package com.Controller;
 
-import com.Model.CustomerManageDto;
-import com.Model.CustomerManageReqDto;
+import com.Model.CustomerManagement;
+import com.Model.CustomerManagementReq;
 import com.Service.CustomerManageService;
 
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/CustomerManagement")
-public class CustomerManageController extends HttpServlet {
+public class CustomerManagementController extends HttpServlet {
     private CustomerManageService customerManageService;
 
     @Override
@@ -24,11 +24,11 @@ public class CustomerManageController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            CustomerManageReqDto customerManageReqDto = new CustomerManageReqDto();
+            CustomerManagementReq customerManagementReq = new CustomerManagementReq();
 
-            List<CustomerManageDto> customerManageResDto = customerManageService.getCustomerInfo(customerManageReqDto);
+            List<CustomerManagement> customerManageResDto = customerManageService.getCustomerInfo(customerManagementReq);
 
             req.setAttribute("customerManageResDto", customerManageResDto);
 

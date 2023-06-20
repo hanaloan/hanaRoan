@@ -3,7 +3,7 @@ package com.Model;
 import lombok.ToString;
 
 @ToString
-public class CustomerManageDto {
+public class CustomerManagement {
     private int cusId;
     private String name;
     private String contactInfo;
@@ -16,7 +16,7 @@ public class CustomerManageDto {
     private String paymentStatus;
     private Long overdueInterestRate;
 
-    public CustomerManageDto(int cusId, String name, String contactInfo, String password, String startDate, String endDate, Long loanAmount, String loanStatus, Long paymentAmount, String paymentStatus, Long overdueInterestRate) {
+    public CustomerManagement(int cusId, String name, String contactInfo, String password, String startDate, String endDate, Long loanAmount, String loanStatus, Long paymentAmount, String paymentStatus, Long overdueInterestRate) {
         this.cusId=cusId;
         this.name=name;
         this.contactInfo=contactInfo;
