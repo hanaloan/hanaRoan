@@ -268,20 +268,19 @@ public class LoginDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
-            System.out.println(loginForAdminReq.getUsername());
             // SQL 쿼리 작성
-            String sql = "SELECT name FROM employees WHERE name = ? AND password = ?";
+            String sql = "SELECT name, employee_idx FROM employees WHERE id = ? AND password = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, loginForAdminReq.getUsername());
             stmt.setString(2, loginForAdminReq.getPassword());
 
             // 쿼리 실행
             rs = stmt.executeQuery();
-
             // 결과 처리
             if (rs.next()) {
                 String name = rs.getString("name");
-                loginForAdminRes = new LoginForAdminRes(name, false);
+                int idx = rs.getInt("employee_idx");
+                loginForAdminRes = new LoginForAdminRes(name, idx,false);
             }
         } catch (ClassNotFoundException e) {
             System.out.println("데이터베이스 연결 실패: " + e.getMessage());
