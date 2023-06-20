@@ -270,18 +270,19 @@ public class LoginDao {
 
             System.out.println(loginForAdminReq.getUsername());
             // SQL 쿼리 작성
-            String sql = "SELECT name FROM employees WHERE name = ? AND password = ?";
+            String sql = "SELECT name, employee_idx FROM employees WHERE id = ? AND password = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, loginForAdminReq.getUsername());
             stmt.setString(2, loginForAdminReq.getPassword());
-
+            System.out.println("asdasdasd");
             // 쿼리 실행
             rs = stmt.executeQuery();
-
+            System.out.println("asd");
             // 결과 처리
             if (rs.next()) {
                 String name = rs.getString("name");
-                loginForAdminRes = new LoginForAdminRes(name, false);
+                int idx = rs.getInt("employee_idx");
+                loginForAdminRes = new LoginForAdminRes(name, idx,false);
             }
         } catch (ClassNotFoundException e) {
             System.out.println("데이터베이스 연결 실패: " + e.getMessage());
