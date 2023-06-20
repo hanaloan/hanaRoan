@@ -39,4 +39,22 @@ public class CustomerManagementController extends HttpServlet {
             resp.getWriter().println("Internal server error");
         }
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+
+            CustomerManagementReq customerManagementReq = new CustomerManagementReq();
+
+            // Create Customer Data 액션을 실행
+            customerManageService.getCustomerInfo(customerManagementReq);
+
+            // Create Customer Data 액션이 완료되면 다른 페이지로 리다이렉트 또는 응답할 수 있습니다.
+            resp.sendRedirect("/jsp/CustomerManagement/CustomerManagement.jsp");
+        } catch (SQLException e) {
+            // 예외 발생 시 응답
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.getWriter().println("Internal server error");
+        }
+    }
 }

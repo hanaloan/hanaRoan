@@ -64,5 +64,8 @@
   %>
 
 </table>
+<a href="/jsp/CustomerManagement/CreateCustomer.jsp">고객 생성</a>
+<a href="/jsp/CustomerManagement/ApplyLoan.jsp">고객 상품 등록</a>
+
 </body>
 </html>
