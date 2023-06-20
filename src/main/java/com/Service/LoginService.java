@@ -1,7 +1,7 @@
 package com.Service;
 
 import com.DAO.LoginDao;
-import com.Model.LoginUser;
+import com.Model.*;
 
 import java.sql.SQLException;
 
@@ -13,20 +13,40 @@ public class LoginService {
         loginDao = new LoginDao();
     }
 
-    public boolean authenticateUser(LoginUser loginUser) throws SQLException {
+    public LoginUserRes authenticateUser(LoginUserReq user) throws SQLException {
 
-        // 의미적 유효성 검사
-        if (!isMeaningfulValidationPassed(loginUser)) {
-            return false;
+        LoginUserRes loginUserRes = loginDao.login(user);
+
+        // 의미적 유효성 검사 -> if 회원있음, else 회원없음
+        if (loginUserRes != null && loginUserRes.getName() != null) {
+            loginUserRes.setAuthenticated(true);
+        } else {
+            loginUserRes = new LoginUserRes(null, 0, false);
         }
 
-        // LoginDao의 로그인 메소드 호출
-        return loginDao.login(loginUser);
+        return loginUserRes;
     }
 
-    private boolean isMeaningfulValidationPassed(LoginUser loginUser) {
-        // 여기에 의미적 유효성 검사 로직을 구현
+    public LoginForAdminRes authenticateAdmin(LoginForAdminReq loginForAdminReq) throws SQLException {
+        // LoginDao의 로그인 메소드 호출
+        LoginForAdminRes loginForAdminRes = loginDao.loginAdmin(loginForAdminReq);
 
-        return true; // 의미적 유효성 검사 통과
+        // 의미적 유효성 검사 -> if 회원있음, else 회원없음
+        if (loginForAdminRes != null && loginForAdminRes.getName() != null) {
+            loginForAdminRes.setAuthenticated(true);
+        } else {
+            loginForAdminRes = new LoginForAdminRes(null, false);
+        }
+
+        return loginForAdminRes;
+    }
+
+
+    public LoginCreditScoreModelRes getCreditScore(LoginCreditScoreModelReq modelReq) throws SQLException {
+        return loginDao.getCreditScore(modelReq);
+    }
+
+    public LoginRecommendationRes getRecoProduct(LoginRecommendationReq recoReq) throws SQLException{
+        return loginDao.getRecoProduct(recoReq);
     }
 }
