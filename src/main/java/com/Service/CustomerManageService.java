@@ -17,4 +17,5 @@ public class CustomerManageService {
     public List<CustomerManagement> getCustomerInfo(CustomerManagementReq customerManagementReq) throws SQLException {
         return customerManagementDao.getCustomerInfo(customerManagementReq);
     }
+
 }
