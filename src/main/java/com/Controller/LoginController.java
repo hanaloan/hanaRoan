@@ -35,13 +35,12 @@ public class LoginController extends HttpServlet {
         LoginUserReq loginUserReq = new LoginUserReq(username, password, userType);
         LoginForAdminReq loginForAdminReq = new LoginForAdminReq(username, password, userType);
 
-        System.out.println(username);
-
         try {
             if ("admin".equals(userType)) {
                 LoginForAdminRes loginForAdminRes = loginService.authenticateAdmin(loginForAdminReq);
                 if (loginForAdminRes.isAuthenticated()) {
                     req.setAttribute("username", loginForAdminRes.getName());
+                    req.setAttribute("employee_idx", loginForAdminRes.getAdminIdx());
                     resp.setStatus(HttpServletResponse.SC_OK);
                     req.getRequestDispatcher("/jsp/ManageEmployee/EmployeeManagement.jsp").forward(req, resp);
 

@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 public class LoginForAdminRes{
     private String name;
+    private int adminIdx;
     private boolean authenticated;
 
 
