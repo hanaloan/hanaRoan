@@ -1,6 +1,6 @@
 package com.Model;
 
-public class CustomerManagementReq {
+public class Customer {
     private String name;
     private String contactInfo;
     private String cusId;
