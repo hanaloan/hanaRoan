@@ -35,15 +35,14 @@ public class LoginController extends HttpServlet {
         LoginUserReq loginUserReq = new LoginUserReq(username, password, userType);
         LoginForAdminReq loginForAdminReq = new LoginForAdminReq(username, password, userType);
 
-        System.out.println("vvvvvvvvvvvvvvv");
         try {
             if ("admin".equals(userType)) {
                 LoginForAdminRes loginForAdminRes = loginService.authenticateAdmin(loginForAdminReq);
                 if (loginForAdminRes.isAuthenticated()) {
                     req.setAttribute("username", loginForAdminRes.getName());
                     req.setAttribute("employee_idx", loginForAdminRes.getAdminIdx());
-                    //resp.setStatus(HttpServletResponse.SC_OK);
-                    //req.getRequestDispatcher("/jsp/ManageEmployee/EmployeeManagement.jsp").forward(req, resp);
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                    req.getRequestDispatcher("/jsp/ManageEmployee/EmployeeManagement.jsp").forward(req, resp);
 
                 }else {
                     String errorMessage = "Name과 Password를 확인해주세요";
