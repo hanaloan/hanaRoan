@@ -13,7 +13,7 @@ public class EmployeeManagementDao {
 
     PreparedStatement ps=null; // SQL문 담당
 
-    public Employee currentEmployee(LoginForAdminReq username, String cur_name) {
+    public Employee currentEmployee(String cur_name) {
 
         Employee cur_emp = null;
         try {
@@ -27,7 +27,7 @@ public class EmployeeManagementDao {
 
             while(rs.next()) {
                 int level = rs.getInt("authority_idx");
-                System.out.println(level);
+//                System.out.println(level);
                 cur_emp = new Employee(level);
             }
             conn.close();
@@ -43,21 +43,21 @@ public class EmployeeManagementDao {
 
 
     public List<Employee> selectEmployees() {
-        List<Employee> employees = new ArrayList<>();
+        List<Employee> employeeManagementList = new ArrayList<>();
         try{
             Connection conn = DatabaseConnector.getConnection();
-            String sql="SELECT authority_idx, name FROM employees";
+            String sql="SELECT name, authority_idx FROM employees";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(); //select문에서 검색 결과를 담을 것
 
             while(rs.next()) {
-                int level = rs.getInt("authority_idx");
                 String name = rs.getString("name");
+                int level = rs.getInt("authority_idx");
 
-                Employee emp = new Employee(level,name );
-                employees.add(emp); // 주석2 리스트에 담아주고
+                Employee emp = new Employee(name, level );
+                employeeManagementList.add(emp); // 주석2 리스트에 담아주고
                 System.out.println("담았어?");
-                System.out.println(employees);
+                System.out.println(employeeManagementList);
             }
             conn.close();
             ps.close();
@@ -67,8 +67,16 @@ public class EmployeeManagementDao {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return employees;
+        return employeeManagementList;
     }
+
+    public void insertEmployeeInfo(EmployeeManagementReq employeeManagementReq) {
+
+
+
+
+    }
+
 
 
 

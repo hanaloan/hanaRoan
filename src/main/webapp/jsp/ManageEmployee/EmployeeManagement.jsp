@@ -1,12 +1,6 @@
 <%@ page import="com.DAO.EmployeeManagementDao" %>
 <%@ page import="com.Model.Employee" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: Petchu
-  Date: 2023-06-19
-  Time: 오전 12:58
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -18,7 +12,7 @@
     window.onload = function() {
         if (!sessionStorage.getItem('loaded')) {
             sessionStorage.setItem('loaded', 'true');
-            location.href = '/EmployeeManagement';
+            location.href = '${pageContext.request.contextPath}/EmployeeManagement';
         }
     }
 </script>
@@ -35,7 +29,7 @@
     </div>
 <%--    <% String loggedInUser = request.getAttribute("username").toString(); %>--%>
 
-    <p>어서오세요!, 현재 관리자는 <%= request.getAttribute("username") %>. 입니다~.</p>
+    <p>어서오세요!, 현재 관리자는 <%= request.getAttribute("empName") %>. 입니다~.</p>
 
 
     <p>당신의 권한은 <%
@@ -59,15 +53,15 @@
         <%
             request.setCharacterEncoding("UTF-8");
 //            EmployeeManagementDao empDao = new EmployeeManagementDao();
-            List<Employee> employees = (List<Employee>) request.getAttribute("employees");
+            List<Employee> employees = (List<Employee>) request.getAttribute("employeeManageResDto");
 
 //            for (Employee employee : employees) {
 //            System.out.println("가져옴?");
 //            System.out.println(employees);
             if (employees != null) {
-            for (Object obj : employees) {
-                if (obj instanceof Employee) {
-                    Employee employee = (Employee) obj;
+                for (Object obj : employees) {
+                    if (obj instanceof Employee) {
+                        Employee employee = (Employee) obj;
 
 
         %>
@@ -76,7 +70,8 @@
             <td><%=employee.getEmpLevel() %></td>
         </tr>
         <%
-            }}
+                    }
+                }
             }
         %>
     </table>

@@ -14,20 +14,23 @@ public class EmployeeManageService {
 
     private final EmployeeManagementDao employeeManagementDao;
 
+    //생성자
     public EmployeeManageService() {
         this.employeeManagementDao = new EmployeeManagementDao();
     }
 
+    //직원들 정보 표로 가져오기
     public List<Employee> selectEmployees() throws SQLException {
         return employeeManagementDao.selectEmployees();
     }
 
-//    public Employee currentEmployee(String cur_name) {
-//
-//
-//    }
-
-
-
-
+    //현재 직원 정보 가져오기
+    public Employee currentEmployee(String empAuth) {
+        return employeeManagementDao.currentEmployee(empAuth);
     }
+
+    //직원 추가
+    public void insertEmployeeInfo(EmployeeManagementReq employeeManagementReq) {
+        employeeManagementDao.insertEmployeeInfo(employeeManagementReq);
+    }
+}

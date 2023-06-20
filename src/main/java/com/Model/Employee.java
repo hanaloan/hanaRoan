@@ -11,12 +11,10 @@ public class Employee {
         this.empLevel = empLevel;
     }
 
-    public Employee(int empLevel, String empName) {
-        this.empLevel = empLevel;
+    public Employee( String empName, int empLevel) {
         this.empName = empName;
+        this.empLevel = empLevel;
     }
-
-
 
     public int getEmpLevel() {
         return empLevel;
