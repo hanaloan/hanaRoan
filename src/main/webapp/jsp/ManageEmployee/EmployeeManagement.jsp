@@ -14,32 +14,35 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/EmployeeManagement/EmployeeManagement.css">
 </head>
 <body>
+<script>
+    window.onload = function() {
+        if (!sessionStorage.getItem('loaded')) {
+            sessionStorage.setItem('loaded', 'true');
+            location.href = '/EmployeeManagement';
+        }
+    }
+</script>
+
+<%--<form action="${pageContext.request.contextPath}/EmployeeManagement" method="get">--%>
+<%--    <input type="submit" value="Load Employee Data">--%>
+<%--</form>--%>
+
 
 <div>
     <h3>현재 관리자</h3>
     <div class="box" style=" height: 100px; width: 100px">
         <img class="profile" src="${pageContext.request.contextPath}/img/undraw_profile.svg">
     </div>
-    <%-- Retrieve logged-in user from session --%>
-    <% String loggedInUser = (String) session.getAttribute("loggedInUser"); %>
+<%--    <% String loggedInUser = request.getAttribute("username").toString(); %>--%>
 
-    <%-- Display logged-in user and perform admin functionality --%>
-<%--    <% if (loggedInUser != null && loggedInUser.equals("admin")) { %>--%>
-<%--    <p>어서오세요!, 현재 관리자는 <%= loggedInUser %>. 입니다~.</p>--%>
     <p>어서오세요!, 현재 관리자는 <%= request.getAttribute("username") %>. 입니다~.</p>
+
+
     <p>당신의 권한은 <%
-        EmployeeManagementDao empDao = new EmployeeManagementDao();
-        Employee cur_emp = empDao.currentEmployee(loggedInUser);
+        %>
+        <%= request.getAttribute("empAuth") %></p>
 
-//            for(int i=0;i<list.size();i++){
-    %>
-        <%=cur_emp.getEmpLevel() %></p>
 
-<%--    &lt;%&ndash; Perform admin functionality here &ndash;%&gt;--%>
-<%--    <p>This is the admin functionality.</p>--%>
-<%--    <% } else { %>--%>
-<%--    <p>Access denied. You need to be logged in as an admin to view this page.</p>--%>
-<%--    <% } %>--%>
 
 </div>
 
@@ -54,16 +57,26 @@
             </th>
         </tr>
         <%
+            request.setCharacterEncoding("UTF-8");
 //            EmployeeManagementDao empDao = new EmployeeManagementDao();
-            List<Employee> employees = empDao.selectEmployees();
-            for (Employee employee : employees) {
-//            for(int i=0;i<list.size();i++){
+            List<Employee> employees = (List<Employee>) request.getAttribute("employees");
+
+//            for (Employee employee : employees) {
+//            System.out.println("가져옴?");
+//            System.out.println(employees);
+            if (employees != null) {
+            for (Object obj : employees) {
+                if (obj instanceof Employee) {
+                    Employee employee = (Employee) obj;
+
+
         %>
         <tr>
             <td><%=employee.getEmpName() %></td>
             <td><%=employee.getEmpLevel() %></td>
         </tr>
         <%
+            }}
             }
         %>
     </table>
