@@ -8,10 +8,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class LoginUserReq {
-    private String username;
-    private String password;
-    private String userType;
+public class LoginForAdminRes{
+    private String name;
+    private boolean authenticated;
 
 
 }
