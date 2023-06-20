@@ -42,6 +42,7 @@ public class LoginController extends HttpServlet {
                 LoginForAdminRes loginForAdminRes = loginService.authenticateAdmin(loginForAdminReq);
                 if (loginForAdminRes.isAuthenticated()) {
                     req.setAttribute("username", loginForAdminRes.getName());
+                    req.setAttribute("employee_idx", loginForAdminRes.getAdmin_idx());
                     resp.setStatus(HttpServletResponse.SC_OK);
                     req.getRequestDispatcher("/jsp/ManageEmployee/EmployeeManagement.jsp").forward(req, resp);
 

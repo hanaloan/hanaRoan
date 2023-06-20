@@ -40,7 +40,6 @@
 <%--    <% } else { %>--%>
 <%--    <p>Access denied. You need to be logged in as an admin to view this page.</p>--%>
 <%--    <% } %>--%>
-
 </div>
 
 <div class="table">
