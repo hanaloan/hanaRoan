@@ -28,8 +28,8 @@ public class EmployeeManagementDao {
             while(rs.next()) {
                 String name=rs.getString("name");
 //                int level = rs.getInt("authority_idx");
-                String lebelName=rs.getString("authority_type");
-                cur_emp = new Employee(name, lebelName);
+                String levelName=rs.getString("authority_type");
+                cur_emp = new Employee(name, levelName);
             }
             conn.close();
             ps.close();
@@ -82,5 +82,3 @@ public class EmployeeManagementDao {
 
 
 }
-
-

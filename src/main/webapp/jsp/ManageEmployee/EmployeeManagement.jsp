@@ -8,18 +8,18 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/EmployeeManagement/EmployeeManagement.css">
 </head>
 <body>
-<%--<script>--%>
-<%--    window.onload = function() {--%>
-<%--        if (!sessionStorage.getItem('loaded')) {--%>
-<%--            sessionStorage.setItem('loaded', 'true');--%>
-<%--            location.href = '${pageContext.request.contextPath}/EmployeeManagement';--%>
-<%--        }--%>
-<%--    }--%>
-<%--</script>--%>
+<script>
+    window.onload = function() {
+        if (!sessionStorage.getItem('loaded')) {
+            sessionStorage.setItem('loaded', 'true');
+            location.href = '${pageContext.request.contextPath}/EmployeeManagement';
+        }
+    }
+</script>
 
-<%--<form action="${pageContext.request.contextPath}/EmployeeManagement" method="get">--%>
-<%--    <input type="submit" value="Load Employee Data">--%>
-<%--</form>--%>
+<form action="${pageContext.request.contextPath}/EmployeeManagement" method="get">
+    <input type="submit" value="Load Employee Data">
+</form>
 
 <%@ include file="/jsp/AdminSidebar/AdminSidebar.jsp" %>
 <div>
