@@ -75,6 +75,11 @@ public class LoginController extends HttpServlet {
                     LoginRecommendationRes recoRes = loginService.getRecoProduct(recoReq);
                     req.setAttribute("recoRes", recoRes);
 
+                    // 세션 관련
+                    HttpSession session = req.getSession();
+                    session.setAttribute("username",  loginUserRes.getName());
+                    session.setAttribute("customer_Idx", loginUserRes.getCustomer_Idx());
+
                     // 로그인 성공 시 응답
                     resp.setStatus(HttpServletResponse.SC_OK);
                     req.getRequestDispatcher("/jsp/CustomerHome/CustomerHome.jsp").forward(req, resp);
