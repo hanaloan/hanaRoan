@@ -38,13 +38,13 @@
 </head>
 <body>
 <script>
-  window.onload = function() {
-    if (!sessionStorage.getItem('loaded')) {
-      sessionStorage.setItem('loaded', 'true');
+  window.onload = function () {
+    if (window.location.pathname !== '/CustomerManagement') {
       location.href = '/CustomerManagement';
     }
   }
 </script>
+
 
 
 <h1>Customer Management</h1>
@@ -130,6 +130,6 @@
 <p>대출 상품 등록 시 유저 최소 신용도 등 자격 조건 체크 + 얼마 대출할건지</p>
 <p>pending 상태인 상품만 조회할 수 있는 기능</p>
 <p>유저 가입할 때 신용도 등 테이블 조인</p>
-
+<a href="/jsp/LoanApproval/LoanApproval.jsp"><button>대출 승인 페이지</button></a>
 </body>
 </html>
