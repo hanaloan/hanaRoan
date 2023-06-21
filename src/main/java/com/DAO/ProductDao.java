@@ -3,7 +3,6 @@ package com.DAO;
 import com.Model.Product;
 import com.utils.DatabaseConnector;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,25 +10,32 @@ import java.util.List;
 public class ProductDao {
     Connection conn = null;
     PreparedStatement stmt = null;
-    public List<Product> getItems() {
+    public List<Product> getProducts(String category) {
         List<Product> products = new ArrayList<>();
         try  {
             conn = DatabaseConnector.getConnection();
-            String sql = "SELECT * FROM loan_products";
-            stmt = conn.prepareStatement(sql);
+            String sql = "SELECT * FROM loan_products\n";
+
+            if (!category.equals("*")) {
+                sql += " WHERE loan_products.loan_type_id = ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1, category);
+            } else {
+                stmt = conn.prepareStatement(sql);
+            }
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("loan_idx");
-                String name = rs.getString("loan_name");
-                String description = rs.getString("loan_description");
-                int minCredit = rs.getInt("min_credit");
-                BigDecimal lendLimit = rs.getBigDecimal("lend_limit");
-                int loanPeriod = rs.getInt("lend_period");
-                BigDecimal interestRate = rs.getBigDecimal("loan_interest_rate");
-                Date startDate = rs.getDate("start_date");
-                Date endDate = rs.getDate("end_date");
+                Product product = new Product();
+                product.setId(String.valueOf(rs.getInt("loan_idx")));
+                product.setName(rs.getString("loan_name"));
+                product.setDescription(rs.getString("loan_description"));
+                product.setMinCredit(rs.getInt("min_credit"));
+                product.setLendLimit(rs.getBigDecimal("lend_limit"));
+                product.setLoanPeriod(rs.getInt("lend_period"));
+                product.setInterestRate(rs.getBigDecimal("loan_interest_rate"));
+                product.setStartDate(rs.getDate("start_date"));
+                product.setEndDate(rs.getDate("end_date"));
 
-                Product product = new Product(id, name, description, minCredit, lendLimit, loanPeriod, interestRate, startDate, endDate);
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -40,7 +46,7 @@ public class ProductDao {
         return products;
     }
 
-    public Product getItemById(int productIdx) {
+    public Product getProductById(int productIdx) {
         Product product = null;
         try {
             conn = DatabaseConnector.getConnection();
@@ -49,17 +55,16 @@ public class ProductDao {
             stmt.setInt(1, productIdx);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                int id = rs.getInt("loan_idx");
-                String name = rs.getString("loan_name");
-                String description = rs.getString("loan_description");
-                int minCredit = rs.getInt("min_credit");
-                BigDecimal lendLimit = rs.getBigDecimal("lend_limit");
-                int loanPeriod = rs.getInt("lend_period");
-                BigDecimal interestRate = rs.getBigDecimal("loan_interest_rate");
-                Date startDate = rs.getDate("start_date");
-                Date endDate = rs.getDate("end_date");
-
-                product = new Product(id, name, description, minCredit, lendLimit, loanPeriod, interestRate, startDate, endDate);
+                product = new Product();
+                product.setId(String.valueOf(rs.getInt("loan_idx")));
+                product.setName(rs.getString("loan_name"));
+                product.setDescription(rs.getString("loan_description"));
+                product.setMinCredit(rs.getInt("min_credit"));
+                product.setLendLimit(rs.getBigDecimal("lend_limit"));
+                product.setLoanPeriod(rs.getInt("lend_period"));
+                product.setInterestRate(rs.getBigDecimal("loan_interest_rate"));
+                product.setStartDate(rs.getDate("start_date"));
+                product.setEndDate(rs.getDate("end_date"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
