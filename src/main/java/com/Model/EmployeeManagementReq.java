@@ -7,6 +7,17 @@ public class EmployeeManagementReq {
     private String empName;
     private int empAuthIdx;
 
+    public EmployeeManagementReq(String empId, String empPw, String empName, int empAuthIdx) {
+        this.empId = empId;
+        this.empPw = empPw;
+        this.empName = empName;
+        this.empAuthIdx = empAuthIdx;
+    }
+
+    public EmployeeManagementReq() {
+
+    }
+
     public String getEmpId() {
         return empId;
     }

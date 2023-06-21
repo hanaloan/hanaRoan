@@ -6,7 +6,7 @@
 
 
         <welcome-file-list>
-            <welcome-file>jsp/ManageEmployee/EmployeeManagement.jsp</welcome-file>
+            <welcome-file>jsp/Login/login.jsp</welcome-file>
 <!--            <welcome-file>jsp/DisplayProduct/ProductList.jsp</welcome-file>-->
         </welcome-file-list>
 

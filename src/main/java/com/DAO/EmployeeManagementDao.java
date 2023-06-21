@@ -13,22 +13,23 @@ public class EmployeeManagementDao {
 
     PreparedStatement ps=null; // SQL문 담당
 
-    public Employee currentEmployee(String cur_name) {
+    public Employee currentEmployee(Integer cur_idx) {
 
         Employee cur_emp = null;
         try {
 
-            System.out.println("currentEmployee 들어옴");
+//            System.out.println("currentEmployee 들어옴");
             Connection conn = DatabaseConnector.getConnection(); //변수 선언 DB와 연결
 
-            String sql = "SELECT authority_idx FROM employees WHERE name='" + cur_name+"'";
+            String sql = "SELECT e.name, a.authority_type FROM employees e JOIN authority_types a ON a.authority_idx = e.authority_idx WHERE e.employee_idx=" + cur_idx;
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(); //select문에서 검색 결과를 담을 것
 
             while(rs.next()) {
-                int level = rs.getInt("authority_idx");
-//                System.out.println(level);
-                cur_emp = new Employee(level);
+                String name=rs.getString("name");
+//                int level = rs.getInt("authority_idx");
+                String lebelName=rs.getString("authority_type");
+                cur_emp = new Employee(name, lebelName);
             }
             conn.close();
             ps.close();
@@ -46,18 +47,18 @@ public class EmployeeManagementDao {
         List<Employee> employeeManagementList = new ArrayList<>();
         try{
             Connection conn = DatabaseConnector.getConnection();
-            String sql="SELECT name, authority_idx FROM employees";
+//            String sql="SELECT name, authority_idx FROM employees";
+            String sql="SELECT e.name, a.authority_type FROM employees e JOIN authority_types a ON a.authority_idx = e.authority_idx";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(); //select문에서 검색 결과를 담을 것
 
             while(rs.next()) {
                 String name = rs.getString("name");
-                int level = rs.getInt("authority_idx");
-
-                Employee emp = new Employee(name, level );
+//                int level = rs.getInt("authority_idx");
+                String levelName = rs.getString("authority_type");
+//                System.out.println(levelName);
+                Employee emp = new Employee(name, levelName );
                 employeeManagementList.add(emp); // 주석2 리스트에 담아주고
-                System.out.println("담았어?");
-                System.out.println(employeeManagementList);
             }
             conn.close();
             ps.close();
