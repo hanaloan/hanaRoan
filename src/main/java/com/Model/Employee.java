@@ -4,25 +4,23 @@ public class Employee {
 
     private String empId;
     private String empPw;
-    private String empLevel;
+    private int empLevel;
     private String empName;
 
-    public Employee(String empLevel) {
+    public Employee(int empLevel) {
         this.empLevel = empLevel;
     }
 
-    public Employee(String empLevel, String empName) {
-        this.empLevel = empLevel;
+    public Employee( String empName, int empLevel) {
         this.empName = empName;
+        this.empLevel = empLevel;
     }
 
-
-
-    public String getEmpLevel() {
+    public int getEmpLevel() {
         return empLevel;
     }
 
-    public void setEmpLevel(String empLevel) {
+    public void setEmpLevel(int empLevel) {
         this.empLevel = empLevel;
     }
 

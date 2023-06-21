@@ -1,6 +1,10 @@
 package com.DAO;
 
 import com.Model.Employee;
+import com.Model.EmployeeManagementReq;
+import com.Model.LoginForAdminReq;
+import com.utils.DatabaseConnector;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +18,16 @@ public class EmployeeManagementDao {
         Employee cur_emp = null;
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver"); //mysql 드라이버 JVM에 로딩
-            Connection conn = DatabaseUtil.getConnection(); //변수 선언 DB와 연결
+            System.out.println("currentEmployee 들어옴");
+            Connection conn = DatabaseConnector.getConnection(); //변수 선언 DB와 연결
 
-            String sql = "SELECT name, authority_idx FROM employees WHERE name='" + cur_name+"'";
+            String sql = "SELECT authority_idx FROM employees WHERE name='" + cur_name+"'";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(); //select문에서 검색 결과를 담을 것
 
             while(rs.next()) {
-                String level = rs.getString("authority_idx");
+                int level = rs.getInt("authority_idx");
+//                System.out.println(level);
                 cur_emp = new Employee(level);
             }
             conn.close();
@@ -38,20 +43,21 @@ public class EmployeeManagementDao {
 
 
     public List<Employee> selectEmployees() {
-        List<Employee> employees = new ArrayList<>();
+        List<Employee> employeeManagementList = new ArrayList<>();
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver"); //mysql 드라이버 JVM에 로딩
-            Connection conn = DatabaseUtil.getConnection();
-            String sql="SELECT authority_idx, name FROM employees";
+            Connection conn = DatabaseConnector.getConnection();
+            String sql="SELECT name, authority_idx FROM employees";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(); //select문에서 검색 결과를 담을 것
 
             while(rs.next()) {
-                String level = rs.getString("authority_idx");
                 String name = rs.getString("name");
+                int level = rs.getInt("authority_idx");
 
-                Employee emp = new Employee(level,name );
-                employees.add(emp); // 주석2 리스트에 담아주고
+                Employee emp = new Employee(name, level );
+                employeeManagementList.add(emp); // 주석2 리스트에 담아주고
+                System.out.println("담았어?");
+                System.out.println(employeeManagementList);
             }
             conn.close();
             ps.close();
@@ -61,8 +67,16 @@ public class EmployeeManagementDao {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return employees;
+        return employeeManagementList;
     }
+
+    public void insertEmployeeInfo(EmployeeManagementReq employeeManagementReq) {
+
+
+
+
+    }
+
 
 
 
