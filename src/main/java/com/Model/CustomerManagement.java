@@ -8,23 +8,27 @@ public class CustomerManagement {
     private String name;
     private String contactInfo;
     private String password;
+    private int lendId;
     private String startDate;
     private String endDate;
     private Long loanAmount;
     private String loanStatus;
+    private int repaymentId;
     private Long paymentAmount;
     private String paymentStatus;
     private Long overdueInterestRate;
 
-    public CustomerManagement(int cusId, String name, String contactInfo, String password, String startDate, String endDate, Long loanAmount, String loanStatus, Long paymentAmount, String paymentStatus, Long overdueInterestRate) {
+    public CustomerManagement(int cusId, String name, String contactInfo, String password, int lendId, String startDate, String endDate, Long loanAmount, String loanStatus, int repaymentId,Long paymentAmount, String paymentStatus, Long overdueInterestRate) {
         this.cusId=cusId;
         this.name=name;
         this.contactInfo=contactInfo;
         this.password=password;
+        this.lendId=lendId;
         this.startDate=startDate;
         this.endDate=endDate;
         this.loanAmount=loanAmount;
         this.loanStatus=loanStatus;
+        this.repaymentId=repaymentId;
         this.paymentAmount=paymentAmount;
         this.paymentStatus=paymentStatus;
         this.overdueInterestRate=overdueInterestRate;
@@ -63,6 +67,14 @@ public class CustomerManagement {
         this.password = password;
     }
 
+    public int getLendId() {
+        return lendId;
+    }
+
+    public void setLendId(int lendId) {
+        this.lendId = lendId;
+    }
+
     public String getStartDate() {
         return startDate;
     }
@@ -93,6 +105,14 @@ public class CustomerManagement {
 
     public void setLoanStatus(String loanStatus) {
         this.loanStatus = loanStatus;
+    }
+
+    public int getRepaymentId() {
+        return repaymentId;
+    }
+
+    public void setRepaymentId(int repaymentId) {
+        this.repaymentId = repaymentId;
     }
 
     public Long getPaymentAmount() {

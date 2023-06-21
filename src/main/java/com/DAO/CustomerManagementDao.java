@@ -39,16 +39,18 @@ public class CustomerManagementDao {
                 String name = rs.getString("name");
                 String contactInfo = rs.getString("contact_info");
                 String customerPassword = rs.getString("password");
+                int lendId = rs.getInt("lend_idx");
                 String startDate = String.valueOf(rs.getDate("start_date"));
                 String endDate = String.valueOf(rs.getDate("start_date"));
                 Long loanAmount = rs.getLong("loan_amount");
                 String loanStatus = rs.getString("loan_status");
+                int repaymentId = rs.getInt("repayment_idx");
                 Long paymentAmount = rs.getLong("payment_amount");
                 String paymentStatus = rs.getString("payment_status");
                 Long overdueInterestRate = rs.getLong("overdue_interest_rate");
 
 
-                CustomerManagement customerManagement1 = new CustomerManagement(cusId, name, contactInfo, customerPassword, startDate, endDate, loanAmount, loanStatus, paymentAmount, paymentStatus, overdueInterestRate);
+                CustomerManagement customerManagement1 = new CustomerManagement(cusId, name, contactInfo, customerPassword, lendId, startDate, endDate, loanAmount, loanStatus,repaymentId, paymentAmount, paymentStatus, overdueInterestRate);
 
                 customerManagementList.add(customerManagement1);
             }

@@ -5,6 +5,16 @@
 <html>
 <head>
   <title>Customer Management</title>
+  <script>
+    function updateLoanStatus(lendId) {
+      var loanStatus = document.getElementById('loan-status-' + lendId).value;
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/ChangeLoanStatus", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.send("lendId=" + lendId + "&loanStatus=" + loanStatus);
+    }
+  </script>
+
 </head>
 <body>
 <script>
@@ -15,6 +25,8 @@
     }
   }
 </script>
+
+
 <h1>Customer Management</h1>
 <table>
   <tr>
@@ -22,10 +34,12 @@
     <th>Customer Name</th>
     <th>Customer Password</th>
     <th>Contact Info</th>
+    <th>Lend ID</th>
     <th>Start Date</th>
     <th>End Date</th>
     <th>Loan Amount</th>
     <th>Loan Status</th>
+    <th>Repayment ID</th>
     <th>payment Amount</th>
     <th>payment Status</th>
     <th>overdue Interest Rate</th>
@@ -47,13 +61,23 @@
     </td>
     <td><%= customer.getContactInfo() %>
     </td>
+    <td><%= customer.getLendId() %>
+    </td>
     <td><%= customer.getStartDate() %>
     </td>
     <td><%= customer.getEndDate() %>
     </td>
     <td><%= customer.getLoanAmount() %>
     </td>
-    <td><%= customer.getLoanStatus() %>
+    <td>
+      <select id="loan-status-<%= customer.getLendId() %>" onchange="updateLoanStatus('<%= customer.getLendId() %>')">
+        <option value="pending" <%= customer.getLoanStatus() != null && customer.getLoanStatus().equals("pending") ? "selected" : "" %>>Pending</option>
+        <option value="approved" <%= customer.getLoanStatus() != null && customer.getLoanStatus().equals("approved") ? "selected" : "" %>>Approved</option>
+        <option value="denied" <%= customer.getLoanStatus() != null && customer.getLoanStatus().equals("denied") ? "selected" : "" %>>Denied</option>
+        <option value="paid" <%= customer.getLoanStatus() != null && customer.getLoanStatus().equals("paid") ? "selected" : "" %>>Paid</option>
+      </select>
+    </td>
+    <td><%= customer.getRepaymentId() %>
     </td>
     <td><%= customer.getPaymentAmount() %>
     </td>
