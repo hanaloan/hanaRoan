@@ -17,8 +17,10 @@ public class CustomerManagement {
     private Long paymentAmount;
     private String paymentStatus;
     private Long overdueInterestRate;
+    private String loanTypeName;
+    private int lendPeriod;
 
-    public CustomerManagement(int cusId, String name, String contactInfo, String password, int lendId, String startDate, String endDate, Long loanAmount, String loanStatus, int repaymentId,Long paymentAmount, String paymentStatus, Long overdueInterestRate) {
+    public CustomerManagement(int cusId, String name, String contactInfo, String password, int lendId, String startDate, String endDate, Long loanAmount, String loanStatus, int repaymentId,Long paymentAmount, String paymentStatus, Long overdueInterestRate,String loanTypeName, int lendPeriod) {
         this.cusId=cusId;
         this.name=name;
         this.contactInfo=contactInfo;
@@ -32,6 +34,8 @@ public class CustomerManagement {
         this.paymentAmount=paymentAmount;
         this.paymentStatus=paymentStatus;
         this.overdueInterestRate=overdueInterestRate;
+        this.loanTypeName=loanTypeName;
+        this.lendPeriod=lendPeriod;
     }
 
     // Getter and Setter methods
@@ -138,5 +142,18 @@ public class CustomerManagement {
     public void setOverdueInterestRate(Long overdueInterestRate) {
         this.overdueInterestRate = overdueInterestRate;
     }
+    public String getLoanTypeName() {
+        return loanTypeName;
+    }
 
+    public void setLoanTypeName(String loanTypeName) {
+        this.loanTypeName = loanTypeName;
+    }
+
+    public int getLendPeriod() {
+        return lendPeriod;
+    }
+    public void setLendPeriod(int lendPeriod) {
+        this.lendPeriod = lendPeriod;
+    }
 }

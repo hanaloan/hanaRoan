@@ -14,8 +14,8 @@ public class CustomerManageService {
         this.customerManagementDao = new CustomerManagementDao();
     }
 
-    public List<CustomerManagement> getCustomerInfo(CustomerManagementReq customerManagementReq) throws SQLException {
-        return customerManagementDao.getCustomerInfo(customerManagementReq);
+    public List<CustomerManagement> getCustomerInfo(String loanTypeName, CustomerManagementReq customerManagementReq) throws SQLException {
+        return customerManagementDao.getCustomerInfo(loanTypeName, customerManagementReq);
     }
 
 }

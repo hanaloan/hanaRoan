@@ -46,6 +46,11 @@
 
 
 <h1>Customer Management</h1>
+<button onclick="location.href='/CustomerManagement?loanType=월세대출'">월세 대출</button>
+<button onclick="location.href='/CustomerManagement?loanType=전세대출'">전세 대출</button>
+<button onclick="location.href='/CustomerManagement?loanType=담보대출'">담보 대출</button>
+<button onclick="location.href='/CustomerManagement'">전체 대출 보기</button>
+
 <table>
   <tr>
     <th>Customer ID</th>
@@ -53,6 +58,7 @@
     <th>Customer Password</th>
     <th>Contact Info</th>
     <th>Lend ID</th>
+    <th>Loan Type</th>
     <th>Start Date</th>
     <th>End Date</th>
     <th>Loan Amount</th>
@@ -80,6 +86,8 @@
     <td><%= customer.getContactInfo() %>
     </td>
     <td><%= customer.getLendId() %>
+    </td>
+    <td><%= customer.getLoanTypeName() %>
     </td>
     <td><%= customer.getStartDate() %>
     </td>

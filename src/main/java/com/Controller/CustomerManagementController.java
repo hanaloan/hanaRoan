@@ -28,7 +28,14 @@ public class CustomerManagementController extends HttpServlet {
         try {
             CustomerManagementReq customerManagementReq = new CustomerManagementReq();
 
-            List<CustomerManagement> customerManageResDto = customerManageService.getCustomerInfo(customerManagementReq);
+            String loanType = req.getParameter("loanType");
+            customerManagementReq.setLoanType(loanType);
+
+            if (loanType == null || loanType.isEmpty()) {
+                customerManagementReq.setLoanType(null);
+            }
+
+            List<CustomerManagement> customerManageResDto = customerManageService.getCustomerInfo(loanType, customerManagementReq);
 
             req.setAttribute("customerManageResDto", customerManageResDto);
 
@@ -46,8 +53,11 @@ public class CustomerManagementController extends HttpServlet {
 
             CustomerManagementReq customerManagementReq = new CustomerManagementReq();
 
+            String loanType = req.getParameter("loanType");
+            customerManagementReq.setLoanType(loanType);
+
             // Create Customer Data 액션을 실행
-            customerManageService.getCustomerInfo(customerManagementReq);
+            customerManageService.getCustomerInfo(loanType,customerManagementReq);
 
             // Create Customer Data 액션이 완료되면 다른 페이지로 리다이렉트 또는 응답할 수 있습니다.
             resp.sendRedirect("/jsp/CustomerManagement/CustomerManagement.jsp");
