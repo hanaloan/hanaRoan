@@ -7,11 +7,29 @@
   <title>Customer Management</title>
   <script>
     function updateLoanStatus(lendId) {
+      console.log(lendId)
       var loanStatus = document.getElementById('loan-status-' + lendId).value;
+      createLoanPayment(lendId, loanStatus);
+
       var xhr = new XMLHttpRequest();
       xhr.open("POST", "/ChangeLoanStatus", true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
       xhr.send("lendId=" + lendId + "&loanStatus=" + loanStatus);
+    }
+    function createLoanPayment(lendId, loanStatus) {
+      if (loanStatus == "approved") {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/CreateLoanPayment", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("lendId=" + lendId);
+
+        // 작업이 완료되면 페이지를 새로고침
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            location.reload();
+          }
+        };
+      }
     }
   </script>
 
