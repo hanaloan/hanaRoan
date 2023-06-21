@@ -10,4 +10,15 @@
 <!--            <welcome-file>jsp/DisplayProduct/ProductList.jsp</welcome-file>-->
         </welcome-file-list>
 
+    <servlet>
+        <servlet-name>AdminSystemSetting</servlet-name>
+        <servlet-class>com.Controller.AdminSystemSettingController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminSystemSetting</servlet-name>
+        <url-pattern>/AdminSystemSetting</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
