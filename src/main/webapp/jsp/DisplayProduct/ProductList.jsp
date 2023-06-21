@@ -1,25 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.Model.Product" %>
-<%@ page import="com.DAO.ProductDao" %>
-<%@ page import="com.DAO.ProductDao" %>
-
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Items List</title>
+  <title>Product List</title>
 </head>
 <body>
-<h1>Items List</h1>
+<a href="productList">전체</a> <!-- Link to show all products -->
+<a href="productList?category=1">전세</a>
+<a href="productList?category=2">월세</a>
+<a href="productList?category=3">담보</a>
+<hr>
 
-<%
-  ProductDao productDao = new ProductDao();
-  List<Product> products = productDao.getItems();
-  for (Product product : products) {
+<% List<?> productList = (List<?>) request.getAttribute("productList");
+  if (productList.isEmpty()) { %>
+<p>No products found.</p>
+<% } else {
+  for (Object product : productList) {
+    String id = (String) product.getClass().getMethod("getId").invoke(product);
+    String name = (String) product.getClass().getMethod("getName").invoke(product);
+    String description = (String) product.getClass().getMethod("getDescription").invoke(product);
 %>
-<h2><a href="${pageContext.request.contextPath}/ProductDetail?id=<%= product.getId() %>"><%= product.getName() %></a></h2>
-<p><%= product.getDescription() %></p>
-<% } %>
+<p><a href="productDetail?id=<%= id %>"><strong><%= name%></strong></a></p>
+<p><%= description %></p>
+<hr>
+<%     }
+} %>
 </body>
 </html>
