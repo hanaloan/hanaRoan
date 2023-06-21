@@ -5,6 +5,7 @@
 <html>
 <head>
   <title>Customer Management</title>
+  <link rel="stylesheet" href="/css/CustomerManagement/Style.css" type="text/css">
   <script>
     function updateLoanStatus(lendId) {
       console.log(lendId)
@@ -32,6 +33,7 @@
       }
     }
   </script>
+
 
 </head>
 <body>
@@ -119,8 +121,15 @@
   %>
 
 </table>
-<a href="/jsp/CustomerManagement/CreateCustomer.jsp">고객 생성</a>
-<a href="/jsp/CustomerManagement/ApplyLoan.jsp">고객 대출 상품 등록</a>
+<a href="/jsp/CustomerManagement/CreateCustomer.jsp"><button>고객 생성</button></a>
+<a href="/jsp/CustomerManagement/ApplyLoan.jsp"><button>고객 대출 상품 등록</button></a>
+<h1>수정해야 할 것</h1>
+<p>end date -> start date에 lend period 더하도록 수정</p>
+<p>overdue interest rate 기준 설정 </p>
+<p>숫자 및 contanct info 설정(전화번호 010-1234-1234 형식, 금액 1,000,000,000원)</p>
+<p>대출 상품 등록 시 유저 최소 신용도 등 자격 조건 체크 + 얼마 대출할건지</p>
+<p>pending 상태인 상품만 조회할 수 있는 기능</p>
+<p>유저 가입할 때 신용도 등 테이블 조인</p>
 
 </body>
 </html>
