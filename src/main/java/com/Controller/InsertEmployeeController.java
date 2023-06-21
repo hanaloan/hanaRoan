@@ -26,7 +26,7 @@ public class InsertEmployeeController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         try {
@@ -35,18 +35,15 @@ public class InsertEmployeeController extends HttpServlet {
             String empName=req.getParameter("empName");
             String empAuth=req.getParameter("empAuthorityName");
 
-//            EmployeeManagementReq employeeManagementReq  = new EmployeeManagementReq();
-//            employeeManagementReq.setEmpId(empId);
-//            employeeManagementReq.setEmpPw(empPw);
-//            employeeManagementReq.setEmpName(empName);
-//            employeeManagementReq.setEmpAuthName(empAuth);
 
             Employee employee  = new Employee(empId, empPw, empName,empAuth);
 
             System.out.println("Post 들어옴");
             insertEmployeeService.insertEmployee(employee);
-
-            resp.sendRedirect("/jsp/ManageEmployee/EmployeeManagement.jsp");
+            System.out.println("넘어가기전");
+//            resp.sendRedirect("/jsp/ManageEmployee/EmployeeManagement.jsp");
+            req.getRequestDispatcher("/jsp/ManageEmployee/EmployeeManagement.jsp").forward(req, resp);
+            System.out.println("넘어간 후");
 
         } catch (Exception e) {
             // 예외 발생 시 응답

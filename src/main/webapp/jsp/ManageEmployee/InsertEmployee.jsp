@@ -11,10 +11,18 @@
     <title>Title</title>
 </head>
 <body>
+<script>
+    window.onload = function() {
+        if (!sessionStorage.getItem('loaded')) {
+            sessionStorage.setItem('loaded', 'true');
+            location.href = '${pageContext.request.contextPath}/EmployeeManagement';
+        }
+    }
+</script>
 <h2>Enter Add Employee:</h2>
 
 
-    <form action="${pageContext.request.contextPath}/EmployeeManagement" method="get">
+    <form action="${pageContext.request.contextPath}/InsertEmployee" method="post">
         <label for="empId">ID:</label>
         <input type="text" id="empId" name="empId"  placeholder="Parameter 1" required>
         <br>
