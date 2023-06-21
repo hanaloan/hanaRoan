@@ -71,13 +71,6 @@ public class EmployeeManagementDao {
         return employeeManagementList;
     }
 
-    public void insertEmployeeInfo(EmployeeManagementReq employeeManagementReq) {
-
-
-
-
-    }
-
 
 
 

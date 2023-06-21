@@ -12,6 +12,13 @@ public class Employee {
 
     }
 
+    public Employee(String empId, String empPw, String empName, String empLevelName) {
+        this.empId = empId;
+        this.empPw = empPw;
+        this.empName = empName;
+        this.empLevelName = empLevelName;
+    }
+
     public String getEmpLevelName() {
         return empLevelName;
     }

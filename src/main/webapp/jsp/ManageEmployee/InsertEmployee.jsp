@@ -12,18 +12,18 @@
 </head>
 <body>
 <h2>Enter Add Employee:</h2>
-<form>
-    <label for="empID">ID:</label>
-    <input type="text" id="empID" name="empID"  placeholder="Parameter 1" required>
-    <br>
-    <label for="empPW">PW:</label>
-    <input type="text" id="empPW" name="empPW" required>
-    <br>
-    <label for="empName">Name:</label>
-    <input type="text" id="empName" name="empName" required>
-    <br>
 
-    <form action="${pageContext.request.contextPath}/EmployeeManagement" method="POST">
+
+    <form action="${pageContext.request.contextPath}/EmployeeManagement" method="get">
+        <label for="empId">ID:</label>
+        <input type="text" id="empId" name="empId"  placeholder="Parameter 1" required>
+        <br>
+        <label for="empPw">PW:</label>
+        <input type="text" id="empPw" name="empPw" required>
+        <br>
+        <label for="empName">Name:</label>
+        <input type="text" id="empName" name="empName" required>
+        <br>
         <label for="empAuthorityName">권한:</label>
         <select name="empAuthorityName" id="empAuthorityName">
             <option value="all">all</option>
@@ -32,11 +32,13 @@
             <option value="readOnly">read only</option>
             <option value="none">none</option>
         </select>
-        <!--                  <input type="submit" value="Submit" />-->
+
+        <br>
+        <input type="submit" value="Submit" />
+
     </form>
-    <br>
-    <input type="submit" value="Create">
-</form>
+
+
 
 
 </body>

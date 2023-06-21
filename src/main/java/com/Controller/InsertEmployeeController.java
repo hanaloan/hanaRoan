@@ -1,6 +1,8 @@
 package com.Controller;
 
+import com.Model.Employee;
 import com.Model.EmployeeManagementReq;
+import com.Model.EmployeeManagementRes;
 import com.Service.CreateCustomerService;
 import com.Service.InsertEmployeeService;
 
@@ -24,23 +26,27 @@ public class InsertEmployeeController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
         try {
             String empId=req.getParameter("empId");
             String empPw = req.getParameter("empPw");
             String empName=req.getParameter("empName");
-            Integer empAuth=req.getIntHeader("empAuth");
+            String empAuth=req.getParameter("empAuthorityName");
 
-            EmployeeManagementReq employeeManagementReq  = new EmployeeManagementReq();
-            employeeManagementReq.setEmpId(empId);
-            employeeManagementReq.setEmpPw(empPw);
-            employeeManagementReq.setEmpName(empName);
-            employeeManagementReq.setEmpAuthIdx(empAuth);
+//            EmployeeManagementReq employeeManagementReq  = new EmployeeManagementReq();
+//            employeeManagementReq.setEmpId(empId);
+//            employeeManagementReq.setEmpPw(empPw);
+//            employeeManagementReq.setEmpName(empName);
+//            employeeManagementReq.setEmpAuthName(empAuth);
 
-            insertEmployeeService.insertEmployee(employeeManagementReq);
+            Employee employee  = new Employee(empId, empPw, empName,empAuth);
 
-//            resp.sendRedirect("/jsp/ManageEmployee/EmployeeManagement.jsp");
+            System.out.println("Post 들어옴");
+            insertEmployeeService.insertEmployee(employee);
+
+            resp.sendRedirect("/jsp/ManageEmployee/EmployeeManagement.jsp");
 
         } catch (Exception e) {
             // 예외 발생 시 응답

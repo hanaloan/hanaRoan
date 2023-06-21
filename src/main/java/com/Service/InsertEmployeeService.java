@@ -4,26 +4,32 @@ import com.DAO.EmployeeManagementDao;
 import com.DAO.InsertEmployeeDao;
 import com.Model.Employee;
 import com.Model.EmployeeManagementReq;
+import com.Model.EmployeeManagementRes;
 
 public class InsertEmployeeService {
-    private InsertEmployeeDao insertEmployeeDAO;
+    private InsertEmployeeDao insertEmployeeDao;
 
     public InsertEmployeeService() {
-        insertEmployeeDAO= new InsertEmployeeDao();
+        insertEmployeeDao= new InsertEmployeeDao();
     }
-    public void insertEmployee(EmployeeManagementReq employeeManagementReq){
-        String empId=employeeManagementReq.getEmpId();
-        String empPw=employeeManagementReq.getEmpPw();
-        String empName=employeeManagementReq.getEmpId();
-        Integer empAuthIdx= employeeManagementReq.getEmpAuthIdx();
+    public void insertEmployee(Employee employee){
+//        String empId=employeeManagementReq.getEmpId();
+//        String empPw=employeeManagementReq.getEmpPw();
+//        String empName=employeeManagementReq.getEmpId();
+//        String empAuthName= employeeManagementReq.getEmpAuthName();
+//
+//        System.out.println(empId);
+//        System.out.println(empPw);
+//        System.out.println(empName);
+//        System.out.println(empAuthName);
+//
+//        Employee employee=new Employee();
+//        employee.setEmpId(empId);
+//        employee.setEmpPw(empPw);
+//        employee.setEmpName(empName);
+//        employee.setEmpLevelName(empAuthName);
 
-        Employee employee=new Employee();
-        employee.setEmpId(empId);
-        employee.setEmpPw(empPw);
-        employee.setEmpName(empName);
-        employee.setEmpLevel(empAuthIdx);
-
-        insertEmployeeDAO.insertEmployee(employee);
+        insertEmployeeDao.insertEmployee(employee);
 
     }
 

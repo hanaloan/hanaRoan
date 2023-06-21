@@ -17,15 +17,37 @@ public class InsertEmployeeDao {
         Employee newEmployee=null;
         try {
             Connection conn = DatabaseConnector.getConnection();
-            String sql="INSERT INTO hanaroDB.employees (id, password, name, authority_idx) VALUES (?, ?, ?, ?) ";
+            String sql="INSERT INTO hanaroDB.employees (id, password, name, authority_idx) VALUES (?, ?, ?, ?)";
             ps=conn.prepareStatement(sql);
 
             ps.setString(1, employee.getEmpId());
             ps.setString(2, employee.getEmpPw());
             ps.setString(3, employee.getEmpName());
-            ps.setInt(4, employee.getEmpLevel());
+
+            Integer empAuth = null;
+            String s1=employee.getEmpLevelName();
+            if (s1.equals("all")){
+                empAuth=1;
+            }
+            else if (s1.equals("managingProducts")){
+                empAuth=2;
+            }
+            else if (s1.equals("managingCustomers")){
+                empAuth=3;
+            }
+            else if (s1.equals("readOnly")){
+                empAuth=4;
+            }
+            else{
+                empAuth=5;
+            }
+
+            ps.setInt(4, empAuth);
+
+
 
             ps.executeUpdate();
+            System.out.println(ps);
             ps.close();
             conn.close();
         } catch (SQLException e) {

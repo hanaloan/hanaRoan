@@ -29,8 +29,5 @@ public class EmployeeManageService {
         return employeeManagementDao.currentEmployee(cur_idx);
     }
 
-    //직원 추가
-    public void insertEmployeeInfo(EmployeeManagementReq employeeManagementReq) {
-        employeeManagementDao.insertEmployeeInfo(employeeManagementReq);
-    }
+
 }
