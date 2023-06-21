@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -29,7 +30,7 @@ public class LoginController extends HttpServlet {
         String password = req.getParameter("password");
         String userType = req.getParameter("userType");
 
-        System.out.println("asdasd");
+
 
         LoginUserReq loginUserReq = new LoginUserReq(username, password, userType);
         LoginForAdminReq loginForAdminReq = new LoginForAdminReq(username, password, userType);
@@ -38,10 +39,12 @@ public class LoginController extends HttpServlet {
             if ("admin".equals(userType)) {
                 LoginForAdminRes loginForAdminRes = loginService.authenticateAdmin(loginForAdminReq);
                 if (loginForAdminRes.isAuthenticated()) {
-                    req.setAttribute("username", loginForAdminRes.getName());
-                    req.setAttribute("employee_idx", loginForAdminRes.getAdminIdx());
-                    resp.setStatus(HttpServletResponse.SC_OK);
-                    req.getRequestDispatcher("/jsp/ManageEmployee/EmployeeManagement.jsp").forward(req, resp);
+                    HttpSession session = req.getSession();
+                    session.setAttribute("username", loginForAdminRes.getName());
+                    session.setAttribute("employee_idx", loginForAdminRes.getAdminIdx());
+                    //int ses=(int) session.getAttribute("employee_idx");
+
+                    req.getRequestDispatcher("/jsp/DashBoard/DashBoard.jsp").forward(req, resp);
 
                 }else {
                     String errorMessage = "Name과 Password를 확인해주세요";
