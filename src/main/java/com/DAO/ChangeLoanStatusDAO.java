@@ -1,6 +1,6 @@
 package com.DAO;
 
-import com.Model.Customer;
+//import com.Model.Customer;
 import com.utils.DatabaseConnector;
 
 import java.sql.Connection;

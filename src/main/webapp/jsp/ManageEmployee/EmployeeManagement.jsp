@@ -35,6 +35,10 @@
 
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
 <div class="table">
     <table>
         <tr>
@@ -57,6 +61,9 @@
 
 
         %>
+
+
+
         <tr>
             <td><%=employee.getEmpName() %></td>
             <td><%=employee.getEmpLevelName() %></td>
@@ -70,7 +77,9 @@
 
     <a href="/jsp/ManageEmployee/InsertEmployee.jsp">관리자 직원 추가</a>
 
-    <a href="/jsp/ManageEmployee/InsertEmployee.jsp">관리자 직원 수정</a>
+
+
+    <button class="toggleButton">관리자 직원 수정</button>
 </div>
 
 </body>
