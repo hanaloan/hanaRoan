@@ -31,7 +31,8 @@ public class LoanApprovalDao {
                     "LEFT JOIN hanaroDB.loan_lend AS ll ON c.customer_idx = ll.customer_idx\n" +
                     "LEFT JOIN hanaroDB.loan_products AS lp ON ll.loan_idx = lp.loan_idx\n" +
                     "LEFT JOIN hanaroDB.loan_types AS lt ON lp.loan_type_id = lt.loan_type_idx\n" +
-                    "LEFT JOIN hanaroDB.loan_payments AS lpm ON ll.lend_idx = lpm.loan_lend_idx\n";
+                    "LEFT JOIN hanaroDB.loan_payments AS lpm ON ll.lend_idx = lpm.loan_lend_idx\n" +
+                    "WHERE ll.lend_idx IS NOT NULL";
 
             if (loanTypeName != null) {
                 sql += " WHERE lt.loan_type_name = ?";

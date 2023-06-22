@@ -51,6 +51,14 @@
                 selectElement.disabled = false;
             } else {
                 selectElement.disabled = true;
+                if (loanStatus === 'denied') {
+                    var row = selectElement.parentNode.parentNode;
+                    var cells = row.getElementsByTagName('td');
+                    for (var i = 7; i < cells.length; i++) {
+                        cells[i].style.backgroundColor = '#F0F0F0'; // 회색으로 변경
+                        cells[i].style.color = '#999999'; // 글자색 변경
+                    }
+                }
             }
         }
     </script>
