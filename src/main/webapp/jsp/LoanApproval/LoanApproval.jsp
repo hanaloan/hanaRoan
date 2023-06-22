@@ -21,6 +21,8 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     updateDropdownStatus(document.getElementById('loan-status-' + lendId), loanStatus);
+
+                    location.reload();
                 }
             };
         }
