@@ -8,13 +8,23 @@
     <script>
         function updateLoanStatus(lendId) {
             var loanStatus = document.getElementById('loan-status-' + lendId).value;
-            createLoanPayment(lendId, loanStatus);
+
+            if (loanStatus == "approved") {
+                createLoanPayment(lendId, loanStatus);
+            }
 
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "/ChangeLoanStatus", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.send("lendId=" + lendId + "&loanStatus=" + loanStatus);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    updateDropdownStatus(document.getElementById('loan-status-' + lendId), loanStatus);
+                }
+            };
         }
+
 
         function createLoanPayment(lendId, loanStatus) {
             if (loanStatus == "approved") {
