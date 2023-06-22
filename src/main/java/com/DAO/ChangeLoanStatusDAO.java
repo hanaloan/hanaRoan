@@ -7,20 +7,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class CustomerDAO {
-    public void createCustomer(Customer customer) throws SQLException {
+public class ChangeLoanStatusDAO {
+    public void updateLoanStatus(String lendId, String loanStatus) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
 
         try {
             conn = DatabaseConnector.getConnection();
-            String sql = "INSERT INTO hanaroDB.customers (name, contact_info, cus_id, password) VALUES (?, ?, ?, ?)";
+            String sql = "UPDATE hanaroDB.loan_lend SET loan_status = ? WHERE lend_idx = ?";
             stmt = conn.prepareStatement(sql);
 
-            stmt.setString(1, customer.getName());
-            stmt.setString(2, customer.getContactInfo());
-            stmt.setString(3, customer.getCusId());
-            stmt.setString(4, customer.getPassword());
+            stmt.setString(1, loanStatus);
+            stmt.setString(2, lendId);
 
             stmt.executeUpdate();
         } catch (ClassNotFoundException e) {

@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerManagementDao {
+public class LoanApprovalDao {
     private static final String DB_URL = Secret.DB_URL;
     private static final String DB_USER = Secret.DB_USER;
     private static final String DB_PASSWORD = Secret.DB_PASSWORD;
@@ -26,10 +26,13 @@ public class CustomerManagementDao {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             System.out.println(">>> db connection");
             // SQL 쿼리 작성
-            String sql = "SELECT c.customer_idx, c.name, c.contact_info, c.cus_id, c.password, cs.credit_score, cs.income, j.job_type\n" +
-                    "FROM hanaroDB.customers c\n" +
-                    "JOIN hanaroDB.credit_scores cs ON c.customer_idx = cs.customer_idx\n" +
-                    "JOIN hanaroDB.jobs j ON cs.job_idx = j.job_idx";
+            String sql = "SELECT *\n" +
+                    "FROM hanaroDB.customers AS c\n" +
+                    "LEFT JOIN hanaroDB.loan_lend AS ll ON c.customer_idx = ll.customer_idx\n" +
+                    "LEFT JOIN hanaroDB.loan_products AS lp ON ll.loan_idx = lp.loan_idx\n" +
+                    "LEFT JOIN hanaroDB.loan_types AS lt ON lp.loan_type_id = lt.loan_type_idx\n" +
+                    "LEFT JOIN hanaroDB.loan_payments AS lpm ON ll.lend_idx = lpm.loan_lend_idx\n" +
+                    "WHERE ll.lend_idx IS NOT NULL";
 
             if (loanTypeName != null) {
                 sql += " WHERE lt.loan_type_name = ?";
@@ -45,27 +48,25 @@ public class CustomerManagementDao {
                 int cusId = rs.getInt("customer_idx");
                 String name = rs.getString("name");
                 String contactInfo = rs.getString("contact_info");
-                String password = rs.getString("password");
-//                int lendId = rs.getInt("lend_idx");
-//                String startDate = String.valueOf(rs.getDate("start_date"));
-//                String endDate = String.valueOf(rs.getDate("start_date"));
-//                Long loanAmount = rs.getLong("loan_amount");
-//                String loanStatus = rs.getString("loan_status");
-//                int repaymentId = rs.getInt("repayment_idx");
-//                Long paymentAmount = rs.getLong("payment_amount");
-//                String paymentStatus = rs.getString("payment_status");
-//                Long overdueInterestRate = rs.getLong("overdue_interest_rate");
-//                loanTypeName = rs.getString("loan_type_name");
-//                int lendPeriod = rs.getInt("lend_period");
-
-                int creditScore = rs.getInt("credit_score");
-                Long income = rs.getLong("income");
-                String jobType = rs.getString("job_type");
-
-//                lendId, startDate, endDate, loanAmount, loanStatus, repaymentId, paymentAmount, paymentStatus, overdueInterestRate, loanTypeName, lendPeriod
+                String customerPassword = rs.getString("password");
+                int lendId = rs.getInt("lend_idx");
+                String startDate = String.valueOf(rs.getDate("start_date"));
+                String endDate = String.valueOf(rs.getDate("start_date"));
+                Long loanAmount = rs.getLong("loan_amount");
+                String loanStatus = rs.getString("loan_status");
+                int repaymentId = rs.getInt("repayment_idx");
+                Long paymentAmount = rs.getLong("payment_amount");
+                String paymentStatus = rs.getString("payment_status");
+                float overdueInterestRate = rs.getFloat("overdue_interest_rate");
+                float loanInterestRate = rs.getFloat("loan_interest_rate");
+                loanTypeName = rs.getString("loan_type_name");
+                int lendPeriod = rs.getInt("lend_period");
 
 
-                CustomerManagement customerManagement1 = new CustomerManagement(cusId, name, contactInfo, password,creditScore,income, jobType);
+                int creditScore = 0;
+                Long income = null;
+                String jobType = null;
+                CustomerManagement customerManagement1 = new CustomerManagement(cusId, name, contactInfo, customerPassword, lendId, startDate, endDate, loanAmount, loanStatus, repaymentId, paymentAmount, paymentStatus, overdueInterestRate, loanInterestRate,loanTypeName, lendPeriod, creditScore, income, jobType);
 
                 customerManagementList.add(customerManagement1);
             }
