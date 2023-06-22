@@ -37,4 +37,7 @@ public class CustomerManagementReq {
     public String getPassword() {
         return password;
     }
+
+    public void setLoanType(String loanType) {
+    }
 }
