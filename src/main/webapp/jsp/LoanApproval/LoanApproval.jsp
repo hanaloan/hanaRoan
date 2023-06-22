@@ -129,12 +129,18 @@
                 </option>
             </select>
         </td>
+        <% if (customer.getLoanStatus() != null && customer.getLoanStatus().equals("approved")) { %>
         <td><%= customer.getRepaymentId() %>
         </td>
-        <td><%= customer.getPaymentAmount() %>
+        <td><%= customer.calculatePaymentAmount() %>
         </td>
         <td><%= customer.getPaymentStatus() %>
         </td>
+        <% } else { %>
+        <td>&#8212;</td>
+        <td>&#8212;</td>
+        <td>&#8212;</td>
+        <% } %>
     </tr>
     <%
                 }
@@ -143,6 +149,8 @@
     %>
 
 </table>
-<a href="/jsp/CustomerManagement/CustomerManagement.jsp"><button>고객 관리 페이지</button></a>
+<a href="/jsp/CustomerManagement/CustomerManagement.jsp">
+    <button>고객 관리 페이지</button>
+</a>
 </body>
 </html>

@@ -57,7 +57,8 @@ public class LoanApprovalDao {
                 int repaymentId = rs.getInt("repayment_idx");
                 Long paymentAmount = rs.getLong("payment_amount");
                 String paymentStatus = rs.getString("payment_status");
-                Long overdueInterestRate = rs.getLong("overdue_interest_rate");
+                float overdueInterestRate = rs.getFloat("overdue_interest_rate");
+                float loanInterestRate = rs.getFloat("loan_interest_rate");
                 loanTypeName = rs.getString("loan_type_name");
                 int lendPeriod = rs.getInt("lend_period");
 
@@ -65,7 +66,7 @@ public class LoanApprovalDao {
                 int creditScore = 0;
                 Long income = null;
                 String jobType = null;
-                CustomerManagement customerManagement1 = new CustomerManagement(cusId, name, contactInfo, customerPassword, lendId, startDate, endDate, loanAmount, loanStatus, repaymentId, paymentAmount, paymentStatus, overdueInterestRate, loanTypeName, lendPeriod, creditScore, income, jobType);
+                CustomerManagement customerManagement1 = new CustomerManagement(cusId, name, contactInfo, customerPassword, lendId, startDate, endDate, loanAmount, loanStatus, repaymentId, paymentAmount, paymentStatus, overdueInterestRate, loanInterestRate,loanTypeName, lendPeriod, creditScore, income, jobType);
 
                 customerManagementList.add(customerManagement1);
             }

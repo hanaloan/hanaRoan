@@ -20,15 +20,20 @@ public class CustomerManagement {
     private int repaymentId;
     private Long paymentAmount;
     private String paymentStatus;
-    private Long overdueInterestRate;
+    private float overdueInterestRate;
+    private float loanInterestRate;
     private String loanTypeName;
     private int lendPeriod;
     private int creditScore;
     private Long income;
     private String jobType;
 
+    public Long calculatePaymentAmount() {
+        return this.loanAmount + (long)(this.loanAmount * this.lendPeriod * this.loanInterestRate);
+    }
 
-    public CustomerManagement(int cusId, String name, String contactInfo, String password, int lendId, String startDate, String endDate, Long loanAmount, String loanStatus, int repaymentId, Long paymentAmount, String paymentStatus, Long overdueInterestRate, String loanTypeName, int lendPeriod, int creditScore, Long income, String jobType) {
+
+    public CustomerManagement(int cusId, String name, String contactInfo, String password, int lendId, String startDate, String endDate, Long loanAmount, String loanStatus, int repaymentId, Long paymentAmount, String paymentStatus, float overdueInterestRate, float loanInterestRate, String loanTypeName, int lendPeriod, int creditScore, Long income, String jobType) {
         this.cusId=cusId;
         this.name=name;
         this.contactInfo=contactInfo;
@@ -42,6 +47,7 @@ public class CustomerManagement {
         this.paymentAmount=paymentAmount;
         this.paymentStatus=paymentStatus;
         this.overdueInterestRate=overdueInterestRate;
+        this.loanInterestRate=loanInterestRate;
         this.loanTypeName=loanTypeName;
         this.lendPeriod=lendPeriod;
     }

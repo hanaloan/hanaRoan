@@ -58,9 +58,6 @@
   %>
 
 </table>
-<a href="/jsp/CustomerManagement/CreateCustomer.jsp"><button>고객 생성</button></a>
-<a href="/jsp/CustomerManagement/ApplyLoan.jsp"><button>고객 대출 상품 등록</button></a>
-<p>숫자 및 contanct info 설정(전화번호 010-1234-1234 형식, 금액 1,000,000,000원)</p>
 <a href="/jsp/LoanApproval/LoanApproval.jsp"><button>대출 승인 페이지</button></a>
 </body>
 </html>
