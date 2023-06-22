@@ -5,13 +5,44 @@
 </head>
 <body>
 <div id="sidebar">
-    <ul>
-        <li><a href="jsp/ManageEmployee/EmployeeManagement.jsp">EmployeeManagement</a></li>
-        <li><a href="jsp/CustomerManagement/CustomerManagement.jsp">CustomerManagement</a></li>
-        <li><a href="jsp/LoanManagement/LoanManagement.jsp">LoanManagement</a></li>
-        <li><a href="jsp/LoanPayment/LoanPayment.jsp">LoanPayment</a></li>
-        <li><a href="jsp/Report/Report.jsp">eport</a></li>
-        <li><a href="AdminSystemSetting">AdminSystemSetting</a></li>
+    <ul id="accordionSidebar" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"><a
+            class="sidebar-brand d-flex align-items-center justify-content-center" href="/jsp/DashBoard/DashBoard.jsp">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">대시보드</div>
+    </a>
+        <li class="nav-item">
+            <a class="nav-link" href="/jsp/ManageEmployee/EmployeeManage.jsp">
+                <i class="fas fa-fw fa-table"></i>
+                <span>직원관리</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/jsp/CustomerManagement/CustomerManagement.jsp">
+                <i class="fas fa-fw fa-table"></i>
+                <span>고객관리</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/jsp/LoanManagement/LoanManagement.jsp">
+                <i class="fas fa-fw fa-table"></i>
+                <span>대출관리</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/jsp/LoanPayment/LoanPayment.jsp">
+                <i class="fas fa-fw fa-table"></i>
+                <span>상환관리</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/jsp/Report/Report.jsp">
+                <i class="fas fa-fw fa-table"></i>
+                <span>보고서</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/jsp/AdminSystemSetting/AdminSystemSetting.jsp">
+                <i class="fas fa-fw fa-table"></i>
+                <span>시스템 설정</span></a>
+        </li>
+
     </ul>
 </div>
 </body>
