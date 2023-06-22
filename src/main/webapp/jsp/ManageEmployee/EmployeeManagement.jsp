@@ -6,8 +6,10 @@
 <head>
     <title>직원 관리 페이지</title>
     <link rel="stylesheet" href="/css/EmployeeManagement/EmployeeManagement.css">
+
 </head>
 <body>
+
 <script>
     window.onload = function() {
         if (!sessionStorage.getItem('loaded')) {
@@ -51,9 +53,7 @@
         </tr>
         <%
             request.setCharacterEncoding("UTF-8");
-//            EmployeeManagementDao empDao = new EmployeeManagementDao();
             List<Employee> employees = (List<Employee>) request.getAttribute("employeeManageResDto");
-
             if (employees != null) {
                 for (Object obj : employees) {
                     if (obj instanceof Employee) {
@@ -63,11 +63,31 @@
         %>
 
 
-
         <tr>
             <td><%=employee.getEmpName() %></td>
-            <td><%=employee.getEmpLevelName() %></td>
+<%--            <td><%=employee.getEmpLevelName() %></td>--%>
+            <td>
+            <select style="appearance: none" disabled id="dropdownMenu-<%= employee.getEmpName() %>" class="loan-status-<%= employee.getEmpId() %>"
+                    onchange="updateLoanStatus('<%= employee.getEmpLevelName() %>')">
+                <option value="all" <%= employee.getEmpLevelName() != null && employee.getEmpLevelName().equals("all") ? "selected" : "" %>>
+                    all
+                </option>
+                <option value="managing Products" <%= employee.getEmpLevelName() != null && employee.getEmpLevelName().equals("managing Products") ? "selected" : "" %>>
+                    managing Products
+                </option>
+                <option value="managing Customers" <%= employee.getEmpLevelName() != null && employee.getEmpLevelName().equals("managing Customers") ? "selected" : "" %>>
+                    managing Customers
+                </option>
+                <option value="read only" <%= employee.getEmpLevelName() != null && employee.getEmpLevelName().equals("read only") ? "selected" : "" %>>
+                    read only
+                </option>
+                <option value="none" <%= employee.getEmpLevelName() != null && employee.getEmpLevelName().equals("none") ? "selected" : "" %>>
+                    none
+                </option>
+            </select>
+            </td>
         </tr>
+
         <%
                     }
                 }
@@ -75,11 +95,39 @@
         %>
     </table>
 
+
     <a href="/jsp/ManageEmployee/InsertEmployee.jsp">관리자 직원 추가</a>
+    <button id="dropdownButton">관리자 직원 수정</button>
 
 
 
-    <button class="toggleButton">관리자 직원 수정</button>
+    <script>
+
+        <%
+            request.setCharacterEncoding("UTF-8");
+            employees = (List<Employee>) request.getAttribute("employeeManageResDto");
+            if (employees != null) {
+                for (Object obj : employees) {
+                    if (obj instanceof Employee) {
+                        Employee employee = (Employee) obj;
+
+
+        %>
+
+        document.getElementById("dropdownButton").addEventListener("click", function() {
+            console.log("버튼 누름")
+            // "dropdownMenu- 뒤에 employee.getEmpName만 다 설정됨 다른 건 안되는데.. 왜그럴까?
+            var element = document.getElementById("dropdownMenu-<%= employee.getEmpName() %>");
+            element.style.appearance = "menulist-button";
+            // element.classList.remove("disabled-dropdown");
+            element.disabled  = false;
+        });
+        <%
+                    }
+                }
+            }
+        %>
+    </script>
 </div>
 
 </body>
