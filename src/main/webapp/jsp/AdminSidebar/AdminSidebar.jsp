@@ -10,8 +10,13 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">대시보드</div>
+        <div class="sidebar-brand-text mx-3">HanaRoan</div>
     </a>
+        <li class="nav-item">
+            <a class="nav-link" href="/jsp/DashBoard/DashBoard.jsp">
+                <i class="fas fa-fw fa-table"></i>
+                <span>대시보드</span></a>
+        </li>
         <li class="nav-item">
             <a class="nav-link" href="/jsp/ManageEmployee/EmployeeManage.jsp">
                 <i class="fas fa-fw fa-table"></i>
