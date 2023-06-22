@@ -39,10 +39,16 @@ public class InsertEmployeeController extends HttpServlet {
             Employee employee  = new Employee(empId, empPw, empName,empAuth);
 
             System.out.println("Post 들어옴");
+
             insertEmployeeService.insertEmployee(employee);
+//            if(success){
+//                System.out.println("성공!");
+//                resp.sendRedirect("EmployeeManagement.jsp");
+//            }
             System.out.println("넘어가기전");
+            resp.sendRedirect("/jsp/ManageEmployee/EmployeeManagement.jsp");
 //            resp.sendRedirect("/jsp/ManageEmployee/EmployeeManagement.jsp");
-            req.getRequestDispatcher("/jsp/ManageEmployee/EmployeeManagement.jsp").forward(req, resp);
+//            req.getRequestDispatcher("/jsp/ManageEmployee/EmployeeManagement.jsp").forward(req, resp);
             System.out.println("넘어간 후");
 
         } catch (Exception e) {

@@ -5,14 +5,13 @@ import com.utils.DatabaseConnector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class InsertEmployeeDao {
 
     PreparedStatement ps = null;
 
-    public void insertEmployee(Employee employee){
+    public boolean insertEmployee(Employee employee){
 
         Employee newEmployee=null;
         try {
@@ -46,10 +45,12 @@ public class InsertEmployeeDao {
 
 
 
-            ps.executeUpdate();
+            int check=ps.executeUpdate();
+
             System.out.println(ps);
             ps.close();
             conn.close();
+            return check>1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

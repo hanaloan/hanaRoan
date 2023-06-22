@@ -5,19 +5,19 @@
 <html>
 <head>
     <title>직원 관리 페이지</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/EmployeeManagement/EmployeeManagement.css">
+    <link rel="stylesheet" href="/css/EmployeeManagement/EmployeeManagement.css">
 </head>
 <body>
 <script>
     window.onload = function() {
         if (!sessionStorage.getItem('loaded')) {
             sessionStorage.setItem('loaded', 'true');
-            location.href = '${pageContext.request.contextPath}/EmployeeManagement';
+            location.href = '/EmployeeManagement';
         }
     }
 </script>
 
-<form action="${pageContext.request.contextPath}/EmployeeManagement" method="get">
+<form action="/EmployeeManagement" method="get">
     <input type="submit" value="Load Employee Data">
 </form>
 
@@ -25,7 +25,7 @@
 <div>
     <h3>현재 관리자</h3>
     <div class="box" style=" height: 100px; width: 100px">
-        <img class="profile" src="${pageContext.request.contextPath}/img/undraw_profile.svg">
+        <img class="profile" src="/img/undraw_profile.svg">
     </div>
 <%--    <% String loggedInUser = request.getAttribute("username").toString(); %>--%>
 
@@ -76,7 +76,7 @@
     </table>
 <%--    <button id="popupButton" onclick="openPopup()">관리자 직원 추가</button>--%>
 
-    <a href="${pageContext.request.contextPath}/jsp/ManageEmployee/InsertEmployee.jsp">관리자 직원 추가</a>
+    <a href="/jsp/ManageEmployee/InsertEmployee.jsp">관리자 직원 추가</a>
 
 <%--    <script src="../../js/ManageEmployee/AddEmployeeScript.js"></script>--%>
 
