@@ -7,7 +7,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Customer Home</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        var counter = 10 * 60;
+        var interval = setInterval(function() {
+            counter--;
+            if (counter <= 0) {
+                clearInterval(interval);
+                $('#time').text("Session expired");
+                return;
+            } else {
+                var minutes = Math.floor(counter / 60);
+                var seconds = counter % 60;
+                $('#time').text(minutes + ":" + seconds);
+            }
+        }, 1000);
+
+        function extendSession() {
+            $.ajax({
+                url: '${pageContext.request.contextPath}/extendSession',
+                type: 'POST',
+                success: function() {
+                    counter = 10 * 60;
+                },
+                error: function() {
+                    console.log("Error extending the session");
+                }
+            });
+        }
+    </script>
 </head>
+<%@ include file="/jsp/CustomerGNB/CustomerGNB.jsp" %>
 <body>
 <h1>Welcome, <%= request.getAttribute("username") %>!</h1>
 <p>Income: <%= request.getAttribute("income") %></p>
@@ -25,5 +56,12 @@
 <%
     }
 %>
+
+<%--세션 만료 관련--%>
+<div id="top-right">
+    <p id="time">10:00</p>
+    <button onclick="extendSession()">Extend session</button>
+</div>
 </body>
+
 </html>
