@@ -9,8 +9,8 @@ public class InsertEmployeeService {
     public InsertEmployeeService() {
         insertEmployeeDao= new InsertEmployeeDao();
     }
-    public boolean insertEmployee(Employee employee){
-        return insertEmployeeDao.insertEmployee(employee);
+    public void insertEmployee(Employee employee){
+        insertEmployeeDao.insertEmployee(employee);
 
     }
 }

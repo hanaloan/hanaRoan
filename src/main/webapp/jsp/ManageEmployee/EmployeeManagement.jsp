@@ -67,7 +67,10 @@
             }
         %>
     </table>
+
     <a href="/jsp/ManageEmployee/InsertEmployee.jsp">관리자 직원 추가</a>
+
+    <a href="/jsp/ManageEmployee/InsertEmployee.jsp">관리자 직원 수정</a>
 </div>
 
 </body>
