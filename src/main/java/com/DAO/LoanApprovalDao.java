@@ -61,7 +61,10 @@ public class LoanApprovalDao {
                 int lendPeriod = rs.getInt("lend_period");
 
 
-                CustomerManagement customerManagement1 = new CustomerManagement(cusId, name, contactInfo, customerPassword, lendId, startDate, endDate, loanAmount, loanStatus, repaymentId, paymentAmount, paymentStatus, overdueInterestRate, loanTypeName, lendPeriod);
+                int creditScore = 0;
+                Long income = null;
+                String jobType = null;
+                CustomerManagement customerManagement1 = new CustomerManagement(cusId, name, contactInfo, customerPassword, lendId, startDate, endDate, loanAmount, loanStatus, repaymentId, paymentAmount, paymentStatus, overdueInterestRate, loanTypeName, lendPeriod, creditScore, income, jobType);
 
                 customerManagementList.add(customerManagement1);
             }

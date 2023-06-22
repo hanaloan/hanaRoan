@@ -31,18 +31,32 @@
                 };
             }
         }
+
+        window.onload = function () {
+            if (window.location.pathname !== '/LoanApproval') {
+                location.href = '/LoanApproval';
+            }
+
+            // 페이지 로드 시 드롭다운 버튼 상태 업데이트
+            var selectElements = document.querySelectorAll("select[id^='loan-status-']");
+            for (var i = 0; i < selectElements.length; i++) {
+                var lendId = selectElements[i].id.split('-')[2];
+                var loanStatus = document.getElementById('loan-status-' + lendId).value;
+                updateDropdownStatus(selectElements[i], loanStatus);
+            }
+        }
+
+        function updateDropdownStatus(selectElement, loanStatus) {
+            if (loanStatus === 'pending') {
+                selectElement.disabled = false;
+            } else {
+                selectElement.disabled = true;
+            }
+        }
     </script>
+
 </head>
 <body>
-<script>
-    window.onload = function () {
-        if (window.location.pathname !== '/LoanApproval') {
-            location.href = '/LoanApproval';
-        }
-    }
-</script>
-
-
 <h1>대출승인페이지</h1>
 
 
@@ -94,9 +108,6 @@
                 </option>
                 <option value="denied" <%= customer.getLoanStatus() != null && customer.getLoanStatus().equals("denied") ? "selected" : "" %>>
                     Denied
-                </option>
-                <option value="paid" <%= customer.getLoanStatus() != null && customer.getLoanStatus().equals("paid") ? "selected" : "" %>>
-                    Paid
                 </option>
             </select>
         </td>
