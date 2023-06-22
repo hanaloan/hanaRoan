@@ -25,12 +25,9 @@ public class EmployeeManageService {
     }
 
     //현재 직원 정보 가져오기
-    public Employee currentEmployee(String empAuth) {
-        return employeeManagementDao.currentEmployee(empAuth);
+    public Employee currentEmployee(Integer cur_idx) {
+        return employeeManagementDao.currentEmployee(cur_idx);
     }
 
-    //직원 추가
-    public void insertEmployeeInfo(EmployeeManagementReq employeeManagementReq) {
-        employeeManagementDao.insertEmployeeInfo(employeeManagementReq);
-    }
+
 }
