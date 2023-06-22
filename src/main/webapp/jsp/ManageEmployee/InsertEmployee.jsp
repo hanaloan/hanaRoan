@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: msw45
-  Date: 2023-06-21
-  Time: 오후 4:26
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -45,9 +39,6 @@
         <input type="submit" value="Submit" />
 
     </form>
-
-
-
 
 </body>
 </html>

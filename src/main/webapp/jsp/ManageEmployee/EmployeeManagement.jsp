@@ -17,9 +17,9 @@
     }
 </script>
 
-<form action="/EmployeeManagement" method="get">
-    <input type="submit" value="Load Employee Data">
-</form>
+<%--<form action="/EmployeeManagement" method="get">--%>
+<%--    <input type="submit" value="Load Employee Data">--%>
+<%--</form>--%>
 
 <%@ include file="/jsp/AdminSidebar/AdminSidebar.jsp" %>
 <div>
@@ -27,18 +27,11 @@
     <div class="box" style=" height: 100px; width: 100px">
         <img class="profile" src="/img/undraw_profile.svg">
     </div>
-<%--    <% String loggedInUser = request.getAttribute("username").toString(); %>--%>
 
     <p>어서오세요!, 현재 관리자는 <%= request.getAttribute("empName") %>. 입니다~.</p>
-<%--    <p>어서오세요!, 현재 관리자 인덱스는 <%= session.getAttribute("employee_idx") %>. 입니다~.</p>--%>
 
-
-
-    <p>당신의 권한은 <%
-        %>
+    <p>당신의 권한은
         <%= request.getAttribute("empAuthName") %></p>
-
-
 
 </div>
 
@@ -74,15 +67,8 @@
             }
         %>
     </table>
-<%--    <button id="popupButton" onclick="openPopup()">관리자 직원 추가</button>--%>
-
     <a href="/jsp/ManageEmployee/InsertEmployee.jsp">관리자 직원 추가</a>
-
-<%--    <script src="../../js/ManageEmployee/AddEmployeeScript.js"></script>--%>
-
 </div>
-
-
 
 </body>
 </html>
