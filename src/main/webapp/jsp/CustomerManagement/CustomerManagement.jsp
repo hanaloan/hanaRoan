@@ -5,16 +5,17 @@
 <html>
 <head>
   <title>Customer Management</title>
+  <link rel="stylesheet" href="/css/CustomerManagement/Style.css" type="text/css">
 </head>
 <body>
 <script>
-  window.onload = function() {
-    if (!sessionStorage.getItem('loaded')) {
-      sessionStorage.setItem('loaded', 'true');
+  window.onload = function () {
+    if (window.location.pathname !== '/CustomerManagement') {
       location.href = '/CustomerManagement';
     }
   }
 </script>
+
 <h1>Customer Management</h1>
 <table>
   <tr>
@@ -22,13 +23,9 @@
     <th>Customer Name</th>
     <th>Customer Password</th>
     <th>Contact Info</th>
-    <th>Start Date</th>
-    <th>End Date</th>
-    <th>Loan Amount</th>
-    <th>Loan Status</th>
-    <th>payment Amount</th>
-    <th>payment Status</th>
-    <th>overdue Interest Rate</th>
+    <th>Credit Score</th>
+    <th>Income</th>
+    <th>Job Type</th>
   </tr>
   <%
     request.setCharacterEncoding("UTF-8");
@@ -47,19 +44,11 @@
     </td>
     <td><%= customer.getContactInfo() %>
     </td>
-    <td><%= customer.getStartDate() %>
+    <td><%= customer.getCreditScore() %>
     </td>
-    <td><%= customer.getEndDate() %>
+    <td><%= customer.getIncome() %>
     </td>
-    <td><%= customer.getLoanAmount() %>
-    </td>
-    <td><%= customer.getLoanStatus() %>
-    </td>
-    <td><%= customer.getPaymentAmount() %>
-    </td>
-    <td><%= customer.getPaymentStatus() %>
-    </td>
-    <td><%= customer.getOverdueInterestRate() %>
+    <td><%= customer.getJobType() %>
     </td>
   </tr>
   <%
@@ -69,8 +58,6 @@
   %>
 
 </table>
-<a href="/jsp/CustomerManagement/CreateCustomer.jsp">고객 생성</a>
-<a href="/jsp/CustomerManagement/ApplyLoan.jsp">고객 대출 상품 등록</a>
-
+<a href="/jsp/LoanApproval/LoanApproval.jsp"><button>대출 승인 페이지</button></a>
 </body>
 </html>
