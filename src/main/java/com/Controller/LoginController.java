@@ -45,7 +45,6 @@ public class LoginController extends HttpServlet {
                     session.setAttribute("authType", loginForAdminRes.getAuthorityType());
                     //int ses=(int) session.getAttribute("employee_idx");
 
-//                    req.getRequestDispatcher("/jsp/DashBoard/DashBoard.jsp").forward(req, resp);
                     resp.sendRedirect("/jsp/DashBoard/DashBoard.jsp");
 
                 }else {
