@@ -35,7 +35,7 @@ public class LoginService {
         if (loginForAdminRes != null && loginForAdminRes.getName() != null) {
             loginForAdminRes.setAuthenticated(true);
         } else {
-            loginForAdminRes = new LoginForAdminRes(null, 0,false);
+            loginForAdminRes = new LoginForAdminRes(null, 0, null,false);
         }
 
         return loginForAdminRes;
