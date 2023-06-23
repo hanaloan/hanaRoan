@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-
+<h1>보고서 페이지입니다</h1>
 </body>
 </html>
