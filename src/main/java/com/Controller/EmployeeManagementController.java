@@ -36,6 +36,7 @@ public class EmployeeManagementController extends HttpServlet {
             Employee cur_employee=employeeManageService.currentEmployee(employeeIdx);
             req.setAttribute("empName", cur_employee.getEmpName()); //값은 아무값도 없고 로직도 없지만 임시로 해놓음
             req.setAttribute("empAuthName", cur_employee.getEmpLevelName());
+            req.setAttribute("empIdx", cur_employee.getEmpIdx());
 
             //모든 직원 데이터 가져오기
             List<Employee> employeeManageResDto = employeeManageService.selectEmployees();

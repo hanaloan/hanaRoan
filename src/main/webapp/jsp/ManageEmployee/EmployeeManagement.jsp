@@ -11,37 +11,64 @@
 
 <script>
     window.onload = function() {
-        if (!sessionStorage.getItem('loaded')) {
-            sessionStorage.setItem('loaded', 'true');
+        if (window.location.pathname !== '/EmployeeManagement') {
             location.href = '/EmployeeManagement';
         }
+
+        // 페이지 로드 시 드롭다운 버튼 상태 업데이트
+        var selectElements = document.querySelectorAll("select[id^='auth-']");
+        for (var i = 0; i < selectElements.length; i++) {
+            var empIdx = selectElements[i].id.split('-')[1];
+            // var loanStatus = document.getElementById('loan-status-' + lendId).value;
+            updateAuthStatus(selectElements[i]);
+        }
+
+
+
     }
 
     function updateEmployeeAuth(getEmpIdx) {
         //select 태그에서 선택한 값 가져옴
-        var employeeStatus = document.getElementById('auth-' + getEmpIdx).value;
+        <%--var empIdx='<%=session.getAttribute("employee_idx")%>';--%>
+        var empIdx=getEmpIdx;
+        var empAuthName = document.getElementById('auth-' + getEmpIdx).value;
+        <%--console.log(employeeStatus)--%>
+        // console.log(getEmpIdx)
+        // console.log(typeof empAuthName)
 
+        console.log("Request 전")
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/UpdateEmpAuth", true);
+        console.log("문제1")
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        console.log("문제2")
+        xhr.send("empIdx=" + empIdx + "&empAuthName=" + empAuthName);
+        console.log("보냄")
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) { // 응답이 완료되었을 때만 실행
+                console.log("응답 완료")
+                if (xhr.status === 200) { // 성공적인 응답일 경우
+                    updateAuthStatus(document.getElementById('auth-' + getEmpIdx), empAuthName);
+                    location.reload();
+                } else {
+                    console.log('오류 발생: ' + xhr.status);
+                }
+            }
+        };
 
-        console.log(employeeStatus)
-        if(employeeStatus =="all"){
-        //  여기부터 작성하면 됨!
-
-
-        }
-
-        // var xhr = new XMLHttpRequest();
-        // xhr.open("POST", "/ChangeLoanStatus", true);
-        // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        // xhr.send("lendId=" + lendId + "&loanStatus=" + loanStatus);
-
-        // xhr.onreadystatechange = function () {
-        //     if (xhr.readyState === 4 && xhr.status === 200) {
-        //         updateDropdownStatus(document.getElementById('loan-status-' + lendId), loanStatus);
-        //
-        //         location.reload();
-        //     }
-        // };
     }
+
+//  직원의 권한을 바꾸면 다시 비활성화 상태로 바꿔야 함.
+    function updateAuthStatus(selectElement){
+        selectElement.disabled=true;
+        var row=selectElement.parentNode.parentNode;
+        var column=row.getElementsByTagName('td');
+        for (var i=1;i<column.length;i++){
+            // column[i].style.backgroundColor = '#F0F0F0';
+        }
+    }
+
+
 
 
 </script>
