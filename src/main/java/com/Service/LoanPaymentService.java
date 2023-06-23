@@ -23,4 +23,7 @@ public class LoanPaymentService {
     public void handleOverdue(String paymentId) throws SQLException {
         paymentDao.handleOverdue(paymentId);
     }
+
+    public void createLoanPayment(int i) {
+    }
 }
