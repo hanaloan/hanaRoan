@@ -17,11 +17,15 @@
         }
     }
 
-    function updateEmployeeAuth(EmpLevelName) {
-        var employeeStatus = document.getElementById('loan-auth-' + EmpLevelName).value;
+    function updateEmployeeAuth(getEmpIdx) {
+        //select 태그에서 선택한 값 가져옴
+        var employeeStatus = document.getElementById('auth-' + getEmpIdx).value;
 
+
+        console.log(employeeStatus)
         if(employeeStatus =="all"){
         //  여기부터 작성하면 됨!
+
 
         }
 
@@ -29,7 +33,7 @@
         // xhr.open("POST", "/ChangeLoanStatus", true);
         // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         // xhr.send("lendId=" + lendId + "&loanStatus=" + loanStatus);
-        //
+
         // xhr.onreadystatechange = function () {
         //     if (xhr.readyState === 4 && xhr.status === 200) {
         //         updateDropdownStatus(document.getElementById('loan-status-' + lendId), loanStatus);
@@ -52,6 +56,7 @@
 
     <p>어서오세요!, 현재 관리자는 <%= request.getAttribute("empName") %>. 입니다~.</p>
 
+    <p>당신의 인덱스는 <%=session.getAttribute("employee_idx")%> 입니다</p>
     <p>당신의 권한은
         <%= request.getAttribute("empAuthName") %></p>
 </div>
@@ -85,8 +90,8 @@
 <%--            <td><%=employee.getEmpLevelName() %></td>--%>
             <td>
 <%--                전체 권한 비활성화로 세팅--%>
-            <select style="appearance: none" disabled id="auth-<%= employee.getEmpName() %>" class="loan-status-<%= employee.getEmpId() %>"
-                    onchange="updateEmployeeAuth('<%= employee.getEmpLevelName() %>')">
+            <select style="appearance: none" disabled id="auth-<%= employee.getEmpIdx() %>"
+                    onchange="updateEmployeeAuth('<%= employee.getEmpIdx() %>')">
                 <option value="all" <%= employee.getEmpLevelName() != null && employee.getEmpLevelName().equals("all") ? "selected" : "" %>>
                     all
                 </option>
@@ -134,7 +139,10 @@
         //관리자 직원 수정 버튼을 누르면 활성화로 전환됨
         document.getElementById("updateEmployeeBtn").addEventListener("click", function() {
             // "dropdownMenu- 뒤에 employee.getEmpName만 다 설정됨 다른 건 안되는데.. 왜그럴까?
-            var element = document.getElementById("auth-<%= employee.getEmpName() %>");
+            // 왜냐면 내가 애초에 select 함수로 가져온게, name, AuthName이기 때문에!
+            // 그러면 authname은 왜 끊기냐면 각 속성에 따라서 쭉 나오니까 처음 그 권한 값이 나오는 애들만 표시가 되는 것임!
+            // getEmpName은 값이 다 달라서 이렇게 가져와질 수 있음 근데 동명이인이라면.. 안됨.. 그래서 추가적으로 idx를 가져옴!
+            var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
             element.style.appearance = "menulist-button"; //아래 화살표 띄우기
             // element.classList.remove("disabled-dropdown");
             element.disabled  = false; //비활성화 False로 처리

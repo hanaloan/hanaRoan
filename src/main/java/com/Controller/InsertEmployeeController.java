@@ -45,7 +45,7 @@ public class InsertEmployeeController extends HttpServlet {
 //                resp.sendRedirect("EmployeeManagement.jsp");
 //            }
             System.out.println("넘어가기전");
-            resp.sendRedirect("/jsp/ManageEmployee/EmployeeManagement.jsp");
+            resp.sendRedirect("/jsp/ManageEmployee/EmployeeManagement");
 //            resp.sendRedirect("/jsp/ManageEmployee/EmployeeManagement.jsp");
 //            req.getRequestDispatcher("/jsp/ManageEmployee/EmployeeManagement.jsp").forward(req, resp);
             System.out.println("넘어간 후");
