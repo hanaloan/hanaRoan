@@ -279,7 +279,10 @@ public class LoginDao {
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
             // SQL 쿼리 작성
-            String sql = "SELECT name, employee_idx FROM employees WHERE id = ? AND password = ?";
+            String sql = "SELECT e.name, e.employee_idx, a.authority_type\n" +
+                    "FROM employees e\n" +
+                    "JOIN authority_types a ON e.authority_idx = a.authority_idx\n" +
+                    "WHERE e.id = ? AND e.password = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, loginForAdminReq.getUsername());
             stmt.setString(2, loginForAdminReq.getPassword());
@@ -290,7 +293,8 @@ public class LoginDao {
             if (rs.next()) {
                 String name = rs.getString("name");
                 int idx = rs.getInt("employee_idx");
-                loginForAdminRes = new LoginForAdminRes(name, idx,false);
+                String authType = rs.getString("authority_type");
+                loginForAdminRes = new LoginForAdminRes(name, idx, authType, false);
             }
         } catch (ClassNotFoundException e) {
             System.out.println("데이터베이스 연결 실패: " + e.getMessage());
