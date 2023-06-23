@@ -25,7 +25,7 @@
                 <a class="nav-link" href="CustomerHome">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="ProductListController">Products</a>
+                <a class="nav-link" href="/productList">Products</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="LogoutController">Logout</a>
