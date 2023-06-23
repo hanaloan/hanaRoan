@@ -24,12 +24,14 @@ public class LoanPaymentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            HttpSession session = request.getSession();
             String option1 = request.getParameter("option1") == null || request.getParameter("option1").isEmpty()?
                     "*" : request.getParameter("option1");
             String option2 = request.getParameter("option2") == null || request.getParameter("option2").isEmpty()?
                     "*" : request.getParameter("option2");
             List<Payment> paymentList = loanPaymentService.getPayments(option1, option2);
             request.setAttribute("paymentList", paymentList);
+            request.setAttribute("authType", session.getAttribute("authType"));
             request.getRequestDispatcher("jsp/LoanPayment/LoanPayment.jsp").forward(request, response);
         } catch (SQLException e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

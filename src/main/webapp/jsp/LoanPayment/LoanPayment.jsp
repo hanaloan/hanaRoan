@@ -76,6 +76,7 @@
     </tr>
     </thead>
     <tbody>
+    <% String authType = request.getAttribute("authType").toString(); %>
     <% List<?> paymentList = (List<?>) request.getAttribute("paymentList");
         for (Object payment : paymentList) {
             String customerName = (String) payment.getClass().getMethod("getCustomerName").invoke(payment);
@@ -84,7 +85,7 @@
             Date lendStartDate = (Date) payment.getClass().getMethod("getLendStartDate").invoke(payment);
             Date paymentDueDate = (Date) payment.getClass().getMethod("getPaymentDueDate").invoke(payment);
             BigDecimal dueBalance = (BigDecimal) payment.getClass().getMethod("getDueBalance").invoke(payment);
-            String passedDate = (String) payment.getClass().getMethod("getPassedDate").invoke(payment);
+            int passedDate = Integer.parseInt(payment.getClass().getMethod("getPassedDate").invoke(payment).toString());
             String paymentStatus = (String) payment.getClass().getMethod("getPaymentStatus").invoke(payment);
             int paymentId = (int) payment.getClass().getMethod("getPaymentId").invoke(payment);
     %>
@@ -96,10 +97,14 @@
         <td><%= paymentDueDate %></td>
         <td><%= dueBalance %></td>
         <td>
-            <% if(paymentStatus.equals("상환중") || paymentStatus.equals("연체")) { %>
-            <%= passedDate %>
+            <% if(!paymentStatus.equals("상환완료")) { %>
+                <% if(passedDate < 0){ %>
+                    0
+                <% } else { %>
+                    <%= passedDate %>
+                <% } %>
             <% } else { %>
-            -
+                -
             <% } %>
         </td>
         <td><%= paymentStatus %></td>
@@ -107,8 +112,8 @@
             <form action="loanPayment" method="post" accept-charset="UTF-8">
                 <input type="hidden" class="payment-id" name="paymentId" value="<%= paymentId %>">
                 <input type="hidden" class="payment-status" name="paymentStatus" value="<%= paymentStatus %>">
-                <button type="submit" name="deductBalance" <% if ((dueBalance.intValue() == 0 && paymentStatus.equals("상환완료")) || Integer.parseInt(passedDate) <= 0) { %>disabled<% } %>
-                        onclick="return confirm('잔액을 차감하시겠습니까?');">
+                <button type="submit" name="deductBalance" <% if (paymentStatus.equals("상환완료")) { %>disabled<% } %>
+                        onclick="return confirmDeductBalance('<%= authType %>', '<%= passedDate%>');">
                     잔액차감
                 </button>
             </form>
@@ -117,8 +122,8 @@
             <form action="loanPayment" method="post" accept-charset="UTF-8">
                 <input type="hidden" class="payment-id" name="paymentId" value="<%= paymentId %>">
                 <input type="hidden" class="passed-date" name="passedDate" value="<%= passedDate %>">
-                <button type="submit" name="handleOverdue" <% if (paymentStatus.equals("상환완료") || Integer.parseInt(passedDate) <= 0) { %>disabled<% } %>
-                        onclick="return confirm('해당 상환 정보의 상태를 연체로 변경하시겠습니까?');">
+                <button type="submit" name="handleOverdue" <% if (paymentStatus.equals("상환완료")) { %>disabled<% } %>
+                        onclick="return confirmHandleOverdue('<%= authType %>', '<%= paymentStatus %>', '<%= passedDate %>');">
                     연체관리
                 </button>
             </form>
@@ -130,6 +135,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-
+<script src="../../js/LoanPayment/LoanPayment.js"></script>
 </body>
 </html>
