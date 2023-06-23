@@ -52,29 +52,4 @@ public class EmployeeManagementController extends HttpServlet {
 
     }
 
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        req.setCharacterEncoding("UTF-8");
-//        // 요청 파라미터 추출
-//        String empId = req.getParameter("empId");
-//        String empPw = req.getParameter("empPw");
-//        String empName = req.getParameter("empName");
-//        int empAuth = Integer.parseInt(req.getParameter("empAuth"));
-////        String empAuthName= req.getParameter("empAuthName");
-//
-//        EmployeeManagementReq employeeManagementReq = new EmployeeManagementReq(empId, empPw, empName,empAuth);
-////
-//        try {
-//            //직원 정보 추가
-////            Employee cur_employee=employeeManageService.currentEmployee(employeeIdx);
-////            req.setAttribute("empName", cur_employee.getEmpName()); //값은 아무값도 없고 로직도 없지만 임시로 해놓음
-////            req.setAttribute("empAuthName", cur_employee.getEmpLevelName());
-//
-//
-//        } catch (SQLException e) {
-//            // 예외 발생 시 응답
-//            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-//            resp.getWriter().println("Internal server error");
-//        }
-//    }
 }

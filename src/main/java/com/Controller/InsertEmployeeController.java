@@ -1,9 +1,6 @@
 package com.Controller;
 
 import com.Model.Employee;
-import com.Model.EmployeeManagementReq;
-import com.Model.EmployeeManagementRes;
-
 import com.Service.InsertEmployeeService;
 
 import javax.servlet.ServletException;
@@ -12,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/InsertEmployee")
 public class InsertEmployeeController extends HttpServlet {
@@ -35,21 +31,11 @@ public class InsertEmployeeController extends HttpServlet {
             String empName=req.getParameter("empName");
             String empAuth=req.getParameter("empAuthorityName");
 
-
             Employee employee  = new Employee(empId, empPw, empName,empAuth);
 
-            System.out.println("Post 들어옴");
-
             insertEmployeeService.insertEmployee(employee);
-//            if(success){
-//                System.out.println("성공!");
-//                resp.sendRedirect("EmployeeManagement.jsp");
-//            }
-            System.out.println("넘어가기전");
+
             resp.sendRedirect("/jsp/ManageEmployee/EmployeeManagement");
-//            resp.sendRedirect("/jsp/ManageEmployee/EmployeeManagement.jsp");
-//            req.getRequestDispatcher("/jsp/ManageEmployee/EmployeeManagement.jsp").forward(req, resp);
-            System.out.println("넘어간 후");
 
         } catch (Exception e) {
             // 예외 발생 시 응답
