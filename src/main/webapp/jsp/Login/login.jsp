@@ -7,7 +7,7 @@
     <title>Login</title>
     <!-- 부트스트랩 CDN 링크 추가 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login/login.css">
+    <link rel="stylesheet" href="/css/login/login.css">
 
     <style>
         .login-form h2 {
@@ -39,7 +39,7 @@
         </c:if>
 
 
-        <form action="${pageContext.request.contextPath}/login" method="post">
+        <form action="/login" method="post">
 
             <div class="form-group">
                 <label>

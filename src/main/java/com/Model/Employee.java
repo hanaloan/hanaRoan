@@ -6,6 +6,26 @@ public class Employee {
     private String empPw;
     private int empLevel;
     private String empName;
+    private String empLevelName; //권한 이름
+
+    public Employee() {
+
+    }
+
+    public Employee(String empId, String empPw, String empName, String empLevelName) {
+        this.empId = empId;
+        this.empPw = empPw;
+        this.empName = empName;
+        this.empLevelName = empLevelName;
+    }
+
+    public String getEmpLevelName() {
+        return empLevelName;
+    }
+
+    public void setEmpLevelName(String empLevelName) {
+        this.empLevelName = empLevelName;
+    }
 
     public Employee(int empLevel) {
         this.empLevel = empLevel;
@@ -14,6 +34,11 @@ public class Employee {
     public Employee( String empName, int empLevel) {
         this.empName = empName;
         this.empLevel = empLevel;
+    }
+
+    public Employee( String empName, String empLevelName) {
+        this.empName = empName;
+        this.empLevelName = empLevelName;
     }
 
     public int getEmpLevel() {
