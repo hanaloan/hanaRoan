@@ -56,12 +56,18 @@
 
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">고객 관리</h1>
-                <p class="mb-4">이 HTML 페이지는 고객 관리를 위한 관리자 대시보드를 나타냅니다. 이 페이지는 고객 정보를 표로 나타내며, 다양한 기능을 제공합니다. 관리자는 고객의 신상정보, 연락처, 신용 점수, 소득 및 직업 유형을 확인할 수 있습니다.</p>
+                <p class="mb-4">이 HTML 페이지는 고객 관리를 위한 관리자 대시보드를 나타냅니다. 이 페이지는 고객 정보를 표로 나타내며, 다양한 기능을 제공합니다. 관리자는 고객의
+                    신상정보, 연락처, 신용 점수, 소득 및 직업 유형을 확인할 수 있습니다.</p>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                    <div class="card-header py-3"
+                         style="display: flex; justify-content: space-between; align-items: center;">
+                        <h6 class="m-0 font-weight-bold text-primary">고객 정보</h6>
+                        <a href="/jsp/LoanApproval/LoanApproval.jsp" class="btn btn-secondary btn-icon-split">
+                            <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
+                            <span class="text">대출 승인 페이지</span>
+                        </a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -178,8 +184,5 @@
 
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
-<a href="/jsp/LoanApproval/LoanApproval.jsp">
-    <button>대출 승인 페이지</button>
-</a>
 </body>
 </html>

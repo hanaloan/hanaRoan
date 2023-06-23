@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables</title>
+    <title>대출 승인 < 하나론</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -125,8 +125,12 @@
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                    <div class="card-header py-3" style="display: flex; justify-content: space-between; align-items: center;">
+                        <h6 class="m-0 font-weight-bold text-primary">대출 승인 현황</h6>
+                        <a href="/jsp/CustomerManagement/CustomerManagement.jsp" class="btn btn-secondary btn-icon-split">
+                            <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
+                            <span class="text">고객 관리 페이지</span>
+                        </a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -278,8 +282,6 @@
 
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
-<a href="/jsp/CustomerManagement/CustomerManagement.jsp">
-    <button>고객 관리 페이지</button>
-</a>
+
 </body>
 </html>

@@ -44,7 +44,8 @@ public class LoginController extends HttpServlet {
                     session.setAttribute("employee_idx", loginForAdminRes.getAdminIdx());
                     //int ses=(int) session.getAttribute("employee_idx");
 
-                    req.getRequestDispatcher("/jsp/DashBoard/DashBoard.jsp").forward(req, resp);
+//                    req.getRequestDispatcher("/jsp/DashBoard/DashBoard.jsp").forward(req, resp);
+                    resp.sendRedirect("/jsp/DashBoard/DashBoard.jsp");
 
                 }else {
                     String errorMessage = "Name과 Password를 확인해주세요";

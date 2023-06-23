@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>대시보드 < 하나론</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -18,7 +19,36 @@
             rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+<%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--%>
+    <script>
+        var counter = 10 * 60;
+        var interval = setInterval(function() {
+            counter--;
+            if (counter <= 0) {
+                clearInterval(interval);
+                $('#time').text("Session expired");
+                return;
+            } else {
+                var minutes = Math.floor(counter / 60);
+                var seconds = counter % 60;
+                $('#time').text(minutes + ":" + seconds);
+            }
+        }, 1000);
+        function extendSession() {
+            $.ajax({
+                url: '${pageContext.request.contextPath}/extendSession',
+                type: 'POST',
+                success: function() {
+                    counter = 10 * 60;
+                },
+                error: function() {
+                    console.log("Error extending the session");
+                }
+            });
+        }
+    </script>
 
 </head>
 
@@ -26,6 +56,8 @@
 
 <!-- Page Wrapper -->
 <div id="wrapper">
+
+
 
     <!-- Sidebar -->
     <%@ include file="/jsp/Components/AdminSidebar/AdminSidebar.jsp" %>
@@ -41,6 +73,14 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
+
+                <p>어서오세요!, 현재 관리자는 <%= session.getAttribute("username") %>. 입니다~.</p>
+                <p>어서오세요!, 현재 관리자 인덱스는 <%= session.getAttribute("employee_idx") %>. 입니다~.</p>
+
+                <div id="top-right">
+                    <p id="time">10:00</p>
+                    <button onclick="extendSession()">Extend session</button>
+                </div>
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
