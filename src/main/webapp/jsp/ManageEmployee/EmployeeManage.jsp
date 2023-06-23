@@ -7,14 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.Model.Employee"%>
-<%@ page import="com.DAO.EmployeeManagementDao"%>
+<%@ page import="com.Model.Employee" %>
+<%@ page import="com.DAO.EmployeeManagementDao" %>
 
 <%
     request.setCharacterEncoding("UTF-8");
 //list 불러오기
     ArrayList<EmployeeManagementDao> list = new ArrayList<EmployeeManagementDao>();
-    list = (ArrayList<EmployeeManagementDao>)request.getAttribute("list");
+    list = (ArrayList<EmployeeManagementDao>) request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -28,7 +28,8 @@
     <%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/EmployeeManagement/EmployeeManagement.css">--%>
 
     <!-- Custom fonts for this template -->
-    <link href="${pageContext.request.contextPath}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+          type="text/css">
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
@@ -48,7 +49,8 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/login/login.jsp">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center"
+           href="${pageContext.request.contextPath}/login/login.jsp">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -292,7 +294,8 @@
                                 </div>
                                 <div class="font-weight-bold">
                                     <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                        problem I've been having.</div>
+                                        problem I've been having.
+                                    </div>
                                     <div class="small text-gray-500">Emily Fowler · 58m</div>
                                 </div>
                             </a>
@@ -304,7 +307,8 @@
                                 </div>
                                 <div>
                                     <div class="text-truncate">I have the photos that you ordered last month, how
-                                        would you like them sent to you?</div>
+                                        would you like them sent to you?
+                                    </div>
                                     <div class="small text-gray-500">Jae Chun · 1d</div>
                                 </div>
                             </a>
@@ -316,7 +320,8 @@
                                 </div>
                                 <div>
                                     <div class="text-truncate">Last month's report looks great, I am very happy with
-                                        the progress so far, keep up the good work!</div>
+                                        the progress so far, keep up the good work!
+                                    </div>
                                     <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                                 </div>
                             </a>
@@ -328,7 +333,8 @@
                                 </div>
                                 <div>
                                     <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                        told me that people say this to all dogs, even if they aren't good...</div>
+                                        told me that people say this to all dogs, even if they aren't good...
+                                    </div>
                                     <div class="small text-gray-500">Chicken the Dog · 2w</div>
                                 </div>
                             </a>
@@ -391,7 +397,7 @@
                     </div>
 
                     <%--                    <div>--%>
-                    <%--                        <p>현재 관리자</p>--%>
+                    <%--                        <p>현재 관리자</p>--%>체
                     <%--                    </div>--%>
 
                     <div class="card-body">
@@ -426,8 +432,10 @@
 //            for(int i=0;i<list.size();i++){
                                 %>
                                 <tr>
-                                    <td><%=employee.getEmpName() %></td>
-                                    <td><%=employee.getEmpLevel() %></td>
+                                    <td><%=employee.getEmpName() %>
+                                    </td>
+                                    <td><%=employee.getEmpLevel() %>
+                                    </td>
                                 </tr>
                                 <%
                                     }
