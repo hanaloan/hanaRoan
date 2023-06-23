@@ -17,4 +17,5 @@ public class Payment {
     private Date paymentDueDate;
     private BigDecimal dueBalance;
     private String passedDate;
+    private String paymentStatus;
 }
