@@ -1,7 +1,6 @@
 package com.Service;
 
-import com.DAO.LoanPaymentDAO;
-import com.DAO.PaymentDao;
+import com.DAO.LoanPaymentDao;
 import com.Model.Payment;
 
 import java.sql.SQLException;
@@ -9,10 +8,10 @@ import java.util.List;
 
 
 public class LoanPaymentService {
-    private final PaymentDao paymentDao;
+    private final LoanPaymentDao paymentDao;
 
     public LoanPaymentService() {
-        this.paymentDao = new PaymentDao();
+        this.paymentDao = new LoanPaymentDao();
     }
 
     public List<Payment> getPayments(String option1, String option2) throws SQLException {
@@ -27,7 +26,7 @@ public class LoanPaymentService {
         paymentDao.handleOverdue(paymentId);
     }
 
-    LoanPaymentDAO loanPaymentDAO = new LoanPaymentDAO();
+    LoanPaymentDao loanPaymentDAO = new LoanPaymentDao();
 
     public void createLoanPayment(int lendId) throws SQLException {
         loanPaymentDAO.createLoanPayment(lendId);

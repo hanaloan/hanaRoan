@@ -2,12 +2,14 @@ package com.DAO;
 
 import com.Model.Payment;
 import com.utils.DatabaseConnector;
+
+import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-public class PaymentDao {
+public class LoanPaymentDao {
     public List<Payment> getPayments(String option1, String option2) throws SQLException {
         List<Payment> paymentList = new ArrayList<>();
         Connection conn = null;
@@ -115,6 +117,32 @@ public class PaymentDao {
             if (conn != null) conn.close();
         }
     }
+
+    public void createLoanPayment(int lendId) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = DatabaseConnector.getConnection();
+            String sql = "INSERT INTO hanaroDB.loan_payments (payment_amount, payment_status, loan_lend_idx) VALUES (?, ?, ?)";
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setBigDecimal(1, BigDecimal.ZERO);
+            stmt.setString(2, "in progress");
+            stmt.setInt(3, lendId);
+
+            stmt.executeUpdate();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
     /* Helper Functions */
     public String[] getPaymentOption(String option1, String option2){
         String[] retVal = new String[2];
@@ -171,7 +199,7 @@ public class PaymentDao {
 
         long daysDifference = ChronoUnit.DAYS.between(specificDate, today);
 
-        return daysDifference <= 0 ? "0" : String.valueOf(daysDifference);
+        return String.valueOf(daysDifference);
     }
 
     public String getStatus(String status){
