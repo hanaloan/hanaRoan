@@ -3,7 +3,8 @@
 <head>
     <title>Dashboard</title>
     <link rel="stylesheet" href="/css/sb-admin-2.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     <script>
         var counter = 10 * 60;
@@ -34,51 +35,13 @@
         }
     </script>
 </head>
+
 <body>
-
-<%--수정하는 부분--%>
 <div id="wrapper">
+    <!-- Start of Sidebar -->
     <%@ include file="/jsp/AdminSidebar/AdminSidebar.jsp" %>
-    <%--    <ul id="accordionSidebar" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"><a--%>
-    <%--            class="sidebar-brand d-flex align-items-center justify-content-center" href="/jsp/DashBoard/DashBoard.jsp">--%>
-    <%--        <div class="sidebar-brand-icon rotate-n-15">--%>
-    <%--            <i class="fas fa-laugh-wink"></i>--%>
-    <%--        </div>--%>
-    <%--        <div class="sidebar-brand-text mx-3">대시보드</div>--%>
-    <%--    </a>--%>
-    <%--        <li class="nav-item">--%>
-    <%--            <a class="nav-link" href="/jsp/ManageEmployee/EmployeeManage.jsp">--%>
-    <%--                <i class="fas fa-fw fa-table"></i>--%>
-    <%--                <span>직원관리</span></a>--%>
-    <%--        </li>--%>
-    <%--        <li class="nav-item">--%>
-    <%--            <a class="nav-link" href="/jsp/CustomerManagement/CustomerManagement.jsp">--%>
-    <%--                <i class="fas fa-fw fa-table"></i>--%>
-    <%--                <span>고객관리</span></a>--%>
-    <%--        </li>--%>
-    <%--        <li class="nav-item">--%>
-    <%--            <a class="nav-link" href="/jsp/Loan리Management/Loan리Management.jsp">--%>
-    <%--                <i class="fas fa-fw fa-table"></i>--%>
-    <%--                <span>대출관리</span></a>--%>
-    <%--        </li>--%>
-    <%--        <li class="nav-item">--%>
-    <%--            <a class="nav-link" href="/jsp/LoanPayment/LoanPayment.jsp">--%>
-    <%--                <i class="fas fa-fw fa-table"></i>--%>
-    <%--                <span>상환관리</span></a>--%>
-    <%--        </li>--%>
-    <%--        <li class="nav-item">--%>
-    <%--            <a class="nav-link" href="/jsp/Report/Report.jsp">--%>
-    <%--                <i class="fas fa-fw fa-table"></i>--%>
-    <%--                <span>보고서</span></a>--%>
-    <%--        </li>--%>
-    <%--        <li class="nav-item">--%>
-    <%--            <a class="nav-link" href="/jsp/AdminSystemSetting/AdminSystemSetting.jsp">--%>
-    <%--                <i class="fas fa-fw fa-table"></i>--%>
-    <%--                <span>시스템 설정</span></a>--%>
-    <%--        </li>--%>
 
-    <%--    </ul>--%>
-    <!-- End of Sidebar -->
+
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">컨텐츠 래퍼
         <p>어서오세요!, 현재 관리자는 <%= session.getAttribute("username") %>. 입니다~.</p>
@@ -87,9 +50,79 @@
             <p id="time">10:00</p>
             <button onclick="extendSession()">Extend session</button>
         </div>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">Charts</h1>
+            <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme.
+                The charts below have been customized - for further customization options, please visit the <a
+                        target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js
+                    documentation</a>.</p>
+
+            <!-- Content Row -->
+            <div class="row">
+
+                <div class="col-xl-8 col-lg-7">
+
+                    <!-- Area Chart -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area">
+                                <canvas id="myAreaChart"></canvas>
+                            </div>
+                            <hr>
+                            Styling for the area chart can be found in the
+                            <code>/js/demo/chart-area-demo.js</code> file.
+                        </div>
+                    </div>
+
+                    <!-- Bar Chart -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar">
+                                <canvas id="myBarChart"></canvas>
+                            </div>
+                            <hr>
+                            Styling for the bar chart can be found in the
+                            <code>/js/demo/chart-bar-demo.js</code> file.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Donut Chart -->
+                <div class="col-xl-4 col-lg-5">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <div class="chart-pie pt-4">
+                                <canvas id="myPieChart"></canvas>
+                            </div>
+                            <hr>
+                            Styling for the donut chart can be found in the
+                            <code>/js/demo/chart-pie-demo.js</code> file.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
     </div>
 </div>
 
-
 </body>
+
+<script src="/js/demo/chart-area-demo.js"></script>
 </html>
