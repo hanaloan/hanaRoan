@@ -11,7 +11,6 @@ import lombok.Setter;
 public class LoginForAdminRes{
     private String name;
     private int adminIdx;
+    private String authorityType;
     private boolean authenticated;
-
-
 }
