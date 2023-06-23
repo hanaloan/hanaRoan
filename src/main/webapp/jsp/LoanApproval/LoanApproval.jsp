@@ -93,6 +93,22 @@
                 }
             }
         }
+
+        $(document).ready(function() {
+            var table = $('#dataTable').DataTable();
+
+            function attachDropdownHandlers() {
+                table.$('select[id^="loan-status-"]').off('change').change(function() {
+                    var lendId = $(this).attr('id').split('-')[2];
+                    var loanStatus = $(this).val();
+                    updateLoanStatus(lendId, loanStatus);
+                    updateDropdownStatus(this, loanStatus);
+                });
+            }
+
+            table.on('init.dt', attachDropdownHandlers);
+            table.on('draw.dt', attachDropdownHandlers); // 'page.dt' 대신 'draw.dt' 이벤트를 사용합니다.
+        });
     </script>
 
 </head>
@@ -125,9 +141,11 @@
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="card-header py-3"
+                         style="display: flex; justify-content: space-between; align-items: center;">
                         <h6 class="m-0 font-weight-bold text-primary">대출 승인 현황</h6>
-                        <a href="/jsp/CustomerManagement/CustomerManagement.jsp" class="btn btn-secondary btn-icon-split">
+                        <a href="/jsp/CustomerManagement/CustomerManagement.jsp"
+                           class="btn btn-secondary btn-icon-split">
                             <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
                             <span class="text">고객 관리 페이지</span>
                         </a>
@@ -186,7 +204,7 @@
                                     </td>
                                     <td><%= customer.getEndDate() %>
                                     </td>
-                                    <td><%= customer.getLoanAmount() %>
+                                    <td class="text-right"><%= customer.getFormattedLoanAmount() %> 원
                                     </td>
                                     <td>
                                         <select id="loan-status-<%= customer.getLendId() %>"
@@ -205,7 +223,7 @@
                                     <% if (customer.getLoanStatus() != null && customer.getLoanStatus().equals("approved")) { %>
                                     <td><%= customer.getRepaymentId() %>
                                     </td>
-                                    <td><%= customer.calculatePaymentAmount() %>
+                                    <td class="text-right"><%= customer.getFormattedPaymentAmount() %> 원
                                     </td>
                                     <td><%= customer.getPaymentStatus() %>
                                     </td>

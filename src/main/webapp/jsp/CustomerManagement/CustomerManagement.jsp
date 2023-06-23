@@ -109,11 +109,11 @@
                                     </td>
                                     <td><%= customer.getPassword() %>
                                     </td>
-                                    <td><%= customer.getContactInfo() %>
+                                    <td><%= customer.getFormattedContactInfo() %>
                                     </td>
-                                    <td><%= customer.getCreditScore() %>
+                                    <td class="text-right"><%= customer.getCreditScore() %> 점
                                     </td>
-                                    <td><%= customer.getIncome() %>
+                                    <td class="text-right"><%= customer.getFormattedIncome() %> 원
                                     </td>
                                     <td><%= customer.getJobType() %>
                                     </td>
