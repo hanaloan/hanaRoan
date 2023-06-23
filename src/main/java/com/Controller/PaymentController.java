@@ -18,7 +18,11 @@ public class PaymentController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String lendId = request.getParameter("lendId");
 
-        loanPaymentService.createLoanPayment(Integer.parseInt(lendId));
+        try {
+            loanPaymentService.createLoanPayment(Integer.parseInt(lendId));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         response.sendRedirect("/CustomerManagement");
     }
