@@ -2,6 +2,7 @@
 <%@ page import="com.Model.Employee" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.HashMap" %>
 <html>
 <head>
     <title>직원 관리 페이지</title>
@@ -23,6 +24,17 @@
             updateAuthStatus(selectElements[i]);
         }
 
+        var k='<%= request.getAttribute("empAuthName") %>';
+        var updateEmployeeBtn = document.getElementById("updateEmployeeBtn");
+        var insertEmployeeBtn = document.getElementById("insertEmployeeBtn");
+
+        if (k==="all"){
+            updateEmployeeBtn.disabled=false;
+            insertEmployeeBtn.disabled=false;
+        }
+        console.log(k);
+
+
 
 
     }
@@ -36,17 +48,12 @@
         // console.log(getEmpIdx)
         // console.log(typeof empAuthName)
 
-        console.log("Request 전")
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/UpdateEmpAuth", true);
-        console.log("문제1")
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        console.log("문제2")
         xhr.send("empIdx=" + empIdx + "&empAuthName=" + empAuthName);
-        console.log("보냄")
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) { // 응답이 완료되었을 때만 실행
-                console.log("응답 완료")
                 if (xhr.status === 200) { // 성공적인 응답일 경우
                     updateAuthStatus(document.getElementById('auth-' + getEmpIdx), empAuthName);
                     location.reload();
@@ -67,11 +74,9 @@
             // column[i].style.backgroundColor = '#F0F0F0';
         }
     }
-
-
-
-
 </script>
+
+
 
 
 <%@ include file="/jsp/AdminSidebar/AdminSidebar.jsp" %>
@@ -146,8 +151,15 @@
     </table>
 
 
-    <a href="/jsp/ManageEmployee/InsertEmployee.jsp">관리자 직원 추가</a>
-    <button id="updateEmployeeBtn">관리자 직원 수정</button>
+<%--    <a href="/jsp/ManageEmployee/InsertEmployee.jsp">관리자 직원 추가</a>--%>
+<%--    <button id="updateEmployeeBtn" disabled--%>
+    <button id="insertEmployeeBtn" disabled onclick="location.href='/jsp/ManageEmployee/InsertEmployee.jsp'">관리자 직원 추가</button>
+    <button id="updateEmployeeBtn" disabled>관리자 직원 수정</button>
+
+
+
+
+
 
     <script>
 
@@ -162,6 +174,10 @@
 
 
         %>
+        // if (employee.getEmpIdx()==1){
+        //
+        // }
+
 
         //관리자 직원 수정 버튼을 누르면 활성화로 전환됨
         document.getElementById("updateEmployeeBtn").addEventListener("click", function() {

@@ -11,6 +11,11 @@
             sessionStorage.setItem('loaded', 'true');
             location.href = '/InsertEmployee';
         }
+
+        // if (window.location.pathname !== '/InsertEmployee') {
+        //     location.href = '/InsertEmployee';
+        // }
+
     }
 </script>
 <h2>Enter Add Employee:</h2>
