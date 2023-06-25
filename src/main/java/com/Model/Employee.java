@@ -2,6 +2,7 @@ package com.Model;
 
 public class Employee {
 
+    private  Integer empIdx;
     private String empId;
     private String empPw;
     private int empLevel;
@@ -12,11 +13,25 @@ public class Employee {
 
     }
 
+    public Employee(Integer empIdx, String empName, String empLevelName) {
+        this.empIdx = empIdx;
+        this.empName = empName;
+        this.empLevelName = empLevelName;
+    }
+
     public Employee(String empId, String empPw, String empName, String empLevelName) {
         this.empId = empId;
         this.empPw = empPw;
         this.empName = empName;
         this.empLevelName = empLevelName;
+    }
+
+    public Integer getEmpIdx() {
+        return empIdx;
+    }
+
+    public void setEmpIdx(Integer empIdx) {
+        this.empIdx = empIdx;
     }
 
     public String getEmpLevelName() {

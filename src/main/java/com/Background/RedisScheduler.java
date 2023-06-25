@@ -1,9 +1,10 @@
 //package com.Background;
 //
 //import com.Service.RedisService;
-//
 //import javax.servlet.ServletContextEvent;
 //import java.util.List;
+
+
 //import java.util.Set;
 //import java.util.Timer;
 //import java.util.TimerTask;
@@ -21,6 +22,7 @@
 //        timer.schedule(new TimerTask() {
 //            @Override
 //            public void run() {
+
 //
 //                //최신 pv 업댓된 pk 구하는 로직
 //                List<String> PreList = redisService.getPreList();
@@ -37,20 +39,28 @@
 //                redisService.clearPreList();
 //
 //                // 토탈 pk 구하는 로직
+
 //                Set<String> allUserIds = redisService.getAllKeys();
 //                int totalPageViews = 0;
 //                // 모든 key값 돌면서 total pv구하기
 //                for (String userId : allUserIds) {
 //                    try {
+
 //                        Integer pageViews = redisService.getPageView(userId);
 //                        totalPageViews += pageViews;
 //
 //                    } catch (NumberFormatException e) {
 //                        System.out.println(e);
+
+//                        int pageViews = redisService.getPageView(userId);
+//                        totalPageViews += pageViews;
+//                    } catch (NumberFormatException e) {
+
 //                    }
 //                }
 //                System.out.println("Total page views: " + totalPageViews);
 //                // DB 로직 짜기
+
 //
 //
 //            }
@@ -61,4 +71,6 @@
 //        timer.cancel();
 //        timer.purge();
 //    }
+
+
 //}

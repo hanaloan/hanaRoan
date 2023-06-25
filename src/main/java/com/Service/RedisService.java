@@ -40,8 +40,6 @@
 //            throw e;
 //        }
 //    }
-//
-//
 //    public void addToPreList(Integer customer_Idx) {
 //        jedis.rpush("PreList", String.valueOf(customer_Idx));
 //    }
