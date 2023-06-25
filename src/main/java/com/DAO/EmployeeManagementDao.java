@@ -13,30 +13,33 @@ public class EmployeeManagementDao {
 
     PreparedStatement ps=null; // SQL문 담당
 
-    public Employee currentEmployee(Integer cur_idx) {
+    public Employee currentEmployee(Integer cur_idx) throws SQLException {
 
         Employee cur_emp = null;
+        Connection conn = null;
+        ResultSet rs=null;
         try {
 
 //            System.out.println("currentEmployee 들어옴");
-            Connection conn = DatabaseConnector.getConnection(); //변수 선언 DB와 연결
+            conn = DatabaseConnector.getConnection(); //변수 선언 DB와 연결
 
             String sql = "SELECT e.name, a.authority_type FROM employees e JOIN authority_types a ON a.authority_idx = e.authority_idx WHERE e.employee_idx=" + cur_idx;
             ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery(); //select문에서 검색 결과를 담을 것
+            rs = ps.executeQuery(); //select문에서 검색 결과를 담을 것
 
             while(rs.next()) {
                 String name=rs.getString("name");
                 String levelName=rs.getString("authority_type");
                 cur_emp = new Employee(name, levelName);
             }
-            conn.close();
-            ps.close();
-            rs.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        }finally {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (conn != null) conn.close();
         }
         return cur_emp;
     }
