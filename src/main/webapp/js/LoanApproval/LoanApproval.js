@@ -11,14 +11,14 @@ async function sendRequest(url, data) {
     }
 }
 
-async function updateLoanStatus(lendId) {
+async function updateLoanStatus(lendId, lendPeriod) {
     const loanStatus = document.getElementById('loan-status-' + lendId).value;
 
     if (loanStatus === "approved") {
         await createLoanPayment(lendId);
     }
 
-    await sendRequest("/ChangeLoanStatus", { lendId, loanStatus });
+    await sendRequest("/ChangeLoanStatus", { lendId, loanStatus, lendPeriod });
 
     updateDropdownStatus(document.getElementById('loan-status-' + lendId), loanStatus);
     location.reload();

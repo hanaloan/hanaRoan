@@ -69,6 +69,7 @@
                                     <th>고객명</th>
                                     <th>대출ID</th>
                                     <th>대출 타입</th>
+                                    <th>대출 기간</th>
                                     <th>대출 시작일</th>
                                     <th>대출 종료일</th>
                                     <th>Loan Amount</th>
@@ -84,6 +85,7 @@
                                     <th>Customer Name</th>
                                     <th>Lend ID</th>
                                     <th>Loan Type</th>
+                                    <th>대출 기간</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Loan Amount</th>
@@ -110,6 +112,8 @@
                                     </td>
                                     <td><%= customer.getLoanTypeName() %>
                                     </td>
+                                    <td><%= customer.getLendPeriod() %>
+                                    </td>
                                     <td><%= customer.getStartDate() %>
                                     </td>
                                     <td><%= customer.getEndDate() %>
@@ -118,7 +122,7 @@
                                     </td>
                                     <td>
                                         <select id="loan-status-<%= customer.getLendId() %>"
-                                                onchange="updateLoanStatus('<%= customer.getLendId() %>')">
+                                                onchange="updateLoanStatus('<%= customer.getLendId() %>', '<%= customer.getLendPeriod() %>')">
                                             <option value="pending" <%= customer.getLoanStatus() != null && customer.getLoanStatus().equals("pending") ? "selected" : "" %>>
                                                 Pending
                                             </option>
