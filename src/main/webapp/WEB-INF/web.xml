@@ -10,7 +10,13 @@
             <welcome-file>jsp/Login/login.jsp</welcome-file>
         </welcome-file-list>
 
-    
+
+<!--    <listener>-->
+<!--        <listener-class>com.Background.AppContextListener</listener-class>-->
+<!--    </listener>-->
+
+
+
     <servlet>
         <servlet-name>AdminSystemSetting</servlet-name>
         <servlet-class>com.Controller.AdminSystemSettingController</servlet-class>
@@ -29,6 +35,16 @@
     <servlet-mapping>
         <servlet-name>CustomerHome</servlet-name>
         <url-pattern>/CustomerHome</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CustomerLogout</servlet-name>
+        <servlet-class>com.Controller.LogoutController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CustomerLogout</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
     </servlet-mapping>
 
     <error-page>

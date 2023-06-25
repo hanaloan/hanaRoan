@@ -74,14 +74,6 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <p>어서오세요!, 현재 관리자는 <%= session.getAttribute("username") %>. 입니다~.</p>
-                <p>어서오세요!, 현재 관리자 인덱스는 <%= session.getAttribute("employee_idx") %>. 입니다~.</p>
-
-                <div id="top-right">
-                    <p id="time">10:00</p>
-                    <button onclick="extendSession()">Extend session</button>
-                </div>
-
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
