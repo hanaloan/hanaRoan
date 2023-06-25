@@ -25,18 +25,27 @@ public class LoanManagementController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try{
-            String option1 = req.getParameter("option1") == null || req.getParameter("option1").isEmpty()?
+//        String option1 = req.getParameter("option1");
+                    String option1 = req.getParameter("option1") == null || req.getParameter("option1").isEmpty()?
                     "*" : req.getParameter("option1");
 
-            List<Product> loanProductsDto=loanManagementService.selectProducts(option1);
-            req.setAttribute("loanProductsDto",loanProductsDto );
-            req.getRequestDispatcher("jsp/LoanManagement/LoanManagement.jsp").forward(req, resp);
-
-        } catch (SQLException e) {
-            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            resp.getWriter().println("Internal server error");
-            throw new RuntimeException(e);
+        List<Product> loanProductsDto;
+        if (option1 == null || option1.equals("전체")){
+            try {
+                loanProductsDto=loanManagementService.selectAllProducts();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
+        else{
+            try {
+                loanProductsDto = loanManagementService.selectProductsByOption(option1);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        req.setAttribute("loanProductsDto",loanProductsDto );
+        req.getRequestDispatcher("jsp/LoanManagement/LoanManagement.jsp").forward(req, resp);
+
     }
 }

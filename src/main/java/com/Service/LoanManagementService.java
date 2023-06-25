@@ -14,10 +14,13 @@ public class LoanManagementService {
         this.loanManagementDao=new LoanManagementDao();
     }
 
-    public List<Product> selectProducts(String option1) throws SQLException{
-        return loanManagementDao.selectProducts(option1);
+
+
+    public List<Product> selectAllProducts() throws SQLException {
+        return loanManagementDao.selectAllProducts();
     }
 
-
-
+    public List<Product> selectProductsByOption(String option1) throws SQLException {
+        return loanManagementDao.selectProductsByOption(option1);
+    }
 }

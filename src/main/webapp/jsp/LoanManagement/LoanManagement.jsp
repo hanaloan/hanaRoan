@@ -56,11 +56,15 @@
 <%@ include file="/jsp/AdminSidebar/AdminSidebar.jsp" %>
 <div id="navBar">
     <div id="Option">
-        <button type="button"><a href="loanManagement">전체</a></button>
-        <button type="button"><a href="loanManagement?option1=전세">전세</a></button>
-        <button type="button"><a href="loanManagement?option1=월세">월세</a></button>
-        <button type="button"><a href="loanManagement?option1=담보">담보</a></button>
+        <button type="button"><a href="LoanManagement">전체</a></button>
+        <button type="button"><a href="LoanManagement?option1=전세대출">전세</a></button>
+        <button type="button"><a href="LoanManagement?option1=월세대출">월세</a></button>
+        <button type="button"><a href="LoanManagement?option1=담보대출">담보</a></button>
     </div>
+
+    <button id="insertProductBtn" onclick="location.href='/jsp/LoanManagement/InsertProduct.jsp'">
+        추가
+    </button>
 
 </div>
 
@@ -86,9 +90,7 @@
         request.setCharacterEncoding("UTF-8");
         List<Product> products = (List<Product>) request.getAttribute("loanProductsDto");
         if (products != null) {
-            for (Object obj : products) {
-                if (obj instanceof Product) {
-                    Product product = (Product) obj;
+            for (Product product : products) {
     %>
     <tr>
         <td><%= product.getIdx() %></td>
@@ -104,7 +106,6 @@
 
     </tr>
     <%
-                }
             }
         }%>
     </tbody>

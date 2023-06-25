@@ -36,4 +36,15 @@ public class Product {
 
 
     }
+
+    public Product(String productName, String productType, String productInfo, BigDecimal interestRate, BigDecimal overdueInterestRate, BigDecimal limit, Integer period, Integer minCredit) {
+        this.name=productName;
+        this.loanTypeName=productType;
+        this.minCredit=minCredit;
+        this.lendLimit=limit;
+        this.loanPeriod=period;
+        this.description=productInfo;
+        this.interestRate=interestRate;
+        this.overdueInterestRate=overdueInterestRate;
+    }
 }
