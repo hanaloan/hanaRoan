@@ -30,15 +30,18 @@ public class LoginController extends HttpServlet {
         String password = req.getParameter("password");
         String userType = req.getParameter("userType");
 
-
-
         LoginUserReq loginUserReq = new LoginUserReq(username, password, userType);
         LoginForAdminReq loginForAdminReq = new LoginForAdminReq(username, password, userType);
 
         try {
             if ("admin".equals(userType)) {
                 LoginForAdminRes loginForAdminRes = loginService.authenticateAdmin(loginForAdminReq);
-                if (loginForAdminRes.isAuthenticated()) {
+                if (loginForAdminRes.isAuthenticated() && loginForAdminRes.getAuthorityType().equals("none")) {
+                    String errorMessage = "권한이 없는 관리자입니다";
+                    req.setAttribute("errorMessage", errorMessage);
+                    req.getRequestDispatcher("/jsp/Login/login.jsp").forward(req, resp);
+
+                } else if (loginForAdminRes.isAuthenticated()) {
                     HttpSession session = req.getSession();
                     session.setAttribute("username", loginForAdminRes.getName());
                     session.setAttribute("employee_idx", loginForAdminRes.getAdminIdx());
@@ -47,13 +50,13 @@ public class LoginController extends HttpServlet {
 
                     resp.sendRedirect("/jsp/DashBoard/DashBoard.jsp");
 
-                }else {
+                } else {
                     String errorMessage = "Name과 Password를 확인해주세요";
                     req.setAttribute("errorMessage", errorMessage);
                     req.getRequestDispatcher("/jsp/Login/login.jsp").forward(req, resp);
                 }
 
-            }else{
+            } else {
                 // LoginService를 사용하여 의미적 유효성 검사 및 인증 수행
                 LoginUserRes loginUserRes = loginService.authenticateUser(loginUserReq);
 
@@ -78,19 +81,19 @@ public class LoginController extends HttpServlet {
 
                     // 세션 관련
                     HttpSession session = req.getSession();
-                    session.setAttribute("username",  loginUserRes.getName());
+                    session.setAttribute("username", loginUserRes.getName());
                     session.setAttribute("customer_Idx", loginUserRes.getCustomer_Idx());
 
                     // 로그인 성공 시 응답
                     resp.setStatus(HttpServletResponse.SC_OK);
                     req.getRequestDispatcher("/jsp/CustomerHome/CustomerHome.jsp").forward(req, resp);
-                }else {
+                } else {
 
                     String errorMessage = "ID와 Password를 확인해주세요";
                     req.setAttribute("errorMessage", errorMessage);
                     req.getRequestDispatcher("/jsp/Login/login.jsp").forward(req, resp);
                 }
-                    }
+            }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
