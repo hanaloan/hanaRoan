@@ -53,19 +53,3 @@ window.onload = function () {
         updateDropdownStatus(selectElement, loanStatus);
     });
 }
-
-$(document).ready(function() {
-    const table = $('#dataTable').DataTable();
-
-    function attachDropdownHandlers() {
-        table.$('select[id^="loan-status-"]').off('change').change(function() {
-            const lendId = $(this).attr('id').split('-')[2];
-            const loanStatus = $(this).val();
-            updateLoanStatus(lendId, loanStatus);
-            updateDropdownStatus(this, loanStatus);
-        });
-    }
-
-    table.on('init.dt', attachDropdownHandlers);
-    table.on('draw.dt', attachDropdownHandlers);
-});
