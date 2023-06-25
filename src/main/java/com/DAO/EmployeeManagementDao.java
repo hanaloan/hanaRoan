@@ -27,7 +27,6 @@ public class EmployeeManagementDao {
 
             while(rs.next()) {
                 String name=rs.getString("name");
-//                int level = rs.getInt("authority_idx");
                 String levelName=rs.getString("authority_type");
                 cur_emp = new Employee(name, levelName);
             }
@@ -47,17 +46,15 @@ public class EmployeeManagementDao {
         List<Employee> employeeManagementList = new ArrayList<>();
         try{
             Connection conn = DatabaseConnector.getConnection();
-//            String sql="SELECT name, authority_idx FROM employees";
-            String sql="SELECT e.name, a.authority_type FROM employees e JOIN authority_types a ON a.authority_idx = e.authority_idx";
+            String sql="SELECT e.employee_idx, e.name, a.authority_type FROM employees e JOIN authority_types a ON a.authority_idx = e.authority_idx";
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery(); //select문에서 검색 결과를 담을 것
 
             while(rs.next()) {
+                Integer idx=rs.getInt("employee_idx");
                 String name = rs.getString("name");
-//                int level = rs.getInt("authority_idx");
                 String levelName = rs.getString("authority_type");
-//                System.out.println(levelName);
-                Employee emp = new Employee(name, levelName );
+                Employee emp = new Employee(idx, name, levelName );
                 employeeManagementList.add(emp); // 주석2 리스트에 담아주고
             }
             conn.close();
@@ -70,8 +67,5 @@ public class EmployeeManagementDao {
         }
         return employeeManagementList;
     }
-
-
-
 
 }

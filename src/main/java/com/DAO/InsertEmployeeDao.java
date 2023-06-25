@@ -11,9 +11,7 @@ public class InsertEmployeeDao {
 
     PreparedStatement ps = null;
 
-    public boolean insertEmployee(Employee employee){
-
-        Employee newEmployee=null;
+    public void insertEmployee(Employee employee){
         try {
             Connection conn = DatabaseConnector.getConnection();
             String sql="INSERT INTO hanaroDB.employees (id, password, name, authority_idx) VALUES (?, ?, ?, ?)";
@@ -43,14 +41,10 @@ public class InsertEmployeeDao {
 
             ps.setInt(4, empAuth);
 
-
-
-            int check=ps.executeUpdate();
-
-            System.out.println(ps);
+            ps.executeUpdate();
             ps.close();
             conn.close();
-            return check>1;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
