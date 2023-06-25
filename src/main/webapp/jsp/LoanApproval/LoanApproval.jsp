@@ -23,8 +23,15 @@
     <!-- Custom styles for this template -->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
+    <link href="/css/LoanApproval/style.css" rel="stylesheet">
+
+
     <!-- Custom styles for this page -->
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+
     <script>
         function updateLoanStatus(lendId) {
             var loanStatus = document.getElementById('loan-status-' + lendId).value;
@@ -152,15 +159,15 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="dataTable">
                                 <thead>
                                 <tr>
-                                    <th>Customer ID</th>
-                                    <th>Customer Name</th>
-                                    <th>Lend ID</th>
-                                    <th>Loan Type</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
+                                    <th>고객ID</th>
+                                    <th>고객명</th>
+                                    <th>대출ID</th>
+                                    <th>대출 타입</th>
+                                    <th>대출 시작일</th>
+                                    <th>대출 종료일</th>
                                     <th>Loan Amount</th>
                                     <th>Loan Status</th>
                                     <th>Repayment ID</th>
