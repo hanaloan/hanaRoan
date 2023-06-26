@@ -89,7 +89,7 @@
     <%
         request.setCharacterEncoding("UTF-8");
         List<Product> products = (List<Product>) request.getAttribute("loanProductsDto");
-        if (products != null) {
+        if (products != null && !products.isEmpty()) {
             for (Product product : products) {
     %>
     <tr>
@@ -107,7 +107,17 @@
     </tr>
     <%
             }
-        }%>
+        }else{
+
+
+            %>
+    <tr>
+        <td colspan="9">No loan products available.</td>
+    </tr>
+
+    <% }%>
+
+
     </tbody>
 </table>
 

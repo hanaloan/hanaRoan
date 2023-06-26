@@ -25,12 +25,11 @@ public class LoanManagementController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String option1 = req.getParameter("option1");
-                    String option1 = req.getParameter("option1") == null || req.getParameter("option1").isEmpty()?
-                    "*" : req.getParameter("option1");
+        String option1 = req.getParameter("option1");
 
         List<Product> loanProductsDto;
-        if (option1 == null || option1.equals("전체")){
+
+        if (option1 == null || option1.isEmpty() || option1.equals("전체")){
             try {
                 loanProductsDto=loanManagementService.selectAllProducts();
             } catch (SQLException e) {
