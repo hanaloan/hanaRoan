@@ -22,10 +22,12 @@ public class ProductDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try{
+            HttpSession session = request.getSession();
             int productId = Integer.parseInt(request.getParameter("id"));
             Product product = displayProductDetailService.getProductById(productId);
 
             request.setAttribute("product", product);
+            request.setAttribute("customerIdx", session.getAttribute("customer_Idx"));
             request.getRequestDispatcher("jsp/DisplayProduct/ProductDetail.jsp").forward(request, response);
         } catch (SQLException e){
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

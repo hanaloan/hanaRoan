@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RedisPageViewsReq {
-    private Integer customer_Idx;
-
+public class RedisViewsRes {
+    private Boolean isDateExist;
 
 }

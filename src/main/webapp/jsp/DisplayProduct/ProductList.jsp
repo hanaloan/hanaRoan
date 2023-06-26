@@ -5,6 +5,7 @@
   <title>Product List</title>
 </head>
 <body>
+<jsp:include page="../CustomerGNB/CustomerGNB.jsp"></jsp:include>
 <a href="productList">전체</a> <!-- Link to show all products -->
 <a href="productList?category=1">전세</a>
 <a href="productList?category=2">월세</a>
