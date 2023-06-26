@@ -38,7 +38,7 @@
                 <span>대출관리</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/jsp/LoanPayment/LoanPayment.jsp">
+            <a class="nav-link" href="/loanPayment">
                 <i class="fas fa-fw fa-table"></i>
                 <span>상환관리</span></a>
         </li>

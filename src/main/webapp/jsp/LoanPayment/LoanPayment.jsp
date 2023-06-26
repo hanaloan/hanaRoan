@@ -76,7 +76,7 @@
     </tr>
     </thead>
     <tbody>
-    <% String authType = request.getAttribute("authType").toString(); %>
+    <% String authType = session.getAttribute("authType").toString(); %>
     <% List<?> paymentList = (List<?>) request.getAttribute("paymentList");
         for (Object payment : paymentList) {
             String customerName = (String) payment.getClass().getMethod("getCustomerName").invoke(payment);
