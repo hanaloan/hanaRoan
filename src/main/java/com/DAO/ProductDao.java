@@ -80,8 +80,6 @@ public class ProductDao {
         product.setLendLimit(rs.getBigDecimal("lend_limit"));
         product.setLoanPeriod(rs.getInt("lend_period"));
         product.setInterestRate(rs.getBigDecimal("loan_interest_rate"));
-        product.setStartDate(rs.getDate("start_date"));
-        product.setEndDate(rs.getDate("end_date"));
         return product;
     }
 }
