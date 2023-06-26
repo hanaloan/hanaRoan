@@ -10,7 +10,7 @@ public class CustomerManagementService {
     private static CustomerManagementDao customerManagementDao;
 
     public CustomerManagementService() {
-        this.customerManagementDao = new CustomerManagementDao();
+        customerManagementDao = new CustomerManagementDao();
     }
 
     public static List<CustomerRes> getCustomerInfo() throws SQLException {
