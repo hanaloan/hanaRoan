@@ -50,6 +50,20 @@
             location.href = '/LoanManagement';
         }
     }
+
+
+    // function deleteProduct(productId) {
+    //     if (confirm("Are you sure you want to delete this product?")) {
+    //         $.ajax({
+    //             url: '/LoanManagement?productId=' + productId,
+    //             type: 'DELETE',
+    //             success: function () {
+    //                 // location.reload();
+    //                 // window.location.href = '/LoanManagement';
+    //             }
+    //         });
+    //     }
+    // }
 </script>
 
 
@@ -80,6 +94,7 @@
         <th>최대한도</th>
         <th>대출기한</th>
         <th>최소신용점수</th>
+        <th>삭제 작업</th>
 
 
     </tr>
@@ -102,6 +117,11 @@
         <td><%= product.getLendLimit() %></td>
         <td><%= product.getLoanPeriod() %></td>
         <td><%= product.getMinCredit() %></td>
+        <td>
+            <form action="/LoanManagement" method="POST">
+                <input type="hidden" name="productId" value="<%= product.getId() %>">
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this product?')">삭제</button>
+            </form>        </td>
 
 
     </tr>

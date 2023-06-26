@@ -97,4 +97,29 @@ public class LoanManagementDao {
 
         return products;
     }
+
+    public void deleteProduct(int productId) throws SQLException, ClassNotFoundException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            conn = DatabaseConnector.getConnection();
+            String sql="DELETE FROM loan_products WHERE loan_idx = ?";
+
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, productId);
+            System.out.println(ps);
+            ps.executeUpdate();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }
+
+
+
 }

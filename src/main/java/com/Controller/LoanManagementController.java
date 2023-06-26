@@ -47,4 +47,39 @@ public class LoanManagementController extends HttpServlet {
         req.getRequestDispatcher("jsp/LoanManagement/LoanManagement.jsp").forward(req, resp);
 
     }
+
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int productId = Integer.parseInt(req.getParameter("productId"));
+
+        System.out.println("Post들어감");
+
+        // Perform delete operation using productId
+        try {
+            loanManagementService.deleteProduct(productId);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Redirect back to the LoanManagement page
+        resp.sendRedirect("/LoanManagement");
+        System.out.println("Post나감");
+    }
+
+//    @Override
+//    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        int productId = Integer.parseInt(req.getParameter("productId"));
+//
+//        try {
+//            loanManagementService.deleteProduct(productId);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        resp.sendRedirect("LoanManagement");
+//
+//    }
 }
