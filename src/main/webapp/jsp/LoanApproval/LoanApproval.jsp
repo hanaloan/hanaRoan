@@ -54,11 +54,6 @@
                     <div class="card-header py-3"
                          style="display: flex; justify-content: space-between; align-items: center;">
                         <h6 class="m-0 font-weight-bold text-primary">대출 승인 현황</h6>
-                        <a href="/jsp/CustomerManagement/CustomerManagement.jsp"
-                           class="btn btn-secondary btn-icon-split">
-                            <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
-                            <span class="text">고객 관리 페이지</span>
-                        </a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
