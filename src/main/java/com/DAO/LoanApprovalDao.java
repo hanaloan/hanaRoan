@@ -14,7 +14,7 @@ public class LoanApprovalDao {
     private static final String DB_USER = Secret.DB_USER;
     private static final String DB_PASSWORD = Secret.DB_PASSWORD;
 
-    public List<CustomerManagement> getCustomerInfo(String loanTypeName, CustomerManagementReq customerManagementReq) throws SQLException {
+    public List<CustomerManagement> getCustomerInfo(String loanTypeName, String loanStatus ,CustomerManagementReq customerManagementReq) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -35,12 +35,26 @@ public class LoanApprovalDao {
                     "WHERE ll.lend_idx IS NOT NULL";
 
             if (loanTypeName != null) {
-                sql += " WHERE lt.loan_type_name = ?";
-                stmt = conn.prepareStatement(sql);
-                stmt.setString(1, loanTypeName);
-            } else {
-                stmt = conn.prepareStatement(sql);
+                sql += " AND lt.loan_type_name = ?";
             }
+
+            if (loanStatus != null) {
+                sql += " AND ll.loan_status = ?";
+            }
+
+            stmt = conn.prepareStatement(sql);
+
+            int paramIndex = 1;
+
+            if (loanTypeName != null) {
+                stmt.setString(paramIndex, loanTypeName);
+                paramIndex++;
+            }
+
+            if (loanStatus != null) {
+                stmt.setString(paramIndex, loanStatus);
+            }
+
             // 쿼리 실행
             rs = stmt.executeQuery();
 
@@ -53,7 +67,7 @@ public class LoanApprovalDao {
                 String startDate = String.valueOf(rs.getDate("start_date"));
                 String endDate = String.valueOf(rs.getDate("start_date"));
                 Long loanAmount = rs.getLong("loan_amount");
-                String loanStatus = rs.getString("loan_status");
+                String retrievedLoanStatus = rs.getString("loan_status");
                 int repaymentId = rs.getInt("repayment_idx");
                 Long paymentAmount = rs.getLong("payment_amount");
                 String paymentStatus = rs.getString("payment_status");
@@ -62,15 +76,13 @@ public class LoanApprovalDao {
                 loanTypeName = rs.getString("loan_type_name");
                 int lendPeriod = rs.getInt("lend_period");
 
-
                 int creditScore = 0;
                 Long income = null;
                 String jobType = null;
-                CustomerManagement customerManagement1 = new CustomerManagement(cusId, name, contactInfo, customerPassword, lendId, startDate, endDate, loanAmount, loanStatus, repaymentId, paymentAmount, paymentStatus, overdueInterestRate, loanInterestRate,loanTypeName, lendPeriod, creditScore, income, jobType);
+                CustomerManagement customerManagement1 = new CustomerManagement(cusId, name, contactInfo, customerPassword, lendId, startDate, endDate, loanAmount, retrievedLoanStatus, repaymentId, paymentAmount, paymentStatus, overdueInterestRate, loanInterestRate,loanTypeName, lendPeriod, creditScore, income, jobType);
 
                 customerManagementList.add(customerManagement1);
             }
-
 
         } catch (ClassNotFoundException e) {
             System.out.println("Failed to connect to the database: " + e.getMessage());

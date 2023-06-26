@@ -5,6 +5,8 @@ public class CustomerManagementReq {
     private String contactInfo;
     private String cusId;
     private String password;
+    private String loanType;
+    private String loanStatus;
 
     public void setName(String name) {
         this.name = name;
@@ -39,5 +41,10 @@ public class CustomerManagementReq {
     }
 
     public void setLoanType(String loanType) {
+        this.loanType = loanType;
+    }
+
+    public void setLoanStatus(String loanStatus) {
+        this.loanStatus = loanStatus;
     }
 }

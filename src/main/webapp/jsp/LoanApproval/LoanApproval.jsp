@@ -13,7 +13,8 @@
     <title>대출 승인 < 하나론</title>
 
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
 
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="/css/LoanApproval/style.css" rel="stylesheet">
@@ -54,6 +55,16 @@
                     <div class="card-header py-3"
                          style="display: flex; justify-content: space-between; align-items: center;">
                         <h6 class="m-0 font-weight-bold text-primary">대출 승인 현황</h6>
+                        <div><a href="/LoanApproval?loanStatus=pending"
+                                class="btn btn-light btn-icon-split">
+                            <span class="text">PENDING 상태 보기</span>
+                        </a>
+                            <a href="/LoanApproval"
+                               class="btn btn-light btn-icon-split">
+                                <span class="text">전체 보기</span>
+                            </a></div>
+
+
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
