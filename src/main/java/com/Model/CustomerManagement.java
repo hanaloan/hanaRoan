@@ -31,7 +31,7 @@ public class CustomerManagement {
     private String jobType;
 
     public String getFormattedPaymentAmount() {
-        long paymentAmount = this.loanAmount + (long) (this.loanAmount * this.lendPeriod * this.loanInterestRate);
+        long paymentAmount = this.loanAmount + (long) (this.loanAmount * this.lendPeriod * this.loanInterestRate / 100);
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
         return decimalFormat.format(paymentAmount);
     }
