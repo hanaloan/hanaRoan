@@ -1,8 +1,8 @@
 package com.DAO;
 
 import com.Model.*;
-import com.config.secret.Secret;
 import com.utils.DatabaseConnector;
+import com.utils.DatabaseException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -88,11 +88,5 @@ public class LoanApprovalDao {
                 0,
                 null,
                 null);
-    }
-}
-
-class DatabaseException extends RuntimeException {
-    public DatabaseException(String message, Throwable cause) {
-        super(message, cause);
     }
 }
