@@ -3,9 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,110 +12,15 @@
 
     <title>대출 승인 < 하나론</title>
 
-    <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-
     <link href="/css/LoanApproval/style.css" rel="stylesheet">
-
-
-    <!-- Custom styles for this page -->
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-    <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>
-
-    <script>
-        function updateLoanStatus(lendId) {
-            var loanStatus = document.getElementById('loan-status-' + lendId).value;
-
-            if (loanStatus == "approved") {
-                createLoanPayment(lendId, loanStatus);
-            }
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/ChangeLoanStatus", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.send("lendId=" + lendId + "&loanStatus=" + loanStatus);
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    updateDropdownStatus(document.getElementById('loan-status-' + lendId), loanStatus);
-
-                    location.reload();
-                }
-            };
-        }
-
-
-        function createLoanPayment(lendId, loanStatus) {
-            if (loanStatus == "approved") {
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "/CreateLoanPayment", true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.send("lendId=" + lendId);
-
-                // 작업이 완료되면 페이지를 새로고침
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        location.reload();
-                    }
-                };
-            }
-        }
-
-        window.onload = function () {
-            if (window.location.pathname !== '/LoanApproval') {
-                location.href = '/LoanApproval';
-            }
-
-            // 페이지 로드 시 드롭다운 버튼 상태 업데이트
-            var selectElements = document.querySelectorAll("select[id^='loan-status-']");
-            for (var i = 0; i < selectElements.length; i++) {
-                var lendId = selectElements[i].id.split('-')[2];
-                var loanStatus = document.getElementById('loan-status-' + lendId).value;
-                updateDropdownStatus(selectElements[i], loanStatus);
-            }
-        }
-
-        function updateDropdownStatus(selectElement, loanStatus) {
-            if (loanStatus === 'pending') {
-                selectElement.disabled = false;
-            } else {
-                selectElement.disabled = true;
-                if (loanStatus === 'denied') {
-                    var row = selectElement.parentNode.parentNode;
-                    var cells = row.getElementsByTagName('td');
-                    for (var i = 7; i < cells.length; i++) {
-                        cells[i].style.backgroundColor = '#F0F0F0'; // 회색으로 변경
-                        cells[i].style.color = '#999999'; // 글자색 변경
-                    }
-                }
-            }
-        }
-
-        $(document).ready(function() {
-            var table = $('#dataTable').DataTable();
-
-            function attachDropdownHandlers() {
-                table.$('select[id^="loan-status-"]').off('change').change(function() {
-                    var lendId = $(this).attr('id').split('-')[2];
-                    var loanStatus = $(this).val();
-                    updateLoanStatus(lendId, loanStatus);
-                    updateDropdownStatus(this, loanStatus);
-                });
-            }
-
-            table.on('init.dt', attachDropdownHandlers);
-            table.on('draw.dt', attachDropdownHandlers); // 'page.dt' 대신 'draw.dt' 이벤트를 사용합니다.
-        });
-    </script>
-
+    <script src="/js/LoanApproval/LoanApproval.js"></script>
 </head>
 
 <body id="page-top">
@@ -151,11 +54,6 @@
                     <div class="card-header py-3"
                          style="display: flex; justify-content: space-between; align-items: center;">
                         <h6 class="m-0 font-weight-bold text-primary">대출 승인 현황</h6>
-                        <a href="/jsp/CustomerManagement/CustomerManagement.jsp"
-                           class="btn btn-secondary btn-icon-split">
-                            <span class="icon text-white-50"><i class="fas fa-arrow-right"></i></span>
-                            <span class="text">고객 관리 페이지</span>
-                        </a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -166,6 +64,7 @@
                                     <th>고객명</th>
                                     <th>대출ID</th>
                                     <th>대출 타입</th>
+                                    <th>대출 기간</th>
                                     <th>대출 시작일</th>
                                     <th>대출 종료일</th>
                                     <th>Loan Amount</th>
@@ -181,6 +80,7 @@
                                     <th>Customer Name</th>
                                     <th>Lend ID</th>
                                     <th>Loan Type</th>
+                                    <th>대출 기간</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Loan Amount</th>
@@ -207,6 +107,8 @@
                                     </td>
                                     <td><%= customer.getLoanTypeName() %>
                                     </td>
+                                    <td><%= customer.getLendPeriod() %>
+                                    </td>
                                     <td><%= customer.getStartDate() %>
                                     </td>
                                     <td><%= customer.getEndDate() %>
@@ -215,7 +117,7 @@
                                     </td>
                                     <td>
                                         <select id="loan-status-<%= customer.getLendId() %>"
-                                                onchange="updateLoanStatus('<%= customer.getLendId() %>')">
+                                                onchange="updateLoanStatus('<%= customer.getLendId() %>', '<%= customer.getLendPeriod() %>')">
                                             <option value="pending" <%= customer.getLoanStatus() != null && customer.getLoanStatus().equals("pending") ? "selected" : "" %>>
                                                 Pending
                                             </option>

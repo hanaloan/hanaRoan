@@ -23,9 +23,10 @@ public class ChangeLoanStatusController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String lendId = req.getParameter("lendId");
         String loanStatus = req.getParameter("loanStatus");
+        String lendPeriod = req.getParameter("lendPeriod");
 
         try {
-            changeLoanStatusService.updateLoanStatus(lendId, loanStatus);
+            changeLoanStatusService.updateLoanStatus(lendId, loanStatus, lendPeriod);
             resp.setContentType("text/plain");
             resp.setCharacterEncoding("UTF-8");
             resp.getWriter().write("Success");
