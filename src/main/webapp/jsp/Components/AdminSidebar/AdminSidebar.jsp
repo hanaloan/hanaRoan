@@ -18,7 +18,7 @@
                 <span>대시보드</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/jsp/ManageEmployee/EmployeeManage.jsp">
+            <a class="nav-link" href="/jsp/ManageEmployee/EmployeeManagement.jsp">
                 <i class="fas fa-fw fa-table"></i>
                 <span>직원관리</span></a>
         </li>
@@ -26,6 +26,11 @@
             <a class="nav-link" href="/jsp/CustomerManagement/CustomerManagement.jsp">
                 <i class="fas fa-fw fa-table"></i>
                 <span>고객관리</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/jsp/LoanApproval/LoanApproval.jsp">
+                <i class="fas fa-fw fa-table"></i>
+                <span>승인관리</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/jsp/LoanManagement/LoanManagement.jsp">

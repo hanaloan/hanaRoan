@@ -1,20 +1,17 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: msw45
-  Date: 2023-06-21
-  Time: 오후 4:26
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>직원 추가</title>
 </head>
 <body>
 <script>
     window.onload = function() {
-        if (!sessionStorage.getItem('loaded')) {
-            sessionStorage.setItem('loaded', 'true');
+        // if (!sessionStorage.getItem('loaded')) {
+        //     sessionStorage.setItem('loaded', 'true');
+        //     location.href = '/InsertEmployee';
+        // }
+        if (window.location.pathname !== '/InsertEmployee') {
             location.href = '/InsertEmployee';
         }
     }
@@ -45,9 +42,6 @@
         <input type="submit" value="Submit" />
 
     </form>
-
-
-
 
 </body>
 </html>

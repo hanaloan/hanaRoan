@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,16 +10,45 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>대시보드 < 하나론</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+<%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--%>
+    <script>
+        var counter = 10 * 60;
+        var interval = setInterval(function() {
+            counter--;
+            if (counter <= 0) {
+                clearInterval(interval);
+                $('#time').text("Session expired");
+                return;
+            } else {
+                var minutes = Math.floor(counter / 60);
+                var seconds = counter % 60;
+                $('#time').text(minutes + ":" + seconds);
+            }
+        }, 1000);
+        function extendSession() {
+            $.ajax({
+                url: '${pageContext.request.contextPath}/extendSession',
+                type: 'POST',
+                success: function() {
+                    counter = 10 * 60;
+                },
+                error: function() {
+                    console.log("Error extending the session");
+                }
+            });
+        }
+    </script>
 
 </head>
 
@@ -26,6 +56,8 @@
 
 <!-- Page Wrapper -->
 <div id="wrapper">
+
+
 
     <!-- Sidebar -->
     <%@ include file="/jsp/Components/AdminSidebar/AdminSidebar.jsp" %>
@@ -339,7 +371,7 @@
                             <div class="card-body">
                                 <div class="text-center">
                                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                         src="img/undraw_posting_photo.svg" alt="...">
+                                         src="/img/undraw_posting_photo.svg" alt="...">
                                 </div>
                                 <p>Add some quality, svg illustrations to your project courtesy of <a
                                         target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
@@ -408,21 +440,21 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
+<script src="/js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="/vendor/chart.js/Chart.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="js/demo/chart-area-demo.js"></script>
-<script src="js/demo/chart-pie-demo.js"></script>
+<script src="/js/demo/chart-area-demo.js"></script>
+<script src="/js/demo/chart-pie-demo.js"></script>
 
 </body>
 

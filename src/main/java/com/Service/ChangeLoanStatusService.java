@@ -11,7 +11,7 @@ public class ChangeLoanStatusService {
         changeLoanStatusDAO = new ChangeLoanStatusDAO();
     }
 
-    public void updateLoanStatus(String lendId, String loanStatus) throws SQLException {
-        changeLoanStatusDAO.updateLoanStatus(lendId, loanStatus);
+    public void updateLoanStatus(String lendId, String loanStatus, String lendPeriod) throws SQLException {
+        changeLoanStatusDAO.updateLoanStatus(lendId, loanStatus, lendPeriod);
     }
 }

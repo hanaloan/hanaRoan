@@ -1,6 +1,7 @@
 package com.Controller;
 
-import com.Service.ChangeLoanStatusService;
+
+import com.Service.UpdateEmployeeAuthService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,31 +10,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/ChangeLoanStatus")
-public class ChangeLoanStatusController extends HttpServlet {
-    private ChangeLoanStatusService changeLoanStatusService;
+@WebServlet("/UpdateEmpAuth")
+public class UpdateEmployeeAuthController extends HttpServlet {
+    private UpdateEmployeeAuthService updateEmployeeAuthService;
+
 
     @Override
     public void init() throws ServletException {
         super.init();
-        changeLoanStatusService = new ChangeLoanStatusService();
+
+        updateEmployeeAuthService = new UpdateEmployeeAuthService();
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String lendId = req.getParameter("lendId");
-        String loanStatus = req.getParameter("loanStatus");
-        String lendPeriod = req.getParameter("lendPeriod");
+        Integer empIdx= Integer.valueOf(req.getParameter("empIdx"));
+        String empAuthName=req.getParameter("empAuthName");
+        System.out.println("doPost 들어옴");
 
         try {
-            changeLoanStatusService.updateLoanStatus(lendId, loanStatus, lendPeriod);
+            updateEmployeeAuthService.updateEmployeeAuth(empIdx, empAuthName);
             resp.setContentType("text/plain");
             resp.setCharacterEncoding("UTF-8");
             resp.getWriter().write("Success");
+            System.out.println("doPost 들어옴");
         } catch (Exception e) {
             e.printStackTrace();
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             resp.getWriter().println("Internal server error");
         }
+
     }
 }
