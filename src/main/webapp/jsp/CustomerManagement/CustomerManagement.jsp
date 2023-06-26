@@ -1,5 +1,6 @@
 <%@ page import="com.Model.CustomerManagement" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.Model.CustomerRes" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,11 +93,9 @@
                                 </tfoot>
                                 <%
                                     request.setCharacterEncoding("UTF-8");
-                                    List<CustomerManagement> customers = (List<CustomerManagement>) request.getAttribute("customerManageResDto");
-                                    if (customers != null) {
-                                        for (Object obj : customers) {
-                                            if (obj instanceof CustomerManagement) {
-                                                CustomerManagement customer = (CustomerManagement) obj;
+                                    List<CustomerRes> customerResList = (List<CustomerRes>) request.getAttribute("customerResList");
+                                    if (customerResList != null) {
+                                        for (CustomerRes customer : customerResList) {
                                 %>
                                 <tr>
                                     <td><%= customer.getCusId() %>
@@ -105,18 +104,17 @@
                                     </td>
                                     <td><%= customer.getPassword() %>
                                     </td>
-                                    <td><%= customer.getFormattedContactInfo() %>
+                                    <td><%= customer.getContactInfo() %>
                                     </td>
                                     <td class="text-right"><%= customer.getCreditScore() %> 점
                                     </td>
-                                    <td class="text-right"><%= customer.getFormattedIncome() %> 원
+                                    <td class="text-right"><%= customer.getIncome() %> 원
                                     </td>
                                     <td><%= customer.getJobType() %>
                                     </td>
                                 </tr>
                                 <%
                                             }
-                                        }
                                     }
                                 %>
                             </table>
