@@ -77,9 +77,11 @@ public class LoanPaymentDao {
         PreparedStatement stmt = null;
         try {
             conn = DatabaseConnector.getConnection();
-            String sql = "UPDATE loan_payments\n" +
-                    "SET payment_amount = 0\n," +
-                    "    payment_status = 'paid'" +
+            String sql = "UPDATE loan_payments as lp\n" +
+                    "JOIN loan_lend as ll ON lp.loan_lend_idx = ll.lend_idx\n" +
+                    "SET lp.payment_amount = 0\n," +
+                    "    lp.payment_status = 'paid'\n" +
+                    "    ll.loan_status = 'paid'\n" +
                     "WHERE repayment_idx = ?;";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, paymentId);
