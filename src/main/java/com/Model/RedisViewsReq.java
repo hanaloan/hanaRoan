@@ -14,6 +14,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class RedisViewsReq {
     private Map<Integer, Integer> pageViewsMap;
+    private int totalPageViews;
 
     public void addPageView(Integer customer_Idx, Integer currentPageViews) {
         if (pageViewsMap == null) {

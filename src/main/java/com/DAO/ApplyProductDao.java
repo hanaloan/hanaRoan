@@ -21,21 +21,25 @@ public class ApplyProductDao {
             String sql = "SELECT loan_name, lend_period, lend_limit " +
                     "FROM loan_products WHERE loan_idx = ?";
             stmt = conn.prepareStatement(sql);
+
             stmt.setInt(1, loanId);
             rs = stmt.executeQuery();
             if(rs.next()){
                 String loanName = rs.getString("loan_name");
                 BigDecimal lendLimit = rs.getBigDecimal("lend_limit");
                 applyProductRes = new ApplyProductRes(loanId, loanName, lendLimit);
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } finally {
+
             if(stmt != null) stmt.close();
             if(conn != null) conn.close();
             if(rs != null) rs.close();
+
         }
         return applyProductRes;
     }
