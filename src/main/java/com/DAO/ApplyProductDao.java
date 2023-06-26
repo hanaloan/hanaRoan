@@ -8,31 +8,38 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class ApplyProductDao {
     public ApplyProductRes getApplyInfo(String productId) throws SQLException {
-        ApplyProductRes applyProductRes = null;
         Connection conn = null;
         PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ApplyProductRes applyProductRes = null;
+        int loanId = Integer.parseInt(productId);
         try{
             conn = DatabaseConnector.getConnection();
             String sql = "SELECT loan_name, lend_period, lend_limit " +
                     "FROM loan_products WHERE loan_idx = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, productId);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    String loanName = rs.getString("loan_name");
-                    BigDecimal lendLimit = rs.getBigDecimal("lend_limit");
-                    applyProductRes = new ApplyProductRes(Integer.parseInt(productId), loanName, lendLimit);
-                }
+
+            stmt.setInt(1, loanId);
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                String loanName = rs.getString("loan_name");
+                BigDecimal lendLimit = rs.getBigDecimal("lend_limit");
+                applyProductRes = new ApplyProductRes(loanId, loanName, lendLimit);
+
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } finally {
-            if (stmt != null) stmt.close();
-            if (conn != null) conn.close();
+
+            if(stmt != null) stmt.close();
+            if(conn != null) conn.close();
+            if(rs != null) rs.close();
+
         }
         return applyProductRes;
     }
