@@ -11,24 +11,30 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class ApplyProductDao {
-    public ApplyProductRes getApplyInfo(String productId) {
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT loan_name, lend_period, lend_limit " +
-                     "FROM loan_products WHERE loan_idx = ?")) {
+    public ApplyProductRes getApplyInfo(String productId) throws SQLException {
+        ApplyProductRes applyProductRes = null;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try{
+            conn = DatabaseConnector.getConnection();
+            String sql = "SELECT loan_name, lend_period, lend_limit " +
+                    "FROM loan_products WHERE loan_idx = ?";
+            stmt = conn.prepareStatement(sql);
             stmt.setString(1, productId);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    ApplyProductRes applyProductRes = new ApplyProductRes();
-                    applyProductRes.setProductId(Integer.valueOf(productId));
-                    applyProductRes.setProductName(rs.getString("loan_name"));
-                    applyProductRes.setLendLimit(rs.getBigDecimal("lend_limit"));
-                    return applyProductRes;
+                    String loanName = rs.getString("loan_name");
+                    BigDecimal lendLimit = rs.getBigDecimal("lend_limit");
+                    applyProductRes = new ApplyProductRes(Integer.parseInt(productId), loanName, lendLimit);
                 }
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
+        } finally {
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
         }
-        return null;
+        return applyProductRes;
     }
 
     public void applyProduct(String loanIdx, String customerIdx, String lendAmount) throws SQLException {
