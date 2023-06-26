@@ -11,7 +11,9 @@ public class InsertProductService {
     }
 
     public void insertProduct(Product product){
+        System.out.println("서비스 왔음");
         insertProductDao.insertProduct(product);
+        System.out.println("서비스 나옴");
     }
 
 }

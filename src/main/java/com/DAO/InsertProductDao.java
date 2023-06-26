@@ -12,19 +12,15 @@ public class InsertProductDao {
     PreparedStatement ps = null;
 
     public void insertProduct(Product product){
+        System.out.println("Dao 들어옴");
         try{
             conn = DatabaseConnector.getConnection();
             String sql="INSERT INTO hanaroDB.loan_products (loan_name, loan_type_id, loan_description, loan_interest_rate, overdue_interest_rate, lend_limit, lend_period, min_credit) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             ps=conn.prepareStatement(sql);
 
+
+
             ps.setString(1, product.getName());
-//            ps.setString(2, product.getLoanTypeName());
-            ps.setString(3, product.getDescription());
-            ps.setBigDecimal(4, product.getInterestRate());
-            ps.setBigDecimal(5, product.getOverdueInterestRate());
-            ps.setBigDecimal(6, product.getLendLimit());
-            ps.setInt(7, product.getLoanPeriod());
-            ps.setInt(8, product.getMinCredit());
 
 
             Integer loan_type = null;
@@ -40,9 +36,21 @@ public class InsertProductDao {
             }
 
 
-            ps.setInt(2, loan_type);
 
+            ps.setInt(2, loan_type);
+            ps.setString(3, product.getDescription());
+            ps.setBigDecimal(4, product.getInterestRate());
+            ps.setBigDecimal(5, product.getOverdueInterestRate());
+            ps.setBigDecimal(6, product.getLendLimit());
+            ps.setInt(7, product.getLoanPeriod());
+            ps.setInt(8, product.getMinCredit());
+
+
+
+            System.out.println(ps);
             ps.executeUpdate();
+
+
             ps.close();
             conn.close();
 

@@ -22,6 +22,7 @@ public class Product {
     private String loanTypeName;
     private BigDecimal overdueInterestRate;
 
+
     public Product(Integer loanIdx, String loanName, String loanTypeName, Integer minCredit, BigDecimal lendLimit, Integer lendPeriod, String loanDescription, BigDecimal loanInterestRate, BigDecimal overdueInterestRate) {
         this.idx=loanIdx;
         this.name=loanName;
@@ -37,9 +38,9 @@ public class Product {
 
     }
 
-    public Product(String productName, String productType, String productInfo, BigDecimal interestRate, BigDecimal overdueInterestRate, BigDecimal limit, Integer period, Integer minCredit) {
+    public Product(String productName, String loanTypeName, String productInfo, BigDecimal interestRate, BigDecimal overdueInterestRate, BigDecimal limit, Integer period, Integer minCredit) {
         this.name=productName;
-        this.loanTypeName=productType;
+        this.loanTypeName=loanTypeName;
         this.minCredit=minCredit;
         this.lendLimit=limit;
         this.loanPeriod=period;

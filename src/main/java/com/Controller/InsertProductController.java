@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 @WebServlet("/InsertProduct")
-public class InsertProductContorller extends HttpServlet {
+public class InsertProductController extends HttpServlet {
     private InsertProductService insertProductService;
 
     @Override
@@ -25,11 +25,14 @@ public class InsertProductContorller extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        System.out.println("doPost 왔음");
 
 
         try{
             String productName=req.getParameter("productName");
-            String productType = req.getParameter("productType");
+            String productTypeName = req.getParameter("productTypeName");
+            System.out.println(productName);
+            System.out.println(productTypeName);
             String productInfo=req.getParameter("productInfo");
             BigDecimal interestRate= BigDecimal.valueOf(Long.parseLong(req.getParameter("interestRate")));
             BigDecimal overdueInterestRate=BigDecimal.valueOf(Long.parseLong(req.getParameter("overdueInterestRate")));
@@ -37,11 +40,11 @@ public class InsertProductContorller extends HttpServlet {
             Integer period= Integer.valueOf(req.getParameter("period"));
             Integer minCredit= Integer.valueOf(req.getParameter("minCredit"));
 
-            Product product = new Product(productName, productType,productInfo, interestRate, overdueInterestRate, limit, period, minCredit );
-
+            Product product = new Product(productName, productTypeName,productInfo, interestRate, overdueInterestRate, limit, period, minCredit );
             insertProductService.insertProduct(product);
-            resp.sendRedirect("/jsp/LoanManagement/LoanManagement");
-
+            System.out.println("컨트롤러 끝");
+            resp.sendRedirect("/jsp/LoanManagement/LoanManagement.jsp");
+            System.out.println("컨트롤러에서 이동함");
         }catch (Exception e) {
             // 예외 발생 시 응답
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

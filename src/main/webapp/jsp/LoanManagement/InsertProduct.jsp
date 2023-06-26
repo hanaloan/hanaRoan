@@ -4,17 +4,21 @@
     <title>상품 추가</title>
 </head>
 <body>
-<h2>Enter Add Employee:</h2>
+<script>
+
+</script>
+
+<h2>Enter Add Product:</h2>
 
 
 <form action="/InsertProduct" method="post">
     <label for="productName">상품명:</label>
     <input type="text" id="productName" name="productName" required>
     <br>
-    <label for="productType">상품구분:</label>
-    <select name="productName" id="productType">
+    <label for="productTypeName">상품구분:</label>
+    <select name="productTypeName" id="productTypeName">
         <option value="전세대출">전세대출</option>
-        <option value="원세대출">원세대출</option>
+        <option value="월세대출">원세대출</option>
         <option value="담보대출">담보대출</option>
     </select>
     <br>
