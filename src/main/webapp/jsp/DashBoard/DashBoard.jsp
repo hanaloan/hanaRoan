@@ -390,7 +390,7 @@
 <!-- Page level custom scripts -->
 <script src="/js/Chart/PVChart.js"></script>
 <script src="/js/Chart/UVChart.js"></script>
-<script src="/js/Chart/chart-pie.js"></script>
+<script src="/js/Chart/RepaymentRatioChart.js"></script>
 
 </body>
 </html>
