@@ -32,4 +32,8 @@ public class DashBoardService {
     public Map<String, Integer> getCountPaymentStatus() throws SQLException {
         return dashBoardDao.getCountPaymentStatus();
     }
+
+    public Map<String, String> getRatioOfLoanType() throws SQLException {
+        return dashBoardDao.getRatioOfLoanType();
+    }
 }

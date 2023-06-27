@@ -95,4 +95,33 @@ public class DashBoardDao {
         }
         return statusCounts;
     }
+
+    private static final String GET_RATIO_OF_LOAN_TYPE =
+            "SELECT\n" +
+                    "    loan_type_name,\n" +
+                    "    ROUND(COUNT(*) / (SELECT COUNT(*) FROM hanaroDB.loan_lend) * 100, 2) AS percentage\n" +
+                    "FROM\n" +
+                    "    hanaroDB.loan_lend AS ll\n" +
+                    "    JOIN hanaroDB.loan_products AS lp ON ll.loan_idx = lp.loan_idx\n" +
+                    "    JOIN hanaroDB.loan_types AS lt ON lp.loan_type_id = lt.loan_type_idx\n" +
+                    "WHERE\n" +
+                    "    lt.loan_type_name IN ('전세대출', '월세대출', '담보대출')\n" +
+                    "GROUP BY\n" +
+                    "    loan_type_name;";
+
+    public Map<String,String> getRatioOfLoanType() throws SQLException {
+        Map<String, String> loanTypeLists = new HashMap<>();
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(GET_RATIO_OF_LOAN_TYPE);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                String loanTypeName = rs.getString("loan_type_name");
+                String percentage = rs.getString("percentage");
+                loanTypeLists.put(loanTypeName, percentage);
+            }
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return loanTypeLists;
+    }
 }
