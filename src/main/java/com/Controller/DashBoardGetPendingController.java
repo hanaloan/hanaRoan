@@ -9,12 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/LoanApproval")
-public class LoanApprovalController extends HttpServlet {
+@WebServlet("/DashboardPending")
+public class DashBoardGetPendingController extends HttpServlet {
     private LoanApprovalService loanApprovalService;
 
     @Override
@@ -28,21 +29,16 @@ public class LoanApprovalController extends HttpServlet {
         try {
             CustomerManagementReq request = new CustomerManagementReq();
 
-            String loanType = req.getParameter("loanType");
-            String loanStatus = req.getParameter("loanStatus");
+            String loanStatus = "pending";
 
-            request.setLoanType(loanType);
-            request.setLoanStatus(loanStatus);
+            List<CustomerManagement> customerManagementList = loanApprovalService.getCustomerInfo(null,loanStatus, request);
 
-            if (loanType == null || loanType.isEmpty()) {
-                request.setLoanType(null);
-            }
+            HttpSession session = req.getSession(); // Create session
+            session.setAttribute("PendingList", customerManagementList);
 
-            List<CustomerManagement> customerManagementList = loanApprovalService.getCustomerInfo(loanType,loanStatus, request);
+            req.setAttribute("PendingList", customerManagementList);
 
-            req.setAttribute("customerManagementList", customerManagementList);
-
-            req.getRequestDispatcher("/jsp/LoanApproval/LoanApproval.jsp").forward(req, resp);
+            req.getRequestDispatcher("/jsp/DashBoard/DashBoard.jsp").forward(req, resp);
         } catch (SQLException e) {
             // Handle exceptions and send an appropriate response
             e.printStackTrace();
