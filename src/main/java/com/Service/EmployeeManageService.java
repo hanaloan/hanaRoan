@@ -25,7 +25,7 @@ public class EmployeeManageService {
     }
 
     //현재 직원 정보 가져오기
-    public Employee currentEmployee(Integer cur_idx) {
+    public Employee currentEmployee(Integer cur_idx) throws SQLException {
         return employeeManagementDao.currentEmployee(cur_idx);
     }
 
