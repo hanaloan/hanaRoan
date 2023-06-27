@@ -1,6 +1,6 @@
 package com.Controller;
 
-import com.Service.GetLendDataService;
+import com.Service.DashBoardService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/GetTotalLoanAmount")
-public class GetLoanAmountController  extends HttpServlet {
-    GetLendDataService getLendDataService = new GetLendDataService();
+@WebServlet("/GetOverduePercentage")
+public class DashBoardGetOverduePercentageController extends HttpServlet {
+    DashBoardService dashBoardService = new DashBoardService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String loanAmount;
+        String getOverduePercentage;
         try {
-            loanAmount = getLendDataService.getLendData();
+            getOverduePercentage = dashBoardService.getOverduePercentage();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write("{\"loanAmount\": \"" + loanAmount + "\"}");
+        resp.getWriter().write("{\"getOverduePercentage\": \"" + getOverduePercentage + "\"}");
     }
 }

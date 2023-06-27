@@ -102,6 +102,36 @@
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "/GetCountPendingLends",
+                method: "GET",
+                success: function (response) {
+                    $('#getCountPendingLends').text(response.getCountPendingLends);
+                },
+                error: function (xhr, status, error) {
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "/GetOverduePercentage",
+                method: "GET",
+                success: function (response) {
+                    var percentage = parseFloat(response.getOverduePercentage).toFixed(1);
+                    $('#getOverduePercentage').text(percentage);
+                    $('.progress-bar').attr('aria-valuenow', percentage).css('width', percentage + '%');
+                },
+                error: function (xhr, status, error) {
+                }
+            });
+        });
+    </script>
 </head>
 
 <body id="page-top">
@@ -146,7 +176,8 @@
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             총 대출 금액 (진행 중)
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">₩ <span id="loanAmount"></span></div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">₩ <span
+                                                id="loanAmount"></span></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -165,7 +196,8 @@
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             총 연체 금액
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">₩ <span id="overdueLoanAmount"></span></div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">₩ <span
+                                                id="overdueLoanAmount"></span></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -181,11 +213,12 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">연체 고객 비율
                                         </div>
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><span
+                                                        id="getOverduePercentage"></span> %</div>
                                             </div>
                                             <div class="col">
                                                 <div class="progress progress-sm mr-2">
@@ -215,15 +248,8 @@
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 승인 대기 중
                                             </div>
-
-                                            <div id="pendingList" class="h5 mb-0 font-weight-bold text-gray-800"><%
-                                                List<CustomerManagement> customerManagementList = (List<CustomerManagement>) session.getAttribute("PendingList");
-                                                int length = (customerManagementList != null) ? customerManagementList.size() : 0;
-
-                                            %>
-                                                <%= length %>
-                                            </div>
-
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><span
+                                                    id="getCountPendingLends"></span></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
