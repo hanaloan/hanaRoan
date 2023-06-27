@@ -78,7 +78,7 @@
                                 <label for="empName">Name:</label>
                                 <input class="form-control form-control-user" type="text" id="empName"
                                        name="empName"
-                                       placeholder="name" required>
+                                       placeholder="name" required pattern="[A-Za-z]+" title="Please enter letters only (no numbers)">
                             </div>
 
                             <div class="col-sm-6 mb-3 mb-sm-0">

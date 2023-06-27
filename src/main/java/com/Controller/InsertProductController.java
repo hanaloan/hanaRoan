@@ -31,12 +31,14 @@ public class InsertProductController extends HttpServlet {
         try{
             String productName=req.getParameter("productName");
             String productTypeName = req.getParameter("productTypeName");
-            System.out.println(productName);
-            System.out.println(productTypeName);
+//            System.out.println(productName);
+//            System.out.println(productTypeName);
             String productInfo=req.getParameter("productInfo");
-            BigDecimal interestRate= BigDecimal.valueOf(Long.parseLong(req.getParameter("interestRate")));
-            BigDecimal overdueInterestRate=BigDecimal.valueOf(Long.parseLong(req.getParameter("overdueInterestRate")));
-            BigDecimal limit = BigDecimal.valueOf(Long.parseLong(req.getParameter("limit")));
+            System.out.println(productInfo);
+
+            BigDecimal interestRate = new BigDecimal(req.getParameter("interestRate"));
+            BigDecimal overdueInterestRate = new BigDecimal(req.getParameter("overdueInterestRate"));
+            BigDecimal limit = new BigDecimal(req.getParameter("limit"));
             Integer period= Integer.valueOf(req.getParameter("period"));
             Integer minCredit= Integer.valueOf(req.getParameter("minCredit"));
 
