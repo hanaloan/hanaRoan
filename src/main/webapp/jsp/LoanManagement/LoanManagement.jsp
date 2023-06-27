@@ -78,22 +78,6 @@
         n
         location.href = '/LoanManagement';
     }
-    // function openJSPWindow() {
-    //     childWindow = window.open("/jsp/LoanManagement/InsertProduct.jsp", "_blank", "width=800, height=800");
-    // }
-    //
-    // function refreshWindow() {
-    //     location.reload();
-    // }
-    //
-    // window.onbeforeunload = function () {
-    //     if (childWindow && childWindow.closed) {
-    //         refreshWindow();
-    //     }
-    // }
-
-
-
 
 </script>
 <!-- Page Wrapper -->

@@ -24,14 +24,17 @@
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/LoanManagement/LoanManagement.css">
 
-<%--    <script>--%>
-<%--        function submitForm() {--%>
-<%--            // Perform form submission or any other desired logic--%>
+    <style>
+        .submit-style{
+            width: 300px;
+            height: 50px;
+            margin: 0 auto; /* Center align the button */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-<%--            // Close the new window--%>
-<%--            window.close();--%>
-<%--        }--%>
-<%--    </script>--%>
+    </style>
 
 
 
@@ -110,21 +113,8 @@
                                         </div>
                                 </div>
                                 <br>
-<%--                                <a href="#" class="btn btn-secondary btn-icon-split">--%>
-<%--                                        <span class="icon text-white-50">--%>
-<%--                                            <i class="fas fa-arrow-right"></i>--%>
-<%--                                        </span>--%>
-<%--&lt;%&ndash;                                    <span class="text">Split Button Secondary</span>&ndash;%&gt;--%>
-<%--                                    <input type="submit" value="Submit"/>--%>
-<%--                                </a>--%>
-<%--                                --%>
 
-<%--                                <input type="submit" value="Submit"/>--%>
-                                <input type="submit" value="Submit" class="btn btn-primary" >
-
-<%--                                <form onsubmit="submitForm(); return true;">--%>
-<%--                                    <input type="submit" value="Submit" class="btn btn-primary" >--%>
-<%--                                </form>--%>
+                                <input type="submit" value="Submit" class="btn btn-primary btn-icon-split btn-lg submit-style" >
 
 
                             </div>
