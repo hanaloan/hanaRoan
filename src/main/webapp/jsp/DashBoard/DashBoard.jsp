@@ -115,7 +115,8 @@
                                             </div>
                                             <div class="col">
                                                 <div class="progress progress-sm mr-2">
-                                                    <div id="card-pg-bar" class="progress-bar bg-info" role="progressbar"
+                                                    <div id="card-pg-bar" class="progress-bar bg-info"
+                                                         role="progressbar"
                                                          style="width: 50%" aria-valuenow="50" aria-valuemin="0"
                                                          aria-valuemax="100"></div>
                                                 </div>
@@ -272,23 +273,44 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="small font-weight-bold">월세 대출<span
-                                        id="monthlyRentPercentage"  class="float-right"></span></h4>
+                                        id="monthlyRentPercentage" class="float-right"></span></h4>
                                 <div class="progress mb-4">
-                                    <div id="monthlyRentRentBar" class="progress-bar bg-danger" role="progressbar" style="width: 20%"
+                                    <div id="monthlyRentRentBar" class="progress-bar bg-danger" role="progressbar"
+                                         style="width: 20%"
                                          aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <h4 class="small font-weight-bold">전세 대출<span
                                         id="yearlyRentPercentage" class="float-right"></span></h4>
                                 <div class="progress mb-4">
-                                    <div id="monthlyRentBar" class="progress-bar bg-warning" role="progressbar" style="width: 40%"
+                                    <div id="monthlyRentBar" class="progress-bar bg-warning" role="progressbar"
+                                         style="width: 40%"
                                          aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <h4 class="small font-weight-bold">담보 대출<span id="collateralRentPercentage"
-                                        class="float-right"></span></h4>
+                                                                              class="float-right"></span></h4>
                                 <div class="progress mb-4">
-                                    <div id="collateralRentBar" class="progress-bar" role="progressbar" style="width: 60%"
+                                    <div id="collateralRentBar" class="progress-bar" role="progressbar"
+                                         style="width: 60%"
                                          aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- 홈페이지 안내 -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">하나론 이용 안내</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center">
+
+                                </div>
+                                <p>하나론의 대출 관리 기능은 직원들에게 업무 효율성을 높이고, 고객에게 편리하고 안정적인 대출 서비스를 제공하는데 앞장서고 있습니다.<br/> <br/>문의나 도움이 필요한 경우 언제든지 하나론 홈페이지의 전화번호나 고객센터로 문의해 주시기 바랍니다.</p>
+                                <a target="_blank" rel="nofollow" href="https://undraw.co/">☏ 02-0000-0000</a><br/>
+                                <a target="_blank" rel="nofollow" href="https://undraw.co/">하나론 고객센터 바로가기 &rarr;</a>
                             </div>
                         </div>
                     </div>

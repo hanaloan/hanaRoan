@@ -47,7 +47,7 @@ function handleAjaxRequest(url, method, onSuccess, onError) {
 
 $(document).ready(function () {
     startSessionTimer();
-    
+
     handleAjaxRequest("/GetTotalLoanAmount", "GET", function (response) {
         var formattedLoanAmount = parseFloat(response.loanAmount).toLocaleString();
         $('#loanAmount').text(formattedLoanAmount);
