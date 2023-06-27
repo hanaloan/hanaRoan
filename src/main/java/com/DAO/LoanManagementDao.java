@@ -79,6 +79,7 @@ public class LoanManagementDao {
                 BigDecimal loan_interest_rate = rs.getBigDecimal("loan_interest_rate");
                 BigDecimal overdue_interest_rate = rs.getBigDecimal("overdue_interest_rate");
 
+
                 Product product = new Product(loan_idx, loan_name, loan_type_name,min_credit,lend_limit, lend_period,loan_description, loan_interest_rate , overdue_interest_rate );
                 products.add(product);
             }

@@ -61,6 +61,40 @@
         }
     }
 
+
+    function openJSPWindow() {
+        var newWindow = window.open("/jsp/LoanManagement/InsertProduct.jsp", "_blank", "width=800, height=800");
+
+        $.get("/jsp/LoanManagement/InsertProduct.jsp", function(response) {
+            // Write the fetched content to the new window
+            newWindow.document.write(response);
+
+        });
+
+    }
+
+    function refreshWindow() {
+        // location.reload();
+        n
+        location.href = '/LoanManagement';
+    }
+    // function openJSPWindow() {
+    //     childWindow = window.open("/jsp/LoanManagement/InsertProduct.jsp", "_blank", "width=800, height=800");
+    // }
+    //
+    // function refreshWindow() {
+    //     location.reload();
+    // }
+    //
+    // window.onbeforeunload = function () {
+    //     if (childWindow && childWindow.closed) {
+    //         refreshWindow();
+    //     }
+    // }
+
+
+
+
 </script>
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -87,6 +121,22 @@
                     <button class="btn btn-secondary btn-icon-split mr-auto fa btn-h" id="insertProductBtn" onclick="location.href='/jsp/LoanManagement/InsertProduct.jsp'">
                         추가
                     </button>
+
+                    <script>
+
+
+                        window.opener.refreshWindow = function () {
+                            location.href = '/LoanManagement';
+                        };
+                        // Handle refresh event from the new window
+                        window.addEventListener("beforeunload", function () {
+                            if (window.opener && !window.opener.closed) {
+                                window.opener.refreshWindow();
+                            }
+                        });
+
+
+                    </script>
                     <p></p>
                 </div>
 

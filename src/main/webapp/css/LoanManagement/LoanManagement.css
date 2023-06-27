@@ -19,7 +19,7 @@
 
 #primaryOption button:hover,
 #subOption button:hover {
-    background-color: #616d8e;
+    background-color: #798cc0;
     border-color: #616d8e;
 }
 .deductBalanceBtn,
@@ -41,5 +41,5 @@
 
 .deductBalanceBtn:hover,
 .overdueBtn:hover {
-    background-color: #616d8e;
+    background-color: #98a9da;
 }
