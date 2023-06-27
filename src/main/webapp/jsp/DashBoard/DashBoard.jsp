@@ -5,7 +5,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,11 +30,11 @@
 
     <script src="/js/DashBoard/DashBoard.js"></script>
 
+</head>
 <body id="page-top">
 
 <!-- Page Wrapper -->
 <div id="wrapper">
-
 
     <!-- Sidebar -->
     <%@ include file="/jsp/Components/AdminSidebar/AdminSidebar.jsp" %>
@@ -116,7 +115,7 @@
                                             </div>
                                             <div class="col">
                                                 <div class="progress progress-sm mr-2">
-                                                    <div class="progress-bar bg-info" role="progressbar"
+                                                    <div id="card-pg-bar" class="progress-bar bg-info" role="progressbar"
                                                          style="width: 50%" aria-valuenow="50" aria-valuemin="0"
                                                          aria-valuemax="100"></div>
                                                 </div>
@@ -152,7 +151,6 @@
                             </div>
                         </a>
                     </div>
-
                 </div>
 
                 <!-- Content Row -->
@@ -262,10 +260,8 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Content Row -->
                 <div class="row">
-
                     <!-- Content Column -->
                     <div class="col-lg-6 mb-4">
 
@@ -307,71 +303,53 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
-                    <div class="col-lg-6 mb-4">
-
-                        <!-- Illustrations -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                         src="/img/undraw_posting_photo.svg" alt="...">
-                                </div>
-                                <p>Add some quality, svg illustrations to your project courtesy of <a
-                                        target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                                    constantly updated collection of beautiful svg images that you can use
-                                    completely free and without attribution!</p>
-                                <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                    unDraw &rarr;</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- /.container-fluid -->
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <%@ include file="/jsp/Components/AdminFooter/AdminFooter.jsp" %>
 
         </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-        <%@ include file="/jsp/Components/AdminFooter/AdminFooter.jsp" %>
+        <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-</div>
-<!-- End of Page Wrapper -->
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+    <!-- Logout Modal-->
+    <%@ include file="/jsp/Components/LogoutModal/LogoutModal.jsp" %>
 
-<!-- Logout Modal-->
-<%@ include file="/jsp/Components/LogoutModal/LogoutModal.jsp" %>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Bootstrap core JavaScript-->
-<script src="/vendor/jquery/jquery.min.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="/js/sb-admin-2.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="/vendor/chart.js/Chart.js"></script>
 
-<!-- Page level plugins -->
-<script src="/vendor/chart.js/Chart.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="/js/Chart/PVChart.js"></script>
+    <script src="/js/Chart/UVChart.js"></script>
+    <script src="/js/Chart/RepaymentRatioChart.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="/js/Chart/PVChart.js"></script>
-<script src="/js/Chart/UVChart.js"></script>
-<script src="/js/Chart/RepaymentRatioChart.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 </html>

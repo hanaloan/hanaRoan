@@ -69,6 +69,6 @@ $(document).ready(function () {
     handleAjaxRequest("/GetOverduePercentage", "GET", function (response) {
         var percentage = parseFloat(response.getOverduePercentage).toFixed(1);
         $('#getOverduePercentage').text(percentage);
-        $('.progress-bar').attr('aria-valuenow', percentage).css('width', percentage + '%');
+        $('#card-pg-bar').attr('aria-valuenow', percentage).css('width', percentage + '%');
     });
 });
