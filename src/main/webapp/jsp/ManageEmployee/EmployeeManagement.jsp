@@ -12,7 +12,7 @@
     <meta name="author" content="">
 
     <title>직원 관리</title>
-<%--    <link rel="stylesheet" href="/css/EmployeeManagement/EmployeeManagement.css">--%>
+    <%--    <link rel="stylesheet" href="/css/EmployeeManagement/EmployeeManagement.css">--%>
 
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -27,7 +27,7 @@
 
     <style>
         select {
-            border: none;  /* Remove the border */
+            border: none; /* Remove the border */
             outline: none; /* Remove the outline */
             -webkit-appearance: none; /* Remove the default styling in WebKit browsers */
             -moz-appearance: none; /* Remove the default styling in Mozilla Firefox */
@@ -45,12 +45,15 @@
 
         .button-container {
             text-align: right;
+
         }
 
-        .btn-h{
-            height: 30px;
+        .btn-h {
+            height: 35px;
             width: 150px;
             text-align: center;
+            align-items: center;
+
 
             /*justify-content: center;*/
         }
@@ -60,7 +63,7 @@
 <body id="page-top">
 
 <script>
-    window.onload = function() {
+    window.onload = function () {
         if (window.location.pathname !== '/EmployeeManagement') {
             location.href = '/EmployeeManagement';
         }
@@ -71,32 +74,32 @@
             updateAuthStatus(selectElements[i]);
         }
 
-        var k='<%= request.getAttribute("empAuthName") %>';
+        var k = '<%= request.getAttribute("empAuthName") %>';
         var updateEmployeeBtn = document.getElementById("updateEmployeeBtn");
         var insertEmployeeBtn = document.getElementById("insertEmployeeBtn");
 
-        if (k==="all"){
-            updateEmployeeBtn.disabled=false;
-            insertEmployeeBtn.disabled=false;
+        if (k === "all") {
+            updateEmployeeBtn.disabled = false;
+            insertEmployeeBtn.disabled = false;
         }
     }
 
     function updateEmployeeAuth(getEmpIdx, getEmpName) {
         //select 태그에서 선택한 값 가져옴
-        var empIdx=getEmpIdx;
+        var empIdx = getEmpIdx;
         var empAuthName = document.getElementById('auth-' + getEmpIdx).value;
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "/UpdateEmpAuth", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send("empIdx=" + empIdx + "&empAuthName=" + empAuthName);
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) { // 응답이 완료되었을 때만 실행
                 if (xhr.status === 200) { // 성공적인 응답일 경우
                     updateAuthStatus(document.getElementById('auth-' + getEmpIdx));
                     // alert(empAuthName);
-                    if (empAuthName==="none"){
-                        alert(getEmpName+" 직원의 권한이 제한되었습니다.");
+                    if (empAuthName === "none") {
+                        alert(getEmpName + " 직원의 권한이 제한되었습니다.");
                     }
                     location.reload();
                 } else {
@@ -107,9 +110,9 @@
 
     }
 
-//  직원의 권한을 바꾸면 다시 비활성화 상태로 바꿔야 함.
-    function updateAuthStatus(selectElement){
-        selectElement.disabled=true;
+    //  직원의 권한을 바꾸면 다시 비활성화 상태로 바꿔야 함.
+    function updateAuthStatus(selectElement) {
+        selectElement.disabled = true;
     }
 </script>
 
@@ -142,27 +145,30 @@
                     </div>
 
                     <p>
-                        <h5> <%= request.getAttribute("empName") %>&nbsp[<%= request.getAttribute("empAuthName") %>]  </h5> 님 반갑습니다~
+                    <h5><%= request.getAttribute("empName") %>&nbsp[<%= request.getAttribute("empAuthName") %>] </h5> 님
+                    반갑습니다~
                     </p>
 
                 </div>
                 <!-- Page Heading -->
                 <div class="button-container">
-                    <button class="btn btn-secondary btn-icon-split ml-auto fa btn-h" id="insertEmployeeBtn" disabled onclick="location.href='/jsp/ManageEmployee/InsertEmployee.jsp'">관리자 직원 추가</button>
-                    <button class="btn btn-secondary btn-icon-split ml-auto btn-h" id="updateEmployeeBtn" disabled >관리자 직원 수정</button>
+                    <button class="btn btn-secondary btn-icon-split ml-auto fa btn-h" id="insertEmployeeBtn" disabled
+                            onclick="location.href='/jsp/ManageEmployee/InsertEmployee.jsp'">관리자 직원 추가
+                    </button>
+                    <button class="btn btn-secondary btn-icon-split ml-auto btn-h" id="updateEmployeeBtn" disabled>관리자
+                        직원 수정
+                    </button>
 
                 </div>
                 <p>
 
-                <!-- DataTales Example -->
+                    <!-- DataTales Example -->
                 <div class="card shadow mb-4">
 
                     <div class="card-header py-3"
                          style="display: flex; justify-content: space-between; align-items: center;">
 
                         <h6 class="m-0 font-weight-bold text-primary">직원 정보</h6>
-
-
 
 
                     </div>
@@ -302,31 +308,29 @@
 <%--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--%>
 
 
+<script>
+    //전체 권한 비활성화 상태에서 활성화로 전환 시키기
+    <%
+        request.setCharacterEncoding("UTF-8");
+        employees = (List<Employee>) request.getAttribute("employeeManageResDto");
+        if (employees != null) {
+            for (Object obj : employees) {
+                if (obj instanceof Employee) {
+                    Employee employee = (Employee) obj;
+    %>
 
-
-    <script>
-        //전체 권한 비활성화 상태에서 활성화로 전환 시키기
-        <%
-            request.setCharacterEncoding("UTF-8");
-            employees = (List<Employee>) request.getAttribute("employeeManageResDto");
-            if (employees != null) {
-                for (Object obj : employees) {
-                    if (obj instanceof Employee) {
-                        Employee employee = (Employee) obj;
-        %>
-
-        //관리자 직원 수정 버튼을 누르면 활성화로 전환됨
-        document.getElementById("updateEmployeeBtn").addEventListener("click", function() {
-            var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
-            element.style.appearance = "menulist-button"; //아래 화살표 띄우기
-            element.disabled  = false; //비활성화 False로 처리
-        });
-        <%
-                    }
+    //관리자 직원 수정 버튼을 누르면 활성화로 전환됨
+    document.getElementById("updateEmployeeBtn").addEventListener("click", function () {
+        var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
+        element.style.appearance = "menulist-button"; //아래 화살표 띄우기
+        element.disabled = false; //비활성화 False로 처리
+    });
+    <%
                 }
             }
-        %>
-    </script>
+        }
+    %>
+</script>
 </div>
 
 </body>

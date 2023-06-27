@@ -18,8 +18,6 @@ public class InsertProductDao {
             String sql="INSERT INTO hanaroDB.loan_products (loan_name, loan_type_id, loan_description, loan_interest_rate, overdue_interest_rate, lend_limit, lend_period, min_credit) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             ps=conn.prepareStatement(sql);
 
-
-
             ps.setString(1, product.getName());
 
 
@@ -35,8 +33,6 @@ public class InsertProductDao {
                 loan_type=3;
             }
 
-
-
             ps.setInt(2, loan_type);
             ps.setString(3, product.getDescription());
             ps.setBigDecimal(4, product.getInterestRate());
@@ -46,8 +42,6 @@ public class InsertProductDao {
             ps.setInt(8, product.getMinCredit());
 
 
-
-            System.out.println(ps);
             ps.executeUpdate();
 
 

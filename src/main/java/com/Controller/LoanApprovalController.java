@@ -29,19 +29,23 @@ public class LoanApprovalController extends HttpServlet {
             CustomerManagementReq request = new CustomerManagementReq();
 
             String loanType = req.getParameter("loanType");
+            String loanStatus = req.getParameter("loanStatus");
+
             request.setLoanType(loanType);
+            request.setLoanStatus(loanStatus);
 
             if (loanType == null || loanType.isEmpty()) {
                 request.setLoanType(null);
             }
 
-            List<CustomerManagement> customerManagementList = loanApprovalService.getCustomerInfo(loanType, request);
+            List<CustomerManagement> customerManagementList = loanApprovalService.getCustomerInfo(loanType,loanStatus, request);
 
             req.setAttribute("customerManagementList", customerManagementList);
 
             req.getRequestDispatcher("/jsp/LoanApproval/LoanApproval.jsp").forward(req, resp);
         } catch (SQLException e) {
             // Handle exceptions and send an appropriate response
+            e.printStackTrace();
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             resp.getWriter().println("Internal server error");
         }
