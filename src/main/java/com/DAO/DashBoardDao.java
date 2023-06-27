@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DashBoardDao {
 
@@ -67,12 +69,30 @@ public class DashBoardDao {
              PreparedStatement stmt = conn.prepareStatement(GET_OVERDUE_PERCENTAGE);
              ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {
-                System.out.println(rs.getString("overdue_percentage"));
                 return rs.getString("overdue_percentage");
             }
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    private static final String GET_COUNT_PAYMENT_STATUS =
+            "SELECT payment_status, COUNT(payment_status) as count FROM hanaroDB.loan_payments WHERE payment_status IN ('in progress', 'paid', 'overdue') GROUP BY payment_status";
+
+    public Map<String, Integer> getCountPaymentStatus() throws SQLException {
+        Map<String, Integer> statusCounts = new HashMap<>();
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(GET_COUNT_PAYMENT_STATUS);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                String status = rs.getString("payment_status");
+                int count = rs.getInt("count");
+                statusCounts.put(status, count);
+            }
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return statusCounts;
     }
 }

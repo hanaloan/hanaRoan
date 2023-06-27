@@ -3,6 +3,7 @@ package com.Service;
 import com.DAO.DashBoardDao;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 public class DashBoardService {
 
@@ -26,5 +27,9 @@ public class DashBoardService {
 
     public String getOverduePercentage() throws SQLException {
         return dashBoardDao.getOverduePercentage();
+    }
+
+    public Map<String, Integer> getCountPaymentStatus() throws SQLException {
+        return dashBoardDao.getCountPaymentStatus();
     }
 }
