@@ -119,7 +119,7 @@
         <td><%= product.getMinCredit() %></td>
         <td>
             <form action="/LoanManagement" method="POST">
-                <input type="hidden" name="productId" value="<%= product.getId() %>">
+                <input type="hidden" name="productId" value="<%= product.getIdx() %>">
                 <button type="submit" onclick="return confirm('Are you sure you want to delete this product?')">삭제</button>
             </form>        </td>
 

@@ -51,8 +51,14 @@ public class LoanManagementController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int productId = Integer.parseInt(req.getParameter("productId"));
+        String productIdParam = req.getParameter("productId");
+        if (productIdParam == null || productIdParam.isEmpty()) {
+            // Handle the error condition appropriately, such as displaying an error message
+            // or redirecting to an error page.
+            throw new IllegalArgumentException("Invalid productId");
+        }
 
+        int productId = Integer.parseInt(productIdParam);
         System.out.println("Post들어감");
 
         // Perform delete operation using productId

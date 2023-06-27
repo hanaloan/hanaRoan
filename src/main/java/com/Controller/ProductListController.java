@@ -3,9 +3,12 @@ package com.Controller;
 
 //import com.Background.RedisConnectionPool;
 //import com.Service.RedisService;
+//
+//import com.Background.RedisConnectionPool;
 import com.Model.*;
 import com.Service.DisplayProductListService;
 import com.Model.Product;
+//import com.Service.RedisService;
 
 
 import javax.servlet.ServletException;
@@ -44,9 +47,10 @@ public class ProductListController extends HttpServlet {
             request.setAttribute("productList", productList);
             request.getRequestDispatcher("jsp/DisplayProduct/ProductList.jsp").forward(request, response);
 
-            //redisService = RedisConnectionPool.getInstance().getRedisService();
-            //redisService.increasePageView(customer_Idx);
-            //redisService.addToPreList(customer_Idx);
+
+//            redisService = RedisConnectionPool.getInstance().getRedisService();
+//            redisService.increasePageView(customer_Idx);
+//            redisService.addToPreList(customer_Idx);
         } catch (SQLException e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().println("Internal Server Error");

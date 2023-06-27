@@ -15,8 +15,7 @@ public class LoanApprovalService {
         this.loanApprovalDao = new LoanApprovalDao();
     }
 
-    public List<CustomerManagement> getCustomerInfo(String loanTypeName, CustomerManagementReq customerManagementReq) throws SQLException {
-        return loanApprovalDao.getCustomerInfo(loanTypeName, customerManagementReq);
+    public List<CustomerManagement> getCustomerInfo(String loanTypeName, String loanStatus ,CustomerManagementReq customerManagementReq) throws SQLException {
+        return loanApprovalDao.getCustomerInfo(loanTypeName, loanStatus, customerManagementReq);
     }
-
 }
