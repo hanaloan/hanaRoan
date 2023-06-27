@@ -49,7 +49,7 @@
             <div class="p-5">
                 <div class="text-center">
 
-                    <h2>Enter Add Employee:</h2>
+                    <h2>Add Employee</h2>
                     <br></br>
                 </div>
 
@@ -60,13 +60,13 @@
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label for="empId">ID:</label>
                                 <input class="form-control form-control-user" type="text" id="empId" name="empId"
-                                       placeholder="Parameter 1" required>
+                                       placeholder="id" required>
                             </div>
                             <%--    <br>--%>
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label for="empPw">PW:</label>
                                 <input class="form-control form-control-user" type="text" id="empPw" name="empPw"
-                                       required>
+                                       placeholder="password" required>
                             </div>
 
                         </div>
@@ -78,7 +78,7 @@
                                 <label for="empName">Name:</label>
                                 <input class="form-control form-control-user" type="text" id="empName"
                                        name="empName"
-                                       required>
+                                       placeholder="name" required>
                             </div>
 
                             <div class="col-sm-6 mb-3 mb-sm-0">
