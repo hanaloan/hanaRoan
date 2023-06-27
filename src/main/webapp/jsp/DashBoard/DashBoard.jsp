@@ -87,6 +87,21 @@
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "/GetOverdueLoanAmount",
+                method: "GET",
+                success: function (response) {
+                    var formattedLoanAmount = parseFloat(response.overdueLoanAmount).toLocaleString();
+                    $('#overdueLoanAmount').text(formattedLoanAmount);
+                },
+                error: function (xhr, status, error) {
+                }
+            });
+        });
+    </script>
 </head>
 
 <body id="page-top">
@@ -131,7 +146,7 @@
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             총 대출 금액 (진행 중)
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="loanAmount"></span> 원</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">₩ <span id="loanAmount"></span></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -148,9 +163,9 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            Earnings (Annual)
+                                            총 연체 금액
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">₩ <span id="overdueLoanAmount"></span></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>

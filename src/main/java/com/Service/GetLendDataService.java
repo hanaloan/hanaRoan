@@ -13,6 +13,10 @@ public class GetLendDataService {
     }
 
     public String getLendData() throws SQLException {
-        return getLendDataDao.getLendData();
+        return getLendDataDao.getTotalLendData();
+    }
+
+    public String getOverdueLendData() throws SQLException {
+        return getLendDataDao.getOverdueLendData();
     }
 }
