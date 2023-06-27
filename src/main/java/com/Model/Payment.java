@@ -7,7 +7,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class Payment {
     private int paymentId;
     private String customerName;

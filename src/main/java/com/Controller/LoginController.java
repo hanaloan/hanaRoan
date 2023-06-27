@@ -79,6 +79,10 @@ public class LoginController extends HttpServlet {
                     LoginRecommendationRes recoRes = loginService.getRecoProduct(recoReq);
                     req.setAttribute("recoRes", recoRes);
 
+                    // 알림 관련
+                    LoginAlertMessageReq alertReq = new LoginAlertMessageReq(loginUserRes.getCustomer_Idx());
+                    LoginAlertMessageRes alertRes = loginService.getAlertMessages(alertReq);
+                    req.setAttribute("alertRes", alertRes);
                     // 세션 관련
                     HttpSession session = req.getSession();
                     session.setAttribute("username", loginUserRes.getName());

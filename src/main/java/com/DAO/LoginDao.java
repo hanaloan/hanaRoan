@@ -2,16 +2,14 @@ package com.DAO;
 
 import com.Model.*;
 import com.config.secret.Secret;
+import com.utils.DatabaseConnector;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 public class LoginDao {
@@ -311,5 +309,53 @@ public class LoginDao {
             }
         }
         return loginForAdminRes;
+    }
+
+    public LoginAlertMessageRes getAlertMessages(LoginAlertMessageReq alertReq) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        LoginAlertMessageRes alertRes = new LoginAlertMessageRes();
+        try{
+            conn = DatabaseConnector.getConnection();
+            ArrayList<String> overdueMessages = new ArrayList<>();
+            ArrayList<String> approachingRepaymentMessages = new ArrayList<>();
+            String sql = "SELECT lpr.loan_name, ll.start_date, ll.end_date, lp.payment_status, DATEDIFF(ll.end_date, CURDATE()) AS date_diff\n" +
+                        "FROM loan_payments lp \n" +
+                        "JOIN loan_lend ll ON lp.loan_lend_idx = ll.lend_idx \n" +
+                        "JOIN loan_products lpr ON ll.loan_idx = lpr.loan_idx \n" +
+                        "WHERE ll.customer_idx = ? AND (lp.payment_status = 'overdue' OR (lp.payment_status = 'in progress' AND DATEDIFF(ll.end_date, CURDATE()) <= 14))";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, alertReq.getCustomerIdx());
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String loanName = rs.getString("loan_name");
+                Date startDate = rs.getDate("start_date");
+                Date endDate = rs.getDate("end_date");
+                int daysLeft = rs.getInt("date_diff");
+                String status = rs.getString("payment_status");
+                if (status.equals("overdue")) {
+                    String msg = String.format("%s일자에 가입하신 %s 대출 상품이 연체 상태입니다. 빠른 시일내에 상환해주시기 바랍니다.",
+                            startDate, loanName);
+                    overdueMessages.add(msg);
+                } else if(status.equals("in progress")) {
+                    String msg = String.format("%s부터 이용중이신 %s 대출상품의 상환마감기한인 %s까지 %d일 남았습니다.",
+                            startDate, loanName, endDate, daysLeft);
+                    approachingRepaymentMessages.add(msg);
+                }
+            }
+            if(!overdueMessages.isEmpty()){
+                alertRes.addAlertMessages("연체", overdueMessages);
+            }
+            if(!approachingRepaymentMessages.isEmpty()){
+                alertRes.addAlertMessages("상환기한", approachingRepaymentMessages);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return alertRes;
     }
 }

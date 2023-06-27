@@ -35,7 +35,5 @@ public class CustomerRes {
         }
         return contactInfo;
     }
-
-
 }
 
