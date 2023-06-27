@@ -8,6 +8,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.Date;
 
 public class LoanPaymentDao {
     public List<Payment> getPayments(String option1, String option2) throws SQLException {
@@ -18,12 +19,12 @@ public class LoanPaymentDao {
 
         try {
             conn = DatabaseConnector.getConnection();
-            String sql = "SELECT lp.repayment_idx, c.name, lpr.loan_type_id, lpr.loan_name, ll.start_date, ll.end_date, lp.payment_amount, lp.payment_status\n" +
+            String sql = "SELECT lp.repayment_idx, c.name, lp.payment_amount, lp.payment_status, lpr.loan_type_id, lpr.loan_name, ll.start_date, ll.end_date\n" +
                     "FROM loan_payments lp\n" +
                     "JOIN loan_lend ll ON lp.loan_lend_idx = ll.lend_idx\n" +
                     "JOIN loan_products lpr ON ll.loan_idx = lpr.loan_idx\n" +
                     "JOIN customers c ON ll.customer_idx = c.customer_idx\n" +
-                    "WHERE ll.loan_status = 'approved'";
+                    "WHERE ll.loan_status = 'approved' OR ll.loan_status = 'paid'";
 
             String[] option = getPaymentOption(option1, option2);
             Map<Integer, String> category = new HashMap<>();
@@ -49,17 +50,17 @@ public class LoanPaymentDao {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                Payment payment = new Payment();
-                payment.setPaymentId(rs.getInt("repayment_idx"));
-                payment.setCustomerName(rs.getString("name"));
+                int repaymentIdx = rs.getInt("repayment_idx");
+                String customerName = rs.getString("name");
                 String loanType = getLoanType(rs.getInt("loan_type_id"));
-                payment.setProductType(loanType);
-                payment.setProductName(rs.getString("loan_name"));
-                payment.setLendStartDate(rs.getDate("start_date"));
-                payment.setPaymentDueDate(rs.getDate("end_date"));
-                payment.setDueBalance(rs.getBigDecimal("payment_amount"));
-                payment.setPassedDate(getPassedDate(rs.getString("end_date")));
-                payment.setPaymentStatus(getStatus(rs.getString("payment_status")));
+                String productName = rs.getString("loan_name");
+                Date startDate = rs.getDate("start_date");
+                Date paymetDueDate = rs.getDate("end_date");
+                BigDecimal dueBalance = rs.getBigDecimal("payment_amount");
+                String passedDate = getPassedDate(rs.getString("end_date"));
+                String paymentStatus = getStatus(rs.getString("payment_status"));
+                Payment payment = new Payment(repaymentIdx, customerName, loanType, productName, startDate,
+                        paymetDueDate, dueBalance, passedDate, paymentStatus);
                 paymentList.add(payment);
             }
         } catch (ClassNotFoundException e) {
@@ -80,7 +81,7 @@ public class LoanPaymentDao {
             String sql = "UPDATE loan_payments as lp\n" +
                     "JOIN loan_lend as ll ON lp.loan_lend_idx = ll.lend_idx\n" +
                     "SET lp.payment_amount = 0\n," +
-                    "    lp.payment_status = 'paid'\n" +
+                    "    lp.payment_status = 'paid'\n," +
                     "    ll.loan_status = 'paid'\n" +
                     "WHERE repayment_idx = ?;";
             stmt = conn.prepareStatement(sql);

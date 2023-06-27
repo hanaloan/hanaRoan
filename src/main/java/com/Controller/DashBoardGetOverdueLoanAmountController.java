@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/GetCountPendingLends")
-public class DashBoardGetPendingController extends HttpServlet {
+@WebServlet("/GetOverdueLoanAmount")
+public class DashBoardGetOverdueLoanAmountController extends HttpServlet {
     DashBoardService dashBoardService = new DashBoardService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String getCountPendingLends;
+        String overdueLoanAmount;
         try {
-            getCountPendingLends = dashBoardService.getCountPendingLends();
+            overdueLoanAmount = dashBoardService.getOverdueLendData();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write("{\"getCountPendingLends\": \"" + getCountPendingLends + "\"}");
+        resp.getWriter().write("{\"overdueLoanAmount\": \"" + overdueLoanAmount + "\"}");
     }
 }
