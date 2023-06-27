@@ -61,24 +61,6 @@
         }
     }
 
-
-    function openJSPWindow() {
-        var newWindow = window.open("/jsp/LoanManagement/InsertProduct.jsp", "_blank", "width=800, height=800");
-
-        $.get("/jsp/LoanManagement/InsertProduct.jsp", function(response) {
-            // Write the fetched content to the new window
-            newWindow.document.write(response);
-
-        });
-
-    }
-
-    function refreshWindow() {
-        // location.reload();
-        n
-        location.href = '/LoanManagement';
-    }
-
 </script>
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -102,22 +84,25 @@
 
                 <div class="button-container">
 
-                    <button class="btn btn-secondary btn-icon-split mr-auto fa btn-h" id="insertProductBtn" onclick="location.href='/jsp/LoanManagement/InsertProduct.jsp'">
+                    <button id="insertProductBtn"
+                            class="btn btn-secondary btn-icon-split mr-auto fa btn-h"
+                            disabled
+                            onclick="location.href='/jsp/LoanManagement/InsertProduct.jsp'">
                         추가
                     </button>
 
                     <script>
 
 
-                        window.opener.refreshWindow = function () {
-                            location.href = '/LoanManagement';
-                        };
-                        // Handle refresh event from the new window
-                        window.addEventListener("beforeunload", function () {
-                            if (window.opener && !window.opener.closed) {
-                                window.opener.refreshWindow();
-                            }
-                        });
+                        var k = '<%= session.getAttribute("authType") %>';
+                        var InsertProductBtn = document.getElementById("insertProductBtn");
+                        if (k === "all" || k==="managing Products") {
+                            InsertProductBtn.disabled = false;
+                        }
+                        ////두번 실행돼서 그냥 뺌..
+                        // else{
+                        //     alert("[알림] 관리자님의 권한으로는 대출 상품들을 볼 수 있습니다. 하지만 상품 추가에는 제한이 걸립니다.")
+                        // }
 
 
                     </script>
@@ -253,6 +238,7 @@
 </div>
 <!-- End of Page Wrapper -->
 <!-- Bootstrap core JavaScript-->
+
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
