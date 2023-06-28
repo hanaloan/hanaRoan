@@ -66,13 +66,12 @@
 //                            totalPageViews += pageViews;
 //                        }
 //                    } catch (NumberFormatException e) {
-//                        System.out.println("Invalid data for user: " + userId);
+////                        System.out.println("Invalid data for user: " + userId);
 //                        continue;
 //                    }
 //                }
 //                try {
 //                    RedisViewsReq redisPageViewsReq = new RedisViewsReq();
-//                    System.out.println("지금 totalPV : " + totalPageViews);
 //                    redisPageViewsReq.setTotalPageViews(totalPageViews);
 //                    updateRedisViewsService.updateTotalViewsService(redisPageViewsReq);
 //                } catch (SQLException e) {
