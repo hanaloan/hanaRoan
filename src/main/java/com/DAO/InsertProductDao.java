@@ -20,7 +20,8 @@ public class InsertProductDao {
             ps=conn.prepareStatement(sql);
 
             ps.setString(1, product.getName());
-            System.out.println("testestsest");
+
+
             Integer loan_type = null;
             String s1=product.getLoanTypeName();
             if (s1.equals("전세대출")){
@@ -32,7 +33,6 @@ public class InsertProductDao {
             else if (s1.equals("담보대출")){
                 loan_type=3;
             }
-
             ps.setInt(2, loan_type);
             ps.setString(3, product.getDescription());
             ps.setBigDecimal(4, product.getInterestRate());
@@ -42,9 +42,8 @@ public class InsertProductDao {
             ps.setInt(8, product.getMinCredit());
 
 
-            System.out.println("값 들어감");
-            System.out.println(ps);
             ps.executeUpdate();
+
 
             ps.close();
             conn.close();
@@ -60,4 +59,3 @@ public class InsertProductDao {
 
 
 }
-
