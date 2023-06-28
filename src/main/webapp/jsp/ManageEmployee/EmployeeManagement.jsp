@@ -12,7 +12,6 @@
     <meta name="author" content="">
 
     <title>직원 관리</title>
-    <%--    <link rel="stylesheet" href="/css/EmployeeManagement/EmployeeManagement.css">--%>
 
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
