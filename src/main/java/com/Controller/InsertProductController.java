@@ -42,9 +42,7 @@ public class InsertProductController extends HttpServlet {
 
             Product product = new Product(productName, productTypeName,productInfo, interestRate, overdueInterestRate, limit, period, minCredit );
             insertProductService.insertProduct(product);
-            System.out.println("컨트롤러 끝");
             resp.sendRedirect("/jsp/LoanManagement/LoanManagement.jsp");
-            System.out.println("컨트롤러에서 이동함");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while inserting the product.");
