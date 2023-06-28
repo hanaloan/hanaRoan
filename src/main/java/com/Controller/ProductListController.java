@@ -1,8 +1,8 @@
 package com.Controller;
 
 
-import com.Background.RedisConnectionPool;
-import com.Service.RedisService;
+//import com.Background.RedisConnectionPool;
+//import com.Service.RedisService;
 
 import com.Model.*;
 import com.Service.DisplayProductListService;
@@ -24,7 +24,7 @@ import java.util.List;
 @WebServlet("/productList")
 public class ProductListController extends HttpServlet {
     private DisplayProductListService displayProductListService;
-    private RedisService redisService;
+    //private RedisService redisService;
 
     @Override
     public void init() throws ServletException {
@@ -47,19 +47,19 @@ public class ProductListController extends HttpServlet {
             request.getRequestDispatcher("jsp/DisplayProduct/ProductList.jsp").forward(request, response);
 
 
-            redisService = RedisConnectionPool.getInstance().getRedisService();
-            redisService.increasePageView(customer_Idx);
-            redisService.addToPreList(customer_Idx);
+//            redisService = RedisConnectionPool.getInstance().getRedisService();
+//            redisService.increasePageView(customer_Idx);
+//            redisService.addToPreList(customer_Idx);
         } catch (SQLException e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().println("Internal Server Error");
         }
-        finally {
-            if(redisService != null) {
-                System.out.println("레디스 닫음");
-                redisService.close();
-            }
-        }
+//        finally {
+//            if(redisService != null) {
+//                System.out.println("레디스 닫음");
+//                redisService.close();
+//            }
+//        }
 
     }
 }
