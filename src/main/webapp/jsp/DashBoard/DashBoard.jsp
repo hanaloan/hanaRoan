@@ -309,8 +309,8 @@
 
                                 </div>
                                 <p>하나론의 대출 관리 기능은 직원들에게 업무 효율성을 높이고, 고객에게 편리하고 안정적인 대출 서비스를 제공하는데 앞장서고 있습니다.<br/> <br/>문의나 도움이 필요한 경우 언제든지 하나론 홈페이지의 전화번호나 고객센터로 문의해 주시기 바랍니다.</p>
-                                <a target="_blank" rel="nofollow" href="https://undraw.co/">☏ 02-0000-0000</a><br/>
-                                <a target="_blank" rel="nofollow" href="https://undraw.co/">하나론 고객센터 바로가기 &rarr;</a>
+                                <a rel="nofollow" href="#">☏ 02-0000-0000</a><br/>
+                                <a rel="nofollow" href="#">하나론 고객센터 바로가기 &rarr;</a>
                             </div>
                         </div>
                     </div>
