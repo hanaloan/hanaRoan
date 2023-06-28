@@ -68,7 +68,7 @@
                                             <select class="form-control " name="productTypeName"
                                                     id="productTypeName">
                                                 <option value="전세대출">전세대출</option>
-                                                <option value="월세대출">원세대출</option>
+                                                <option value="월세대출">월세대출</option>
                                                 <option value="담보대출">담보대출</option>
                                             </select>
 

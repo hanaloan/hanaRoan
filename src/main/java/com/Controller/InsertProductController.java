@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 
 @WebServlet("/InsertProduct")
 public class InsertProductController extends HttpServlet {
@@ -31,10 +32,7 @@ public class InsertProductController extends HttpServlet {
         try{
             String productName=req.getParameter("productName");
             String productTypeName = req.getParameter("productTypeName");
-//            System.out.println(productName);
-//            System.out.println(productTypeName);
             String productInfo=req.getParameter("productInfo");
-            System.out.println(productInfo);
 
             BigDecimal interestRate = new BigDecimal(req.getParameter("interestRate"));
             BigDecimal overdueInterestRate = new BigDecimal(req.getParameter("overdueInterestRate"));
@@ -47,10 +45,9 @@ public class InsertProductController extends HttpServlet {
             System.out.println("컨트롤러 끝");
             resp.sendRedirect("/jsp/LoanManagement/LoanManagement.jsp");
             System.out.println("컨트롤러에서 이동함");
-        }catch (Exception e) {
-            // 예외 발생 시 응답
-            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            resp.getWriter().println("Internal server error");
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while inserting the product.");
         }
     }
 }
