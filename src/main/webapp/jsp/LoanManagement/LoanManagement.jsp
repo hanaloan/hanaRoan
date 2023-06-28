@@ -99,10 +99,6 @@
                         if (k === "all" || k==="managing Products") {
                             InsertProductBtn.disabled = false;
                         }
-                        ////두번 실행돼서 그냥 뺌..
-                        // else{
-                        //     alert("[알림] 관리자님의 권한으로는 대출 상품들을 볼 수 있습니다. 하지만 상품 추가에는 제한이 걸립니다.")
-                        // }
 
 
                     </script>
