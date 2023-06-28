@@ -20,6 +20,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--%>
     <script>
@@ -48,7 +49,47 @@
                 }
             });
         }
+        $(document).ready(function () {
+            var currentDate = new Date();
+            var year = currentDate.getFullYear();
+            var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+            var day = currentDate.getDate().toString().padStart(2, '0');
+            var formattedDate = year + '-' + month + '-' + day;
+
+            $.ajax({
+                url: "/DashBoardGetPV",
+                method: "GET",
+                data: { date: formattedDate }, // 포맷된 날짜를 매개변수로 추가
+                success: function (response) {
+                    // Handle the success response if needed
+                },
+                error: function (xhr, status, error) {
+                    // Handle the error response if needed
+                }
+            });
+        });
     </script>
+<%--    <script>--%>
+<%--        $(document).ready(function () {--%>
+<%--            var currentDate = new Date();--%>
+<%--            var year = currentDate.getFullYear();--%>
+<%--            var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');--%>
+<%--            var day = currentDate.getDate().toString().padStart(2, '0');--%>
+<%--            var formattedDate = year + '-' + month + '-' + day;--%>
+
+<%--            $.ajax({--%>
+<%--                url: "/DashBoardGetPV",--%>
+<%--                method: "GET",--%>
+<%--                data: { date: formattedDate }, // 포맷된 날짜를 매개변수로 추가--%>
+<%--                success: function (response) {--%>
+<%--                    // Handle the success response if needed--%>
+<%--                },--%>
+<%--                error: function (xhr, status, error) {--%>
+<%--                    // Handle the error response if needed--%>
+<%--                }--%>
+<%--            });--%>
+<%--        });--%>
+<%--    </script>--%>
 
 </head>
 
@@ -455,6 +496,7 @@
 <!-- Page level custom scripts -->
 <script src="/js/demo/chart-area-demo.js"></script>
 <script src="/js/demo/chart-pie-demo.js"></script>
+
 
 </body>
 
