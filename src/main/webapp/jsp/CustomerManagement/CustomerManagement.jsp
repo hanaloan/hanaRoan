@@ -1,5 +1,6 @@
 <%@ page import="com.Model.CustomerManagement" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.Model.CustomerRes" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +15,7 @@
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/CustomerManagement/style.css" rel="stylesheet" type="text/css">
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
@@ -70,40 +72,38 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>Customer ID</th>
-                                    <th>Customer Name</th>
-                                    <th>Customer Password</th>
-                                    <th>Contact Info</th>
-                                    <th>Credit Score</th>
-                                    <th>Income</th>
-                                    <th>Job Type</th>
+                                    <th>고객 번호</th>
+                                    <th>고객 이름</th>
+                                    <th>고객 ID</th>
+                                    <th>연락처</th>
+                                    <th>신용점수</th>
+                                    <th>소득</th>
+                                    <th>직업 분류</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>Customer ID</th>
-                                    <th>Customer Name</th>
-                                    <th>Customer Password</th>
-                                    <th>Contact Info</th>
-                                    <th>Credit Score</th>
-                                    <th>Income</th>
-                                    <th>Job Type</th>
+                                    <th>고객 번호</th>
+                                    <th>고객 이름</th>
+                                    <th>고객 ID</th>
+                                    <th>연락처</th>
+                                    <th>신용점수</th>
+                                    <th>소득</th>
+                                    <th>직업 분류</th>
                                 </tr>
                                 </tfoot>
                                 <%
                                     request.setCharacterEncoding("UTF-8");
-                                    List<CustomerManagement> customers = (List<CustomerManagement>) request.getAttribute("customerManageResDto");
-                                    if (customers != null) {
-                                        for (Object obj : customers) {
-                                            if (obj instanceof CustomerManagement) {
-                                                CustomerManagement customer = (CustomerManagement) obj;
+                                    List<CustomerRes> customerResList = (List<CustomerRes>) request.getAttribute("customerResList");
+                                    if (customerResList != null) {
+                                        for (CustomerRes customer : customerResList) {
                                 %>
                                 <tr>
-                                    <td><%= customer.getCusId() %>
+                                    <td><%= customer.getCusIdx() %>
                                     </td>
                                     <td><%= customer.getName() %>
                                     </td>
-                                    <td><%= customer.getPassword() %>
+                                    <td><%= customer.getCusId() %>
                                     </td>
                                     <td><%= customer.getFormattedContactInfo() %>
                                     </td>
@@ -116,7 +116,6 @@
                                 </tr>
                                 <%
                                             }
-                                        }
                                     }
                                 %>
                             </table>

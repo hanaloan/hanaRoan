@@ -36,9 +36,6 @@ public class CustomerManagement {
         return decimalFormat.format(paymentAmount);
     }
 
-
-
-
     public String getFormattedContactInfo() {
         // Format the contact info based on the pattern
         // e.g., "01012345678" -> "010-1234-5678"

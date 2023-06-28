@@ -49,4 +49,8 @@ public class LoginService {
     public LoginRecommendationRes getRecoProduct(LoginRecommendationReq recoReq) throws SQLException{
         return loginDao.getRecoProduct(recoReq);
     }
+
+    public LoginAlertMessageRes getAlertMessages(LoginAlertMessageReq alertReq) {
+        return loginDao.getAlertMessages(alertReq);
+    }
 }
