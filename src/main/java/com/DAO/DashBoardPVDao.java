@@ -4,13 +4,13 @@ import com.Model.*;
 import com.utils.DatabaseConnector;
 
 import java.sql.*;
-import java.util.HashMap;
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class DashBoardPVDao {
 
-    public DashBoardPVRes getTotalPageViews(DashBoardPVReq dashBoardPVReq) throws SQLException {
+    public DashBoardPVRes getTotalPageViews() throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -29,8 +29,9 @@ public class DashBoardPVDao {
             String query = "SELECT date, total_views FROM total_page_views WHERE date >= DATE_SUB(?, INTERVAL 6 DAY) AND date <= ? ORDER BY date DESC";
             stmt = conn.prepareStatement(query);
 
-            stmt.setString(1, dashBoardPVReq.getDate());
-            stmt.setString(2, dashBoardPVReq.getDate());
+            String currentDate = LocalDate.now().toString();
+            stmt.setString(1, currentDate);
+            stmt.setString(2, currentDate);
 
             rs = stmt.executeQuery();
 
@@ -53,8 +54,9 @@ public class DashBoardPVDao {
             String query2 = "SELECT visit_date, COUNT(*) as count FROM unique_visitors WHERE visit_date >= DATE_SUB(?, INTERVAL 6 DAY) AND visit_date <= ? GROUP BY visit_date ORDER BY visit_date DESC";
             stmt = conn.prepareStatement(query2);
 
-            stmt.setString(1, dashBoardPVReq.getDate());
-            stmt.setString(2, dashBoardPVReq.getDate());
+//            String currentDate = LocalDate.now().toString();
+            stmt.setString(1, currentDate);
+            stmt.setString(2, currentDate);
 
             rs = stmt.executeQuery();
 
