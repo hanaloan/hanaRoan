@@ -14,10 +14,8 @@ public class InsertProductService {
         insertProductDao = new InsertProductDao();
     }
 
-    public void insertProduct(Product product){
-        System.out.println("서비스 왔음");
+    public void insertProduct(Product product) throws SQLException {
         insertProductDao.insertProduct(product);
-        System.out.println("서비스 나옴");
     }
 
 }

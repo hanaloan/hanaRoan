@@ -14,11 +14,9 @@ import java.io.IOException;
 public class UpdateEmployeeAuthController extends HttpServlet {
     private UpdateEmployeeAuthService updateEmployeeAuthService;
 
-
     @Override
     public void init() throws ServletException {
         super.init();
-
         updateEmployeeAuthService = new UpdateEmployeeAuthService();
     }
 
@@ -26,14 +24,12 @@ public class UpdateEmployeeAuthController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer empIdx= Integer.valueOf(req.getParameter("empIdx"));
         String empAuthName=req.getParameter("empAuthName");
-        System.out.println("doPost 들어옴");
 
         try {
             updateEmployeeAuthService.updateEmployeeAuth(empIdx, empAuthName);
             resp.setContentType("text/plain");
             resp.setCharacterEncoding("UTF-8");
             resp.getWriter().write("Success");
-            System.out.println("doPost 들어옴");
         } catch (Exception e) {
             e.printStackTrace();
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

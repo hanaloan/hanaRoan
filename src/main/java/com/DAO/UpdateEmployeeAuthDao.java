@@ -7,14 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UpdateEmployeeAuthDao {
-
+    Connection conn=null;
     PreparedStatement ps = null;
-    public void updateEmployeeAuth(Integer empIdx, String employeeAuthName){
+    public void updateEmployeeAuth(Integer empIdx, String employeeAuthName) throws SQLException {
         try {
-            Connection conn = DatabaseConnector.getConnection();
+            conn = DatabaseConnector.getConnection();
             String sql="UPDATE hanaroDB.employees SET authority_idx = ? WHERE employee_idx=?";
             ps=conn.prepareStatement(sql);
-
 
 
             String s1=employeeAuthName;
@@ -47,6 +46,13 @@ public class UpdateEmployeeAuthDao {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        }finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
 
     }
