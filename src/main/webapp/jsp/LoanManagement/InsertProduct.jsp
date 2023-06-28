@@ -109,12 +109,12 @@
                                         <div class="col-sm-6">
                                 <label for="minCredit">최소신용점수:</label>
                                 <input class="form-control form-control-user" type="text" id="minCredit"
-                                       name="minCredit" placeholder="0~1000점" required pattern="[0-9]+">
+                                       name="minCredit" placeholder="0~1000점" required pattern="[0-9]+" title="Please enter a numeric value for the minimum credit score">
                                         </div>
                                 </div>
                                 <br>
 
-                                <input type="submit" value="Submit" class="btn btn-primary btn-icon-split btn-lg submit-style" title="Please enter a numeric value for the minimum credit score">
+                                <input type="submit" value="Submit" class="btn btn-primary btn-icon-split btn-lg submit-style" >
 
 
                             </div>

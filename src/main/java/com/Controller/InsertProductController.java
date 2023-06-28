@@ -43,9 +43,10 @@ public class InsertProductController extends HttpServlet {
             Product product = new Product(productName, productTypeName,productInfo, interestRate, overdueInterestRate, limit, period, minCredit );
             insertProductService.insertProduct(product);
             resp.sendRedirect("/jsp/LoanManagement/LoanManagement.jsp");
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while inserting the product.");
+        } catch (Exception e) {
+            // 예외 발생 시 응답
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.getWriter().println("Internal server error");
         }
     }
 }

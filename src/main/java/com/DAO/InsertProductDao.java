@@ -9,21 +9,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class InsertProductDao {
-//    Connection conn= null;
-//    PreparedStatement ps = null;
-    CallableStatement ps = null;
+    Connection conn= null;
+    PreparedStatement ps = null;
 
-    public void insertProduct(Product product) throws SQLException, ClassNotFoundException {
-        System.out.println("Dao 들어옴1");
+    public void insertProduct(Product product){
+        System.out.println("Dao 들어옴");
         try{
-            Connection conn = DatabaseConnector.getConnection();
-//            String sql="INSERT INTO hanaroDB.loan_products (loan_name, loan_type_id, loan_description, loan_interest_rate, overdue_interest_rate, lend_limit, lend_period, min_credit) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-//            ps=conn.prepareStatement(sql);
-
-            String sql = "{CALL InsertProduct(?, ?, ?, ?, ?, ?, ?, ?)}";
-
-            System.out.println(sql);
-            ps=conn.prepareCall(sql);
+            conn = DatabaseConnector.getConnection();
+            String sql="INSERT INTO hanaroDB.loan_products (loan_name, loan_type_id, loan_description, loan_interest_rate, overdue_interest_rate, lend_limit, lend_period, min_credit) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            ps=conn.prepareStatement(sql);
 
             ps.setString(1, product.getName());
             System.out.println("testestsest");
@@ -52,36 +46,18 @@ public class InsertProductDao {
             System.out.println(ps);
             ps.executeUpdate();
 
-        } catch (SQLException e) {
-            throw e;
-        } catch (ClassNotFoundException e) {
-            throw e;
-        } finally {
-            if (ps != null) {
-                ps.close();
-            }
-        }
-    }
-}
+            ps.close();
+            conn.close();
 
-//        } catch (SQLException e) {
-//            if (conn != null) {
-//                conn.rollback();
-//            }
-//            throw e;
-//        } catch (ClassNotFoundException e) {
-//            if (conn != null) {
-//                conn.rollback();
-//            }
-//            throw e;
-//        } finally {
-//            if (ps != null) {
-//                ps.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//    }
-//}
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+}
 
