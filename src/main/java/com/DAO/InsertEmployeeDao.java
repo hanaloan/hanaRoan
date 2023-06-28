@@ -9,11 +9,12 @@ import java.sql.SQLException;
 
 public class InsertEmployeeDao {
 
+    Connection conn=null;
     PreparedStatement ps = null;
 
-    public void insertEmployee(Employee employee){
+    public void insertEmployee(Employee employee) throws SQLException {
         try {
-            Connection conn = DatabaseConnector.getConnection();
+            conn = DatabaseConnector.getConnection();
             String sql="INSERT INTO hanaroDB.employees (id, password, name, authority_idx) VALUES (?, ?, ?, ?)";
             ps=conn.prepareStatement(sql);
 
@@ -42,13 +43,14 @@ public class InsertEmployeeDao {
             ps.setInt(4, empAuth);
 
             ps.executeUpdate();
-            ps.close();
-            conn.close();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        }finally {
+            if (ps != null) ps.close();
+            if (conn != null) conn.close();
         }
     }
 }

@@ -25,17 +25,11 @@ public class InsertProductController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
-        System.out.println("doPost 왔음");
-
 
         try{
             String productName=req.getParameter("productName");
             String productTypeName = req.getParameter("productTypeName");
-//            System.out.println(productName);
-//            System.out.println(productTypeName);
             String productInfo=req.getParameter("productInfo");
-            System.out.println(productInfo);
-
             BigDecimal interestRate = new BigDecimal(req.getParameter("interestRate"));
             BigDecimal overdueInterestRate = new BigDecimal(req.getParameter("overdueInterestRate"));
             BigDecimal limit = new BigDecimal(req.getParameter("limit"));
@@ -44,10 +38,8 @@ public class InsertProductController extends HttpServlet {
 
             Product product = new Product(productName, productTypeName,productInfo, interestRate, overdueInterestRate, limit, period, minCredit );
             insertProductService.insertProduct(product);
-            System.out.println("컨트롤러 끝");
             resp.sendRedirect("/jsp/LoanManagement/LoanManagement.jsp");
-            System.out.println("컨트롤러에서 이동함");
-        }catch (Exception e) {
+        } catch (Exception e) {
             // 예외 발생 시 응답
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             resp.getWriter().println("Internal server error");

@@ -35,8 +35,6 @@
             width: 150px;
             text-align: center;
             align-items: center;
-
-            /*justify-content: center;*/
         }
         .btn-w {
             height: 25px;
@@ -45,11 +43,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-
-            /*justify-content: center;*/
         }
-
-
     </style>
 
 </head>
@@ -79,8 +73,8 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <h1 class="h3 mb-2 text-gray-800">대출 상품 관리</h1>
-                <p class="mb-4">이 HTML 페이지는 고객 관리를 위한 관리자 대시보드를 나타냅니다. 이 페이지는 고객 정보를 표로 나타내며, 다양한 기능을 제공합니다. 관리자는 고객의
-                    신상정보, 연락처, 신용 점수, 소득 및 직업 유형을 확인할 수 있습니다.</p>
+                <p class="mb-4">이 페이지는 대출 상품을 관리할 수 있는 페이지입니다. 이 페이지에서는 대출 상품의 정보를 확인할 수 있으며, 추가 및 삭제 기능을 제공합니다. 관리자는 대출상품의
+                    상품명, 상품 세부 설명, 이율, 연체 이율, 최대한도, 대출 기한 및 최소 신용점수를 확인할 수 있습니다. 각 상품 구분에 따라 전세, 월세, 담보 대출 상품만 선택하여 보실 수 있습니다.</p>
 
                 <div class="button-container">
 
@@ -141,7 +135,7 @@
                                     <th>이율</th>
                                     <th>연체이율</th>
                                     <th>최대한도</th>
-                                    <th>대출기한</th>
+                                    <th>대출기한 [년]</th>
                                     <th>최소신용점수</th>
                                     <th>삭제 작업</th>
 
@@ -199,21 +193,15 @@
                                         </form>
                                     </td>
 
-
                                 </tr>
                                 <%
                                     }
                                 } else {
-
-
                                 %>
                                 <tr>
                                     <td colspan="9">No loan products available.</td>
                                 </tr>
-
                                 <% }%>
-
-
                                 </tbody>
                             </table>
                         </div>

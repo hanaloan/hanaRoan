@@ -25,8 +25,6 @@ public class LoanManagementService {
     }
 
     public void deleteProduct(int productId) throws SQLException, ClassNotFoundException {
-        System.out.println("서비스들어감");
         loanManagementDao.deleteProduct(productId);
-        System.out.println("서비스나감");
     }
 }
