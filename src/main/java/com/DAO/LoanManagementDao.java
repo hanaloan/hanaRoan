@@ -21,7 +21,7 @@ public class LoanManagementDao {
         try{
             conn = DatabaseConnector.getConnection();
             String sql="SELECT lp.loan_idx, lp.loan_name, lt.loan_type_name, lp.min_credit, lp.lend_limit, lp.lend_period, lp.loan_description, lp.loan_interest_rate, lp.overdue_interest_rate\n" +
-                    "FROM loan_products lp JOIN loan_types lt ON lp.loan_type_id = lt.loan_type_idx AND lp.flag=1";
+                    "FROM loan_products lp JOIN loan_types lt ON lp.loan_type_id = lt.loan_type_idx";
 
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -62,7 +62,7 @@ public class LoanManagementDao {
         try{
             conn = DatabaseConnector.getConnection();
             String sql="SELECT lp.loan_idx, lp.loan_name, lt.loan_type_name, lp.min_credit, lp.lend_limit, lp.lend_period, lp.loan_description, lp.loan_interest_rate, lp.overdue_interest_rate\n" +
-                    "FROM loan_products lp JOIN loan_types lt ON lp.loan_type_id = lt.loan_type_idx WHERE lt.loan_type_name = ? AND lp.flag=1";
+                    "FROM loan_products lp JOIN loan_types lt ON lp.loan_type_id = lt.loan_type_idx WHERE lt.loan_type_name = ?";
 
             ps = conn.prepareStatement(sql);
             ps.setString(1, option);
@@ -105,7 +105,7 @@ public class LoanManagementDao {
 
         try {
             conn = DatabaseConnector.getConnection();
-            String sql="UPDATE loan_products SET flag=0 WHERE loan_idx = ?";
+            String sql="DELETE FROM loan_products WHERE loan_idx = ?";
 
             ps = conn.prepareStatement(sql);
             ps.setInt(1, productId);
