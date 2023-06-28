@@ -2,7 +2,7 @@
 async function sendRequest(url, data) {
     const response = await fetch(url, {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
         body: new URLSearchParams(data)
     });
 
@@ -12,20 +12,29 @@ async function sendRequest(url, data) {
 }
 
 async function updateLoanStatus(lendId, lendPeriod) {
+    const loanStatusElement = document.getElementById('loan-status-' + lendId);
+    const previousLoanStatus = loanStatusElement.value;
+    if (authType !== "all" && authType !== "managing Customers") {
+        alert(`대출 승인 관리에 대한 권한이 없는 관리자 입니다.\n\n현재 권한: ${authType}`);
+        loanStatusElement.value = previousLoanStatus;
+        location.reload();
+        return;
+    }
+
     const loanStatus = document.getElementById('loan-status-' + lendId).value;
 
     if (loanStatus === "approved") {
         await createLoanPayment(lendId);
     }
 
-    await sendRequest("/ChangeLoanStatus", { lendId, loanStatus, lendPeriod });
+    await sendRequest("/ChangeLoanStatus", {lendId, loanStatus, lendPeriod});
 
-    updateDropdownStatus(document.getElementById('loan-status-' + lendId), loanStatus);
+    updateDropdownStatus(loanStatusElement, loanStatus);
     location.reload();
 }
 
 async function createLoanPayment(lendId) {
-    await sendRequest("/CreateLoanPayment", { lendId });
+    await sendRequest("/CreateLoanPayment", {lendId});
     location.reload();
 }
 
