@@ -20,7 +20,6 @@ public class EmployeeManagementDao {
         ResultSet rs=null;
         try {
 
-//            System.out.println("currentEmployee 들어옴");
             conn = DatabaseConnector.getConnection(); //변수 선언 DB와 연결
 
             String sql = "SELECT e.name, a.authority_type FROM employees e JOIN authority_types a ON a.authority_idx = e.authority_idx WHERE e.employee_idx=" + cur_idx;

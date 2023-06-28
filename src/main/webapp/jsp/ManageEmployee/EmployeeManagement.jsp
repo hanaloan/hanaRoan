@@ -129,14 +129,16 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <h1 class="h3 mb-2 text-gray-800">직원 관리</h1>
-                <p class="mb-4">이 페이지는 직원(관리자)의 시스템 접근 권한을 관리하는 페이지입니다. 직원 정보를 표로 나타내며, 직원을 추가 및 접근 권한 수정을 할 수 있습니다.
-                    <br><br>
-                    권한은 'all', 'managing Products', 'managing Customers', 'read only', 'none' 이렇게 총 5개로 구분합니다.<br>
-                    *  'all' 권한은 직원들의 권한 수정이 가능하고, 고객, 상품에 대한 접근까지 가능합니다.<br>
-                    *  'managing Products' 권한은 대출 상품에 대한 접근만 가능하다. 상품 추가, 삭제, 상환 업무 등을 할 수 있습니다.<br>
-                    *  'managing Customers' 권한은 고객 정보에 대한 접근만 가능하다. 대출 상품 신청에 대한 승인 업무 등을 할 수 있습니다. <br>
-                    *  'read only' 권한은 대출 상품, 고객 정보에 대한 읽기만 가능하다. 추가 및 수정 등과 같은 업무는 제한됩니다.<br>
-                    *  'none' 권한은 관리자 페이지에 대해 제한합니다. 해당 권한을 갖고 있는 관리자는 로그인조차 제한됩니다.
+                <p class="mb-4">이 페이지는 직원(관리자)의 시스템 접근 권한을 관리하는 페이지입니다. 직원 정보를 표로 나타내며, 직원을 추가 및 접근 권한 수정을 할 수 있습니다.<br>
+                    <br>
+                    권한은 'all', 'managing Products', 'managing Customers', 'read only', 'none' 이렇게 총 5개로 구분합니다.
+                    <p style="font-size: small">
+                *  <strong>'all'</strong> 권한은 직원들의 권한 수정이 가능하고, 고객, 상품에 대한 접근까지 가능합니다.<br>
+                *  <strong>'managing Products'</strong> 권한은 대출 상품에 대한 접근만 가능하다. 상품 추가, 삭제, 상환 업무 등을 할 수 있습니다.<br>
+                *  <strong>'managing Customers'</strong> 권한은 고객 정보에 대한 접근만 가능하다. 대출 상품 신청에 대한 승인 업무 등을 할 수 있습니다. <br>
+                *  <strong>'read only'</strong> 권한은 대출 상품, 고객 정보에 대한 읽기만 가능하다. 추가 및 수정 등과 같은 업무는 제한됩니다.<br>
+                *  <strong>'none'</strong> 권한은 관리자 페이지에 대해 제한합니다. 해당 권한을 갖고 있는 관리자는 로그인조차 제한됩니다.
+            </p>
 
                 </p>
                 <h4>현재 관리자</h4>
@@ -221,7 +223,7 @@
                                     <td>
                                         <%--                전체 권한 비활성화로 세팅--%>
                                         <select style="appearance: none" disabled id="auth-<%= employee.getEmpIdx() %>"
-                                                onchange="updateEmployeeAuth('<%= employee.getEmpIdx() %>', '<%= employee.getEmpName() %>')">
+                                                onchange="updateEmployeeAuth('<%= employee.getEmpIdx() %>', '<%= employee.getEmpName() %>', '<%= session.getAttribute("employee_idx") %>')">
                                             <option value="all" <%= employee.getEmpLevelName() != null && employee.getEmpLevelName().equals("all") ? "selected" : "" %>>
                                                 all
                                             </option>
@@ -318,13 +320,29 @@
             for (Object obj : employees) {
                 if (obj instanceof Employee) {
                     Employee employee = (Employee) obj;
+
     %>
 
     //관리자 직원 수정 버튼을 누르면 활성화로 전환됨
     document.getElementById("updateEmployeeBtn").addEventListener("click", function () {
-        var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
-        element.style.appearance = "menulist-button"; //아래 화살표 띄우기
-        element.disabled = false; //비활성화 False로 처리
+        var currentUserID = "<%= session.getAttribute("employee_idx") %>"; // Assuming you have the current user's ID stored in a variable
+
+        if ("<%= employee.getEmpIdx() %>" === currentUserID) {
+            var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
+            element.style.appearance = "none"; // hide the dropdown arrow
+            element.disabled = true; // treat as inactive
+        }
+
+        else{
+            var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
+            //아래 화살표 띄우기
+            element.style.appearance = "-webkit-menulist-button"; // show the dropdown arrow for WebKit browsers (e.g., Chrome, Safari)
+            element.style.appearance = "menulist-button"; // show the dropdown arrow for other browsers
+            element.disabled = false; //비활성화 False로 처리
+        }
+
+
+
     });
     <%
                 }

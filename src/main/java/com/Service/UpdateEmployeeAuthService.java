@@ -12,8 +12,8 @@ public class UpdateEmployeeAuthService {
         updateEmployeeAuthDao= new UpdateEmployeeAuthDao();
     }
 
-    public void updateEmployeeAuth(Integer empIdx, String employeeAuthName) throws SQLException {
-        updateEmployeeAuthDao.updateEmployeeAuth(empIdx, employeeAuthName);
+    public void updateEmployeeAuth(Integer empIdx, String employeeAuthName , Integer curEmpIdx) throws SQLException {
+        updateEmployeeAuthDao.updateEmployeeAuth(empIdx, employeeAuthName, curEmpIdx);
     }
 
 }

@@ -9,10 +9,11 @@ import java.sql.SQLException;
 public class UpdateEmployeeAuthDao {
     Connection conn=null;
     PreparedStatement ps = null;
-    public void updateEmployeeAuth(Integer empIdx, String employeeAuthName) throws SQLException {
+    public void updateEmployeeAuth(Integer empIdx, String employeeAuthName, Integer curEmpIdx) throws SQLException {
         try {
+
             conn = DatabaseConnector.getConnection();
-            String sql="UPDATE hanaroDB.employees SET authority_idx = ? WHERE employee_idx=?";
+            String sql="UPDATE hanaroDB.employees SET authority_idx = ? WHERE employee_idx=? AND employee_idx <> curEmpIdx";
             ps=conn.prepareStatement(sql);
 
 
@@ -37,7 +38,6 @@ public class UpdateEmployeeAuthDao {
             ps.setInt(1, (empAuthId));
             ps.setInt(2, empIdx);
 
-            System.out.println(ps);
             ps.executeUpdate();
             ps.close();
             conn.close();

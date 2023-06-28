@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/UpdateEmpAuth")
@@ -25,8 +26,12 @@ public class UpdateEmployeeAuthController extends HttpServlet {
         Integer empIdx= Integer.valueOf(req.getParameter("empIdx"));
         String empAuthName=req.getParameter("empAuthName");
 
+        HttpSession session = req.getSession();
+        Integer curEmpIdx = (Integer) session.getAttribute("employee_idx");
+
+
         try {
-            updateEmployeeAuthService.updateEmployeeAuth(empIdx, empAuthName);
+            updateEmployeeAuthService.updateEmployeeAuth(empIdx, empAuthName, curEmpIdx);
             resp.setContentType("text/plain");
             resp.setCharacterEncoding("UTF-8");
             resp.getWriter().write("Success");
