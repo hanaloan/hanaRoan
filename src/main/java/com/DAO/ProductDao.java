@@ -16,10 +16,11 @@ public class ProductDao {
 
         try {
             conn = DatabaseConnector.getConnection();
-            String sql = "SELECT * FROM loan_products";
+            String sql = "SELECT * FROM loan_products \n" +
+                        "WHERE loan_products.flag = 1";
 
             if (!category.equals("*")) {
-                sql += " WHERE loan_products.loan_type_id = ?";
+                sql += " AND loan_products.loan_type_id = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1, category);
             } else {

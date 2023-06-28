@@ -121,7 +121,6 @@ public class UpdateRedisViewsDao {
             // 결과 처리
             if (rs.next()) {
                 int date_exists = rs.getInt("date_exists");
-                System.out.println(date_exists);
                 if (date_exists == 1) {
                     redisViewsRes = new RedisViewsRes(true);
                 }else{

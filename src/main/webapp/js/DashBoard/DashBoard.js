@@ -1,38 +1,3 @@
-// Session Timer
-var counter = 10 * 60;
-var interval;
-
-function formatTime(counter) {
-    var minutes = Math.floor(counter / 60);
-    var seconds = counter % 60;
-    return minutes + ":" + seconds;
-}
-
-function startSessionTimer() {
-    interval = setInterval(function () {
-        counter--;
-        if (counter <= 0) {
-            clearInterval(interval);
-            $('#time').text("Session expired");
-        } else {
-            $('#time').text(formatTime(counter));
-        }
-    }, 1000);
-}
-
-function extendSession() {
-    $.ajax({
-        url: '${pageContext.request.contextPath}/extendSession',
-        type: 'POST',
-        success: function () {
-            counter = 10 * 60;
-        },
-        error: function () {
-            console.log("Error extending the session");
-        }
-    });
-}
-
 // AJAX requests
 function handleAjaxRequest(url, method, onSuccess, onError) {
     $.ajax({
@@ -46,8 +11,6 @@ function handleAjaxRequest(url, method, onSuccess, onError) {
 }
 
 $(document).ready(function () {
-    startSessionTimer();
-
     handleAjaxRequest("/GetTotalLoanAmount", "GET", function (response) {
         var formattedLoanAmount = parseFloat(response.loanAmount).toLocaleString();
         $('#loanAmount').text(formattedLoanAmount);

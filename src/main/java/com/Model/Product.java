@@ -15,8 +15,6 @@ public class Product {
     private BigDecimal lendLimit;
     private int loanPeriod;
     private BigDecimal interestRate;
-    private Date startDate;
-    private Date endDate;
 
     private int idx;
     private String loanTypeName;

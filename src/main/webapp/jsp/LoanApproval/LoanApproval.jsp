@@ -21,6 +21,8 @@
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <script src="/vendor/jquery/jquery.min.js"></script>
+    <script>const authType = '<%= session.getAttribute("authType") %>';</script>
+
     <script src="/js/LoanApproval/LoanApproval.js"></script>
 </head>
 
@@ -128,6 +130,9 @@
                                     </td>
                                     <td>
                                         <select id="loan-status-<%= customer.getLendId() %>"
+                                                <% if (!("all".equals(session.getAttribute("authType")) || "managing Customers".equals(session.getAttribute("authType")))) { %>
+                                                disabled
+                                                <% } %>
                                                 onchange="updateLoanStatus('<%= customer.getLendId() %>', '<%= customer.getLendPeriod() %>')">
                                             <option value="pending" <%= customer.getLoanStatus() != null && customer.getLoanStatus().equals("pending") ? "selected" : "" %>>
                                                 Pending

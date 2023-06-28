@@ -21,6 +21,30 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var currentDate = new Date();
+            var year = currentDate.getFullYear();
+            var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+            var day = currentDate.getDate().toString().padStart(2, '0');
+            var formattedDate = year + '-' + month + '-' + day;
+
+            $.ajax({
+                url: "/DashBoardGetPV",
+                method: "GET",
+                data: { date: formattedDate }, // 포맷된 날짜를 매개변수로 추가
+                success: function (response) {
+                    // Handle the success response if needed
+                },
+                error: function (xhr, status, error) {
+                    // Handle the error response if needed
+                }
+            });
+        });
+    </script>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -309,8 +333,8 @@
 
                                 </div>
                                 <p>하나론의 대출 관리 기능은 직원들에게 업무 효율성을 높이고, 고객에게 편리하고 안정적인 대출 서비스를 제공하는데 앞장서고 있습니다.<br/> <br/>문의나 도움이 필요한 경우 언제든지 하나론 홈페이지의 전화번호나 고객센터로 문의해 주시기 바랍니다.</p>
-                                <a target="_blank" rel="nofollow" href="https://undraw.co/">☏ 02-0000-0000</a><br/>
-                                <a target="_blank" rel="nofollow" href="https://undraw.co/">하나론 고객센터 바로가기 &rarr;</a>
+                                <a rel="nofollow" href="#">☏ 02-0000-0000</a><br/>
+                                <a rel="nofollow" href="#">하나론 고객센터 바로가기 &rarr;</a>
                             </div>
                         </div>
                     </div>

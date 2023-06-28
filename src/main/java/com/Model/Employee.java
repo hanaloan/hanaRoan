@@ -1,5 +1,13 @@
 package com.Model;
 
+import lombok.*;
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@Data
+
 public class Employee {
 
     private  Integer empIdx;
@@ -9,9 +17,7 @@ public class Employee {
     private String empName;
     private String empLevelName; //권한 이름
 
-    public Employee() {
 
-    }
 
     public Employee(Integer empIdx, String empName, String empLevelName) {
         this.empIdx = empIdx;
@@ -26,21 +32,6 @@ public class Employee {
         this.empLevelName = empLevelName;
     }
 
-    public Integer getEmpIdx() {
-        return empIdx;
-    }
-
-    public void setEmpIdx(Integer empIdx) {
-        this.empIdx = empIdx;
-    }
-
-    public String getEmpLevelName() {
-        return empLevelName;
-    }
-
-    public void setEmpLevelName(String empLevelName) {
-        this.empLevelName = empLevelName;
-    }
 
     public Employee(int empLevel) {
         this.empLevel = empLevel;
@@ -56,35 +47,5 @@ public class Employee {
         this.empLevelName = empLevelName;
     }
 
-    public int getEmpLevel() {
-        return empLevel;
-    }
 
-    public void setEmpLevel(int empLevel) {
-        this.empLevel = empLevel;
-    }
-
-    public String getEmpName() {
-        return empName;
-    }
-
-    public void setEmpName(String empName) {
-        this.empName = empName;
-    }
-
-    public String getEmpId() {
-        return empId;
-    }
-
-    public void setEmpId(String empId) {
-        this.empId = empId;
-    }
-
-    public String getEmpPw() {
-        return empPw;
-    }
-
-    public void setEmpPw(String empPw) {
-        this.empPw = empPw;
-    }
 }
