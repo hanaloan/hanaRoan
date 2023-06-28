@@ -124,4 +124,30 @@ public class DashBoardDao {
         }
         return loanTypeLists;
     }
+
+//    private static final String GET_PV =
+//            "SELECT date, total_views FROM total_page_views WHERE date >= DATE_SUB(?, INTERVAL 6 DAY) AND date <= ? ORDER BY date DESC";
+//
+//    public Map<String,String> getRatioOfLoanType() throws SQLException {
+//        Map<String, String> loanTypeLists = new HashMap<>();
+//        try (Connection conn = DatabaseConnector.getConnection();
+//             PreparedStatement stmt = conn.prepareStatement(GET_PV);
+//             ResultSet rs = stmt.executeQuery()) {
+//            while (rs.next()) {
+//                String loanTypeName = rs.getString("loan_type_name");
+//                String percentage = rs.getString("percentage");
+//                loanTypeLists.put(loanTypeName, percentage);
+//            }
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return loanTypeLists;
+//    }
+//
+
+
+
+
+
+
 }
