@@ -22,7 +22,6 @@
 
     <!-- Custom styles for this page -->
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/LoanManagement/LoanManagement.css">
 
     <style>
         .submit-style{
@@ -50,7 +49,7 @@
                     <div class="p-5">
                         <div class="text-center">
 
-                            <h2>Enter Add Product:</h2>
+                            <h2>Add Product</h2>
                             <br></br>
                         </div>
 
@@ -61,7 +60,7 @@
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label for="productName">상품명:</label>
                                             <input class="form-control form-control-user" type="text" id="productName"
-                                                   name="productName" required>
+                                                   name="productName" placeholder="loan product name" required>
                                         </div>
                                     <div class="col-sm-6">
                                         <label for="productTypeName">상품구분:</label>
@@ -79,42 +78,43 @@
 
                                 <label for="productInfo">상품 설명:</label>
                                 <input class="form-control form-control-user" type="text" id="productInfo"
-                                       name="productInfo" required>
+                                       name="productInfo" placeholder="loan product description" required>
 
                             <br>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label for="interestRate">이율:</label>
                                         <input class="form-control form-control-user" type="text" id="interestRate"
-                                               name="interestRate" required>
+                                               name="interestRate" placeholder="loan product interestRate" step="any" required title="Please enter a numeric value for the interest rate">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="overdueInterestRate">연체이율:</label>
 
                                         <input class="form-control form-control-user" type="text"
-                                               id="overdueInterestRate" name="overdueInterestRate" required>
+                                               id="overdueInterestRate" name="overdueInterestRate" placeholder="product overdueInterestRate" required step="any" title="Please enter a numeric value for the overdue interest rate">
                                     </div>
                                 </div>
 
+
                                 <label for="limit">최대한도:</label>
                                 <input class="form-control form-control-user" type="text" id="limit" name="limit"
-                                       required>
+                                       placeholder="maximum amount" required pattern="[0-9]+" title="Please enter a numeric value for the maximum limit">
                                 <br>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label for="period">대출기한:</label>
-                                <input class="form-control form-control-user" type="text" id="period" name="period" placeholder="Year"
-                                       required>
+                                <input class="form-control form-control-user" type="text" id="period" name="period"
+                                       placeholder="loan period (by year)" required pattern="[0-9]+" title="Please enter a numeric value for the loan term" >
                                         </div>
                                         <div class="col-sm-6">
                                 <label for="minCredit">최소신용점수:</label>
                                 <input class="form-control form-control-user" type="text" id="minCredit"
-                                       name="minCredit" placeholder="100~800점" required>
+                                       name="minCredit" placeholder="0~1000점" required pattern="[0-9]+">
                                         </div>
                                 </div>
                                 <br>
 
-                                <input type="submit" value="Submit" class="btn btn-primary btn-icon-split btn-lg submit-style" >
+                                <input type="submit" value="Submit" class="btn btn-primary btn-icon-split btn-lg submit-style" title="Please enter a numeric value for the minimum credit score">
 
 
                             </div>
