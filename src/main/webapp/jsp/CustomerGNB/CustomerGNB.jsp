@@ -28,7 +28,7 @@
   <div class="col-2 d-flex container-fluid" style="width: 14%;" id="sidebar-wrapper">
     <div class="border-end bg-blue">
       <div class="sidebar-heading border-bottom bg-light">
-        <a href="CustomerHome"><img class="img-fluid" src="/resource/login_logo-removebg-preview.png" style="height: 100px; width: 185px;"></a>
+        <a href="CustomerHome"><img class="img-fluid" src="/resource/newLogo.png" style="height: 100px; width: 185px;"></a>
       </div>
       <div id="linkList" class="list-group list-group-flush flex-grow-1">
         <a class="list-group-item list-group-item-action list-group-item-light p-3 font-weight-bold" href="/CustomerHome">홈</a>
