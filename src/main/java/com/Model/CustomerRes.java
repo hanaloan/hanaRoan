@@ -16,6 +16,7 @@ public class CustomerRes {
     private int creditScore;
     private Long income;
     private String jobType;
+    private String personalId;
 
     public String getFormattedIncome() {
         // Format income with commas as thousands separators
@@ -35,5 +36,13 @@ public class CustomerRes {
         }
         return contactInfo;
     }
+
+    public String getFormattedPersonalId() {
+        if (personalId != null) {
+            return personalId.substring(0, 8) + "******";
+        }
+        return null;
+    }
+
 }
 

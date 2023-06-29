@@ -10,7 +10,7 @@ import java.util.List;
 public class CustomerManagementDao {
 
     private static final String CUSTOMER_INFO_QUERY =
-            "SELECT c.customer_idx, c.name, c.contact_info, c.cus_id, c.password, cs.credit_score, cs.income, j.job_type " +
+            "SELECT c.customer_idx, c.name, c.contact_info, c.cus_id, c.password, cs.credit_score, cs.income, j.job_type, c.personal_id " +
                     "FROM hanaroDB.customers c " +
                     "LEFT JOIN hanaroDB.credit_scores cs ON c.customer_idx = cs.customer_idx " +
                     "LEFT JOIN hanaroDB.jobs j ON cs.job_idx = j.job_idx";
@@ -39,8 +39,9 @@ public class CustomerManagementDao {
             int creditScore = rs.getInt("credit_score");
             long income = rs.getLong("income");
             String jobType = rs.getString("job_type");
+            String personalId = rs.getString("personal_id");
 
-            CustomerRes customer = new CustomerRes(cusIdx, name, cusId, password, contactInfo, creditScore, income, jobType);
+            CustomerRes customer = new CustomerRes(cusIdx, name, cusId, password, contactInfo, creditScore, income, jobType, personalId);
             customerResList.add(customer);
         }
 
