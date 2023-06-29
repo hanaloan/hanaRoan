@@ -53,4 +53,8 @@ public class LoginService {
     public LoginAlertMessageRes getAlertMessages(LoginAlertMessageReq alertReq) {
         return loginDao.getAlertMessages(alertReq);
     }
+
+    public LoginPersonalProductRes getPersonalProducts(LoginPersonalProductReq personalProductReq) throws SQLException {
+        return loginDao.getPersonalProducts(personalProductReq);
+    }
 }
