@@ -76,6 +76,7 @@
                                     <th>고객 이름</th>
                                     <th>고객 ID</th>
                                     <th>연락처</th>
+                                    <th>주민번호</th>
                                     <th>신용점수</th>
                                     <th>소득</th>
                                     <th>직업 분류</th>
@@ -87,6 +88,7 @@
                                     <th>고객 이름</th>
                                     <th>고객 ID</th>
                                     <th>연락처</th>
+                                    <th>주민번호</th>
                                     <th>신용점수</th>
                                     <th>소득</th>
                                     <th>직업 분류</th>
@@ -106,6 +108,8 @@
                                     <td><%= customer.getCusId() %>
                                     </td>
                                     <td><%= customer.getFormattedContactInfo() %>
+                                    </td>
+                                    <td><%= customer.getFormattedPersonalId() %>
                                     </td>
                                     <td class="text-right"><%= customer.getCreditScore() %> 점
                                     </td>
