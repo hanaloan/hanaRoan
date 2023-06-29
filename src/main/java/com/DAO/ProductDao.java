@@ -81,6 +81,7 @@ public class ProductDao {
         product.setLendLimit(rs.getBigDecimal("lend_limit"));
         product.setLoanPeriod(rs.getInt("lend_period"));
         product.setInterestRate(rs.getBigDecimal("loan_interest_rate"));
+        product.setOverdueInterestRate(rs.getBigDecimal("overdue_interest_rate"));
         return product;
     }
 }

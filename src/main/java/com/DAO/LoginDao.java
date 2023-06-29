@@ -4,6 +4,7 @@ import com.Model.*;
 import com.config.secret.Secret;
 import com.utils.DatabaseConnector;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -357,5 +358,44 @@ public class LoginDao {
             throw new RuntimeException(e);
         }
         return alertRes;
+    }
+
+    public LoginPersonalProductRes getPersonalProducts(LoginPersonalProductReq personalProductReq) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        LoginPersonalProductRes loginPersonalProductRes = null;
+        ArrayList<LoginLendProduct> subscribedProducts = new ArrayList<>();
+        try {
+            conn = DatabaseConnector.getConnection();
+            String sql = "SELECT lp.loan_name, ll.loan_amount, ll.loan_status, ll.start_date, ll.end_date\n" +
+                    "FROM loan_lend AS ll\n" +
+                    "INNER JOIN loan_products AS lp ON ll.loan_idx = lp.loan_idx\n" +
+                    "WHERE ll.customer_idx = ? AND ll.start_date IS NOT NULL AND ll.end_date IS NOT NULL\n" +
+                    "ORDER BY ll.start_date;";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, personalProductReq.getCustomerIdx());
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String productName = rs.getString("loan_name");
+                BigDecimal lendAmount = rs.getBigDecimal("loan_amount");
+                String lendStatus = rs.getString("loan_status");
+                Date startDate = rs.getDate("start_date");
+                Date endDate = rs.getDate("end_date");
+
+                LoginLendProduct subscribedProduct = new LoginLendProduct(productName, lendAmount, lendStatus, startDate, endDate);
+                subscribedProducts.add(subscribedProduct);
+            }
+            loginPersonalProductRes = new LoginPersonalProductRes(subscribedProducts);
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
+        }
+        return loginPersonalProductRes;
     }
 }
