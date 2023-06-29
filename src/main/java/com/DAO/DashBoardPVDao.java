@@ -72,6 +72,9 @@ public class DashBoardPVDao {
             dashBoardPVRes.setMaxUVValue(maxUVValue);
             dashBoardPVRes.setMinUVValue(minUVValue);
 
+        } catch (SQLException e) {
+            System.out.println("데이터베이스 오류: " + e.getMessage());
+            throw e;
         } catch (ClassNotFoundException e) {
             System.out.println("데이터베이스 연결 실패: " + e.getMessage());
         } finally {

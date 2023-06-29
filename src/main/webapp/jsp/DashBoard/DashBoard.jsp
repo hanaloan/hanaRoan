@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,13 +11,17 @@
 
     <title>대시보드 < 하나론</title>
 
-    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
-    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="/js/DashBoard/DashBoard.js"></script>
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../js/DashBoard/DashBoard.js"></script>
 
 </head>
 <body id="page-top">
@@ -122,7 +126,7 @@
 
                     <!-- 승인 대기 중 Card -->
                     <div class="col-xl-3 col-md-6 mb-4">
-                        <a href="/LoanApproval?loanStatus=pending" style="text-decoration: none;">
+                        <a href="../../LoanApproval?loanStatus=pending" style="text-decoration: none;">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -328,17 +332,19 @@
     <!-- Logout Modal-->
     <%@ include file="/jsp/Components/LogoutModal/LogoutModal.jsp" %>
 
-
-
     <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+    <script src="../../js/sb-admin-2.min.js"></script>
+
+
 
     <!-- Page level plugins -->
-    <script src="/vendor/chart.js/Chart.js"></script>
+    <script src="../../vendor/chart.js/Chart.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="/js/Chart/UVChart.js"></script>
-    <script src="/js/Chart/RepaymentRatioChart.js"></script>
+    <script src="../../js/Chart/UVChart.js"></script>
+    <script src="../../js/Chart/RepaymentRatioChart.js"></script>
+
+
 
 </body>
 </html>

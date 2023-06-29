@@ -19,11 +19,13 @@ public class DashBoardGetPendingController extends HttpServlet {
         String getCountPendingLends;
         try {
             getCountPendingLends = dashBoardService.getCountPendingLends();
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            resp.getWriter().write("{\"getCountPendingLends\": \"" + getCountPendingLends + "\"}");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // 500 Internal Server Error
+            resp.getWriter().write("An error occurred while retrieving loan type ratio.");
+            e.printStackTrace(); // 에러 로그 출력
         }
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write("{\"getCountPendingLends\": \"" + getCountPendingLends + "\"}");
     }
 }
