@@ -41,5 +41,5 @@ $(document).ready(function () {
         $('#monthlyRentRentBar').attr('aria-valuenow', monthlyRentPercentage).css('width', monthlyRentPercentage + '%');
         $('#monthlyRentBar').attr('aria-valuenow', yearlyRentPercentage).css('width', yearlyRentPercentage + '%');
         $('#collateralRentBar').attr('aria-valuenow', collateralRentPercentage).css('width', collateralRentPercentage + '%');
-    });
+    }, );
 });

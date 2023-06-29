@@ -19,11 +19,14 @@ public class DashBoardGetOverduePercentageController extends HttpServlet {
         String getOverduePercentage;
         try {
             getOverduePercentage = dashBoardService.getOverduePercentage();
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            resp.getWriter().write("{\"getOverduePercentage\": \"" + getOverduePercentage + "\"}");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.getWriter().write("An error occurred while retrieving loan type ratio.");
+            e.printStackTrace();
         }
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write("{\"getOverduePercentage\": \"" + getOverduePercentage + "\"}");
+
     }
 }

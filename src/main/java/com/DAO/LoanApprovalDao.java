@@ -76,6 +76,7 @@ public class LoanApprovalDao {
                 rs.getInt("lend_idx"),
                 String.valueOf(rs.getDate("start_date")),
                 String.valueOf(rs.getDate("start_date")),
+                rs.getString("loan_name"),
                 rs.getLong("loan_amount"),
                 rs.getString("loan_status"),
                 rs.getInt("repayment_idx"),

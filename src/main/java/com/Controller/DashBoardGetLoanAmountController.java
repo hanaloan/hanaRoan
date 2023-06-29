@@ -19,11 +19,14 @@ public class DashBoardGetLoanAmountController extends HttpServlet {
         String loanAmount;
         try {
             loanAmount = dashBoardService.getLendData();
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            resp.getWriter().write("{\"loanAmount\": \"" + loanAmount + "\"}");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.getWriter().write("An error occurred while retrieving loan type ratio.");
+            e.printStackTrace();
         }
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write("{\"loanAmount\": \"" + loanAmount + "\"}");
+
     }
 }

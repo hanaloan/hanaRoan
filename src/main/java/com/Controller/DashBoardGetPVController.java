@@ -29,7 +29,9 @@ public class DashBoardGetPVController extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(gson.toJson(dashBoardPVRes));
         } catch (SQLException e) {
-            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // 500 Internal Server Error
+            response.getWriter().write("An error occurred while retrieving loan type ratio.");
+            e.printStackTrace(); // 에러 로그 출력
         }
     }
 

@@ -22,11 +22,13 @@ public class DashBoardGetCountPaymentStatusController extends HttpServlet {
         Map<String, Integer> getCountPaymentStatus;
         try {
             getCountPaymentStatus = dashBoardService.getCountPaymentStatus();
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            resp.getWriter().write(gson.toJson(getCountPaymentStatus));
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.getWriter().write("An error occurred while retrieving loan type ratio.");
+            e.printStackTrace();
         }
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(gson.toJson(getCountPaymentStatus));
     }
 }
