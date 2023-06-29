@@ -1,6 +1,6 @@
 <%@ page import="com.Model.CustomerManagement" %>
 <%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,18 +12,18 @@
 
     <title>대출 승인 < 하나론</title>
 
-    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
 
-    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="/css/LoanApproval/style.css" rel="stylesheet">
-    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../css/LoanApproval/style.css" rel="stylesheet">
+    <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/jquery/jquery.min.js"></script>
     <script>const authType = '<%= session.getAttribute("authType") %>';</script>
 
-    <script src="/js/LoanApproval/LoanApproval.js"></script>
+    <script src="../../js/LoanApproval/LoanApproval.js"></script>
 </head>
 
 <body id="page-top">
@@ -57,11 +57,11 @@
                     <div class="card-header py-3"
                          style="display: flex; justify-content: space-between; align-items: center;">
                         <h6 class="m-0 font-weight-bold text-primary">대출 승인 현황</h6>
-                        <div><a href="/LoanApproval?loanStatus=pending"
+                        <div><a href="LoanApproval?loanStatus=pending"
                                 class="btn btn-light btn-icon-split">
                             <span class="text">PENDING 상태 보기</span>
                         </a>
-                            <a href="/LoanApproval"
+                            <a href="LoanApproval"
                                class="btn btn-light btn-icon-split">
                                 <span class="text">전체 보기</span>
                             </a></div>
@@ -77,30 +77,32 @@
                                     <th>고객명</th>
                                     <th>대출ID</th>
                                     <th>대출 타입</th>
+                                    <th>대출 이름</th>
                                     <th>대출 기간</th>
                                     <th>대출 시작일</th>
                                     <th>대출 종료일</th>
-                                    <th>Loan Amount</th>
-                                    <th>Loan Status</th>
-                                    <th>Repayment ID</th>
-                                    <th>payment Amount</th>
-                                    <th>payment Status</th>
+                                    <th>대출 금액</th>
+                                    <th>대출 상태</th>
+                                    <th>상환ID</th>
+                                    <th>상환 금액</th>
+                                    <th>상환 상태</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>Customer ID</th>
-                                    <th>Customer Name</th>
-                                    <th>Lend ID</th>
-                                    <th>Loan Type</th>
+                                    <th>고객ID</th>
+                                    <th>고객명</th>
+                                    <th>대출ID</th>
+                                    <th>대출 타입</th>
+                                    <th>대출 이름</th>
                                     <th>대출 기간</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
-                                    <th>Loan Amount</th>
-                                    <th>Loan Status</th>
-                                    <th>Repayment ID</th>
-                                    <th>payment Amount</th>
-                                    <th>payment Status</th>
+                                    <th>대출 시작일</th>
+                                    <th>대출 종료일</th>
+                                    <th>대출 금액</th>
+                                    <th>대출 상태</th>
+                                    <th>상환ID</th>
+                                    <th>상환 금액</th>
+                                    <th>상환 상태</th>
                                 </tr>
                                 </tfoot>
                                 <%
@@ -119,6 +121,8 @@
                                     <td><%= customer.getLendId() %>
                                     </td>
                                     <td><%= customer.getLoanTypeName() %>
+                                    </td>
+                                    <td><%= customer.getLoanName() %>
                                     </td>
                                     <td><%= customer.getLendPeriod() %>
                                     </td>
@@ -190,41 +194,24 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
+<%@ include file="/jsp/Components/LogoutModal/LogoutModal.jsp" %>
 
 <!-- Bootstrap core JavaScript-->
-<script src="/vendor/jquery/jquery.min.js"></script>
-<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../vendor/jquery/jquery.min.js"></script>
+<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="/js/sb-admin-2.min.js"></script>
+<script src="../../js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="/js/demo/datatables-demo.js"></script>
+<script src="../../js/demo/datatables-demo.js"></script>
 
 </body>
 </html>

@@ -335,16 +335,12 @@
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
 
-
-
     <!-- Page level plugins -->
     <script src="../../vendor/chart.js/Chart.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="../../js/Chart/UVChart.js"></script>
     <script src="../../js/Chart/RepaymentRatioChart.js"></script>
-
-
 
 </body>
 </html>
