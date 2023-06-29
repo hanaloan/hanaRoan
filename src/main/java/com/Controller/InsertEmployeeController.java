@@ -32,11 +32,8 @@ public class InsertEmployeeController extends HttpServlet {
             String empAuth=req.getParameter("empAuthorityName");
 
             Employee employee  = new Employee(empId, empPw, empName,empAuth);
-
             insertEmployeeService.insertEmployee(employee);
-
             resp.sendRedirect("/jsp/ManageEmployee/EmployeeManagement");
-
         } catch (Exception e) {
             // 예외 발생 시 응답
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

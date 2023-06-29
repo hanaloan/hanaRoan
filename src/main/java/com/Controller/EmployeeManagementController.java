@@ -33,7 +33,7 @@ public class EmployeeManagementController extends HttpServlet {
 
             //현재 관리자의 정보 가져오기
             Employee cur_employee=employeeManageService.currentEmployee(employeeIdx);
-            req.setAttribute("empName", cur_employee.getEmpName()); //값은 아무값도 없고 로직도 없지만 임시로 해놓음
+            req.setAttribute("empName", cur_employee.getEmpName());
             req.setAttribute("empAuthName", cur_employee.getEmpLevelName());
             req.setAttribute("empIdx", cur_employee.getEmpIdx());
 

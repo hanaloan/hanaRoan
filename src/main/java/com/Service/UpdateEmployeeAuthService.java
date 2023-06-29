@@ -2,6 +2,8 @@ package com.Service;
 
 import com.DAO.UpdateEmployeeAuthDao;
 
+import java.sql.SQLException;
+
 public class UpdateEmployeeAuthService {
 
     private UpdateEmployeeAuthDao updateEmployeeAuthDao;
@@ -10,9 +12,8 @@ public class UpdateEmployeeAuthService {
         updateEmployeeAuthDao= new UpdateEmployeeAuthDao();
     }
 
-    public void updateEmployeeAuth(Integer empIdx, String employeeAuthName){
-        System.out.println("여기는 update 서비스");
-        updateEmployeeAuthDao.updateEmployeeAuth(empIdx, employeeAuthName);
+    public void updateEmployeeAuth(Integer empIdx, String employeeAuthName , Integer curEmpIdx) throws SQLException {
+        updateEmployeeAuthDao.updateEmployeeAuth(empIdx, employeeAuthName, curEmpIdx);
     }
 
 }

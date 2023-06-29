@@ -85,13 +85,13 @@
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label for="interestRate">이율:</label>
                                         <input class="form-control form-control-user" type="text" id="interestRate"
-                                               name="interestRate" placeholder="loan product interestRate" step="any" required title="Please enter a numeric value for the interest rate">
+                                               name="interestRate" placeholder="loan product interestRate" pattern="[0-9]+(\.[0-9]+)?" step="any" required title="Please enter a numeric value for the interest rate">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="overdueInterestRate">연체이율:</label>
 
                                         <input class="form-control form-control-user" type="text"
-                                               id="overdueInterestRate" name="overdueInterestRate" placeholder="product overdueInterestRate" required step="any" title="Please enter a numeric value for the overdue interest rate">
+                                               id="overdueInterestRate" name="overdueInterestRate" placeholder="product overdueInterestRate" required pattern="[0-9]+(\.[0-9]+)?" step="any" title="Please enter a numeric value for the overdue interest rate">
                                     </div>
                                 </div>
 
@@ -109,12 +109,12 @@
                                         <div class="col-sm-6">
                                 <label for="minCredit">최소신용점수:</label>
                                 <input class="form-control form-control-user" type="text" id="minCredit"
-                                       name="minCredit" placeholder="0~1000점" required pattern="[0-9]+">
+                                       name="minCredit" placeholder="0~1000점" required pattern="[0-9]+" title="Please enter a numeric value for the minimum credit score">
                                         </div>
                                 </div>
                                 <br>
 
-                                <input type="submit" value="Submit" class="btn btn-primary btn-icon-split btn-lg submit-style" title="Please enter a numeric value for the minimum credit score">
+                                <input type="submit" value="Submit" class="btn btn-primary btn-icon-split btn-lg submit-style" >
 
 
                             </div>

@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -45,7 +44,6 @@ public class LoanManagementController extends HttpServlet {
         }
         req.setAttribute("loanProductsDto",loanProductsDto );
         req.getRequestDispatcher("jsp/LoanManagement/LoanManagement.jsp").forward(req, resp);
-
     }
 
 
@@ -53,39 +51,19 @@ public class LoanManagementController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String productIdParam = req.getParameter("productId");
         if (productIdParam == null || productIdParam.isEmpty()) {
-            // Handle the error condition appropriately, such as displaying an error message
-            // or redirecting to an error page.
             throw new IllegalArgumentException("Invalid productId");
         }
 
         int productId = Integer.parseInt(productIdParam);
-        System.out.println("Post들어감");
 
-        // Perform delete operation using productId
+        // productId를 사용하여 삭제 작업 수행
         try {
             loanManagementService.deleteProduct(productId);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-        // Redirect back to the LoanManagement page
+        // 대출 관리 페이지로 다시 리디렉션
         resp.sendRedirect("/LoanManagement");
-        System.out.println("Post나감");
     }
 
-//    @Override
-//    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        int productId = Integer.parseInt(req.getParameter("productId"));
-//
-//        try {
-//            loanManagementService.deleteProduct(productId);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        resp.sendRedirect("LoanManagement");
-//
-//    }
 }

@@ -26,14 +26,13 @@
 
     <style>
         select {
-            border: none; /* Remove the border */
-            outline: none; /* Remove the outline */
-            -webkit-appearance: none; /* Remove the default styling in WebKit browsers */
-            -moz-appearance: none; /* Remove the default styling in Mozilla Firefox */
-            appearance: none; /* Remove the default styling in other browsers */
-            background-color: transparent; /* Set the background color as transparent */
-            padding: 0; /* Remove padding */
-            /* Add any additional styling as per your requirements */
+            border: none;
+            outline: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: transparent;
+            padding: 0;
         }
 
         .container {
@@ -44,7 +43,6 @@
 
         .button-container {
             text-align: right;
-
         }
 
         .btn-h {
@@ -52,9 +50,6 @@
             width: 150px;
             text-align: center;
             align-items: center;
-
-
-            /*justify-content: center;*/
         }
     </style>
 
@@ -134,8 +129,18 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <h1 class="h3 mb-2 text-gray-800">직원 관리</h1>
-                <p class="mb-4">이 HTML 페이지는 고객 관리를 위한 관리자 대시보드를 나타냅니다. 이 페이지는 고객 정보를 표로 나타내며, 다양한 기능을 제공합니다. 관리자는 고객의
-                    신상정보, 연락처, 신용 점수, 소득 및 직업 유형을 확인할 수 있습니다.</p>
+                <p class="mb-4">이 페이지는 직원(관리자)의 시스템 접근 권한을 관리하는 페이지입니다. 직원 정보를 표로 나타내며, 직원을 추가 및 접근 권한 수정을 할 수 있습니다.<br>
+                    <br>
+                    권한은 'all', 'managing Products', 'managing Customers', 'read only', 'none' 이렇게 총 5개로 구분합니다.
+                    <p style="font-size: small">
+                *  <strong>'all'</strong> 권한은 직원들의 권한 수정이 가능하고, 고객, 상품에 대한 접근까지 가능합니다.<br>
+                *  <strong>'managing Products'</strong> 권한은 대출 상품에 대한 접근만 가능하다. 상품 추가, 삭제, 상환 업무 등을 할 수 있습니다.<br>
+                *  <strong>'managing Customers'</strong> 권한은 고객 정보에 대한 접근만 가능하다. 대출 상품 신청에 대한 승인 업무 등을 할 수 있습니다. <br>
+                *  <strong>'read only'</strong> 권한은 대출 상품, 고객 정보에 대한 읽기만 가능하다. 추가 및 수정 등과 같은 업무는 제한됩니다.<br>
+                *  <strong>'none'</strong> 권한은 관리자 페이지에 대해 제한합니다. 해당 권한을 갖고 있는 관리자는 로그인조차 제한됩니다.
+            </p>
+
+                </p>
                 <h4>현재 관리자</h4>
                 <div class="container">
 
@@ -152,10 +157,9 @@
                 <!-- Page Heading -->
                 <div class="button-container">
                     <button class="btn btn-secondary btn-icon-split ml-auto fa btn-h" id="insertEmployeeBtn" disabled
-                            onclick="location.href='/jsp/ManageEmployee/InsertEmployee.jsp'">관리자 직원 추가
+                            onclick="location.href='/jsp/ManageEmployee/InsertEmployee.jsp'">직원 추가
                     </button>
-                    <button class="btn btn-secondary btn-icon-split ml-auto btn-h" id="updateEmployeeBtn" disabled>관리자
-                        직원 수정
+                    <button class="btn btn-secondary btn-icon-split ml-auto btn-h" id="updateEmployeeBtn" disabled>접근 권한 부여
                     </button>
 
                 </div>
@@ -219,7 +223,7 @@
                                     <td>
                                         <%--                전체 권한 비활성화로 세팅--%>
                                         <select style="appearance: none" disabled id="auth-<%= employee.getEmpIdx() %>"
-                                                onchange="updateEmployeeAuth('<%= employee.getEmpIdx() %>', '<%= employee.getEmpName() %>')">
+                                                onchange="updateEmployeeAuth('<%= employee.getEmpIdx() %>', '<%= employee.getEmpName() %>', '<%= session.getAttribute("employee_idx") %>')">
                                             <option value="all" <%= employee.getEmpLevelName() != null && employee.getEmpLevelName().equals("all") ? "selected" : "" %>>
                                                 all
                                             </option>
@@ -288,6 +292,43 @@
     </div>
 </div>
 
+<script>
+    //전체 권한 비활성화 상태에서 활성화로 전환 시키기
+    <%
+        request.setCharacterEncoding("UTF-8");
+        employees = (List<Employee>) request.getAttribute("employeeManageResDto");
+        if (employees != null) {
+            for (Object obj : employees) {
+                if (obj instanceof Employee) {
+                    Employee employee = (Employee) obj;
+
+    %>
+
+    //관리자 직원 수정 버튼을 누르면 활성화로 전환됨
+    document.getElementById("updateEmployeeBtn").addEventListener("click", function () {
+        var currentUserID = "<%= session.getAttribute("employee_idx") %>"; // Assuming you have the current user's ID stored in a variable
+
+        if ("<%= employee.getEmpIdx() %>" === currentUserID) {
+            var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
+            element.style.appearance = "none"; // hide the dropdown arrow
+            element.disabled = true; // treat as inactive
+        }
+
+        else{
+            var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
+            //아래 화살표 띄우기
+            element.style.appearance = "-webkit-menulist-button"; // show the dropdown arrow for WebKit browsers (e.g., Chrome, Safari)
+            element.style.appearance = "menulist-button"; // show the dropdown arrow for other browsers
+            element.disabled = false; //비활성화 False로 처리
+        }
+    });
+    <%
+                }
+            }
+        }
+    %>
+</script>
+
 <!-- Bootstrap core JavaScript-->
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -307,29 +348,7 @@
 <%--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--%>
 
 
-<script>
-    //전체 권한 비활성화 상태에서 활성화로 전환 시키기
-    <%
-        request.setCharacterEncoding("UTF-8");
-        employees = (List<Employee>) request.getAttribute("employeeManageResDto");
-        if (employees != null) {
-            for (Object obj : employees) {
-                if (obj instanceof Employee) {
-                    Employee employee = (Employee) obj;
-    %>
 
-    //관리자 직원 수정 버튼을 누르면 활성화로 전환됨
-    document.getElementById("updateEmployeeBtn").addEventListener("click", function () {
-        var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
-        element.style.appearance = "menulist-button"; //아래 화살표 띄우기
-        element.disabled = false; //비활성화 False로 처리
-    });
-    <%
-                }
-            }
-        }
-    %>
-</script>
 </div>
 
 </body>
