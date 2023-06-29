@@ -74,6 +74,11 @@ public class LoginController extends HttpServlet {
                     req.setAttribute("credit", credit);
                     req.setAttribute("customer_idx", loginUserRes.getCustomer_Idx());
 
+                    // 사용자 가입중인 상품 관련
+                    LoginPersonalProductReq personalProductReq = new LoginPersonalProductReq(loginUserRes.getCustomer_Idx());
+                    LoginPersonalProductRes personalProductRes = loginService.getPersonalProducts(personalProductReq);
+                    req.setAttribute("personalProducts", personalProductRes);
+
                     // 추천상품 관련
                     LoginRecommendationReq recoReq = new LoginRecommendationReq(loginUserRes.getCustomer_Idx(), income, credit);
                     LoginRecommendationRes recoRes = loginService.getRecoProduct(recoReq);
@@ -83,6 +88,7 @@ public class LoginController extends HttpServlet {
                     LoginAlertMessageReq alertReq = new LoginAlertMessageReq(loginUserRes.getCustomer_Idx());
                     LoginAlertMessageRes alertRes = loginService.getAlertMessages(alertReq);
                     req.setAttribute("alertRes", alertRes);
+
                     // 세션 관련
                     HttpSession session = req.getSession();
                     session.setAttribute("username", loginUserRes.getName());

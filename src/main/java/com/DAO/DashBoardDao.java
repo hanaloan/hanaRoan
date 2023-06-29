@@ -19,13 +19,17 @@ public class DashBoardDao {
              PreparedStatement stmt = conn.prepareStatement(GET_TOTAL_AMOuNT_QUERY);
              ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {
-                return rs.getString("total_lent_amount");
+                String totalLentAmount = rs.getString("total_lent_amount");
+                if (totalLentAmount != null) {
+                    return totalLentAmount;
+                }
             }
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return "0"; // 기본값으로 0을 반환하거나 원하는 값을 반환할 수 있습니다.
     }
+
 
     private static final String GET_OVERDUE_AMOuNT_QUERY =
             "SELECT SUM(loan_lend.loan_amount) AS overdue_lent_amount FROM hanaroDB.loan_payments JOIN hanaroDB.loan_lend ON loan_payments.loan_lend_idx = loan_lend.lend_idx WHERE loan_payments.payment_status IN ('overdue')";
@@ -35,14 +39,16 @@ public class DashBoardDao {
              PreparedStatement stmt = conn.prepareStatement(GET_OVERDUE_AMOuNT_QUERY);
              ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {
-                return rs.getString("overdue_lent_amount");
+                String overdueLentAmount = rs.getString("overdue_lent_amount");
+                if (overdueLentAmount != null) {
+                    return overdueLentAmount;
+                }
             }
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return "0";
     }
-
     private static final String GET_COUNT_PENDING_QUERY =
             "SELECT COUNT(loan_status) AS pending_loans FROM hanaroDB.loan_lend WHERE loan_status = 'pending'";
 
@@ -51,12 +57,15 @@ public class DashBoardDao {
              PreparedStatement stmt = conn.prepareStatement(GET_COUNT_PENDING_QUERY);
              ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {
-                return rs.getString("pending_loans");
+                String pendingLoansCount = rs.getString("pending_loans");
+                if (pendingLoansCount != null) {
+                    return pendingLoansCount;
+                }
             }
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return "0";
     }
 
     private static final String GET_OVERDUE_PERCENTAGE =
@@ -69,12 +78,15 @@ public class DashBoardDao {
              PreparedStatement stmt = conn.prepareStatement(GET_OVERDUE_PERCENTAGE);
              ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {
-                return rs.getString("overdue_percentage");
+                String overduePercentage = rs.getString("overdue_percentage");
+                if (overduePercentage != null) {
+                    return overduePercentage;
+                }
             }
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return "0";
     }
 
     private static final String GET_COUNT_PAYMENT_STATUS =
@@ -109,7 +121,7 @@ public class DashBoardDao {
                     "GROUP BY\n" +
                     "    loan_type_name;";
 
-    public Map<String,String> getRatioOfLoanType() throws SQLException {
+    public Map<String, String> getRatioOfLoanType() throws SQLException {
         Map<String, String> loanTypeLists = new HashMap<>();
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(GET_RATIO_OF_LOAN_TYPE);
@@ -124,30 +136,4 @@ public class DashBoardDao {
         }
         return loanTypeLists;
     }
-
-//    private static final String GET_PV =
-//            "SELECT date, total_views FROM total_page_views WHERE date >= DATE_SUB(?, INTERVAL 6 DAY) AND date <= ? ORDER BY date DESC";
-//
-//    public Map<String,String> getRatioOfLoanType() throws SQLException {
-//        Map<String, String> loanTypeLists = new HashMap<>();
-//        try (Connection conn = DatabaseConnector.getConnection();
-//             PreparedStatement stmt = conn.prepareStatement(GET_PV);
-//             ResultSet rs = stmt.executeQuery()) {
-//            while (rs.next()) {
-//                String loanTypeName = rs.getString("loan_type_name");
-//                String percentage = rs.getString("percentage");
-//                loanTypeLists.put(loanTypeName, percentage);
-//            }
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return loanTypeLists;
-//    }
-//
-
-
-
-
-
-
 }

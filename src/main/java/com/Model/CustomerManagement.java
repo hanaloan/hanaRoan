@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 @Getter
 @Setter
 public class CustomerManagement {
+    private String loanName;
     private int cusId;
     private String name;
     private String contactInfo;
@@ -64,7 +65,7 @@ public class CustomerManagement {
         return null;
     }
 
-    public CustomerManagement(int cusId, String name, String contactInfo, String password, int lendId, String startDate, String endDate, Long loanAmount, String loanStatus, int repaymentId, Long paymentAmount, String paymentStatus, float overdueInterestRate, float loanInterestRate, String loanTypeName, int lendPeriod, int creditScore, Long income, String jobType) {
+    public CustomerManagement(int cusId, String name, String contactInfo, String password, int lendId, String startDate, String endDate, String loanName, Long loanAmount, String loanStatus, int repaymentId, Long paymentAmount, String paymentStatus, float overdueInterestRate, float loanInterestRate, String loanTypeName, int lendPeriod, int creditScore, Long income, String jobType) {
         this.cusId = cusId;
         this.name = name;
         this.contactInfo = contactInfo;
@@ -72,6 +73,7 @@ public class CustomerManagement {
         this.lendId = lendId;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.loanName = loanName;
         this.loanAmount = loanAmount;
         this.loanStatus = loanStatus;
         this.repaymentId = repaymentId;
@@ -95,4 +97,6 @@ public class CustomerManagement {
         this.income = income;
         this.jobType = jobType;
     }
+
+
 }

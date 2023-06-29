@@ -1,6 +1,4 @@
-<%@ page import="com.Model.CustomerManagement" %>
-<%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,24 +11,17 @@
 
     <title>대시보드 < 하나론</title>
 
-    <!-- Custom fonts for this template-->
-    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
+    <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom styles for this template-->
-    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-
-    <script src="/js/DashBoard/DashBoard.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../js/DashBoard/DashBoard.js"></script>
 
 </head>
 <body id="page-top">
@@ -135,7 +126,7 @@
 
                     <!-- 승인 대기 중 Card -->
                     <div class="col-xl-3 col-md-6 mb-4">
-                        <a href="/LoanApproval?loanStatus=pending" style="text-decoration: none;">
+                        <a href="../../LoanApproval?loanStatus=pending" style="text-decoration: none;">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -310,7 +301,8 @@
                                 <div class="text-center">
 
                                 </div>
-                                <p>하나론의 대출 관리 기능은 직원들에게 업무 효율성을 높이고, 고객에게 편리하고 안정적인 대출 서비스를 제공하는데 앞장서고 있습니다.<br/> <br/>문의나 도움이 필요한 경우 언제든지 하나론 홈페이지의 전화번호나 고객센터로 문의해 주시기 바랍니다.</p>
+                                <p>하나론의 대출 관리 기능은 직원들에게 업무 효율성을 높이고, 고객에게 편리하고 안정적인 대출 서비스를 제공하는데 앞장서고 있습니다.<br/> <br/>문의나
+                                    도움이 필요한 경우 언제든지 하나론 홈페이지의 전화번호나 고객센터로 문의해 주시기 바랍니다.</p>
                                 <a rel="nofollow" href="#">☏ 02-0000-0000</a><br/>
                                 <a rel="nofollow" href="#">하나론 고객센터 바로가기 &rarr;</a>
                             </div>
@@ -331,6 +323,7 @@
 
     </div>
     <!-- End of Page Wrapper -->
+
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -339,29 +332,15 @@
     <!-- Logout Modal-->
     <%@ include file="/jsp/Components/LogoutModal/LogoutModal.jsp" %>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
     <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+    <script src="../../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="/vendor/chart.js/Chart.js"></script>
+    <script src="../../vendor/chart.js/Chart.js"></script>
 
     <!-- Page level custom scripts -->
-<%--    <script src="/js/Chart/PVChart.js"></script>--%>
-    <script src="/js/Chart/UVChart.js"></script>
-    <script src="/js/Chart/RepaymentRatioChart.js"></script>
-
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
+    <script src="../../js/Chart/UVChart.js"></script>
+    <script src="../../js/Chart/RepaymentRatioChart.js"></script>
 
 </body>
 </html>
