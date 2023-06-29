@@ -74,32 +74,33 @@
                     </div>
                 </div>
             </div>
-            <%List<LoginLoanProduct> recommendedProducts = ((LoginRecommendationRes)request.getAttribute("recoRes")).getRecommendedProducts();%>
-            <div id="carouselExample" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
-                    <%for (int i = 1; i < recommendedProducts.size(); i++) {%>
-                    <li data-target="#carouselExample" data-slide-to="<%=i%>"></li>
-                    <% } %>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="<%=recommendedProducts.get(0).getLoanImage()%>" class="d-block h-25 w-100" alt="image0">
-                        <p><%=recommendedProducts.get(0).getLoanName()%></p>
-                        <p><%=recommendedProducts.get(0).getLoanInterestRate()%>%</p>
-                    </div>
-                    <%for (int i = 1; i < recommendedProducts.size(); i++) {%>
+            <%List<LoginLoanProduct> recommendedProducts = ((LoginRecommendationRes)request.getAttribute("recoRes")).getRecommendedProducts();
+            if(!recommendedProducts.isEmpty() && recommendedProducts != null){%>
+                <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
+                        <%for (int i = 1; i < recommendedProducts.size(); i++) {%>
+                        <li data-target="#carouselExample" data-slide-to="<%=i%>"></li>
+                        <% } %>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="<%=recommendedProducts.get(0).getLoanImage()%>" class="d-block h-25 w-100" alt="image0">
+                            <p><%=recommendedProducts.get(0).getLoanName()%></p>
+                            <p><%=recommendedProducts.get(0).getLoanInterestRate()%>%</p>
+                        </div>
+                        <%for (int i = 1; i < recommendedProducts.size(); i++) {%>
                         <div class="carousel-item">
                             <img src="<%=recommendedProducts.get(i).getLoanImage()%>" class="d-block h-25 w-100" alt="image<%=i%>">
                             <p><%=recommendedProducts.get(i).getLoanName()%></p>
                             <p><%=recommendedProducts.get(i).getLoanInterestRate()%>%</p>
                         </div>
-                    <% } %>
+                        <% } %>
+                    </div>
                 </div>
-            </div>
+            <%}%>
     </div>
 </div>
-
 
 <%-- 사용자 알림 관련 --%>
 <div>

@@ -41,6 +41,10 @@ public class CustomerHomeController extends HttpServlet {
             LoginRecommendationRes recoRes = loginService.getRecoProduct(recoReq);
             req.setAttribute("recoRes", recoRes);
 
+            // 이용중상품 재사용(재사용)
+            LoginPersonalProductReq subsReq = new LoginPersonalProductReq(customer_Idx);
+            LoginPersonalProductRes subsRes = loginService.getPersonalProducts(subsReq);
+            req.setAttribute("personalProducts", subsRes);
             // 로그인 성공 시 응답
             resp.setStatus(HttpServletResponse.SC_OK);
             req.getRequestDispatcher("/jsp/CustomerHome/CustomerHome.jsp").forward(req, resp);
