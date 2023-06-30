@@ -32,8 +32,6 @@ public class UpdateRedisViewsService {
             updateRedisViewsDao.updateTotalPageViews(redisViewsReq);
         }
 
-
-
     }
 
 }

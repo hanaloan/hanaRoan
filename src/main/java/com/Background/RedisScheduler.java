@@ -26,64 +26,52 @@
 //        timer.schedule(new TimerTask() {
 //            @Override
 //            public void run() {
-//
-//                //최신 pv 업댓된 pk 구하는 로직
 //                List<String> preList = redisService.getPreList();
 //                if (preList != null && !preList.isEmpty()) {
 //                    try {
+//                        int totalPageViews = 0;
+//                        Set<String> allUserIds = redisService.getAllKeys();
 //                        RedisViewsReq redisPageViewsReq = new RedisViewsReq();
-//                        for (String customerIdx : preList) {
-//                            Integer currentPageViews = redisService.getPageView(customerIdx);
-//                            if (currentPageViews != null) {
-//                                System.out.println("지금 바뀐 cus_idx : " + customerIdx + "이고 pv는 " + currentPageViews + "로 바뀌었습니다.");
-//                                // RedisViewsReq 객체에 값 추가
-//                                redisPageViewsReq.addPageView(Integer.parseInt(customerIdx), currentPageViews);
-//                            }else {
-//                                System.out.println("Invalid data for user: " + customerIdx);
+//
+//                        for (String customerIdx : allUserIds) {
+//                            try {
+//                                Integer pageViews = redisService.getPageView(customerIdx);
+//                                if (pageViews != null) {
+//                                    System.out.println("지금 바뀐 cus_idx : " + customerIdx + "이고 " + pageViews + " PV값은 DB에 더해집니다.");
+//                                    // RedisViewsReq 객체에 값 추가
+//                                    redisPageViewsReq.addPageView(Integer.parseInt(customerIdx), pageViews);
+//                                    totalPageViews += pageViews;
+//                                    // Redis의 값을 초기화
+//                                    redisService.setPageView(customerIdx, 0);
+//                                }
+//                            } catch (NumberFormatException e) {
+//                                System.out.println("Error in number format: " + e.getMessage());
+//                            } catch (Exception e) {
+//                                System.out.println("Error while processing customer id: " + customerIdx + ", error: " + e.getMessage());
 //                            }
 //                        }
 //
+//                        redisPageViewsReq.setTotalPageViews(totalPageViews);
+//                        System.out.println("totalpageViews = " + totalPageViews);
+//
 //                        updateRedisViewsService.updatePageViewsService(redisPageViewsReq);
 //                        updateRedisViewsService.insertUniqueVisitorsService(redisPageViewsReq);
+//                        updateRedisViewsService.updateTotalViewsService(redisPageViewsReq);
 //
-//                    } catch (NumberFormatException e) {
-//                        System.out.println("Error updating page views: " + e.getMessage());
 //                    } catch (SQLException e) {
 //                        System.out.println("Error updating page views: " + e.getMessage());
 //                    } finally {
 //                        redisService.clearPreList();
 //                    }
 //                }
-//
-//                // 토탈 pk 구하는 로직
-//                Set<String> allUserIds = redisService.getAllKeys();
-//                int totalPageViews = 0;
-//                // 모든 key값 돌면서 total pv구하기
-//                for (String userId : allUserIds) {
-//                    try {
-//                        Integer pageViews = redisService.getPageView(userId);
-//                        if (pageViews != null) {
-//                            totalPageViews += pageViews;
-//                        }
-//                    } catch (NumberFormatException e) {
-////                        System.out.println("Invalid data for user: " + userId);
-//                        continue;
-//                    }
-//                }
-//                try {
-//                    RedisViewsReq redisPageViewsReq = new RedisViewsReq();
-//                    redisPageViewsReq.setTotalPageViews(totalPageViews);
-//                    updateRedisViewsService.updateTotalViewsService(redisPageViewsReq);
-//                } catch (SQLException e) {
-//                    System.out.println("Error updating total page views: " + e.getMessage());
-//                }
 //            }
 //        }, 0, 3000); // 3초마다 실행
 //    }
+//
+//
 //    public void close() {
 //        timer.cancel();
 //        timer.purge();
 //    }
-//
 //
 //}
