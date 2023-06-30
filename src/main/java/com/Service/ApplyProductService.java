@@ -1,6 +1,7 @@
 package com.Service;
 
 import com.DAO.ApplyProductDao;
+import com.Model.ApplyCustomerRes;
 import com.Model.ApplyProductRes;
 
 import java.sql.SQLException;
@@ -11,8 +12,12 @@ public class ApplyProductService {
 
     public ApplyProductService() {this.applyProductDao = new ApplyProductDao();}
 
-    public ApplyProductRes getApplyInfo(String productId) throws SQLException {
-        return applyProductDao.getApplyInfo(productId);
+    public ApplyProductRes getApplyProductInfo(String productId) throws SQLException {
+        return applyProductDao.getApplyProductInfo(productId);
+    }
+
+    public ApplyCustomerRes getApplyCustomerInfo(String customerIdx) throws SQLException {
+        return applyProductDao.getApplyCustomerInfo(customerIdx);
     }
 
     public void applyProduct(String loanIdx, String customerIdx, String lendAmount) throws SQLException {

@@ -8,7 +8,11 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class ApplyProductRes {
-    private int productId;
-    private String productName;
+    private String loanName;
+    private String loanDescription;
+    private BigDecimal loanInterestRate;
+    private BigDecimal overdueInterestRate;
+    private int minCredit;
     private BigDecimal lendLimit;
+    private int lendPeriod;
 }
