@@ -188,19 +188,23 @@
                                                 <div class="col">
                                                     <% for (int i = 0; i < subsProducts.size(); i++) { %>
                                                     <div id="subs<%=i%>" style="display: none">
-                                                        <strong><p class="info-name">
-                                                            상 품 명: <%= subsProducts.get(i).getProductName()%>
-                                                        </p></strong>
-                                                        <p class="info-amount">
-                                                            대출금액: <%= subsProducts.get(i).getLendAmount()%>
-                                                        </p>
-                                                        <p class="info-status">
-                                                            대출상태: <%= subsProducts.get(i).getLendStatus()%>
-                                                        </p>
-                                                        <p class="info-period" style="margin-bottom: 0">
-                                                            대출기간: <%= subsProducts.get(i).getStartDate()%>
-                                                            ~ <%= subsProducts.get(0).getEndDate()%>
-                                                        </p>
+                                                        <dl class="row">
+                                                            <dt class="col-sm-2">상 품 명</dt>
+                                                            <dd class="col-sm-10"><%= subsProducts.get(i).getProductName()%></dd>
+                                                        </dl>
+                                                        <dl class="row">
+                                                            <dt class="col-sm-2">대출금액</dt>
+                                                            <dd class="col-sm-10"><%= subsProducts.get(i).getLendAmount()%></dd>
+                                                        </dl>
+                                                        <dl class="row">
+                                                            <dt class="col-sm-2">대출상태</dt>
+                                                            <dd class="col-sm-10"><%= subsProducts.get(i).getLendStatus()%></dd>
+                                                        </dl>
+                                                        <dl class="row mb-0">
+                                                            <dt class="col-sm-2">대출기간</dt>
+                                                            <dd class="col-sm-10"><%= subsProducts.get(i).getStartDate()%>
+                                                                ~ <%= subsProducts.get(0).getEndDate()%></dd>
+                                                        </dl>
                                                     </div>
                                                     <% } %>
                                                 </div>
