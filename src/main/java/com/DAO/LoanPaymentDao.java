@@ -24,7 +24,7 @@ public class LoanPaymentDao {
                     "JOIN loan_lend ll ON lp.loan_lend_idx = ll.lend_idx\n" +
                     "JOIN loan_products lpr ON ll.loan_idx = lpr.loan_idx\n" +
                     "JOIN customers c ON ll.customer_idx = c.customer_idx\n" +
-                    "WHERE ll.loan_status = 'approved' OR ll.loan_status = 'paid'";
+                    "WHERE (ll.loan_status = 'approved' OR ll.loan_status = 'paid')";
 
             String[] option = getPaymentOption(option1, option2);
             Map<Integer, String> category = new HashMap<>();
@@ -32,11 +32,11 @@ public class LoanPaymentDao {
             if(!option[0].equals("*") || !option[1].equals("*")){
                 int idx = 1;
                 if(!option[0].equals("*")){
-                    sql += "and lpr.loan_type_id = ?";
+                    sql += " AND lpr.loan_type_id = ?";
                     category.put(idx++, option[0]);
                 }
                 if(!option[1].equals("*")){
-                    sql += "and lp.payment_status = ?";
+                    sql += " AND lp.payment_status = ?";
                     category.put(idx++, option[1]);
                 }
                 stmt = conn.prepareStatement(sql);
