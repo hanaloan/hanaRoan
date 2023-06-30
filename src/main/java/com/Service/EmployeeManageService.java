@@ -4,8 +4,8 @@ import com.DAO.CustomerManagementDao;
 import com.DAO.EmployeeManagementDao;
 import com.Model.CustomerManagement;
 import com.Model.CustomerManagementReq;
-import com.Model.Employee;
 import com.Model.EmployeeManagementReq;
+import com.Model.EmployeeRes;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -20,12 +20,12 @@ public class EmployeeManageService {
     }
 
     //직원들 정보 표로 가져오기
-    public List<Employee> selectEmployees() throws SQLException {
+    public List<EmployeeRes> selectEmployees() throws SQLException {
         return employeeManagementDao.selectEmployees();
     }
 
     //현재 직원 정보 가져오기
-    public Employee currentEmployee(Integer cur_idx) throws SQLException {
+    public EmployeeRes currentEmployee(Integer cur_idx) throws SQLException {
         return employeeManagementDao.currentEmployee(cur_idx);
     }
 
