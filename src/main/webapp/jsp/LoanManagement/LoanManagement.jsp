@@ -1,5 +1,5 @@
-<%@ page import="com.Model.Product" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.Model.ProductRes" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -160,9 +160,9 @@
 
                                 <%
                                     request.setCharacterEncoding("UTF-8");
-                                    List<Product> products = (List<Product>) request.getAttribute("loanProductsDto");
+                                    List<ProductRes> products = (List<ProductRes>) request.getAttribute("loanProductsDto");
                                     if (products != null && !products.isEmpty()) {
-                                        for (Product product : products) {
+                                        for (ProductRes product : products) {
                                 %>
                                 <tr>
                                     <td><%= product.getIdx() %>
