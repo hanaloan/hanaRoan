@@ -1,6 +1,6 @@
 package com.DAO;
 
-import com.Model.Product;
+import com.Model.ProductRes;
 import com.utils.DatabaseConnector;
 
 import java.sql.CallableStatement;
@@ -12,7 +12,7 @@ public class InsertProductDao {
     Connection conn= null;
     PreparedStatement ps = null;
 
-    public void insertProduct(Product product) throws SQLException {
+    public void insertProduct(ProductRes product) throws SQLException {
         try{
             conn = DatabaseConnector.getConnection();
             String sql="INSERT INTO hanaroDB.loan_products (loan_name, loan_type_id, loan_description, loan_interest_rate, overdue_interest_rate, lend_limit, lend_period, min_credit) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

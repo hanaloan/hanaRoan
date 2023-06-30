@@ -2,17 +2,17 @@ package com.Model;
 
 import lombok.*;
 import java.math.BigDecimal;
-import java.util.Date;
 
 @NoArgsConstructor
 @Getter
 @Setter
-public class Product {
+public class ProductRes {
     private String id;
     private String name;
     private String description;
     private int minCredit;
     private BigDecimal lendLimit;
+
     private int loanPeriod;
     private BigDecimal interestRate;
 
@@ -21,7 +21,7 @@ public class Product {
     private BigDecimal overdueInterestRate;
 
 
-    public Product(Integer loanIdx, String loanName, String loanTypeName, Integer minCredit, BigDecimal lendLimit, Integer lendPeriod, String loanDescription, BigDecimal loanInterestRate, BigDecimal overdueInterestRate) {
+    public ProductRes(Integer loanIdx, String loanName, String loanTypeName, Integer minCredit, BigDecimal lendLimit, Integer lendPeriod, String loanDescription, BigDecimal loanInterestRate, BigDecimal overdueInterestRate) {
         this.idx=loanIdx;
         this.name=loanName;
         this.loanTypeName=loanTypeName;
@@ -36,7 +36,7 @@ public class Product {
 
     }
 
-    public Product(String productName, String loanTypeName, String productInfo, BigDecimal interestRate, BigDecimal overdueInterestRate, BigDecimal limit, Integer period, Integer minCredit) {
+    public ProductRes(String productName, String loanTypeName, String productInfo, BigDecimal interestRate, BigDecimal overdueInterestRate, BigDecimal limit, Integer period, Integer minCredit) {
         this.name=productName;
         this.loanTypeName=loanTypeName;
         this.minCredit=minCredit;

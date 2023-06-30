@@ -1,7 +1,7 @@
 package com.Service;
 
 import com.DAO.LoanManagementDao;
-import com.Model.Product;
+import com.Model.ProductRes;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,11 +16,11 @@ public class LoanManagementService {
 
 
 
-    public List<Product> selectAllProducts() throws SQLException {
+    public List<ProductRes> selectAllProducts() throws SQLException {
         return loanManagementDao.selectAllProducts();
     }
 
-    public List<Product> selectProductsByOption(String option1) throws SQLException {
+    public List<ProductRes> selectProductsByOption(String option1) throws SQLException {
         return loanManagementDao.selectProductsByOption(option1);
     }
 

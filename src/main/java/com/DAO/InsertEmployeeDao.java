@@ -1,6 +1,6 @@
 package com.DAO;
 
-import com.Model.Employee;
+import com.Model.EmployeeRes;
 import com.utils.DatabaseConnector;
 
 import java.sql.Connection;
@@ -12,7 +12,7 @@ public class InsertEmployeeDao {
     Connection conn=null;
     PreparedStatement ps = null;
 
-    public void insertEmployee(Employee employee) throws SQLException {
+    public void insertEmployee(EmployeeRes employee) throws SQLException {
         try {
             conn = DatabaseConnector.getConnection();
             String sql="INSERT INTO hanaroDB.employees (id, password, name, authority_idx) VALUES (?, ?, ?, ?)";

@@ -1,6 +1,6 @@
 package com.Controller;
 
-import com.Model.Employee;
+import com.Model.EmployeeRes;
 import com.Service.InsertEmployeeService;
 
 import javax.servlet.ServletException;
@@ -31,7 +31,7 @@ public class InsertEmployeeController extends HttpServlet {
             String empName=req.getParameter("empName");
             String empAuth=req.getParameter("empAuthorityName");
 
-            Employee employee  = new Employee(empId, empPw, empName,empAuth);
+            EmployeeRes employee  = new EmployeeRes(empId, empPw, empName,empAuth);
             insertEmployeeService.insertEmployee(employee);
             resp.sendRedirect("/jsp/ManageEmployee/EmployeeManagement");
         } catch (Exception e) {

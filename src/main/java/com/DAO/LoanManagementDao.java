@@ -1,6 +1,6 @@
 package com.DAO;
 
-import com.Model.Product;
+import com.Model.ProductRes;
 import com.utils.DatabaseConnector;
 
 import java.math.BigDecimal;
@@ -16,8 +16,8 @@ public class LoanManagementDao {
     Connection conn = null;
     ResultSet rs=null;
 
-    public List<Product> selectAllProducts() throws SQLException {
-        List<Product> productList = new ArrayList<>();
+    public List<ProductRes> selectAllProducts() throws SQLException {
+        List<ProductRes> productList = new ArrayList<>();
         try{
             conn = DatabaseConnector.getConnection();
             String sql="SELECT lp.loan_idx, lp.loan_name, lt.loan_type_name, lp.min_credit, lp.lend_limit, lp.lend_period, lp.loan_description, lp.loan_interest_rate, lp.overdue_interest_rate\n" +
@@ -37,7 +37,7 @@ public class LoanManagementDao {
                 BigDecimal loan_interest_rate = rs.getBigDecimal("loan_interest_rate");
                 BigDecimal overdue_interest_rate = rs.getBigDecimal("overdue_interest_rate");
 
-                Product product = new Product(loan_idx, loan_name, loan_type_name,min_credit,lend_limit, lend_period,loan_description, loan_interest_rate , overdue_interest_rate );
+                ProductRes product = new ProductRes(loan_idx, loan_name, loan_type_name,min_credit,lend_limit, lend_period,loan_description, loan_interest_rate , overdue_interest_rate );
                 productList.add(product);
             }
 
@@ -56,8 +56,8 @@ public class LoanManagementDao {
     }
 
 
-    public List<Product> selectProductsByOption(String option) throws SQLException {
-        List<Product> products = new ArrayList<>();
+    public List<ProductRes> selectProductsByOption(String option) throws SQLException {
+        List<ProductRes> products = new ArrayList<>();
 
         try{
             conn = DatabaseConnector.getConnection();
@@ -80,7 +80,7 @@ public class LoanManagementDao {
                 BigDecimal overdue_interest_rate = rs.getBigDecimal("overdue_interest_rate");
 
 
-                Product product = new Product(loan_idx, loan_name, loan_type_name,min_credit,lend_limit, lend_period,loan_description, loan_interest_rate , overdue_interest_rate );
+                ProductRes product = new ProductRes(loan_idx, loan_name, loan_type_name,min_credit,lend_limit, lend_period,loan_description, loan_interest_rate , overdue_interest_rate );
                 products.add(product);
             }
 

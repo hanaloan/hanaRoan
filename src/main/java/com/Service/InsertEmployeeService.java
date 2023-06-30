@@ -1,7 +1,7 @@
 package com.Service;
 
 import com.DAO.InsertEmployeeDao;
-import com.Model.Employee;
+import com.Model.EmployeeRes;
 
 import java.sql.SQLException;
 
@@ -11,7 +11,7 @@ public class InsertEmployeeService {
     public InsertEmployeeService() {
         insertEmployeeDao= new InsertEmployeeDao();
     }
-    public void insertEmployee(Employee employee) throws SQLException {
+    public void insertEmployee(EmployeeRes employee) throws SQLException {
         insertEmployeeDao.insertEmployee(employee);
 
     }

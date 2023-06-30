@@ -1,7 +1,8 @@
 package com.Service;
 
 import com.DAO.ProductDao;
-import com.Model.Product;
+import com.Model.ProductRes;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class DisplayProductListService {
         this.productDao = new ProductDao();
     }
 
-    public List<Product> getProducts(String category) throws SQLException{
+    public List<ProductRes> getProducts(String category) throws SQLException{
         return productDao.getProducts(category);
     }
 }
