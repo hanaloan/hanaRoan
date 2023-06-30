@@ -82,7 +82,7 @@
                             class="btn btn-secondary btn-icon-split mr-auto fa btn-h"
                             disabled
                             onclick="location.href='/jsp/LoanManagement/InsertProduct.jsp'">
-                        추가
+                        등록
                     </button>
 
                     <script>
@@ -135,7 +135,7 @@
                                     <th>이율</th>
                                     <th>연체이율</th>
                                     <th>최대한도</th>
-                                    <th>대출기한 [년]</th>
+                                    <th>대출기간 [년]</th>
                                     <th>최소신용점수</th>
                                     <th>삭제 작업</th>
 
@@ -187,7 +187,7 @@
                                         <form action="/LoanManagement" method="POST">
                                             <input type="hidden" name="productId" value="<%= product.getIdx() %>">
                                             <button class="btn mr-auto fa btn-outline-danger btn-w" type="submit"
-                                                    onclick="return confirm('Are you sure you want to delete this product?')">
+                                                    onclick="return confirm('정말 해당 상품을 삭제하시겠습니까?')">
                                                 삭제
                                             </button>
                                         </form>
