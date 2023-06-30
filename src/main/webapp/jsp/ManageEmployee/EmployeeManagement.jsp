@@ -157,7 +157,7 @@
                 <!-- Page Heading -->
                 <div class="button-container">
                     <button class="btn btn-secondary btn-icon-split ml-auto fa btn-h" id="insertEmployeeBtn" disabled
-                            onclick="location.href='/jsp/ManageEmployee/InsertEmployee.jsp'">직원 추가
+                            onclick="location.href='/jsp/ManageEmployee/InsertEmployee.jsp'">직원 등록
                     </button>
                     <button class="btn btn-secondary btn-icon-split ml-auto btn-h" id="updateEmployeeBtn" disabled>접근 권한 부여
                     </button>
