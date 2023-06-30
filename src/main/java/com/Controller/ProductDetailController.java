@@ -1,7 +1,7 @@
 package com.Controller;
 
+import com.Model.ProductRes;
 import com.Service.DisplayProductDetailService;
-import com.Model.Product;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -24,7 +24,7 @@ public class ProductDetailController extends HttpServlet {
         try{
             HttpSession session = request.getSession();
             int productId = Integer.parseInt(request.getParameter("id"));
-            Product product = displayProductDetailService.getProductById(productId);
+            ProductRes product = displayProductDetailService.getProductById(productId);
 
             request.setAttribute("product", product);
             request.setAttribute("customerIdx", session.getAttribute("customer_Idx"));

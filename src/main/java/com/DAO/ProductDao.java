@@ -1,6 +1,6 @@
 package com.DAO;
 
-import com.Model.Product;
+import com.Model.ProductRes;
 import com.utils.DatabaseConnector;
 
 import java.sql.*;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDao {
-    public List<Product> getProducts(String category) throws SQLException {
-        List<Product> products = new ArrayList<>();
+    public List<ProductRes> getProducts(String category) throws SQLException {
+        List<ProductRes> products = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -29,7 +29,7 @@ public class ProductDao {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Product product = extractProductFromResultSet(rs);
+                ProductRes product = extractProductFromResultSet(rs);
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -44,8 +44,8 @@ public class ProductDao {
         return products;
     }
 
-    public Product getProductById(int productIdx) throws SQLException {
-        Product product = null;
+    public ProductRes getProductById(int productIdx) throws SQLException {
+        ProductRes product = null;
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -72,8 +72,8 @@ public class ProductDao {
         return product;
     }
 
-    private Product extractProductFromResultSet(ResultSet rs) throws SQLException {
-        Product product = new Product();
+    private ProductRes extractProductFromResultSet(ResultSet rs) throws SQLException {
+        ProductRes product = new ProductRes();
         product.setId(String.valueOf(rs.getInt("loan_idx")));
         product.setName(rs.getString("loan_name"));
         product.setDescription(rs.getString("loan_description"));
