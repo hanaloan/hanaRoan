@@ -27,12 +27,12 @@
 
 </head>
 <style>
-    /*.image-container {*/
-    /*    width: 400px;*/
-    /*    height: 200px;*/
-    /*    position: relative;*/
-    /*    overflow: hidden;*/
-    /*}*/
+    .image-container {
+        width: 400px;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+    }
 
     .image-container img {
         width: 100%;
@@ -85,7 +85,6 @@
 </style>
 <body id="page-top">
 <div id="wrapper">
-    <%--    <%@ include file="/jsp/CustomerGNB/CustomerGNB.jsp" %>--%>
     <%@ include file="/jsp/Components/CustomerSidebar/CustomerSidebar.jsp" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -214,48 +213,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <%--                            <div class="container">--%>
-                            <%--                                <div class="col-6 justify-content-center flex-fill">--%>
-                            <%--                                    <%--%>
-                            <%--                                        ArrayList<LoginLendProduct> subsProducts = ((LoginPersonalProductRes) request.getAttribute("personalProducts")).getSubscribedProducts();--%>
-                            <%--                                        if (subsProducts.isEmpty() || subsProducts == null) {--%>
-                            <%--                                    %>--%>
-                            <%--                                    <p>이용중이신 상품이 없습니다.</p>--%>
-                            <%--                                    <% } else { %>--%>
-                            <%--                                    <div class="card info-container">--%>
-                            <%--                                        <div class="d-flex">--%>
-                            <%--                                            <button class="prev-button"--%>
-                            <%--                                                    onclick="previousElement('<%=subsProducts.size()%>')">--%>
-                            <%--                                                &#10094;--%>
-                            <%--                                            </button>--%>
-                            <%--                                            <div class="col">--%>
-                            <%--                                                <% for (int i = 0; i < subsProducts.size(); i++) { %>--%>
-                            <%--                                                <div id="subs<%=i%>" style="display: none">--%>
-                            <%--                                                    <strong><p class="info-name">--%>
-                            <%--                                                        상품명: <%= subsProducts.get(i).getProductName()%>--%>
-                            <%--                                                    </p></strong>--%>
-                            <%--                                                    <p class="info-amount">--%>
-                            <%--                                                        대출금액: <%= subsProducts.get(i).getLendAmount()%>--%>
-                            <%--                                                    </p>--%>
-                            <%--                                                    <p class="info-status">--%>
-                            <%--                                                        대출상태: <%= subsProducts.get(i).getLendStatus()%>--%>
-                            <%--                                                    </p>--%>
-                            <%--                                                    <p class="info-period">--%>
-                            <%--                                                        대출기간: <%= subsProducts.get(i).getStartDate()%>--%>
-                            <%--                                                        ~ <%= subsProducts.get(0).getEndDate()%>--%>
-                            <%--                                                    </p>--%>
-                            <%--                                                </div>--%>
-                            <%--                                                <% } %>--%>
-                            <%--                                            </div>--%>
-                            <%--                                            <button class="next-button"--%>
-                            <%--                                                    onclick="nextElement('<%=subsProducts.size()%>')">--%>
-                            <%--                                                &#10095;--%>
-                            <%--                                            </button>--%>
-                            <%--                                        </div>--%>
-                            <%--                                    </div>--%>
-                            <%--                                    <% } %>--%>
-                            <%--                                </div>--%>
-                            <%--                            </div>--%>
                         </div>
                     </div>
                 </div>
@@ -360,6 +317,9 @@
 </div>
 </div>
 </div>
+
+<!-- Footer -->
+<%@ include file="/jsp/Components/AdminFooter/AdminFooter.jsp" %>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
