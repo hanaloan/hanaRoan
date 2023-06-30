@@ -82,7 +82,7 @@
                             </div>
 
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <label for="empAuthorityName">권한:</label>
+                                <label for="empAuthorityName">Authority:</label>
                                 <select class="form-control " name="empAuthorityName" id="empAuthorityName">
                                     <option value="all">all</option>
                                     <option value="managingProducts">managing Products</option>
