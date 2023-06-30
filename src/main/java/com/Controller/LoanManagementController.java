@@ -1,6 +1,6 @@
 package com.Controller;
 
-import com.Model.Product;
+import com.Model.ProductRes;
 import com.Service.LoanManagementService;
 
 import javax.servlet.ServletException;
@@ -26,7 +26,7 @@ public class LoanManagementController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String option1 = req.getParameter("option1");
 
-        List<Product> loanProductsDto;
+        List<ProductRes> loanProductsDto;
 
         if (option1 == null || option1.isEmpty() || option1.equals("전체")){
             try {

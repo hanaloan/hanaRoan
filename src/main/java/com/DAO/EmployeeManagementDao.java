@@ -1,6 +1,6 @@
 package com.DAO;
 
-import com.Model.Employee;
+import com.Model.EmployeeRes;
 import com.Model.EmployeeManagementReq;
 import com.Model.LoginForAdminReq;
 import com.utils.DatabaseConnector;
@@ -13,9 +13,9 @@ public class EmployeeManagementDao {
 
     PreparedStatement ps=null; // SQL문 담당
 
-    public Employee currentEmployee(Integer cur_idx) throws SQLException {
+    public EmployeeRes currentEmployee(Integer cur_idx) throws SQLException {
 
-        Employee cur_emp = null;
+        EmployeeRes cur_emp = null;
         Connection conn = null;
         ResultSet rs=null;
         try {
@@ -29,7 +29,7 @@ public class EmployeeManagementDao {
             while(rs.next()) {
                 String name=rs.getString("name");
                 String levelName=rs.getString("authority_type");
-                cur_emp = new Employee(name, levelName);
+                cur_emp = new EmployeeRes(name, levelName);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -44,8 +44,8 @@ public class EmployeeManagementDao {
     }
 
 
-    public List<Employee> selectEmployees() {
-        List<Employee> employeeManagementList = new ArrayList<>();
+    public List<EmployeeRes> selectEmployees() {
+        List<EmployeeRes> employeeManagementList = new ArrayList<>();
         try{
             Connection conn = DatabaseConnector.getConnection();
             String sql="SELECT e.employee_idx, e.name, a.authority_type FROM employees e JOIN authority_types a ON a.authority_idx = e.authority_idx";
@@ -56,7 +56,7 @@ public class EmployeeManagementDao {
                 Integer idx=rs.getInt("employee_idx");
                 String name = rs.getString("name");
                 String levelName = rs.getString("authority_type");
-                Employee emp = new Employee(idx, name, levelName );
+                EmployeeRes emp = new EmployeeRes(idx, name, levelName );
                 employeeManagementList.add(emp); // 주석2 리스트에 담아주고
             }
             conn.close();

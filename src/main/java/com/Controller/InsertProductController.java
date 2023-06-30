@@ -1,6 +1,6 @@
 package com.Controller;
 
-import com.Model.Product;
+import com.Model.ProductRes;
 import com.Service.InsertProductService;
 
 import javax.servlet.ServletException;
@@ -36,7 +36,7 @@ public class InsertProductController extends HttpServlet {
             Integer period= Integer.valueOf(req.getParameter("period"));
             Integer minCredit= Integer.valueOf(req.getParameter("minCredit"));
 
-            Product product = new Product(productName, productTypeName,productInfo, interestRate, overdueInterestRate, limit, period, minCredit );
+            ProductRes product = new ProductRes(productName, productTypeName,productInfo, interestRate, overdueInterestRate, limit, period, minCredit );
             insertProductService.insertProduct(product);
             resp.sendRedirect("/jsp/LoanManagement/LoanManagement.jsp");
         } catch (Exception e) {

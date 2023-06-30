@@ -32,13 +32,13 @@ public class EmployeeManagementController extends HttpServlet {
             Integer employeeIdx = (Integer) session.getAttribute("employee_idx");
 
             //현재 관리자의 정보 가져오기
-            Employee cur_employee=employeeManageService.currentEmployee(employeeIdx);
+            EmployeeRes cur_employee=employeeManageService.currentEmployee(employeeIdx);
             req.setAttribute("empName", cur_employee.getEmpName());
             req.setAttribute("empAuthName", cur_employee.getEmpLevelName());
             req.setAttribute("empIdx", cur_employee.getEmpIdx());
 
             //모든 직원 데이터 가져오기
-            List<Employee> employeeManageResDto = employeeManageService.selectEmployees();
+            List<EmployeeRes> employeeManageResDto = employeeManageService.selectEmployees();
             req.setAttribute("employeeManageResDto", employeeManageResDto);
             req.getRequestDispatcher("jsp/ManageEmployee/EmployeeManagement.jsp").forward(req, resp);
 

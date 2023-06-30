@@ -1,7 +1,7 @@
 package com.Service;
 
 import com.DAO.InsertProductDao;
-import com.Model.Product;
+import com.Model.ProductRes;
 import com.utils.DatabaseConnector;
 
 import java.sql.Connection;
@@ -14,7 +14,7 @@ public class InsertProductService {
         insertProductDao = new InsertProductDao();
     }
 
-    public void insertProduct(Product product) throws SQLException {
+    public void insertProduct(ProductRes product) throws SQLException {
         insertProductDao.insertProduct(product);
     }
 

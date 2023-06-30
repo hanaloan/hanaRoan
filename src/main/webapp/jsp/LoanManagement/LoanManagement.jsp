@@ -1,5 +1,5 @@
-<%@ page import="com.Model.Product" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.Model.ProductRes" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -82,7 +82,7 @@
                             class="btn btn-secondary btn-icon-split mr-auto fa btn-h"
                             disabled
                             onclick="location.href='/jsp/LoanManagement/InsertProduct.jsp'">
-                        추가
+                        등록
                     </button>
 
                     <script>
@@ -135,7 +135,7 @@
                                     <th>이율</th>
                                     <th>연체이율</th>
                                     <th>최대한도</th>
-                                    <th>대출기한 [년]</th>
+                                    <th>대출기간 [년]</th>
                                     <th>최소신용점수</th>
                                     <th>삭제 작업</th>
 
@@ -160,9 +160,9 @@
 
                                 <%
                                     request.setCharacterEncoding("UTF-8");
-                                    List<Product> products = (List<Product>) request.getAttribute("loanProductsDto");
+                                    List<ProductRes> products = (List<ProductRes>) request.getAttribute("loanProductsDto");
                                     if (products != null && !products.isEmpty()) {
-                                        for (Product product : products) {
+                                        for (ProductRes product : products) {
                                 %>
                                 <tr>
                                     <td><%= product.getIdx() %>
@@ -187,7 +187,7 @@
                                         <form action="/LoanManagement" method="POST">
                                             <input type="hidden" name="productId" value="<%= product.getIdx() %>">
                                             <button class="btn mr-auto fa btn-outline-danger btn-w" type="submit"
-                                                    onclick="return confirm('Are you sure you want to delete this product?')">
+                                                    onclick="return confirm('정말 해당 상품을 삭제하시겠습니까?')">
                                                 삭제
                                             </button>
                                         </form>

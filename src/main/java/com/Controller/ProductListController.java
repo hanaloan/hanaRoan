@@ -6,7 +6,7 @@ package com.Controller;
 
 import com.Model.*;
 import com.Service.DisplayProductListService;
-import com.Model.Product;
+
 
 
 
@@ -42,7 +42,7 @@ public class ProductListController extends HttpServlet {
             String category = request.getParameter("category");
             if (category == null || category.isEmpty()) {category = "*";}
 
-            List<Product> productList = displayProductListService.getProducts(category);
+            List<ProductRes> productList = displayProductListService.getProducts(category);
             request.setAttribute("productList", productList);
             request.getRequestDispatcher("jsp/DisplayProduct/ProductList.jsp").forward(request, response);
 
