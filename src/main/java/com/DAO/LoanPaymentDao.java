@@ -126,12 +126,14 @@ public class LoanPaymentDao {
         PreparedStatement stmt = null;
         try {
             conn = DatabaseConnector.getConnection();
-            String sql = "INSERT INTO hanaroDB.loan_payments (payment_amount, payment_status, loan_lend_idx) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO hanaroDB.loan_payments (payment_amount, payment_status, loan_lend_idx)\n" +
+                        "SELECT ll.loan_amount + ROUND(loan_amount * lp.loan_interest_rate * lp.lend_period / 100, 2), 'in progress', lend_idx\n" +
+                        "FROM loan_lend as ll\n" +
+                        "INNER JOIN loan_products as lp ON ll.loan_idx = lp.loan_idx \n" +
+                        "WHERE lend_idx = ?;";
             stmt = conn.prepareStatement(sql);
 
-            stmt.setBigDecimal(1, BigDecimal.ZERO);
-            stmt.setString(2, "in progress");
-            stmt.setInt(3, lendId);
+            stmt.setInt(1, lendId);
 
             stmt.executeUpdate();
         } catch (ClassNotFoundException e) {

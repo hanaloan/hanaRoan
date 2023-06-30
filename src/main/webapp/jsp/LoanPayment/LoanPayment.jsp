@@ -173,6 +173,6 @@
 
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
-<script src="../../js/LoanPayment/LoanPayment.js"></script>
+<script src="/js/LoanPayment/LoanPayment.js"></script>
 </body>
 </html>
