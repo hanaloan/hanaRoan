@@ -35,6 +35,7 @@
         <a class="list-group-item list-group-item-action list-group-item-light p-3 font-weight-bold" href="productList">대출상품</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3 font-weight-bold" href="#!">조회</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3 font-weight-bold" href="#!">이체</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3 font-weight-bold" href="/jsp/CustomerHome/CustomerHomeRenew.jsp">뉴홈</a>
         <div style="position: absolute; bottom: 0;">
           <div class="list-group-item list-group-item-light p-3">
             <p id="time">10:00</p></div>
