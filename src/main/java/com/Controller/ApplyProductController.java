@@ -1,5 +1,6 @@
 package com.Controller;
 
+import com.Model.ApplyCustomerRes;
 import com.Model.ApplyProductRes;
 import com.Service.ApplyProductService;
 
@@ -25,13 +26,11 @@ public class ApplyProductController extends HttpServlet {
         try{
             HttpSession session = request.getSession();
             String productId = request.getParameter("productId");
-            String customerName = session.getAttribute("username").toString();
             String customerIdx = session.getAttribute("customer_Idx").toString();
-            ApplyProductRes applyProductRes = applyProductService.getApplyInfo(productId);
-
-            request.setAttribute("applyProductRes", applyProductRes);
-            request.setAttribute("customerName", customerName);
-            request.setAttribute("customerIdx", customerIdx);
+            ApplyProductRes productInfo = applyProductService.getApplyProductInfo(productId);
+            ApplyCustomerRes customerInfo = applyProductService.getApplyCustomerInfo(customerIdx);
+            request.setAttribute("productInfo", productInfo);
+            request.setAttribute("customerInfo", customerInfo);
             request.getRequestDispatcher("jsp/ApplyProduct/ApplyProduct.jsp").forward(request, response);
         } catch (SQLException e){
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
