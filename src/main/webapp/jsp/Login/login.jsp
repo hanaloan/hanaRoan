@@ -7,7 +7,7 @@
     <title>Login</title>
     <!-- 부트스트랩 CDN 링크 추가 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/login/login.css">
+    <link rel="stylesheet" href="css/login/login.css">
 
     <style>
         .login-form h2 {

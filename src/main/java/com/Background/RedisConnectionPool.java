@@ -23,7 +23,7 @@
 //            poolConfig.setNumTestsPerEvictionRun(10);
 //            poolConfig.setTimeBetweenEvictionRunsMillis(60000);
 //
-//            URI redisUri = new URI("redis://localhost:6379");
+//            URI redisUri = new URI("redis://localhost:6379"); //"redis://54.180.176.180:6379"
 //            pool = new JedisPool(poolConfig, redisUri.getHost(), redisUri.getPort());
 //        }catch (URISyntaxException e) {
 //            throw new RuntimeException("Invalid Redis URI");
@@ -49,7 +49,7 @@
 //
 //    // com/Service/RedisService의 인스턴스 생성하고 반환 -> 여기서 생성한 Jedis객체 이용해서
 //    public RedisService getRedisService() {
-//        return new RedisService(pool.getResource());
+//        return new RedisService(pool.getResource(), pool); // 수정한 부분
 //    }
 //
 //

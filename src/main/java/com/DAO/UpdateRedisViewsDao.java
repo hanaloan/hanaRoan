@@ -21,7 +21,7 @@ public class UpdateRedisViewsDao {
             conn = DatabaseConnector.getConnection();
 
             // SQL 쿼리 작성
-            String query = "UPDATE page_views SET page_views = ?, date = ? WHERE customer_idx = ?";
+            String query = "UPDATE page_views SET page_views = page_views + ?, date = ? WHERE customer_idx = ?";
             stmt = conn.prepareStatement(query);
 
             // RedisPageViewsReq 객체에서 페이지 뷰 정보를 가져와서 쿼리문에 바인딩
@@ -35,7 +35,6 @@ public class UpdateRedisViewsDao {
                 // 쿼리 실행
                 stmt.executeUpdate();
             }
-
 
         } catch (ClassNotFoundException e) {
             System.out.println("데이터베이스 연결 실패: " + e.getMessage());
@@ -52,7 +51,6 @@ public class UpdateRedisViewsDao {
             }
         }
     }
-
 
     public void insertUniqueVisitors(RedisViewsReq redisViewsReq) throws SQLException {
         Connection conn = null;
@@ -192,7 +190,7 @@ public class UpdateRedisViewsDao {
             conn = DatabaseConnector.getConnection();
 
             // SQL 쿼리 작성
-            String query = "update total_page_views set total_views = ? where date = ?";
+            String query = "UPDATE total_page_views SET total_views = total_views + ? WHERE date = ?";
             stmt = conn.prepareStatement(query);
             stmt.setInt(1, redisViewsReq.getTotalPageViews());
             stmt.setDate(2, java.sql.Date.valueOf(java.time.LocalDate.now()));
@@ -214,6 +212,5 @@ public class UpdateRedisViewsDao {
                 conn.close();
             }
         }
-
     }
 }

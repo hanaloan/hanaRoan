@@ -53,8 +53,6 @@ public class CustomerHomeController extends HttpServlet {
             e.printStackTrace();
         }
 
-
-        req.getRequestDispatcher("/jsp/CustomerHome/CustomerHome.jsp").forward(req, resp);
     }
 
     @Override
