@@ -1,8 +1,8 @@
 <%@ page import="com.DAO.EmployeeManagementDao" %>
-<%@ page import="com.Model.Employee" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="com.Model.EmployeeRes" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -206,11 +206,11 @@
                                 </tfoot>
                                 <%
                                     request.setCharacterEncoding("UTF-8");
-                                    List<Employee> employees = (List<Employee>) request.getAttribute("employeeManageResDto");
+                                    List<EmployeeRes> employees = (List<EmployeeRes>) request.getAttribute("employeeManageResDto");
                                     if (employees != null) {
                                         for (Object obj : employees) {
-                                            if (obj instanceof Employee) {
-                                                Employee employee = (Employee) obj;
+                                            if (obj instanceof EmployeeRes) {
+                                                EmployeeRes employee = (EmployeeRes) obj;
                                 %>
 
                                 <tr>
@@ -296,11 +296,11 @@
     //전체 권한 비활성화 상태에서 활성화로 전환 시키기
     <%
         request.setCharacterEncoding("UTF-8");
-        employees = (List<Employee>) request.getAttribute("employeeManageResDto");
+        employees = (List<EmployeeRes>) request.getAttribute("employeeManageResDto");
         if (employees != null) {
             for (Object obj : employees) {
-                if (obj instanceof Employee) {
-                    Employee employee = (Employee) obj;
+                if (obj instanceof EmployeeRes) {
+                    EmployeeRes employee = (EmployeeRes) obj;
 
     %>
 
