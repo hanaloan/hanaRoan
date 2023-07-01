@@ -1,3 +1,6 @@
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +24,6 @@
 
     <!-- Core plugin JavaScript-->
     <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="../../js/DashBoard/DashBoard.js"></script>
 
 </head>
 <body id="page-top">
@@ -31,7 +33,6 @@
 
     <!-- Sidebar -->
     <%@ include file="/jsp/Components/AdminSidebar/AdminSidebar.jsp" %>
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -51,6 +52,17 @@
 
                 <!-- Content Row -->
                 <div class="row">
+                    <% NumberFormat numberFormat = NumberFormat.getInstance(Locale.getDefault());
+                       String loanAmount = numberFormat.format(Float.parseFloat(request.getAttribute("loanAmount").toString()));
+                       String overdueLoanAmount = numberFormat.format(Float.parseFloat(request.getAttribute("overdueLoanAmount").toString()));
+                       String countPendingLends = request.getAttribute("countPendingLends").toString();
+                       Float overduePercentage = Float.parseFloat(request.getAttribute("overduePercentage").toString());
+                       Map<String, String> ratioOfLoanType = (Map<String, String>) request.getAttribute("ratioOfLoanType");
+                       String monthlyRentPercentage = ratioOfLoanType.get("월세대출") == null ? "0" : ratioOfLoanType.get("월세대출");
+                       String yearlyRentPercentage = ratioOfLoanType.get("전세대출") == null ? "0" :  ratioOfLoanType.get("전세대출");
+                       String collateralRentPercentage = ratioOfLoanType.get("담보대출") == null ? "0" : ratioOfLoanType.get("담보대출");
+
+                    %>
 
                     <!-- 총 대출 금액 (진행 중) Card -->
                     <div class="col-xl-3 col-md-6 mb-4">
@@ -62,7 +74,7 @@
                                             총 대출 금액 (진행 중)
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">₩ <span
-                                                id="loanAmount"></span></div>
+                                                id="loanAmount"><%= loanAmount %></span></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -82,7 +94,7 @@
                                             총 연체 금액
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">₩ <span
-                                                id="overdueLoanAmount"></span></div>
+                                                id="overdueLoanAmount"><%= overdueLoanAmount %></span></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -103,14 +115,14 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
                                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><span
-                                                        id="getOverduePercentage"></span> %
+                                                        id="getOverduePercentage"><%= overduePercentage %></span> %
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="progress progress-sm mr-2">
                                                     <div id="card-pg-bar" class="progress-bar bg-info"
                                                          role="progressbar"
-                                                         style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                         style="width: <%= overduePercentage %>%" aria-valuenow="50" aria-valuemin="0"
                                                          aria-valuemax="100"></div>
                                                 </div>
                                             </div>
@@ -135,7 +147,7 @@
                                                 승인 대기 중
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><span
-                                                    id="getCountPendingLends"></span></div>
+                                                    id="getCountPendingLends"><%= countPendingLends %></span></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -266,25 +278,25 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="small font-weight-bold">월세 대출<span
-                                        id="monthlyRentPercentage" class="float-right"></span></h4>
+                                        id="monthlyRentPercentage" class="float-right"><%= monthlyRentPercentage %>%</span></h4>
                                 <div class="progress mb-4">
                                     <div id="monthlyRentRentBar" class="progress-bar bg-danger" role="progressbar"
-                                         style="width: 20%"
-                                         aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                         style="width: <%= monthlyRentPercentage%>%"
+                                         aria-valuenow="<%= monthlyRentPercentage %>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <h4 class="small font-weight-bold">전세 대출<span
-                                        id="yearlyRentPercentage" class="float-right"></span></h4>
+                                        id="yearlyRentPercentage" class="float-right"><%= yearlyRentPercentage%>%</span></h4>
                                 <div class="progress mb-4">
                                     <div id="monthlyRentBar" class="progress-bar bg-warning" role="progressbar"
-                                         style="width: 40%"
-                                         aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                         style="width: <%= yearlyRentPercentage%>%"
+                                         aria-valuenow="<%= yearlyRentPercentage%>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <h4 class="small font-weight-bold">담보 대출<span id="collateralRentPercentage"
-                                                                              class="float-right"></span></h4>
+                                                                              class="float-right"><%= collateralRentPercentage %>%</span></h4>
                                 <div class="progress mb-4">
                                     <div id="collateralRentBar" class="progress-bar" role="progressbar"
-                                         style="width: 60%"
-                                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                         style="width: <%= collateralRentPercentage %>%"
+                                         aria-valuenow="<%= collateralRentPercentage %>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                         </div>
