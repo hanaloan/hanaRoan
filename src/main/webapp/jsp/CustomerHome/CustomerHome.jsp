@@ -2,6 +2,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="com.Model.*" %>
+<%@ page import="java.math.BigDecimal" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -120,7 +121,10 @@
                                                     <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                         수입
                                                     </div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><%= request.getAttribute("income") %>
+                                                    <%
+                                                        String incomeStr = String.format("%,d", (int) request.getAttribute("income"));
+                                                    %>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><%= incomeStr %>원
                                                     </div>
                                                 </div>
                                                 <div class="col-auto">
@@ -138,7 +142,7 @@
                                                     <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                         신용점수
                                                     </div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><%= request.getAttribute("credit") %>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><%= request.getAttribute("credit") %>점
                                                     </div>
                                                 </div>
                                                 <div class="col-auto">
@@ -190,20 +194,28 @@
                                                     <div id="subs<%=i%>" style="display: none">
                                                         <dl class="row">
                                                             <dt class="col-sm-2">상 품 명</dt>
-                                                            <dd class="col-sm-10"><%= subsProducts.get(i).getProductName()%></dd>
+                                                            <dd class="col-sm-10"><%= subsProducts.get(i).getProductName()%>
+                                                            </dd>
                                                         </dl>
                                                         <dl class="row">
                                                             <dt class="col-sm-2">대출금액</dt>
-                                                            <dd class="col-sm-10"><%= subsProducts.get(i).getLendAmount()%></dd>
+                                                            <%
+                                                                BigDecimal lendAmount = subsProducts.get(i).getLendAmount();
+                                                                String lendAmountStr = String.format("%,.0f", lendAmount);
+                                                            %>
+                                                            <dd class="col-sm-10"><%= lendAmountStr %>원
+                                                            </dd>
                                                         </dl>
                                                         <dl class="row">
                                                             <dt class="col-sm-2">대출상태</dt>
-                                                            <dd class="col-sm-10"><%= subsProducts.get(i).getLendStatus()%></dd>
+                                                            <dd class="col-sm-10"><%= subsProducts.get(i).getLendStatus()%>
+                                                            </dd>
                                                         </dl>
                                                         <dl class="row mb-0">
                                                             <dt class="col-sm-2">대출기간</dt>
                                                             <dd class="col-sm-10"><%= subsProducts.get(i).getStartDate()%>
-                                                                ~ <%= subsProducts.get(0).getEndDate()%></dd>
+                                                                ~ <%= subsProducts.get(0).getEndDate()%>
+                                                            </dd>
                                                         </dl>
                                                     </div>
                                                     <% } %>

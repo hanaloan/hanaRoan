@@ -1,3 +1,5 @@
+<%@ page import="java.math.BigDecimal" %>
+<jsp:useBean id="product" scope="request" type="com.Model.ProductRes"/>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -19,6 +21,7 @@
 
     <!-- Core plugin JavaScript-->
     <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
 </head>
 <body id="page-top">
 
@@ -37,37 +40,43 @@
             <%@ include file="/jsp/Components/CustomerTopbar/CustomerTopbar.jsp" %>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col d-flex justify-content-center align-items-center" >
+                    <div class="col d-flex justify-content-center align-items-center">
                         <div class="card col-12 p-0">
                             <div class="card-header p-3 bg-info text-white" style="width: 100%;">
                                 <div class="p-0 bg-info text-white"
                                      style="font-size: 1.5rem; font-weight: bold;">${product.name}</div>
                             </div>
                             <div class="card-body">
-                                <div class="card-title pb-2" style=" border-bottom: 1px solid #858796;"><h5>${product.description}</h5></div>
+                                <div class="card-title pb-2" style=" border-bottom: 1px solid #858796;">
+                                    <h5>${product.description}</h5></div>
 
                                 <dl class="row">
                                     <dt class="col-sm-2">최소신용점수</dt>
-                                    <dd class="col-sm-10">${product.minCredit}</dd>
+                                    <dd class="col-sm-10">${product.minCredit}점</dd>
                                 </dl>
+                                <%
+                                    BigDecimal lendLimit = product.getLendLimit();
+                                    String lendLimitStr = String.format("%,.0f", lendLimit);
+                                %>
                                 <dl class="row">
                                     <dt class="col-sm-2">최대대출한도</dt>
-                                    <dd class="col-sm-10">${product.lendLimit}</dd>
+                                    <dd class="col-sm-10"><%= lendLimitStr %>원</dd>
                                 </dl>
                                 <dl class="row">
                                     <dt class="col-sm-2">최대대출기간</dt>
-                                    <dd class="col-sm-10">${product.loanPeriod}</dd>
+                                    <dd class="col-sm-10">${product.loanPeriod}년</dd>
                                 </dl>
                                 <dl class="row">
                                     <dt class="col-sm-2">이자율</dt>
-                                    <dd class="col-sm-10">${product.interestRate}</dd>
+                                    <dd class="col-sm-10">${product.interestRate}%</dd>
                                 </dl>
                                 <dl class="row">
                                     <dt class="col-sm-2">연체이자율</dt>
-                                    <dd class="col-sm-10">${product.overdueInterestRate}</dd>
+                                    <dd class="col-sm-10">${product.overdueInterestRate}%</dd>
                                 </dl>
                                 <div class="card-title" style=" border-bottom: 1px solid #858796;"></div>
-                                <button type="button" class="btn btn-secondary" name="applyProductRes" style="margin-top: 10px;"
+                                <button type="button" class="btn btn-secondary" name="applyProductRes"
+                                        style="margin-top: 10px;"
                                         onclick="applyConfirm('${product.name}', ${product.id})">대출신청
                                 </button>
                             </div>
@@ -89,5 +98,6 @@
             return false;
         }
     }
+
 </script>
 </html>

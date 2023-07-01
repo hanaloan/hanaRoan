@@ -91,7 +91,7 @@
                                 <!-- Display product card -->
                                 <div class="card bord my-2">
                                     <div class="card-body">
-                                        <h5 class="card-title"><a class="text-info" href="productDetail?id=<%= id %>"><%= name %>
+                                        <h5 class="card-title"><a class="text-info" href="productDetail?id=<%= id %>&product=<%= product %>"><%= name %>
                                         </a></h5>
                                         <p class="card-text" style="font-size: 15px;"><%= description %>
                                         </p>
