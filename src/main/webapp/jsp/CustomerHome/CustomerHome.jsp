@@ -109,7 +109,7 @@
                     <div class="col-lg-12 mb-6">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">고객요약정보</h6>
+                                <h6 class="m-0 font-weight-bold text-info">고객요약정보</h6>
                             </div>
                             <div class="card-body" style="display: flex">
                                 <div class="col-xl-4 col-md-6 mb-4">
@@ -117,7 +117,7 @@
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
-                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                         수입
                                                     </div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800"><%= request.getAttribute("income") %>
@@ -135,7 +135,7 @@
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
-                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                         신용점수
                                                     </div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800"><%= request.getAttribute("credit") %>
@@ -154,7 +154,7 @@
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
-                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                         고객번호
                                                     </div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800"><%= request.getAttribute("customer_idx") %>
@@ -226,7 +226,7 @@
                     <div class="col-lg-12 mb-6">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">고객 맞춤 추천 상품</h6>
+                                <h6 class="m-0 font-weight-bold text-info">고객 맞춤 추천 상품</h6>
                             </div>
                             <%
                                 List<LoginLoanProduct> recommendedProducts = ((LoginRecommendationRes) request.getAttribute("recoRes")).getRecommendedProducts();
