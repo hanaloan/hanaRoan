@@ -2,110 +2,37 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="com.Model.*" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
-    <%--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">--%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>홈 < 하나론 고객</title>
-
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
     <script src="../../vendor/jquery/jquery.min.js"></script>
     <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
     <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-
+    <link rel="stylesheet" href="/css/CustomerHome/CustomerHome.css">
 </head>
-<style>
-    .image-container {
-        width: 400px;
-        height: 200px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .image-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .carousel-item {
-        height: 300px;
-    }
-
-    .carousel-item p {
-        overflow: auto;
-    }
-
-    .prev-button,
-    .next-button {
-        font-size: 24px;
-        color: black;
-        /*background-color: rgba(0, 0, 0, 0.5);*/
-        padding: 8px 12px;
-        /*border-radius: 50%;*/
-        cursor: pointer;
-        margin: 0 5px;
-    }
-
-    button {
-        all: unset;
-    }
-
-    .carousel-item-text {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 8px;
-        color: #fff;
-        font-weight: bold;
-        font-size: 16px;
-    }
-
-    .carousel-item-text .loan-name {
-        margin-right: 10px;
-    }
-
-    .carousel-item-text .loan-interest-rate {
-        margin-left: 10px;
-    }
-</style>
 <body id="page-top">
 <div id="wrapper">
     <%@ include file="/jsp/Components/CustomerSidebar/CustomerSidebar.jsp" %>
-    <!-- Content Wrapper -->
+    <%NumberFormat numberFormat = NumberFormat.getInstance(Locale.getDefault());%>
     <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
         <div id="content">
-
-            <!-- Topbar -->
             <%@ include file="/jsp/Components/AdminTopbar/AdminTopbar.jsp" %>
-
-            <!-- Begin Page Content -->
             <div class="container-fluid">
-                <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">환영합니다. <%= request.getAttribute("username")%>님!</h1>
                 </div>
-
-
-                <!-- 고객요약정보 -->
                 <div class="row">
-                    <!-- Content Column -->
                     <div class="col-lg-12 mb-6">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
@@ -117,14 +44,11 @@
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
-                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                        수입
-                                                    </div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><%= request.getAttribute("income") %>
-                                                    </div>
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">수입</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><%= numberFormat.format(Float.parseFloat(request.getAttribute("income").toString())) %>원</div>
                                                 </div>
                                                 <div class="col-auto">
-                                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                                    <i class="fas fa-won-sign fa-2x text-gray-300"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -135,11 +59,8 @@
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col mr-2">
-                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                        신용점수
-                                                    </div>
-                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><%= request.getAttribute("credit") %>
-                                                    </div>
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">신용점수</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><%= request.getAttribute("credit") %>점</div>
                                                 </div>
                                                 <div class="col-auto">
                                                     <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -148,7 +69,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-xl-4 col-md-6 mb-4">
                                     <div class="card border-left-info shadow h-100 py-2">
                                         <div class="card-body">
@@ -168,7 +88,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="card-body" style="display: flex">
                                 <div class="col-xl-8 col-md-6 mb-4">
                                     <div class="card mb-4">
@@ -194,7 +113,7 @@
                                                         </dl>
                                                         <dl class="row">
                                                             <dt class="col-sm-2">대출금액</dt>
-                                                            <dd class="col-sm-10"><%= subsProducts.get(i).getLendAmount()%></dd>
+                                                            <dd class="col-sm-10"><%= numberFormat.format(Float.parseFloat(subsProducts.get(i).getLendAmount().toString()))%>원</dd>
                                                         </dl>
                                                         <dl class="row">
                                                             <dt class="col-sm-2">대출상태</dt>
@@ -220,8 +139,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 캐러셀 -->
                 <div class="row">
                     <div class="col-lg-12 mb-6">
                         <div class="card shadow mb-4">
@@ -242,24 +159,26 @@
                                     </ol>
                                     <div class="carousel-inner">
                                         <div class="carousel-item col-lg-12 active">
-                                            <img src="<%=recommendedProducts.get(0).getLoanImage()%>"
-                                                 class="d-block w-100"
-                                                 alt="image0">
-                                            <p><%=recommendedProducts.get(0).getLoanName()%>
-                                            </p>
-                                            <p><%=recommendedProducts.get(0).getLoanInterestRate()%>%</p>
-                                        </div>
-                                        <%for (int i = 1; i < recommendedProducts.size(); i++) {%>
-                                        <div class="carousel-item col-lg-12">
-                                            <img src="<%=recommendedProducts.get(i).getLoanImage()%>"
-                                                 class="d-block w-100"
-                                                 alt="image<%=i%>">
-                                            <p class="carousel-item-text">
-                                                <span class="loan-name"><%=recommendedProducts.get(i).getLoanName()%></span>
-                                                <span class="loan-interest-rate"><%=recommendedProducts.get(i).getLoanInterestRate()%>%</span>
-                                            </p>
-                                        </div>
+                                            <a href="productDetail?id=<%=recommendedProducts.get(0).getLoanId()%>">
+                                                <img src="<%=recommendedProducts.get(0).getLoanImage()%>"class="d-block h-75 w-100" alt="image0"></a>
 
+                                            <p class="carousel-item-text">
+                                                <span class="loan-name"><%=recommendedProducts.get(0).getLoanName()%></span>
+                                                <span class="loan-interest-rate"><%=recommendedProducts.get(0).getLoanInterestRate()%>%</span>
+                                            </p>
+                                        </div>
+                                        <%for (int i = 1; i < recommendedProducts.size(); i++) {
+                                            LoginLoanProduct product = recommendedProducts.get(i);
+                                        %>
+                                        <div class="carousel-item col-lg-12">
+                                            <a href="productDetail?id=<%=product.getLoanId()%>">
+                                                <img src="<%=product.getLoanImage()%>"class="d-block h-75 w-100" alt="image<%=i%>"></a>
+
+                                            <p class="carousel-item-text">
+                                                <span class="loan-name"><%=product.getLoanName()%></span>
+                                                <span class="loan-interest-rate"><%=product.getLoanInterestRate()%>%</span>
+                                            </p>
+                                        </div>
                                         <% } %>
                                     </div>
                                 </div>
@@ -321,12 +240,11 @@
 </div>
 </div>
 </div>
-
-<!-- Footer -->
+<%@ include file="/jsp/Components/LogoutModal/LogoutModal.jsp" %>
 <%@ include file="/jsp/Components/AdminFooter/AdminFooter.jsp" %>
 
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="../../js/sb-admin-2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
@@ -366,10 +284,9 @@
         imageElement.alt = "Image " + currentImageIndex;
     }
 
-    // Show the popups automatically when the page loads
     $(document).ready(function () {
         $('.carousel').carousel({
-            interval: 1000 // Slide interval in milliseconds (1 second)
+            interval: 3000
         });
         $('#subs0').css('display', '');
         <% if (alertRes != null && alertRes.getAlertMessageRes() != null) {
