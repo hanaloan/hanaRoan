@@ -6,14 +6,14 @@
 <body>
 <div id="sidebar">
     <ul id="accordionSidebar" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"><a
-            class="sidebar-brand d-flex align-items-center justify-content-center" href="/jsp/DashBoard/DashBoard.jsp">
+            class="sidebar-brand d-flex align-items-center justify-content-center" href="/DashBoard">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
         <div class="sidebar-brand-text mx-3">HanaRoan</div>
     </a>
         <li class="nav-item">
-            <a class="nav-link" href="/jsp/DashBoard/DashBoard.jsp">
+            <a class="nav-link" href="/DashBoard">
                 <i class="fas fa-fw fa-table"></i>
                 <span>대시보드</span></a>
         </li>
@@ -43,12 +43,12 @@
                 <span>상환관리</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/jsp/Report/Report.jsp">
+            <a class="nav-link" href="">
                 <i class="fas fa-fw fa-table"></i>
                 <span>보고서</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/jsp/AdminSystemSetting/AdminSystemSetting.jsp">
+            <a class="nav-link" href="">
                 <i class="fas fa-fw fa-table"></i>
                 <span>시스템 설정</span></a>
         </li>
