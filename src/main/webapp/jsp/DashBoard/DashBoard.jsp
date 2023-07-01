@@ -341,9 +341,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <%@ include file="/jsp/Components/LogoutModal/LogoutModal.jsp" %>
-
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
 

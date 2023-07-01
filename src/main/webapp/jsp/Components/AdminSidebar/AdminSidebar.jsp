@@ -2,43 +2,48 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        .nav-item:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
 <div id="sidebar">
     <ul id="accordionSidebar" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"><a
-            class="sidebar-brand d-flex align-items-center justify-content-center" href="/DashBoard">
+            class="sidebar-brand d-flex align-items-center justify-content-center" href="DashBoard">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
         <div class="sidebar-brand-text mx-3">HanaRoan</div>
     </a>
         <li class="nav-item">
-            <a class="nav-link" href="/DashBoard">
+            <a class="nav-link" href="DashBoard">
                 <i class="fas fa-fw fa-table"></i>
                 <span>대시보드</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/jsp/ManageEmployee/EmployeeManagement.jsp">
+            <a class="nav-link" href="EmployeeManagement">
                 <i class="fas fa-fw fa-table"></i>
                 <span>직원관리</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/jsp/CustomerManagement/CustomerManagement.jsp">
+            <a class="nav-link" href="CustomerManagement">
                 <i class="fas fa-fw fa-table"></i>
                 <span>고객관리</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/jsp/LoanApproval/LoanApproval.jsp">
+            <a class="nav-link" href="LoanApproval">
                 <i class="fas fa-fw fa-table"></i>
                 <span>승인관리</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/jsp/LoanManagement/LoanManagement.jsp">
+            <a class="nav-link" href="LoanManagement">
                 <i class="fas fa-fw fa-table"></i>
                 <span>대출관리</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/loanPayment">
+            <a class="nav-link" href="loanPayment">
                 <i class="fas fa-fw fa-table"></i>
                 <span>상환관리</span></a>
         </li>
