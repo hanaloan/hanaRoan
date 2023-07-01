@@ -7,7 +7,6 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <%--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">--%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -53,9 +52,7 @@
     .next-button {
         font-size: 24px;
         color: black;
-        /*background-color: rgba(0, 0, 0, 0.5);*/
         padding: 8px 12px;
-        /*border-radius: 50%;*/
         cursor: pointer;
         margin: 0 5px;
     }
@@ -244,11 +241,11 @@
                                 List<LoginLoanProduct> recommendedProducts = ((LoginRecommendationRes) request.getAttribute("recoRes")).getRecommendedProducts();
                                 if (!recommendedProducts.isEmpty() && recommendedProducts != null) {
                             %>
-                            <div class="card shadow mb-4">
+                            <div class="card-body p-0">
                                 <div id="carouselExample" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
                                         <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
-                                        <%for (int i = 1; i < recommendedProducts.size(); i++) {%>
+                                        <%for (int i = 1; i < recommendedProducts.size() && i < 3; i++) {%>
                                         <li data-target="#carouselExample" data-slide-to="<%=i%>"></li>
                                         <% } %>
                                     </ol>
@@ -257,11 +254,12 @@
                                             <img src="<%=recommendedProducts.get(0).getLoanImage()%>"
                                                  class="d-block w-100"
                                                  alt="image0">
-                                            <p><%=recommendedProducts.get(0).getLoanName()%>
+                                            <p class="carousel-item-text">
+                                                <span class="loan-name"><%=recommendedProducts.get(0).getLoanName()%></span>
+                                                <span class="loan-interest-rate"><%=recommendedProducts.get(0).getLoanInterestRate()%>%</span>
                                             </p>
-                                            <p><%=recommendedProducts.get(0).getLoanInterestRate()%>%</p>
                                         </div>
-                                        <%for (int i = 1; i < recommendedProducts.size(); i++) {%>
+                                        <%for (int i = 1; i < recommendedProducts.size() && i < 3; i++) {%>
                                         <div class="carousel-item col-lg-12">
                                             <img src="<%=recommendedProducts.get(i).getLoanImage()%>"
                                                  class="d-block w-100"
