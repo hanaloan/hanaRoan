@@ -2,6 +2,11 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        .nav-item:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
 <div id="sidebar">
