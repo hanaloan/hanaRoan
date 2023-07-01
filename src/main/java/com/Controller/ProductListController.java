@@ -44,7 +44,7 @@ public class ProductListController extends HttpServlet {
 
             List<ProductRes> productList = displayProductListService.getProducts(category);
             request.setAttribute("productList", productList);
-            request.getRequestDispatcher("jsp/DisplayProduct/ProductList.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/DisplayProduct/ProductList.jsp").forward(request, response);
 
 
 //            redisService = RedisConnectionPool.getInstance().getRedisService();
