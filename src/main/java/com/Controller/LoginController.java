@@ -48,7 +48,7 @@ public class LoginController extends HttpServlet {
                     session.setAttribute("authType", loginForAdminRes.getAuthorityType());
                     //int ses=(int) session.getAttribute("employee_idx");
 
-                    resp.sendRedirect("/jsp/DashBoard/DashBoard.jsp");
+                    resp.sendRedirect("/DashBoard");
 
                 } else {
                     String errorMessage = "Name과 Password를 확인해주세요";

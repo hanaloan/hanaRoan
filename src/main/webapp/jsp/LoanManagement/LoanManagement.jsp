@@ -187,7 +187,7 @@
                                         <form action="/LoanManagement" method="POST">
                                             <input type="hidden" name="productId" value="<%= product.getIdx() %>">
                                             <button class="btn mr-auto fa btn-outline-danger btn-w" type="submit"
-                                                    onclick="return confirm('정말 해당 상품을 삭제하시겠습니까?')">
+                                                    onclick="return confirmDeleteLoan('${product.getLoanTypeName}', '${authType}')">
                                                 삭제
                                             </button>
                                         </form>
@@ -238,6 +238,27 @@
 
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
+
+<script>
+    function confirmDeleteLoan(productName, authType){
+        if(authType === "managing Customers" || authType === "read only" || authType === "none"){
+            alert("권한이 없습니다.");
+            return false;
+        }
+        else{
+            var confirmMsg = productName + " 상품을 삭제하시겠습니까?";
+            var userChoice = confirm(confirmMsg);
+            if(userChoice){
+                alert(productName + " 상품이 삭제되었습니다.");
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+    }
+</script>
 
 </body>
 </html>
