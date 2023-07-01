@@ -27,25 +27,13 @@
 
 </head>
 <style>
-    .image-container {
-        width: 400px;
-        height: 200px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .image-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
     .carousel-item {
         height: 300px;
     }
 
-    .carousel-item p {
-        overflow: auto;
+    .carousel-item > img {
+        height: 300px;
+        object-fit: cover;
     }
 
     .prev-button,
@@ -243,33 +231,33 @@
                             %>
                             <div class="card-body p-0">
                                 <div id="carouselExample" class="carousel slide" data-ride="carousel">
-                                    <ol class="carousel-indicators">
+                                    <ol class="carousel-indicators m-0">
                                         <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
                                         <%for (int i = 1; i < recommendedProducts.size() && i < 3; i++) {%>
                                         <li data-target="#carouselExample" data-slide-to="<%=i%>"></li>
                                         <% } %>
                                     </ol>
                                     <div class="carousel-inner">
-                                        <div class="carousel-item col-lg-12 active">
+                                        <div class="carousel-item col-lg-12 active px-0">
                                             <img src="<%=recommendedProducts.get(0).getLoanImage()%>"
                                                  class="d-block w-100"
-                                                 alt="image0">
-                                            <p class="carousel-item-text">
+                                                 alt="image0"
+>
+                                            <p class="carousel-item-text mb-4">
                                                 <span class="loan-name"><%=recommendedProducts.get(0).getLoanName()%></span>
                                                 <span class="loan-interest-rate"><%=recommendedProducts.get(0).getLoanInterestRate()%>%</span>
                                             </p>
                                         </div>
                                         <%for (int i = 1; i < recommendedProducts.size() && i < 3; i++) {%>
-                                        <div class="carousel-item col-lg-12">
+                                        <div class="carousel-item col-lg-12 px-0">
                                             <img src="<%=recommendedProducts.get(i).getLoanImage()%>"
                                                  class="d-block w-100"
                                                  alt="image<%=i%>">
-                                            <p class="carousel-item-text">
+                                            <p class="carousel-item-text mb-4">
                                                 <span class="loan-name"><%=recommendedProducts.get(i).getLoanName()%></span>
                                                 <span class="loan-interest-rate"><%=recommendedProducts.get(i).getLoanInterestRate()%>%</span>
                                             </p>
                                         </div>
-
                                         <% } %>
                                     </div>
                                 </div>
