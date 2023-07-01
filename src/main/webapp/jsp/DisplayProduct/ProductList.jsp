@@ -35,7 +35,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <%@ include file="/jsp/Components/AdminTopbar/AdminTopbar.jsp" %>
+            <%@ include file="/jsp/Components/CustomerTopbar/CustomerTopbar.jsp" %>
             <div class="container-fluid">
                 <div class="row">
 
@@ -45,20 +45,20 @@
                                 <nav class="navbar navbar-expand-md navbar-light justify-content-center">
                                     <ul class="navbar-nav">
                                         <li class="nav-item">
-                                            <a class="nav-link btn btn-primary text-white mx-4"
+                                            <a class="nav-link btn btn-info text-white mx-4"
                                                href="productList"
                                                style="width: 150px;">전체</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link btn btn-primary text-white mx-4"
+                                            <a class="nav-link btn btn-info text-white mx-4"
                                                href="productList?category=1" style="width: 150px;">전세</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link btn btn-primary text-white mx-4"
+                                            <a class="nav-link btn btn-info text-white mx-4"
                                                href="productList?category=2" style="width: 150px;">월세</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link btn btn-primary text-white mx-4"
+                                            <a class="nav-link btn btn-info text-white mx-4"
                                                href="productList?category=3" style="width: 150px;">담보</a>
                                         </li>
                                     </ul>
@@ -91,7 +91,7 @@
                                 <!-- Display product card -->
                                 <div class="card bord my-2">
                                     <div class="card-body">
-                                        <h5 class="card-title"><a href="productDetail?id=<%= id %>"><%= name %>
+                                        <h5 class="card-title"><a class="text-info" href="productDetail?id=<%= id %>"><%= name %>
                                         </a></h5>
                                         <p class="card-text" style="font-size: 15px;"><%= description %>
                                         </p>

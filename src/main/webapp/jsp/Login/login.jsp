@@ -30,7 +30,6 @@
         <h2 class="text-center">Login</h2>
 
 
-
         <!-- 오류 메시지 출력 -->
         <c:if test="${not empty errorMessage}">
             <div class="error-box">
@@ -62,7 +61,8 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                       required>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block" value="Login">Log in</button>
@@ -84,7 +84,7 @@
     var userTypeHidden = document.getElementById('userTypeHidden');
 
     // 폼이 제출될 때 실행될 이벤트 핸들러를 설정
-    form.onsubmit = function(e) {
+    form.onsubmit = function (e) {
         // 관리자 라디오 버튼이 선택된 경우 숨겨진 필드의 값을 변경
         if (userTypeAdmin.checked) {
             userTypeHidden.value = "admin";

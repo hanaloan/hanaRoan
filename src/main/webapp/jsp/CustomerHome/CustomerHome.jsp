@@ -93,7 +93,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <%@ include file="/jsp/Components/AdminTopbar/AdminTopbar.jsp" %>
+            <%@ include file="/jsp/Components/CustomerTopbar/CustomerTopbar.jsp" %>
 
             <!-- Begin Page Content -->
             <div class="container-fluid">

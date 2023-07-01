@@ -34,13 +34,13 @@
         <div id="content">
 
             <!-- Topbar -->
-            <%@ include file="/jsp/Components/AdminTopbar/AdminTopbar.jsp" %>
+            <%@ include file="/jsp/Components/CustomerTopbar/CustomerTopbar.jsp" %>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col d-flex justify-content-center align-items-center" >
                         <div class="card col-12 p-0">
-                            <div class="card-header p-3 bg-primary text-white" style="width: 100%;">
-                                <div class="p-0 bg-primary text-white"
+                            <div class="card-header p-3 bg-info text-white" style="width: 100%;">
+                                <div class="p-0 bg-info text-white"
                                      style="font-size: 1.5rem; font-weight: bold;">${product.name}</div>
                             </div>
                             <div class="card-body">
