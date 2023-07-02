@@ -1,6 +1,5 @@
 package com.Service;
 
-import com.DAO.CustomerManagementDao;
 import com.DAO.LoanApprovalDao;
 import com.Model.CustomerManagement;
 import com.Model.CustomerManagementReq;

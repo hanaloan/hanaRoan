@@ -10,122 +10,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>직원 관리</title>
-
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
-
-    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-    <style>
-        select {
-            border: none;
-            outline: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-color: transparent;
-            padding: 0;
-        }
-
-        .container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .button-container {
-            text-align: right;
-        }
-
-        .btn-h {
-            height: 35px;
-            width: 150px;
-            text-align: center;
-            align-items: center;
-        }
-    </style>
-
+    <link href="/css/EmployeeManagement/EmployeeManagement.css" rel="stylesheet">
 </head>
 <body id="page-top">
-
-<script>
-    window.onload = function () {
-        if (window.location.pathname !== '/EmployeeManagement') {
-            location.href = '/EmployeeManagement';
-        }
-
-        // 페이지 로드 시 드롭다운 버튼 상태 업데이트
-        var selectElements = document.querySelectorAll("select[id^='auth-']");
-        for (var i = 0; i < selectElements.length; i++) {
-            updateAuthStatus(selectElements[i]);
-        }
-
-        var k = '<%= request.getAttribute("empAuthName") %>';
-        var updateEmployeeBtn = document.getElementById("updateEmployeeBtn");
-        var insertEmployeeBtn = document.getElementById("insertEmployeeBtn");
-
-        if (k === "all") {
-            updateEmployeeBtn.disabled = false;
-            insertEmployeeBtn.disabled = false;
-        }
-    }
-
-    function updateEmployeeAuth(getEmpIdx, getEmpName) {
-        //select 태그에서 선택한 값 가져옴
-        var empIdx = getEmpIdx;
-        var empAuthName = document.getElementById('auth-' + getEmpIdx).value;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/UpdateEmpAuth", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send("empIdx=" + empIdx + "&empAuthName=" + empAuthName);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) { // 응답이 완료되었을 때만 실행
-                if (xhr.status === 200) { // 성공적인 응답일 경우
-                    updateAuthStatus(document.getElementById('auth-' + getEmpIdx));
-                    // alert(empAuthName);
-                    if (empAuthName === "none") {
-                        alert(getEmpName + " 직원의 권한이 제한되었습니다.");
-                    }
-                    location.reload();
-                } else {
-                    console.log('오류 발생: ' + xhr.status);
-                }
-            }
-        };
-
-    }
-
-    //  직원의 권한을 바꾸면 다시 비활성화 상태로 바꿔야 함.
-    function updateAuthStatus(selectElement) {
-        selectElement.disabled = true;
-    }
-</script>
-
-
 <!-- Page Wrapper -->
 <div id="wrapper">
-
     <!-- Start of Sidebar -->
     <%@ include file="/jsp/Components/AdminSidebar/AdminSidebar.jsp" %>
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-
         <!-- Main Content -->
         <div id="content">
-
             <!-- Topbar -->
             <%@ include file="/jsp/Components/AdminTopbar/AdminTopbar.jsp" %>
-
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <h1 class="h3 mb-2 text-gray-800">직원 관리</h1>
@@ -139,20 +41,16 @@
                 *  <strong>'read only'</strong> 권한은 대출 상품, 고객 정보에 대한 읽기만 가능하다. 추가 및 수정 등과 같은 업무는 제한됩니다.<br>
                 *  <strong>'none'</strong> 권한은 관리자 페이지에 대해 제한합니다. 해당 권한을 갖고 있는 관리자는 로그인조차 제한됩니다.
             </p>
-
                 </p>
                 <h4>현재 관리자</h4>
                 <div class="container">
-
                     <div class="box" style=" height: 80px; width: 80px">
                         <img class="profile" src="/img/undraw_profile.svg">
                     </div>
-
                     <p>
                     <h5><%= request.getAttribute("empName") %>&nbsp[<%= request.getAttribute("empAuthName") %>] </h5> 님
                     반갑습니다~
                     </p>
-
                 </div>
                 <!-- Page Heading -->
                 <div class="button-container">
@@ -161,19 +59,13 @@
                     </button>
                     <button class="btn btn-secondary btn-icon-split ml-auto btn-h" id="updateEmployeeBtn" disabled>접근 권한 부여
                     </button>
-
                 </div>
                 <p>
-
                     <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-
                     <div class="card-header py-3"
                          style="display: flex; justify-content: space-between; align-items: center;">
-
                         <h6 class="m-0 font-weight-bold text-primary">직원 정보</h6>
-
-
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -212,7 +104,6 @@
                                             if (obj instanceof EmployeeRes) {
                                                 EmployeeRes employee = (EmployeeRes) obj;
                                 %>
-
                                 <tr>
                                     <td>
                                         <%=employee.getEmpIdx() %>
@@ -242,7 +133,6 @@
                                         </select>
                                     </td>
                                 </tr>
-
                                 <%
                                             }
                                         }
@@ -252,27 +142,66 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <!-- /.container-fluid -->
         </div>
         <!-- End of Main Content -->
-
         <!-- Footer -->
         <%@ include file="/jsp/Components/AdminFooter/AdminFooter.jsp" %>
-
     </div>
     <!-- End of Content Wrapper -->
-
 </div>
 <!-- End of Page Wrapper -->
-
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
 
 <script>
+    window.onload = function () {
+        if (window.location.pathname !== '/EmployeeManagement') {
+            location.href = '/EmployeeManagement';
+        }
+        // 페이지 로드 시 드롭다운 버튼 상태 업데이트
+        var selectElements = document.querySelectorAll("select[id^='auth-']");
+        for (var i = 0; i < selectElements.length; i++) {
+            updateAuthStatus(selectElements[i]);
+        }
+        var k = '<%= request.getAttribute("empAuthName") %>';
+        var updateEmployeeBtn = document.getElementById("updateEmployeeBtn");
+        var insertEmployeeBtn = document.getElementById("insertEmployeeBtn");
+        if (k === "all") {
+            updateEmployeeBtn.disabled = false;
+            insertEmployeeBtn.disabled = false;
+        }
+    }
+    function updateEmployeeAuth(getEmpIdx, getEmpName) {
+        //select 태그에서 선택한 값 가져옴
+        var empIdx = getEmpIdx;
+        var empAuthName = document.getElementById('auth-' + getEmpIdx).value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/UpdateEmpAuth", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("empIdx=" + empIdx + "&empAuthName=" + empAuthName);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) { // 응답이 완료되었을 때만 실행
+                if (xhr.status === 200) { // 성공적인 응답일 경우
+                    updateAuthStatus(document.getElementById('auth-' + getEmpIdx));
+                    // alert(empAuthName);
+                    if (empAuthName === "none") {
+                        alert(getEmpName + " 직원의 권한이 제한되었습니다.");
+                    }
+                    location.reload();
+                } else {
+                    console.log('오류 발생: ' + xhr.status);
+                }
+            }
+        };
+    }
+    //  직원의 권한을 바꾸면 다시 비활성화 상태로 바꿔야 함.
+    function updateAuthStatus(selectElement) {
+        selectElement.disabled = true;
+    }
     //전체 권한 비활성화 상태에서 활성화로 전환 시키기
     <%
         request.setCharacterEncoding("UTF-8");
@@ -281,19 +210,15 @@
             for (Object obj : employees) {
                 if (obj instanceof EmployeeRes) {
                     EmployeeRes employee = (EmployeeRes) obj;
-
     %>
-
     //관리자 직원 수정 버튼을 누르면 활성화로 전환됨
     document.getElementById("updateEmployeeBtn").addEventListener("click", function () {
         var currentUserID = "<%= session.getAttribute("employee_idx") %>"; // Assuming you have the current user's ID stored in a variable
-
         if ("<%= employee.getEmpIdx() %>" === currentUserID) {
             var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
             element.style.appearance = "none"; // hide the dropdown arrow
             element.disabled = true; // treat as inactive
         }
-
         else{
             var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
             //아래 화살표 띄우기
@@ -308,28 +233,12 @@
         }
     %>
 </script>
-
-<!-- Bootstrap core JavaScript-->
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
-<%--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--%>
-
-
-
-</div>
-
 </body>
 </html>

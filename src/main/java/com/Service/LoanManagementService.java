@@ -14,8 +14,6 @@ public class LoanManagementService {
         this.loanManagementDao=new LoanManagementDao();
     }
 
-
-
     public List<ProductRes> selectAllProducts() throws SQLException {
         return loanManagementDao.selectAllProducts();
     }
