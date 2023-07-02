@@ -1,10 +1,11 @@
 function confirmDeductBalance(authType, passedDate) {
+    console.log(passedDate);
     if (authType === "managing Customers" || authType === "read only" || authType === "none") {
         alert("권한이 없습니다.");
         return false;
     }
-    else if(passedDate <= 0){
-        alert("상환일이 아닙니다.");
+    else if(passedDate < 0){
+        alert(passedDate + " 상환일이 아닙니다.");
         return false;
     }
     else {

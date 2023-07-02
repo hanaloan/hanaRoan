@@ -1,23 +1,24 @@
 package com.DAO;
 
-import com.Model.Payment;
+import com.Model.*;
 import com.utils.DatabaseConnector;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.Date;
 
 public class LoanPaymentDao {
-    public List<Payment> getPayments(String option1, String option2) throws SQLException {
-        List<Payment> paymentList = new ArrayList<>();
+    public PaymentRes getPayments(PaymentReq paymentReq) throws SQLException {
+        PaymentRes paymentRes = null;
+        ArrayList<Payment> paymentList = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-
         try {
+            String option1 = paymentReq.getOption1();
+            String option2 = paymentReq.getOption2();
+
             conn = DatabaseConnector.getConnection();
             String sql = "SELECT lp.repayment_idx, c.name, lp.payment_amount, lp.payment_status, lpr.loan_type_id, lpr.loan_name, ll.start_date, ll.end_date\n" +
                     "FROM loan_payments lp\n" +
@@ -50,19 +51,20 @@ public class LoanPaymentDao {
 
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int repaymentIdx = rs.getInt("repayment_idx");
-                String customerName = rs.getString("name");
-                String loanType = getLoanType(rs.getInt("loan_type_id"));
-                String productName = rs.getString("loan_name");
-                Date startDate = rs.getDate("start_date");
-                Date paymetDueDate = rs.getDate("end_date");
-                BigDecimal dueBalance = rs.getBigDecimal("payment_amount");
-                String passedDate = getPassedDate(rs.getString("end_date"));
-                String paymentStatus = getStatus(rs.getString("payment_status"));
-                Payment payment = new Payment(repaymentIdx, customerName, loanType, productName, startDate,
-                        paymetDueDate, dueBalance, passedDate, paymentStatus);
+                Payment payment = new Payment(
+                        rs.getInt("repayment_idx"),
+                        rs.getString("name"),
+                        getLoanType(rs.getInt("loan_type_id")),
+                        rs.getString("loan_name"),
+                        rs.getDate("start_date"),
+                        rs.getDate("end_date"),
+                        rs.getBigDecimal("payment_amount"),
+                        getPassedDate(rs.getString("end_date")),
+                        getStatus(rs.getString("payment_status"))
+                        );
                 paymentList.add(payment);
             }
+            paymentRes = new PaymentRes(paymentList);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } finally {
@@ -70,13 +72,14 @@ public class LoanPaymentDao {
             if (stmt != null) stmt.close();
             if (conn != null) conn.close();
         }
-        return paymentList;
+        return paymentRes;
     }
 
-    public void deductBalance(String paymentId) throws SQLException {
+    public void deductBalance(DeductDueBalanceReq deductDueBalanceReq) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
+            int paymentId = deductDueBalanceReq.getPaymentId();
             conn = DatabaseConnector.getConnection();
             String sql = "UPDATE loan_payments as lp\n" +
                     "JOIN loan_lend as ll ON lp.loan_lend_idx = ll.lend_idx\n" +
@@ -85,7 +88,7 @@ public class LoanPaymentDao {
                     "    ll.loan_status = 'paid'\n" +
                     "WHERE repayment_idx = ?;";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, paymentId);
+            stmt.setInt(1, paymentId);
             stmt.executeUpdate();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -97,10 +100,11 @@ public class LoanPaymentDao {
         }
     }
 
-    public void handleOverdue(String paymentId) throws SQLException {
+    public void handleOverdue(HandleOverdueReq handleOverdueReq) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
+            int paymentId = handleOverdueReq.getPaymentId();
             conn = DatabaseConnector.getConnection();
             String sql = "UPDATE loan_payments as lp\n" +
                     "JOIN loan_lend as ll ON lp.loan_lend_idx = ll.lend_idx\n" +
@@ -109,7 +113,7 @@ public class LoanPaymentDao {
                     "    lp.payment_status = 'overdue'\n" +
                     "WHERE lp.payment_status != 'paid' AND lp.repayment_idx = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, paymentId);
+            stmt.setInt(1, paymentId);
             stmt.executeUpdate();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
