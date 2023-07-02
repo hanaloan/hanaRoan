@@ -8,11 +8,11 @@ select {
     padding: 0;
 }
 
-.container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
+/*.container {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 20px;*/
+/*}*/
 
 .button-container {
     text-align: right;
