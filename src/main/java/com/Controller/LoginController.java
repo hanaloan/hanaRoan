@@ -1,6 +1,7 @@
 package com.Controller;
 
 import com.Model.*;
+import com.Service.DashBoardService;
 import com.Service.LoginService;
 import com.utils.ValidationRegex;
 
@@ -12,16 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Map;
 
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
     private final LoginService loginService;
+    private final DashBoardService dashBoardService;
 
     public LoginController() {
         loginService = new LoginService();
+        dashBoardService =new DashBoardService();
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -48,7 +51,22 @@ public class LoginController extends HttpServlet {
                     session.setAttribute("authType", loginForAdminRes.getAuthorityType());
                     //int ses=(int) session.getAttribute("employee_idx");
 
-                    resp.sendRedirect("/DashBoard");
+                    Map<String, String> getRatioOfLoanType = dashBoardService.getRatioOfLoanType();
+                    req.setAttribute("ratioOfLoanType", getRatioOfLoanType);
+
+                    String loanAmount = dashBoardService.getLendData();
+                    req.setAttribute("loanAmount", loanAmount);
+
+                    String overdueLoanAmount = dashBoardService.getOverdueLendData();
+                    req.setAttribute("overdueLoanAmount", overdueLoanAmount);
+
+                    String getOverduePercentage = dashBoardService.getOverduePercentage();
+                    req.setAttribute("overduePercentage", getOverduePercentage);
+
+                    String getCountPendingLends = dashBoardService.getCountPendingLends();
+                    req.setAttribute("countPendingLends", getCountPendingLends);
+
+                    req.getRequestDispatcher("/jsp/DashBoard/DashBoard.jsp").forward(req, resp);
 
                 } else {
                     String errorMessage = "Name과 Password를 확인해주세요";
