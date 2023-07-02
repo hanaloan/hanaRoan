@@ -48,7 +48,14 @@
             font-size: 21px;
 
         }
-
+        .button-container {
+            display: flex; /* Set the display property to flex */
+            justify-content: center; /* Align the buttons horizontally at the center of the container */
+        }
+        .button-container button{
+            margin-left: 3%;
+            margin-right: 3%;
+        }
 
 
     </style>
@@ -79,10 +86,6 @@
                             <div class=" mb-3 mb-sm-0">
                                 <h5><strong>상품명:</strong> ${productInfo.loanName}</h5>
                             </div>
-                        <div class=" mb-3 mb-sm-0">
-                            <h5><strong>상품설명:</strong></h5>
-                            <p>${productInfo.loanDescription}</p>
-                        </div>
                         <div class=" mb-3 mb-sm-0">
                             <h5><strong>이자율:</strong> ${productInfo.loanInterestRate}%</h5>
                         </div>
@@ -122,9 +125,13 @@
                     <input class="form-control form-control-user" id="lendAmount" name="lendAmount" type="text">
                     <br>
                     <br>
-                    <button id="loanApply" class="btn btn-primary btn-icon-split btn-lg submit-style"
-                            onclick="return applyProductConfirm('${customerInfo.customerName}', '${customerInfo.creditScore}',
-                                    '${productInfo.loanName}', '${productInfo.lendLimit}', '${productInfo.minCredit}')">대출신청</button>
+                    <div class="button-container">
+                        <a href="productList"><button type="button" class="btn btn-primary btn-lg submit-style">돌아가기</button></a>
+                        <button id="loanApply" class="btn btn-primary btn-lg submit-style"
+                                onclick="return applyProductConfirm('${customerInfo.customerName}', '${customerInfo.creditScore}',
+                                        '${productInfo.loanName}', '${productInfo.lendLimit}', '${productInfo.minCredit}')">대출신청</button>
+                    </div>
+
                 </form>
             </div>
         </div>
