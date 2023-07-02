@@ -48,8 +48,6 @@
                                 </dl>
                                 <%
                                     String lendLimit = numberFormat.format(Float.parseFloat(product.getLendLimit().toString()));
-//                                    BigDecimal lendLimit = product.getLendLimit();
-//                                    String lendLimitStr = String.format("%,.0f", lendLimit);
                                 %>
                                 <dl class="row">
                                     <dt class="col-sm-2">최대대출한도</dt>
