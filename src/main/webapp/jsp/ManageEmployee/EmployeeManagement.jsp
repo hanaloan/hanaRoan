@@ -12,7 +12,8 @@
     <meta name="author" content="">
     <title>직원 관리</title>
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="/css/EmployeeManagement/EmployeeManagement.css" rel="stylesheet">
@@ -34,30 +35,32 @@
                 <p class="mb-4">이 페이지는 직원(관리자)의 시스템 접근 권한을 관리하는 페이지입니다. 직원 정보를 표로 나타내며, 직원을 추가 및 접근 권한 수정을 할 수 있습니다.<br>
                     <br>
                     권한은 'all', 'managing Products', 'managing Customers', 'read only', 'none' 이렇게 총 5개로 구분합니다.
-                    <p style="font-size: small">
-                *  <strong>'all'</strong> 권한은 직원들의 권한 수정이 가능하고, 고객, 상품에 대한 접근까지 가능합니다.<br>
-                *  <strong>'managing Products'</strong> 권한은 대출 상품에 대한 접근만 가능하다. 상품 추가, 삭제, 상환 업무 등을 할 수 있습니다.<br>
-                *  <strong>'managing Customers'</strong> 권한은 고객 정보에 대한 접근만 가능하다. 대출 상품 신청에 대한 승인 업무 등을 할 수 있습니다. <br>
-                *  <strong>'read only'</strong> 권한은 대출 상품, 고객 정보에 대한 읽기만 가능하다. 추가 및 수정 등과 같은 업무는 제한됩니다.<br>
-                *  <strong>'none'</strong> 권한은 관리자 페이지에 대해 제한합니다. 해당 권한을 갖고 있는 관리자는 로그인조차 제한됩니다.
-            </p>
+                <p style="font-size: small">
+                    * <strong>'all'</strong> 권한은 직원들의 권한 수정이 가능하고, 고객, 상품에 대한 접근까지 가능합니다.<br>
+                    * <strong>'managing Products'</strong> 권한은 대출 상품에 대한 접근만 가능하다. 상품 추가, 삭제, 상환 업무 등을 할 수 있습니다.<br>
+                    * <strong>'managing Customers'</strong> 권한은 고객 정보에 대한 접근만 가능하다. 대출 상품 신청에 대한 승인 업무 등을 할 수 있습니다. <br>
+                    * <strong>'read only'</strong> 권한은 대출 상품, 고객 정보에 대한 읽기만 가능하다. 추가 및 수정 등과 같은 업무는 제한됩니다.<br>
+                    * <strong>'none'</strong> 권한은 관리자 페이지에 대해 제한합니다. 해당 권한을 갖고 있는 관리자는 로그인조차 제한됩니다.
+                </p>
                 </p>
                 <h4>현재 관리자</h4>
-                <div class="container">
-                    <div class="box" style=" height: 80px; width: 80px">
+                <div class="container mx-0" style="display: flex; align-items: center; justify-content: flex-start;">
+                    <div class="box" style="height: 80px; width: 80px; margin-right: 10px;">
                         <img class="profile" src="/img/undraw_profile.svg">
                     </div>
-                    <p>
-                    <h5><%= request.getAttribute("empName") %>&nbsp[<%= request.getAttribute("empAuthName") %>] </h5> 님
-                    반갑습니다~
-                    </p>
+                    <div>
+                        <h5 style="margin: 0;">
+                            <%= request.getAttribute("empName") %>&nbsp;[<%= request.getAttribute("empAuthName") %>] 님 반갑습니다~
+                        </h5>
+                    </div>
                 </div>
                 <!-- Page Heading -->
                 <div class="button-container">
                     <button class="btn btn-secondary btn-icon-split ml-auto fa btn-h" id="insertEmployeeBtn" disabled
                             onclick="location.href='/jsp/ManageEmployee/InsertEmployee.jsp'">직원 등록
                     </button>
-                    <button class="btn btn-secondary btn-icon-split ml-auto btn-h" id="updateEmployeeBtn" disabled>접근 권한 부여
+                    <button class="btn btn-secondary btn-icon-split ml-auto btn-h" id="updateEmployeeBtn" disabled>접근 권한
+                        부여
                     </button>
                 </div>
                 <p>
@@ -153,7 +156,7 @@
 </div>
 <!-- End of Page Wrapper -->
 <!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
+<a class="scroll-to-top rounded" href="#page-top" style="display: flex; justify-content: center; align-items: center;">
     <i class="fas fa-angle-up"></i>
 </a>
 
@@ -175,6 +178,7 @@
             insertEmployeeBtn.disabled = false;
         }
     }
+
     function updateEmployeeAuth(getEmpIdx, getEmpName) {
         //select 태그에서 선택한 값 가져옴
         var empIdx = getEmpIdx;
@@ -198,10 +202,12 @@
             }
         };
     }
+
     //  직원의 권한을 바꾸면 다시 비활성화 상태로 바꿔야 함.
     function updateAuthStatus(selectElement) {
         selectElement.disabled = true;
     }
+
     //전체 권한 비활성화 상태에서 활성화로 전환 시키기
     <%
         request.setCharacterEncoding("UTF-8");
@@ -218,8 +224,7 @@
             var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
             element.style.appearance = "none"; // hide the dropdown arrow
             element.disabled = true; // treat as inactive
-        }
-        else{
+        } else {
             var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
             //아래 화살표 띄우기
             element.style.appearance = "-webkit-menulist-button"; // show the dropdown arrow for WebKit browsers (e.g., Chrome, Safari)
