@@ -2,6 +2,7 @@ package com.Controller;
 
 import com.Model.CustomerManagement;
 import com.Model.CustomerManagementReq;
+import com.Model.LoanApprovalRes;
 import com.Service.LoanApprovalService;
 
 import javax.servlet.ServletException;
@@ -28,19 +29,19 @@ public class LoanApprovalController extends HttpServlet {
         try {
             CustomerManagementReq request = new CustomerManagementReq();
 
-            String loanType = req.getParameter("loanType");
-            String loanStatus = req.getParameter("loanStatus");
+//            String loanType = req.getParameter("loanType");
+//            String loanStatus = req.getParameter("loanStatus");
+//
+//            request.setLoanType(loanType);
+//            request.setLoanStatus(loanStatus);
+//
+//            if (loanType == null || loanType.isEmpty()) {
+//                request.setLoanType(null);
+//            }
 
-            request.setLoanType(loanType);
-            request.setLoanStatus(loanStatus);
+            List<LoanApprovalRes> loanApprovalResList = loanApprovalService.loanApprovalRes();
 
-            if (loanType == null || loanType.isEmpty()) {
-                request.setLoanType(null);
-            }
-
-            List<CustomerManagement> customerManagementList = loanApprovalService.getCustomerInfo(loanType,loanStatus, request);
-
-            req.setAttribute("customerManagementList", customerManagementList);
+            req.setAttribute("loanApprovalResList", loanApprovalResList);
 
             req.getRequestDispatcher("/jsp/LoanApproval/LoanApproval.jsp").forward(req, resp);
         } catch (SQLException e) {

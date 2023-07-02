@@ -1,5 +1,6 @@
 <%@ page import="com.Model.CustomerManagement" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.Model.LoanApprovalRes" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,54 +91,54 @@
                                 </tfoot>
                                 <%
                                     request.setCharacterEncoding("UTF-8");
-                                    List<CustomerManagement> customers = (List<CustomerManagement>) request.getAttribute("customerManagementList");
-                                    if (customers != null) {
-                                        for (Object obj : customers) {
-                                            if (obj instanceof CustomerManagement) {
-                                                CustomerManagement customer = (CustomerManagement) obj;
+                                    List<LoanApprovalRes> datas = (List<LoanApprovalRes>) request.getAttribute("loanApprovalResList");
+                                    if (datas != null) {
+                                        for (Object obj : datas) {
+                                            if (obj instanceof LoanApprovalRes) {
+                                                LoanApprovalRes data = (LoanApprovalRes) obj;
                                 %>
                                 <tr>
-                                    <td><%= customer.getCusId() %>
+                                    <td><%= data.getCusIdx() %>
                                     </td>
-                                    <td><%= customer.getName() %>
+                                    <td><%= data.getName() %>
                                     </td>
-                                    <td><%= customer.getLendId() %>
+                                    <td><%= data.getLendIdx() %>
                                     </td>
-                                    <td><%= customer.getLoanTypeName() %>
+                                    <td><%= data.getLoanTypeName() %>
                                     </td>
-                                    <td><%= customer.getLoanName() %>
+                                    <td><%= data.getLoanName() %>
                                     </td>
-                                    <td><%= customer.getLendPeriod() %>
+                                    <td><%= data.getLoanPeriod() %>
                                     </td>
-                                    <td><%= customer.getStartDate() %>
+                                    <td><%= data.getStartDate() %>
                                     </td>
-                                    <td><%= customer.getEndDate() %>
+                                    <td><%= data.getEndDate() %>
                                     </td>
-                                    <td class="text-right"><%= customer.getFormattedLoanAmount() %> 원
+                                    <td class="text-right"><%= data.getFormattedLoanAmount() %> 원
                                     </td>
                                     <td>
-                                        <select id="loan-status-<%= customer.getLendId() %>"
+                                        <select id="loan-status-<%= data.getLendIdx() %>"
                                                 <% if (!("all".equals(session.getAttribute("authType")) || "managing Customers".equals(session.getAttribute("authType")))) { %>
                                                 disabled
                                                 <% } %>
-                                                onchange="updateLoanStatus('<%= customer.getLendId() %>', '<%= customer.getLendPeriod() %>')">
-                                            <option value="pending" <%= customer.getLoanStatus() != null && customer.getLoanStatus().equals("pending") ? "selected" : "" %>>
+                                                onchange="updateLoanStatus('<%= data.getLendIdx() %>', '<%= data.getLoanPeriod() %>')">
+                                            <option value="pending" <%= data.getLoanStatus() != null && data.getLoanStatus().equals("pending") ? "selected" : "" %>>
                                                 Pending
                                             </option>
-                                            <option value="approved" <%= customer.getLoanStatus() != null && customer.getLoanStatus().equals("approved") ? "selected" : "" %>>
+                                            <option value="approved" <%= data.getLoanStatus() != null && data.getLoanStatus().equals("approved") ? "selected" : "" %>>
                                                 Approved
                                             </option>
-                                            <option value="denied" <%= customer.getLoanStatus() != null && customer.getLoanStatus().equals("denied") ? "selected" : "" %>>
+                                            <option value="denied" <%= data.getLoanStatus() != null && data.getLoanStatus().equals("denied") ? "selected" : "" %>>
                                                 Denied
                                             </option>
                                         </select>
                                     </td>
-                                    <% if (customer.getLoanStatus() != null && customer.getLoanStatus().equals("approved")) { %>
-                                    <td><%= customer.getRepaymentId() %>
+                                    <% if (data.getLoanStatus() != null && data.getLoanStatus().equals("approved")) { %>
+                                    <td><%= data.getRepaymentIdx() %>
                                     </td>
-                                    <td class="text-right"><%= customer.getFormattedPaymentAmount() %> 원
+                                    <td class="text-right"><%= data.getFormattedPaymentAmount() %> 원
                                     </td>
-                                    <td><%= customer.getPaymentStatus() %>
+                                    <td><%= data.getPaymentStatus() %>
                                     </td>
                                     <% } else { %>
                                     <td>&#8212;</td>

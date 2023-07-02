@@ -1,8 +1,7 @@
 package com.Service;
 
 import com.DAO.LoanApprovalDao;
-import com.Model.CustomerManagement;
-import com.Model.CustomerManagementReq;
+import com.Model.LoanApprovalRes;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -14,7 +13,7 @@ public class LoanApprovalService {
         this.loanApprovalDao = new LoanApprovalDao();
     }
 
-    public List<CustomerManagement> getCustomerInfo(String loanTypeName, String loanStatus ,CustomerManagementReq customerManagementReq) throws SQLException {
-        return loanApprovalDao.getCustomerInfo(loanTypeName, loanStatus, customerManagementReq);
+    public List<LoanApprovalRes> loanApprovalRes() throws SQLException {
+        return loanApprovalDao.loanApprovalResList();
     }
 }
