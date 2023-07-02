@@ -1,7 +1,5 @@
-<%@ page import="com.DAO.EmployeeManagementDao" %>
 <%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.HashMap" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.Model.EmployeeRes" %>
 <html>
 <head>
@@ -35,11 +33,11 @@
             padding: 0;
         }
 
-        .container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+        /*.container {*/
+        /*    display: flex;*/
+        /*    align-items: center;*/
+        /*    gap: 20px;*/
+        /*}*/
 
         .button-container {
             text-align: right;
@@ -109,8 +107,6 @@
         selectElement.disabled = true;
     }
 </script>
-
-
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -131,16 +127,16 @@
                 <h1 class="h3 mb-2 text-gray-800">직원 관리</h1>
                 <p class="mb-4">이 페이지는 직원(관리자)의 시스템 접근 권한을 관리하는 페이지입니다. 직원 정보를 표로 나타내며, 직원을 추가 및 접근 권한 수정을 할 수 있습니다.<br>
                     <br>
-                    권한은 'all', 'managing Products', 'managing Customers', 'read only', 'none' 이렇게 총 5개로 구분합니다.
-                    <p style="font-size: small">
-                *  <strong>'all'</strong> 권한은 직원들의 권한 수정이 가능하고, 고객, 상품에 대한 접근까지 가능합니다.<br>
-                *  <strong>'managing Products'</strong> 권한은 대출 상품에 대한 접근만 가능하다. 상품 추가, 삭제, 상환 업무 등을 할 수 있습니다.<br>
-                *  <strong>'managing Customers'</strong> 권한은 고객 정보에 대한 접근만 가능하다. 대출 상품 신청에 대한 승인 업무 등을 할 수 있습니다. <br>
-                *  <strong>'read only'</strong> 권한은 대출 상품, 고객 정보에 대한 읽기만 가능하다. 추가 및 수정 등과 같은 업무는 제한됩니다.<br>
-                *  <strong>'none'</strong> 권한은 관리자 페이지에 대해 제한합니다. 해당 권한을 갖고 있는 관리자는 로그인조차 제한됩니다.
-            </p>
-
+                    권한은 'all', 'managing Products', 'managing Customers', 'read only', 'none' 이렇게 총 5개로 구분합니다. </p>
+                <p style="font-size: small">
+                    * <strong>'all'</strong> 권한은 직원들의 권한 수정이 가능하고, 고객, 상품에 대한 접근까지 가능합니다.<br>
+                    * <strong>'managing Products'</strong> 권한은 대출 상품에 대한 접근만 가능하다. 상품 추가, 삭제, 상환 업무 등을 할 수 있습니다.<br>
+                    * <strong>'managing Customers'</strong> 권한은 고객 정보에 대한 접근만 가능하다. 대출 상품 신청에 대한 승인 업무 등을 할 수 있습니다. <br>
+                    * <strong>'read only'</strong> 권한은 대출 상품, 고객 정보에 대한 읽기만 가능하다. 추가 및 수정 등과 같은 업무는 제한됩니다.<br>
+                    * <strong>'none'</strong> 권한은 관리자 페이지에 대해 제한합니다. 해당 권한을 갖고 있는 관리자는 로그인조차 제한됩니다.
                 </p>
+
+
                 <h4>현재 관리자</h4>
                 <div class="container">
 
@@ -148,32 +144,25 @@
                         <img class="profile" src="/img/undraw_profile.svg">
                     </div>
 
-                    <p>
-                    <h5><%= request.getAttribute("empName") %>&nbsp[<%= request.getAttribute("empAuthName") %>] </h5> 님
-                    반갑습니다~
-                    </p>
-
+                    <h5><%= request.getAttribute("empName") %>&nbsp[<%= request.getAttribute("empAuthName") %>] 님
+                        반갑습니다~</h5>
                 </div>
                 <!-- Page Heading -->
                 <div class="button-container">
                     <button class="btn btn-secondary btn-icon-split ml-auto fa btn-h" id="insertEmployeeBtn" disabled
                             onclick="location.href='/jsp/ManageEmployee/InsertEmployee.jsp'">직원 등록
                     </button>
-                    <button class="btn btn-secondary btn-icon-split ml-auto btn-h" id="updateEmployeeBtn" disabled>접근 권한 부여
+                    <button class="btn btn-secondary btn-icon-split ml-auto btn-h" id="updateEmployeeBtn" disabled>접근 권한
+                        부여
                     </button>
-
                 </div>
-                <p>
 
-                    <!-- DataTales Example -->
+                <!-- DataTales Example -->
                 <div class="card shadow mb-4">
 
                     <div class="card-header py-3"
                          style="display: flex; justify-content: space-between; align-items: center;">
-
                         <h6 class="m-0 font-weight-bold text-primary">직원 정보</h6>
-
-
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -252,7 +241,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <!-- /.container-fluid -->
         </div>
@@ -263,14 +251,8 @@
 
     </div>
     <!-- End of Content Wrapper -->
-
 </div>
 <!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
 
 <script>
     //전체 권한 비활성화 상태에서 활성화로 전환 시키기
@@ -292,9 +274,7 @@
             var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
             element.style.appearance = "none"; // hide the dropdown arrow
             element.disabled = true; // treat as inactive
-        }
-
-        else{
+        } else {
             var element = document.getElementById("auth-<%= employee.getEmpIdx() %>");
             //아래 화살표 띄우기
             element.style.appearance = "-webkit-menulist-button"; // show the dropdown arrow for WebKit browsers (e.g., Chrome, Safari)
@@ -325,11 +305,5 @@
 
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
-<%--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--%>
-
-
-
-</div>
-
 </body>
 </html>
