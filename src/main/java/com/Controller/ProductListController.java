@@ -42,11 +42,10 @@ public class ProductListController extends HttpServlet {
             String category = request.getParameter("category");
             if (category == null || category.isEmpty()) {category = "*";}
 
-            List<ProductRes> productList = displayProductListService.getProducts(category);
-            request.setAttribute("productList", productList);
+            DisplayProductListReq productListReq = new DisplayProductListReq(category);
+            DisplayProductListRes productListRes = displayProductListService.getProducts(productListReq);
+            request.setAttribute("productList", productListRes);
             request.getRequestDispatcher("/jsp/ProductList/ProductList.jsp").forward(request, response);
-
-
 //            redisService = RedisConnectionPool.getInstance().getRedisService();
 //            redisService.increasePageView(customer_Idx);
 //            redisService.addToPreList(customer_Idx);

@@ -7,89 +7,36 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <%--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">--%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>홈 < 하나론 고객</title>
 
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/CustomerHome/CustomerHome.css">
+
     <script src="../../vendor/jquery/jquery.min.js"></script>
     <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
     <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-
 </head>
-<style>
-    .carousel-item {
-        height: 300px;
-    }
-
-    .carousel-item > img {
-        height: 300px;
-        object-fit: cover;
-    }
-
-    .prev-button,
-    .next-button {
-        font-size: 24px;
-        color: black;
-        padding: 8px 12px;
-        cursor: pointer;
-        margin: 0 5px;
-    }
-
-    button {
-        all: unset;
-    }
-
-    .carousel-item-text {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 8px;
-        color: #fff;
-        font-weight: bold;
-        font-size: 16px;
-    }
-
-    .carousel-item-text .loan-name {
-        margin-right: 10px;
-    }
-
-    .carousel-item-text .loan-interest-rate {
-        margin-left: 10px;
-    }
-</style>
 <body id="page-top">
 <div id="wrapper">
     <%@ include file="/jsp/Components/CustomerSidebar/CustomerSidebar.jsp" %>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-
         <!-- Main Content -->
         <div id="content">
-
             <!-- Topbar -->
             <%@ include file="/jsp/Components/CustomerTopbar/CustomerTopbar.jsp" %>
-
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">환영합니다. <%= request.getAttribute("username")%>님!</h1>
                 </div>
-
-
                 <!-- 고객요약정보 -->
                 <div class="row">
                     <!-- Content Column -->
@@ -241,9 +188,7 @@
                                     <div class="carousel-inner">
                                         <div class="carousel-item col-lg-12 active px-0">
                                             <a href="productDetail?id=<%=recommendedProducts.get(0).getLoanId()%>">
-                                            <img src="<%=recommendedProducts.get(0).getLoanImage()%>"
-                                                 class="d-block w-100"
-                                                 alt="image0"></a>
+                                            <img src="<%=recommendedProducts.get(0).getLoanImage()%>" class="d-block w-100" alt="image0"></a>
                                             <p class="carousel-item-text mb-4">
                                                 <span class="loan-name"><%=recommendedProducts.get(0).getLoanName()%></span>
                                                 <span class="loan-interest-rate"><%=recommendedProducts.get(0).getLoanInterestRate()%>%</span>
@@ -322,7 +267,6 @@
 </div>
 </div>
 </div>
-
 <!-- Footer -->
 <%@ include file="/jsp/Components/AdminFooter/AdminFooter.jsp" %>
 
@@ -337,7 +281,6 @@
         }
         $('#subs' + String(currIdx)).css('display', '');
     }
-
     function nextElement(listSize) {
         $('#subs' + String(currIdx)).css('display', 'none');
         currIdx++;
@@ -346,7 +289,6 @@
         }
         $('#subs' + String(currIdx)).css('display', '');
     }
-
     var currentImageIndex = 1;
     var totalImages = 3; // Update with the total number of images
 
