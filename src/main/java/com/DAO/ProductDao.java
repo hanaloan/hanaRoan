@@ -1,14 +1,10 @@
 package com.DAO;
 
-import com.Model.DisplayProduct;
-import com.Model.DisplayProductListReq;
-import com.Model.DisplayProductListRes;
-import com.Model.ProductRes;
+import com.Model.*;
 import com.utils.DatabaseConnector;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProductDao {
     public DisplayProductListRes getProducts(DisplayProductListReq displayProductListReq) throws SQLException {
@@ -17,7 +13,6 @@ public class ProductDao {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-
         try {
             conn = DatabaseConnector.getConnection();
             String sql = "SELECT * FROM loan_products \n" +
@@ -53,24 +48,33 @@ public class ProductDao {
         return productListRes;
     }
 
-    public ProductRes getProductById(int productIdx) throws SQLException {
-        ProductRes product = null;
+    public DisplayProductDetailRes getProductDetail(DisplayProductDetailReq productDetailReq) throws SQLException {
+        DisplayProductDetailRes productDetailRes = null;
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-
         try {
+            int loanIdx = productDetailReq.getProductId();
             conn = DatabaseConnector.getConnection();
             String sql = "SELECT * FROM loan_products WHERE loan_idx = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, productIdx);
+            stmt.setInt(1, loanIdx);
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                product = extractProductFromResultSet(rs);
+                productDetailRes = new DisplayProductDetailRes(
+                        rs.getInt("loan_idx"),
+                        rs.getString("loan_name"),
+                        rs.getString("loan_description"),
+                        rs.getInt("min_credit"),
+                        rs.getBigDecimal("lend_limit"),
+                        rs.getInt("lend_period"),
+                        rs.getBigDecimal("loan_interest_rate"),
+                        rs.getBigDecimal("overdue_interest_rate")
+                );
             }
         } catch (SQLException e) {
-            throw e;
+            throw new SQLException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } finally {
@@ -78,19 +82,6 @@ public class ProductDao {
             if (stmt != null) stmt.close();
             if (conn != null) conn.close();
         }
-        return product;
-    }
-
-    private ProductRes extractProductFromResultSet(ResultSet rs) throws SQLException {
-        ProductRes product = new ProductRes();
-        product.setId(String.valueOf(rs.getInt("loan_idx")));
-        product.setName(rs.getString("loan_name"));
-        product.setDescription(rs.getString("loan_description"));
-        product.setMinCredit(rs.getInt("min_credit"));
-        product.setLendLimit(rs.getBigDecimal("lend_limit"));
-        product.setLoanPeriod(rs.getInt("lend_period"));
-        product.setInterestRate(rs.getBigDecimal("loan_interest_rate"));
-        product.setOverdueInterestRate(rs.getBigDecimal("overdue_interest_rate"));
-        return product;
+        return productDetailRes;
     }
 }

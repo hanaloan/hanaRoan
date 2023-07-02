@@ -1,5 +1,7 @@
 package com.Controller;
 
+import com.Model.DisplayProductDetailReq;
+import com.Model.DisplayProductDetailRes;
 import com.Model.ProductRes;
 import com.Service.DisplayProductDetailService;
 
@@ -24,9 +26,10 @@ public class ProductDetailController extends HttpServlet {
         try{
             HttpSession session = request.getSession();
             int productId = Integer.parseInt(request.getParameter("id"));
-            ProductRes product = displayProductDetailService.getProductById(productId);
+            DisplayProductDetailReq productDetailReq = new DisplayProductDetailReq(productId);
+            DisplayProductDetailRes productDetailRes = displayProductDetailService.getProductDetail(productDetailReq);
 
-            request.setAttribute("product", product);
+            request.setAttribute("product", productDetailRes);
             request.setAttribute("customerIdx", session.getAttribute("customer_Idx"));
             request.getRequestDispatcher("jsp/ProductDetail/ProductDetail.jsp").forward(request, response);
         } catch (SQLException e){
