@@ -40,7 +40,6 @@ public class LoanApprovalDao {
                 float loanInterestRate = rs.getFloat("loan_interest_rate");
 
                 LoanApprovalRes loanApprovalRes = new LoanApprovalRes();
-                // Set properties of loanApprovalRes object using retrieved data
                 loanApprovalRes.setCusIdx(cusIdx);
                 loanApprovalRes.setName(name);
                 loanApprovalRes.setLendIdx(lendIdx);
@@ -65,59 +64,3 @@ public class LoanApprovalDao {
         return loanApprovalResList;
     }
 }
-
-
-//    private PreparedStatement createPreparedStatement(Connection conn) throws SQLException {
-//        String sql = createSqlQuery(loanTypeName, loanStatus);
-//        PreparedStatement stmt = conn.prepareStatement(sql);
-//
-//        int paramIndex = 1;
-//
-//        if (loanTypeName != null) {
-//            stmt.setString(paramIndex++, loanTypeName);
-//        }
-//
-//        if (loanStatus != null) {
-//            stmt.setString(paramIndex, loanStatus);
-//        }
-//
-//        return stmt;
-//    }
-//        private String createSqlQuery(String loanTypeName, String loanStatus) {
-//            StringBuilder sql = new StringBuilder(BASE_QUERY);
-//
-//            if (loanTypeName != null) {
-//                sql.append(" AND lt.loan_type_name = ?");
-//            }
-//
-//            if (loanStatus != null) {
-//                sql.append(" AND ll.loan_status = ?");
-//            }
-//
-//            return sql.toString();
-//        }
-//
-//        private CustomerManagement getCustomerManagementFromResultSet(ResultSet rs) throws SQLException {
-//            return new CustomerManagement(
-//                    rs.getInt("customer_idx"),
-//                    rs.getString("name"),
-//                    rs.getString("contact_info"),
-//                    rs.getString("password"),
-//                    rs.getInt("lend_idx"),
-//                    String.valueOf(rs.getDate("start_date")),
-//                    String.valueOf(rs.getDate("start_date")),
-//                    rs.getString("loan_name"),
-//                    rs.getLong("loan_amount"),
-//                    rs.getString("loan_status"),
-//                    rs.getInt("repayment_idx"),
-//                    rs.getLong("payment_amount"),
-//                    rs.getString("payment_status"),
-//                    rs.getFloat("overdue_interest_rate"),
-//                    rs.getFloat("loan_interest_rate"),
-//                    rs.getString("loan_type_name"),
-//                    rs.getInt("lend_period"),
-//                    0,
-//                    null,
-//                    null);
-//
-//    }

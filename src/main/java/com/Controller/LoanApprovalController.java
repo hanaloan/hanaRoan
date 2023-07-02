@@ -27,17 +27,7 @@ public class LoanApprovalController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            CustomerManagementReq request = new CustomerManagementReq();
-
-//            String loanType = req.getParameter("loanType");
-//            String loanStatus = req.getParameter("loanStatus");
-//
-//            request.setLoanType(loanType);
-//            request.setLoanStatus(loanStatus);
-//
-//            if (loanType == null || loanType.isEmpty()) {
-//                request.setLoanType(null);
-//            }
+//            CustomerManagementReq request = new CustomerManagementReq();
 
             List<LoanApprovalRes> loanApprovalResList = loanApprovalService.loanApprovalRes();
 
@@ -45,7 +35,6 @@ public class LoanApprovalController extends HttpServlet {
 
             req.getRequestDispatcher("/jsp/LoanApproval/LoanApproval.jsp").forward(req, resp);
         } catch (SQLException e) {
-            // Handle exceptions and send an appropriate response
             e.printStackTrace();
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             resp.getWriter().println("Internal server error");
