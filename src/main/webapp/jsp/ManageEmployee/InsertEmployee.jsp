@@ -2,12 +2,12 @@
 <html>
 <head>
     <title>직원 추가</title>
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="/css/InsertEmployee/InsertEmployee.css">
+    <link href="/css/InsertEmployee/InsertEmployee.css" rel="stylesheet">
 </head>
 <body class="bg-gradient-primary">
 <div class="container">
@@ -39,7 +39,8 @@
                                 <label for="empName">Name:</label>
                                 <input class="form-control form-control-user" type="text" id="empName"
                                        name="empName"
-                                       placeholder="name" required pattern="[A-Za-z]+" title="Please enter letters only (no numbers)">
+                                       placeholder="이름" required pattern="[ㄱ-ㅎㅏ-ㅣ가-힣]+" title="한글만 입력해주세요">
+
                             </div>
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label for="empAuthorityName">Authority:</label>
@@ -52,8 +53,10 @@
                                 </select>
                             </div>
                         </div>
-                        <br>
-                        <input type="submit" value="Submit" class="btn btn-primary btn-icon-split btn-lg submit-style">
+                        <div class="button-container">
+                            <a href="/EmployeeManagement"><button type="button" class="btn btn-primary btn-icon-split btn-lg submit-style">돌아가기</button></a>
+                            <button type="submit" value="Submit" class="btn btn-primary btn-icon-split btn-lg submit-style">직원등록</button>
+                        </div>
                     </div>
                 </form>
             </div>
