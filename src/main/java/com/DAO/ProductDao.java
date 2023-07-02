@@ -1,5 +1,8 @@
 package com.DAO;
 
+import com.Model.DisplayProduct;
+import com.Model.DisplayProductListReq;
+import com.Model.DisplayProductListRes;
 import com.Model.ProductRes;
 import com.utils.DatabaseConnector;
 
@@ -8,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDao {
-    public List<ProductRes> getProducts(String category) throws SQLException {
-        List<ProductRes> products = new ArrayList<>();
+    public DisplayProductListRes getProducts(DisplayProductListReq displayProductListReq) throws SQLException {
+        DisplayProductListRes productListRes = null;
+        ArrayList<DisplayProduct> products = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -18,7 +22,7 @@ public class ProductDao {
             conn = DatabaseConnector.getConnection();
             String sql = "SELECT * FROM loan_products \n" +
                         "WHERE loan_products.flag = 1";
-
+            String category = displayProductListReq.getCategory();
             if (!category.equals("*")) {
                 sql += " AND loan_products.loan_type_id = ?";
                 stmt = conn.prepareStatement(sql);
@@ -29,9 +33,14 @@ public class ProductDao {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                ProductRes product = extractProductFromResultSet(rs);
+                DisplayProduct product = new DisplayProduct(
+                        rs.getInt("loan_idx"),
+                        rs.getString("loan_name"),
+                        rs.getString("loan_description")
+                );
                 products.add(product);
             }
+            productListRes = new DisplayProductListRes(products);
         } catch (SQLException e) {
             throw e;
         } catch (ClassNotFoundException e) {
@@ -41,7 +50,7 @@ public class ProductDao {
             if (stmt != null) stmt.close();
             if (conn != null) conn.close();
         }
-        return products;
+        return productListRes;
     }
 
     public ProductRes getProductById(int productIdx) throws SQLException {
