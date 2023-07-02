@@ -18,18 +18,6 @@
 <!--        <listener-class>com.Background.AppContextListener</listener-class>-->
 <!--    </listener>-->
 
-
-
-    <servlet>
-        <servlet-name>AdminSystemSetting</servlet-name>
-        <servlet-class>com.Controller.AdminSystemSettingController</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>AdminSystemSetting</servlet-name>
-        <url-pattern>/AdminSystemSetting</url-pattern>
-    </servlet-mapping>
-
     <servlet>
         <servlet-name>CustomerHome</servlet-name>
         <servlet-class>com.Controller.CustomerHomeController</servlet-class>
