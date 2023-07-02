@@ -19,7 +19,7 @@ public class ApplyProductDao {
         int loanId = Integer.parseInt(productId);
         try{
             conn = DatabaseConnector.getConnection();
-            String productSql = "SELECT loan_name, loan_description, loan_interest_rate, overdue_interest_rate, min_credit, lend_limit, lend_period \n" +
+            String productSql = "SELECT loan_name, loan_interest_rate, overdue_interest_rate, min_credit, lend_limit, lend_period \n" +
                     "FROM loan_products WHERE loan_idx = ?";
             stmt = conn.prepareStatement(productSql);
 
@@ -27,13 +27,12 @@ public class ApplyProductDao {
             rs = stmt.executeQuery();
             if(rs.next()){
                 String loanName = rs.getString("loan_name");
-                String loanDescription = rs.getString("loan_description");
                 BigDecimal loanInterestRate = rs.getBigDecimal("loan_interest_rate");
                 BigDecimal overdueInterestRate = rs.getBigDecimal("overdue_interest_rate");
                 int minCredit = rs.getInt("min_credit");
                 BigDecimal lendLimit = rs.getBigDecimal("lend_limit");
                 int lendPeriod = rs.getInt("lend_period");
-                applyProductRes = new ApplyProductRes(loanName, loanDescription, loanInterestRate, overdueInterestRate, minCredit,
+                applyProductRes = new ApplyProductRes(loanName, loanInterestRate, overdueInterestRate, minCredit,
                         lendLimit, lendPeriod);
             }
         } catch (SQLException e) {

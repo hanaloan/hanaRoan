@@ -35,6 +35,12 @@
                 <i class="fas fa-fw fa-table"></i>
                 <span>이체</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/jsp/Components/LogoutModal/LogoutModal.jsp" data-toggle="modal" data-target="#logoutModal">
+                <span><strong>로그아웃</strong></span>
+            </a>
+
+        </li>
     </ul>
 </div>
 </body>

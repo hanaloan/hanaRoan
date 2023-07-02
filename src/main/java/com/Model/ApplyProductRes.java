@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 @Setter
 public class ApplyProductRes {
     private String loanName;
-    private String loanDescription;
     private BigDecimal loanInterestRate;
     private BigDecimal overdueInterestRate;
     private int minCredit;

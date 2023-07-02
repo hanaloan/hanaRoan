@@ -192,9 +192,11 @@ public class LoginDao {
 
             // LoginLoanProduct 모델을 recommendedProducts라는 리스트에 넣어서 축적
             while (rs.next()) {
-                loanIdList.add(rs.getInt("loan_id"));
+                int loanId = rs.getInt("loan_id");
+                loanIdList.add(loanId);
 
                 LoginLoanProduct product = new LoginLoanProduct(
+                        loanId,
                         rs.getString("loan_image"),
                         rs.getString("loan_name"),
                         rs.getFloat("loan_interest_rate")
@@ -214,12 +216,12 @@ public class LoginDao {
             // ★ NOT IN안에 그냥 loanIdList를 넣기에는 인젝션주입 공격에 취약하다 고로 아래와 같이 진행
             // 리스트가 비어있으면 구문이 NOT IN ()이니까 에러나므로 두가지 케이스로 진행
             if (loanIdList.isEmpty()) {
-                sql = "SELECT loan_image, loan_name, loan_interest_rate " +
+                sql = "SELECT loan_idx, loan_image, loan_name, loan_interest_rate " +
                         "FROM loan_products " +
                         "WHERE min_credit < ?";
             } else {
                 String questionmarks = String.join(",", Collections.nCopies(loanIdList.size(), "?"));
-                sql = "SELECT loan_image, loan_name, loan_interest_rate " +
+                sql = "SELECT loan_idx, loan_image, loan_name, loan_interest_rate " +
                         "FROM loan_products " +
                         "WHERE min_credit < ? AND loan_idx NOT IN (" + questionmarks + ")";
             }
@@ -237,6 +239,7 @@ public class LoginDao {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 LoginLoanProduct product = new LoginLoanProduct(
+                        rs.getInt("loan_idx"),
                         rs.getString("loan_image"),
                         rs.getString("loan_name"),
                         rs.getFloat("loan_interest_rate")

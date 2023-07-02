@@ -7,6 +7,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <%--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">--%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -113,7 +114,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-auto">
-                                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                                    <i class="fas fa-won-sign fa-2x text-gray-300"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -239,10 +240,10 @@
                                     </ol>
                                     <div class="carousel-inner">
                                         <div class="carousel-item col-lg-12 active px-0">
+                                            <a href="productDetail?id=<%=recommendedProducts.get(0).getLoanId()%>">
                                             <img src="<%=recommendedProducts.get(0).getLoanImage()%>"
                                                  class="d-block w-100"
-                                                 alt="image0"
->
+                                                 alt="image0"></a>
                                             <p class="carousel-item-text mb-4">
                                                 <span class="loan-name"><%=recommendedProducts.get(0).getLoanName()%></span>
                                                 <span class="loan-interest-rate"><%=recommendedProducts.get(0).getLoanInterestRate()%>%</span>
@@ -250,14 +251,16 @@
                                         </div>
                                         <%for (int i = 1; i < recommendedProducts.size() && i < 3; i++) {%>
                                         <div class="carousel-item col-lg-12 px-0">
+                                            <a href="productDetail?id=<%=recommendedProducts.get(i).getLoanId()%>">
                                             <img src="<%=recommendedProducts.get(i).getLoanImage()%>"
                                                  class="d-block w-100"
-                                                 alt="image<%=i%>">
+                                                 alt="image<%=i%>"></a>
                                             <p class="carousel-item-text mb-4">
                                                 <span class="loan-name"><%=recommendedProducts.get(i).getLoanName()%></span>
                                                 <span class="loan-interest-rate"><%=recommendedProducts.get(i).getLoanInterestRate()%>%</span>
                                             </p>
                                         </div>
+
                                         <% } %>
                                     </div>
                                 </div>
@@ -363,7 +366,7 @@
     // Show the popups automatically when the page loads
     $(document).ready(function () {
         $('.carousel').carousel({
-            interval: 1000 // Slide interval in milliseconds (1 second)
+            interval: 3000
         });
         $('#subs0').css('display', '');
         <% if (alertRes != null && alertRes.getAlertMessageRes() != null) {
