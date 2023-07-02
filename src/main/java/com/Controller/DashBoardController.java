@@ -1,7 +1,5 @@
 package com.Controller;
 
-import com.Model.DashBoardPVRes;
-import com.Service.DashBoardPVService;
 import com.Service.DashBoardService;
 
 import javax.servlet.*;
@@ -14,7 +12,6 @@ import java.util.Map;
 @WebServlet("/DashBoard")
 public class DashBoardController extends HttpServlet {
     DashBoardService dashBoardService = new DashBoardService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try{
@@ -40,10 +37,5 @@ public class DashBoardController extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }
