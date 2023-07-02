@@ -13,19 +13,11 @@
 
     <title>고객관리</title>
 
-    <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="/css/CustomerManagement/style.css" rel="stylesheet" type="text/css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
-
-    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
     <script>
         window.onload = function () {
             if (window.location.pathname !== '/CustomerManagement') {
@@ -36,31 +28,22 @@
 </head>
 
 <body id="page-top">
-
 <!-- Page Wrapper -->
 <div id="wrapper">
-
     <!-- Start of Sidebar -->
     <%@ include file="/jsp/Components/AdminSidebar/AdminSidebar.jsp" %>
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-
         <!-- Main Content -->
         <div id="content">
-
             <!-- Topbar -->
             <%@ include file="/jsp/Components/AdminTopbar/AdminTopbar.jsp" %>
-
-
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">고객 관리</h1>
                 <p class="mb-4">이 HTML 페이지는 고객 관리를 위한 관리자 대시보드를 나타냅니다. 이 페이지는 고객 정보를 표로 나타내며, 다양한 기능을 제공합니다. 관리자는 고객의
                     신상정보, 연락처, 신용 점수, 소득 및 직업 유형을 확인할 수 있습니다.</p>
-
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3"
@@ -129,24 +112,18 @@
 
             </div>
             <!-- /.container-fluid -->
-
         </div>
         <!-- End of Main Content -->
-
         <!-- Footer -->
         <%@ include file="/jsp/Components/AdminFooter/AdminFooter.jsp" %>
-
     </div>
     <!-- End of Content Wrapper -->
-
 </div>
 <!-- End of Page Wrapper -->
-
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -167,21 +144,12 @@
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript-->
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
 </body>
 </html>

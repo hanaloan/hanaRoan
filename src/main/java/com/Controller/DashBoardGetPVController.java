@@ -34,9 +34,4 @@ public class DashBoardGetPVController extends HttpServlet {
             e.printStackTrace(); // 에러 로그 출력
         }
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 }

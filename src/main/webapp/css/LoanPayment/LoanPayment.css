@@ -43,3 +43,7 @@
 .overdueBtn:hover {
     background-color: #375ac4;
 }
+
+#mainContent{
+    font-size: 98%;
+}

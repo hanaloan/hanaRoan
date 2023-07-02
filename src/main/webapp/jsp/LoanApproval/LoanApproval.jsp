@@ -11,47 +11,32 @@
     <meta name="author" content="">
 
     <title>대출 승인 < 하나론</title>
-
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-          rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../../css/LoanApproval/style.css" rel="stylesheet">
     <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
     <script src="../../vendor/jquery/jquery.min.js"></script>
     <script>const authType = '<%= session.getAttribute("authType") %>';</script>
-
     <script src="../../js/LoanApproval/LoanApproval.js"></script>
 </head>
-
 <body id="page-top">
-
 <!-- Page Wrapper -->
 <div id="wrapper">
-
     <!-- Start of Sidebar -->
     <%@ include file="/jsp/Components/AdminSidebar/AdminSidebar.jsp" %>
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
-
         <!-- Main Content -->
         <div id="content">
-
             <!-- Topbar -->
             <%@ include file="/jsp/Components/AdminTopbar/AdminTopbar.jsp" %>
-
-
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">대출 승인 관리</h1>
                 <p class="mb-4">이 페이지는 대출 승인을 관리하는 웹 페이지입니다. 고객들의 대출 정보를 테이블로 나타내고, 대출 상태를 드롭다운 버튼을 통해 업데이트할 수 있습니다. 승인된
                     대출에는 상환 정보가 표시되며, 승인되지 않은 대출은 해당 정보가 표시되지 않습니다</p>
-
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3"
@@ -65,8 +50,6 @@
                                class="btn btn-light btn-icon-split">
                                 <span class="text">전체 보기</span>
                             </a></div>
-
-
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -175,16 +158,12 @@
 
             </div>
             <!-- /.container-fluid -->
-
         </div>
         <!-- End of Main Content -->
-
         <!-- Footer -->
         <%@ include file="/jsp/Components/AdminFooter/AdminFooter.jsp" %>
-
     </div>
     <!-- End of Content Wrapper -->
-
 </div>
 <!-- End of Page Wrapper -->
 
@@ -193,22 +172,12 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
-<!-- Bootstrap core JavaScript-->
 <script src="../../vendor/jquery/jquery.min.js"></script>
 <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
 <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
 <script src="../../js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
 <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
 <script src="../../js/demo/datatables-demo.js"></script>
-
 </body>
 </html>
