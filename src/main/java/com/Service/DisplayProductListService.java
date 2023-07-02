@@ -1,12 +1,10 @@
 package com.Service;
 
 import com.DAO.ProductDao;
-import com.Model.DisplayProduct;
 import com.Model.DisplayProductListReq;
 import com.Model.DisplayProductListRes;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class DisplayProductListService {
     private final ProductDao productDao;

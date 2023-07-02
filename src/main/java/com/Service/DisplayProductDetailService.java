@@ -3,7 +3,6 @@ package com.Service;
 import com.DAO.ProductDao;
 import com.Model.DisplayProductDetailReq;
 import com.Model.DisplayProductDetailRes;
-import com.Model.ProductRes;
 
 import java.sql.SQLException;
 
