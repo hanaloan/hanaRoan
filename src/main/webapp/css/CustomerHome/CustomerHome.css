@@ -1,31 +1,17 @@
-.image-container {
-    width: 400px;
-    height: 200px;
-    position: relative;
-    overflow: hidden;
-}
-
-.image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 .carousel-item {
     height: 300px;
 }
 
-.carousel-item p {
-    overflow: auto;
+.carousel-item > img {
+    height: 300px;
+    object-fit: cover;
 }
 
 .prev-button,
 .next-button {
     font-size: 24px;
     color: black;
-    /*background-color: rgba(0, 0, 0, 0.5);*/
     padding: 8px 12px;
-    /*border-radius: 50%;*/
     cursor: pointer;
     margin: 0 5px;
 }
