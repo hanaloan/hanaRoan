@@ -28,7 +28,7 @@ public class ProductDetailController extends HttpServlet {
 
             request.setAttribute("product", product);
             request.setAttribute("customerIdx", session.getAttribute("customer_Idx"));
-            request.getRequestDispatcher("jsp/DisplayProduct/ProductDetail.jsp").forward(request, response);
+            request.getRequestDispatcher("jsp/ProductDetail/ProductDetail.jsp").forward(request, response);
         } catch (SQLException e){
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().println("Internal Server Error");
