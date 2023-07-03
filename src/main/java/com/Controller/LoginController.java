@@ -106,7 +106,7 @@ public class LoginController extends HttpServlet {
                     HttpSession session = req.getSession();
                     session.setAttribute("username", loginUserRes.getName());
                     session.setAttribute("customer_Idx", loginUserRes.getCustomer_Idx());
-
+                    session.setAttribute("loginUserRes", loginUserRes);
                     // 사용자 가입중인 상품 관련
                     LoginPersonalProductReq personalProductReq = new LoginPersonalProductReq(loginUserRes.getCustomer_Idx());
                     LoginPersonalProductRes personalProductRes = loginService.getPersonalProducts(personalProductReq);
