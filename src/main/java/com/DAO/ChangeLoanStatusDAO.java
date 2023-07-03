@@ -26,7 +26,6 @@ public class ChangeLoanStatusDAO {
             stmt.setString(1, loanStatus);
             stmt.setDate(2, Date.valueOf(startDate));
             stmt.setDate(3, Date.valueOf(endDate));
-
             stmt.setString(4, lendId);
 
             stmt.executeUpdate();

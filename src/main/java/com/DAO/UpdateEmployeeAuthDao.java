@@ -13,7 +13,7 @@ public class UpdateEmployeeAuthDao {
         try {
 
             conn = DatabaseConnector.getConnection();
-            String sql="UPDATE hanaroDB.employees SET authority_idx = ? WHERE employee_idx=? AND employee_idx <> curEmpIdx";
+            String sql="UPDATE hanaroDB.employees SET authority_idx = ? WHERE employee_idx=?";
             ps=conn.prepareStatement(sql);
 
 

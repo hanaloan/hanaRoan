@@ -21,11 +21,11 @@ public class CustomerHomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        Integer customer_Idx = (Integer) session.getAttribute("customer_Idx");
+        Integer customer_Idx = (Integer) session.getAttribute("customer_idx");
         String username = (String) session.getAttribute("username");
 
         //재사용 -> 소득, 신용도 얻기 위함(Login -> 커스터홈 로직 말고 GNB -> 커스터홈이 겹치기 때문)
-        LoginCreditScoreModelReq loginCreditScoreModelReq = new LoginCreditScoreModelReq();
+        LoginCreditScoreModelReq loginCreditScoreModelReq = new LoginCreditScoreModelReq(customer_Idx);
         loginCreditScoreModelReq.setCustomer_Idx(customer_Idx);
         try {
             LoginCreditScoreModelRes loginCreditScoreModelRes = loginService.getCreditScore(loginCreditScoreModelReq);

@@ -27,9 +27,9 @@
                                        placeholder="id" required>
                             </div>
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <label for="empPw">PW:</label>
-                                <input class="form-control form-control-user" type="text" id="empPw" name="empPw"
-                                       placeholder="password" required>
+                                <label for="maskedInput">PW:</label>
+                                <input class="form-control form-control-user" type="password" id="maskedInput" placeholder="Password" required>
+                                <input type="hidden" id="actualInput" name="empPw">
                             </div>
                         </div>
                     </div>
@@ -70,5 +70,13 @@
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="/js/demo/datatables-demo.js"></script>
+<script>
+    const maskedInput = document.getElementById('maskedInput');
+    const actualInput = document.getElementById('actualInput');
+
+    maskedInput.addEventListener('input', function() {
+        actualInput.value = maskedInput.value;
+    });
+</script>
 </body>
 </html>

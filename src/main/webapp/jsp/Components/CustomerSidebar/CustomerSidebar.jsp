@@ -10,11 +10,9 @@
 </head>
 <body>
 <div id="sidebar">
-    <ul id="accordionSidebar" class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion"><a
-            class="sidebar-brand d-flex align-items-center justify-content-center" href="CustomerHome"><img class="img-fluid" src="/resource/newLogo.png" style="height: 100px; width: 185px;">
-        <div class="sidebar-brand-icon rotate-n-15">
-        </div>
-    </a>
+    <ul id="accordionSidebar" class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center"
+           href="CustomerHome"><img class="img-fluid" src="/resource/FinalLogopng.png" style="height: 100px; width: 185px;"></a>
         <li class="nav-item">
             <a class="nav-link" href="CustomerHome">
                 <i class="fas fa-fw fa-table"></i>

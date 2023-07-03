@@ -1,3 +1,8 @@
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="com.Model.ApplyProductRes" %>
+<%@ page import="com.Model.CustomerRes" %>
+<%@ page import="com.Model.ApplyCustomerRes" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,7 +22,17 @@
                     <h1>상품 신청서</h1>
                     <br>
                 </div>
-                <form action="applyProduct" method="post" accept-charset="UTF-8" class="user">
+                <%NumberFormat numberFormat = NumberFormat.getInstance(Locale.getDefault());
+                    ApplyProductRes productInfo = (ApplyProductRes) request.getAttribute("productInfo");
+                    ApplyCustomerRes customerInfo = (ApplyCustomerRes) request.getAttribute("customerInfo");
+                    String contactInfo = customerInfo.getContactInfo();
+                    if (contactInfo != null && !contactInfo.isEmpty()) {
+                        if (contactInfo.matches("\\d{3}-?\\d{3,4}-?\\d{4}")) {
+                            contactInfo = contactInfo.replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-$2-$3");
+                        }
+                    }
+                %>
+                <form action="/applyProduct" method="post" accept-charset="UTF-8" class="user">
                     <div class="form-group col">
                 <div class="form-group row">
                     <div class="form-group col">
@@ -36,7 +51,7 @@
                             <h5><strong>최소신용점수:</strong>${productInfo.minCredit}점</h5>
                         </div>
                         <div class=" mb-3 mb-sm-0">
-                            <h5><strong>대출한도:</strong>${productInfo.lendLimit}원</h5>
+                            <h5><strong>대출한도:</strong><%=numberFormat.format(Float.parseFloat(productInfo.getLendLimit().toString()))%>원</h5>
                         </div>
                         <div class=" mb-3 mb-sm-0">
                             <h5><strong>대출기간:</strong>${productInfo.lendPeriod}년</h5>
@@ -50,7 +65,7 @@
                             <h5><strong>신청인:</strong>${customerInfo.customerName}</h5>
                         </div>
                         <div class=" mb-3 mb-sm-0">
-                            <h5> <strong>전화번호:</strong>${customerInfo.contactInfo}</h5>
+                            <h5> <strong>전화번호:</strong><%= contactInfo %></h5>
                         </div>
                         <div class=" mb-3 mb-sm-0">
                             <h5><strong>신용점수:</strong>${customerInfo.creditScore}점</h5>
@@ -70,7 +85,6 @@
                                 onclick="return applyProductConfirm('${customerInfo.customerName}', '${customerInfo.creditScore}',
                                         '${productInfo.loanName}', '${productInfo.lendLimit}', '${productInfo.minCredit}')">대출신청</button>
                     </div>
-
                 </form>
             </div>
         </div>
