@@ -38,7 +38,7 @@ public class InsertProductController extends HttpServlet {
 
             ProductRes product = new ProductRes(productName, productTypeName,productInfo, interestRate, overdueInterestRate, limit, period, minCredit );
             insertProductService.insertProduct(product);
-            resp.sendRedirect("https://www.hanaroan.shop/LoanManagement");
+            resp.sendRedirect("/LoanManagement");
         } catch (Exception e) {
             // 예외 발생 시 응답
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

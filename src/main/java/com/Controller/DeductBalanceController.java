@@ -25,7 +25,7 @@ public class DeductBalanceController extends HttpServlet {
             int paymentId = Integer.valueOf(request.getParameter("paymentId"));
             DeductDueBalanceReq deductDueBalanceReq = new DeductDueBalanceReq(paymentId);
             deductBalanceService.deductBalance(deductDueBalanceReq);
-            response.sendRedirect("https://www.hanaroan.shop/loanPayment");
+            response.sendRedirect("/loanPayment");
         } catch (SQLException e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().println("Internal Server Error");

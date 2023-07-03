@@ -63,7 +63,7 @@ public class LoanManagementController extends HttpServlet {
             throw new RuntimeException(e);
         }
         // 대출 관리 페이지로 다시 리디렉션
-        resp.sendRedirect("https://www.hanaroan.shop/LoanManagement");
+        resp.sendRedirect("/LoanManagement");
     }
 
 }

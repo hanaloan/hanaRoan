@@ -5,7 +5,7 @@ function confirmDeductBalance(authType, passedDate) {
         return false;
     }
     else if(passedDate < 0){
-        alert(passedDate + " 상환일이 아닙니다.");
+        alert("상환일이 아닙니다.");
         return false;
     }
     else {

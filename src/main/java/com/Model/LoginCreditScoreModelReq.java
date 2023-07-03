@@ -11,5 +11,4 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LoginCreditScoreModelReq {
     private int customer_Idx;
-
 }

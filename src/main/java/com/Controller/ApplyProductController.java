@@ -2,7 +2,6 @@ package com.Controller;
 
 import com.Model.*;
 import com.Service.ApplyProductService;
-import com.Service.LoginService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -14,12 +13,10 @@ import java.sql.SQLException;
 @WebServlet("/applyProduct")
 public class ApplyProductController extends HttpServlet {
     private ApplyProductService applyProductService;
-    private LoginService loginService;
     @Override
     public void init() throws ServletException {
         super.init();
         applyProductService = new ApplyProductService();
-        loginService = new LoginService();
     }
 
     @Override
@@ -51,47 +48,10 @@ public class ApplyProductController extends HttpServlet {
                 String lendAmount = request.getParameter("lendAmount");
                 applyProductService.applyProduct(loanIdx, customerIdx, lendAmount);
             }
-            HttpSession session = request.getSession();
-            LoginUserRes loginUserRes = (LoginUserRes) session.getAttribute("loginUserRes");
-
-            LoginCreditScoreModelReq modelReq = new LoginCreditScoreModelReq(loginUserRes.getCustomer_Idx());
-            LoginCreditScoreModelRes modelRes = loginService.getCreditScore(modelReq);
-
-            int credit = modelRes.getCreditScore();
-            int income = modelRes.getIncome();
-
-            // 사용자 정보관련
-            request.setAttribute("username", loginUserRes.getName());
-            request.setAttribute("income", income);
-            request.setAttribute("credit", credit);
-            request.setAttribute("customer_idx", loginUserRes.getCustomer_Idx());
-
-            // 추천상품 관련
-            LoginRecommendationReq recoReq = new LoginRecommendationReq(loginUserRes.getCustomer_Idx(), income, credit);
-            LoginRecommendationRes recoRes = loginService.getRecoProduct(recoReq);
-            request.setAttribute("recoRes", recoRes);
-
-            // 알림 관련
-            LoginAlertMessageReq alertReq = new LoginAlertMessageReq(loginUserRes.getCustomer_Idx());
-            LoginAlertMessageRes alertRes = loginService.getAlertMessages(alertReq);
-            request.setAttribute("alertRes", alertRes);
-
-            // 세션 관련
-            session.setAttribute("username", loginUserRes.getName());
-            session.setAttribute("customer_Idx", loginUserRes.getCustomer_Idx());
-
-            // 사용자 가입중인 상품 관련
-            LoginPersonalProductReq personalProductReq = new LoginPersonalProductReq(loginUserRes.getCustomer_Idx());
-            LoginPersonalProductRes personalProductRes = loginService.getPersonalProducts(personalProductReq);
-            request.setAttribute("personalProducts", personalProductRes);
-
-//            response.sendRedirect("https://www.hanaroan.shop/CustomerHome");
-            request.getRequestDispatcher("jsp/CustomerHome/CustomerHome.jsp").forward(request, response);
+            response.sendRedirect("/CustomerHome");
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ServletException e) {
             throw new RuntimeException(e);
         }
     }

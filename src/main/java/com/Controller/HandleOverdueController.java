@@ -25,7 +25,7 @@ public class HandleOverdueController extends HttpServlet {
             int paymentId = Integer.valueOf(request.getParameter("paymentId"));
             HandleOverdueReq handleOverdueReq = new HandleOverdueReq(paymentId);
             handleOverdueService.handleOverdue(handleOverdueReq);
-            response.sendRedirect("https://www.hanaroan.shop/loanPayment");
+            response.sendRedirect("/loanPayment");
         } catch (SQLException e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().println("Internal Server Error");

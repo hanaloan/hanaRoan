@@ -51,22 +51,7 @@ public class LoginController extends HttpServlet {
                     session.setAttribute("authType", loginForAdminRes.getAuthorityType());
                     //int ses=(int) session.getAttribute("employee_idx");
 
-                    Map<String, String> getRatioOfLoanType = dashBoardService.getRatioOfLoanType();
-                    req.setAttribute("ratioOfLoanType", getRatioOfLoanType);
-
-                    String loanAmount = dashBoardService.getLendData();
-                    req.setAttribute("loanAmount", loanAmount);
-
-                    String overdueLoanAmount = dashBoardService.getOverdueLendData();
-                    req.setAttribute("overdueLoanAmount", overdueLoanAmount);
-
-                    String getOverduePercentage = dashBoardService.getOverduePercentage();
-                    req.setAttribute("overduePercentage", getOverduePercentage);
-
-                    String getCountPendingLends = dashBoardService.getCountPendingLends();
-                    req.setAttribute("countPendingLends", getCountPendingLends);
-
-                    req.getRequestDispatcher("/jsp/DashBoard/DashBoard.jsp").forward(req, resp);
+                    resp.sendRedirect("/DashBoard");
 
                 } else {
                     String errorMessage = "Name과 Password를 확인해주세요";
@@ -111,7 +96,7 @@ public class LoginController extends HttpServlet {
                     LoginPersonalProductReq personalProductReq = new LoginPersonalProductReq(loginUserRes.getCustomer_Idx());
                     LoginPersonalProductRes personalProductRes = loginService.getPersonalProducts(personalProductReq);
                     req.setAttribute("personalProducts", personalProductRes);
-
+                    System.out.println("셋 되냐 " + session.getAttribute( "customer_Idx"));
                     // 로그인 성공 시 응답
                     resp.setStatus(HttpServletResponse.SC_OK);
                     req.getRequestDispatcher("/jsp/CustomerHome/CustomerHome.jsp").forward(req, resp);
