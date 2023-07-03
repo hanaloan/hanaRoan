@@ -63,4 +63,51 @@ public class LoanApprovalDao {
 
         return loanApprovalResList;
     }
+
+    public List<LoanApprovalRes> getPendingLoanApprovalResList() throws SQLException {
+        List<LoanApprovalRes> loanApprovalResList = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(BASE_QUERY + " AND ll.loan_status = 'pending'");
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                int cusIdx = rs.getInt("customer_idx");
+                String name = rs.getString("name");
+                int lendIdx = rs.getInt("lend_idx");
+                String loanTypeName = rs.getString("loan_type_name");
+                String loanName = rs.getString("loan_name");
+                int loanPeriod = rs.getInt("lend_period");
+                Date startDate = rs.getDate("start_date");
+                Date endDate = rs.getDate("end_date");
+                Long loanAmount = rs.getLong("loan_amount");
+                String loanStatus = rs.getString("loan_status");
+                int repaymentIdx = rs.getInt("repayment_idx");
+                Long paymentAmount = rs.getLong("payment_amount");
+                String paymentStatus = rs.getString("payment_status");
+                float loanInterestRate = rs.getFloat("loan_interest_rate");
+
+                LoanApprovalRes loanApprovalRes = new LoanApprovalRes();
+                loanApprovalRes.setCusIdx(cusIdx);
+                loanApprovalRes.setName(name);
+                loanApprovalRes.setLendIdx(lendIdx);
+                loanApprovalRes.setLoanTypeName(loanTypeName);
+                loanApprovalRes.setLoanName(loanName);
+                loanApprovalRes.setLoanPeriod(loanPeriod);
+                loanApprovalRes.setStartDate(startDate);
+                loanApprovalRes.setEndDate(endDate);
+                loanApprovalRes.setLoanAmount(loanAmount);
+                loanApprovalRes.setLoanStatus(loanStatus);
+                loanApprovalRes.setRepaymentIdx(repaymentIdx);
+                loanApprovalRes.setPaymentAmount(paymentAmount);
+                loanApprovalRes.setPaymentStatus(paymentStatus);
+                loanApprovalRes.setLoanInterestRate(loanInterestRate);
+
+                loanApprovalResList.add(loanApprovalRes);
+            }
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return loanApprovalResList;
+    }
 }
