@@ -16,4 +16,8 @@ public class LoanApprovalService {
     public List<LoanApprovalRes> loanApprovalRes() throws SQLException {
         return loanApprovalDao.loanApprovalResList();
     }
+
+    public List<LoanApprovalRes> getPendingLoanApprovalRes()  throws SQLException {
+        return loanApprovalDao.getPendingLoanApprovalResList();
+    }
 }

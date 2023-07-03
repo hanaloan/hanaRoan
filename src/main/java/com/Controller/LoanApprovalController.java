@@ -27,9 +27,15 @@ public class LoanApprovalController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-//            CustomerManagementReq request = new CustomerManagementReq();
+            String loanStatus = req.getParameter("loanStatus");
 
-            List<LoanApprovalRes> loanApprovalResList = loanApprovalService.loanApprovalRes();
+            List<LoanApprovalRes> loanApprovalResList;
+
+            if (loanStatus != null && loanStatus.equals("pending")) {
+                loanApprovalResList = loanApprovalService.getPendingLoanApprovalRes();
+            } else {
+                loanApprovalResList = loanApprovalService.loanApprovalRes();
+            }
 
             req.setAttribute("loanApprovalResList", loanApprovalResList);
 
