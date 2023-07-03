@@ -48,10 +48,10 @@ public class ApplyProductController extends HttpServlet {
                 String loanIdx = request.getParameter("loanIdx");
                 String customerIdx = request.getParameter("customerIdx");
                 String lendAmount = request.getParameter("lendAmount");
-                System.out.println(loanIdx + " " + customerIdx + " " + lendAmount);
                 applyProductService.applyProduct(loanIdx, customerIdx, lendAmount);
             }
-            response.sendRedirect("CustomerHome");
+            response.sendRedirect("https://www.hanaroan.shop/CustomerHome");
+//            request.getRequestDispatcher("https://www.hanaroan.shop/CustomerHome").forward(request, response);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {

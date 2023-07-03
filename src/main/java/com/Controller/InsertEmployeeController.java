@@ -33,7 +33,7 @@ public class InsertEmployeeController extends HttpServlet {
 
             EmployeeRes employee  = new EmployeeRes(empId, empPw, empName,empAuth);
             insertEmployeeService.insertEmployee(employee);
-            resp.sendRedirect("/EmployeeManagement");
+            resp.sendRedirect("https://www.hanaroan.shop/EmployeeManagement");
         } catch (Exception e) {
             // 예외 발생 시 응답
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

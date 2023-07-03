@@ -24,6 +24,6 @@ public class PaymentController extends HttpServlet {
             e.printStackTrace();
         }
 
-        response.sendRedirect("/CustomerManagement");
+        response.sendRedirect("https://www.hanaroan.shop/CustomerManagement");
     }
 }
